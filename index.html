@@ -52,11 +52,35 @@
   width: 100%;
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 24px 24px 0 0; /* Sudut atas membulat, bawah rata */
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 24px 24px 0 0;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
   margin-top: auto;
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
   padding: 20px 0;
+  cursor: grab; /* Tangan buat drag */
+  position: relative;
+  transform-origin: center top;
+}
+
+/* Saat di-grab (mouse down) */
+.site-footer:active {
+  cursor: grabbing;
+  transform: scaleY(0.95);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Kelas untuk JavaScript tambahkan saat ditarik */
+.site-footer.pulled {
+  transform: translateY(-40px) scaleY(1.05);
+  border-radius: 20px;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Efek lepas setelah ditarik */
+.site-footer.released {
+  transform: translateY(0) scaleY(1);
+  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
   .theme-arona .site-footer {
