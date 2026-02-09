@@ -47,14 +47,17 @@
   }
 
   /* FOOTER STYLES - NEW & IMPROVED */
-  .site-footer {
-    flex-shrink: 0;
-    width: 100%;
-    backdrop-filter: blur(12px);
-    border-top: 1px solid;
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    margin-top: auto;
-  }
+.site-footer {
+  flex-shrink: 0;
+  width: 100%;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px 24px 0 0; /* Sudut atas membulat, bawah rata */
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: auto;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+  padding: 20px 0;
+}
 
   .theme-arona .site-footer {
     background: rgba(255, 255, 255, 0.95);
