@@ -37,6 +37,157 @@
     min-height: 100vh;
     background-attachment: fixed;
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+    width: 100%;
+  }
+
+  /* FOOTER STYLES - NEW & IMPROVED */
+  .site-footer {
+    flex-shrink: 0;
+    width: 100%;
+    backdrop-filter: blur(12px);
+    border-top: 1px solid;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: auto;
+  }
+
+  .theme-arona .site-footer {
+    background: rgba(255, 255, 255, 0.95);
+    border-top-color: rgba(56, 189, 248, 0.3);
+    color: #0c4a6e;
+  }
+
+  .theme-plana .site-footer {
+    background: rgba(255, 255, 255, 0.95);
+    border-top-color: rgba(192, 132, 252, 0.3);
+    color: #4a044e;
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .footer-brand {
+    text-align: center;
+  }
+
+  .footer-brand h3 {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+  }
+
+  .footer-brand p {
+    opacity: 0.8;
+    font-size: 0.875rem;
+  }
+
+  .donation-section {
+    text-align: center;
+    width: 100%;
+  }
+
+  .donation-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  .donation-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .donation-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    min-width: 140px;
+  }
+
+  .theme-arona .donation-btn {
+    background: rgba(56, 189, 248, 0.1);
+    color: #0c4a6e;
+    border-color: rgba(56, 189, 248, 0.3);
+  }
+
+  .theme-arona .donation-btn:hover {
+    background: rgba(56, 189, 248, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(56, 189, 248, 0.2);
+  }
+
+  .theme-plana .donation-btn {
+    background: rgba(192, 132, 252, 0.1);
+    color: #4a044e;
+    border-color: rgba(192, 132, 252, 0.3);
+  }
+
+  .theme-plana .donation-btn:hover {
+    background: rgba(192, 132, 252, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(192, 132, 252, 0.2);
+  }
+
+  .donation-btn .heart {
+    color: #ef4444;
+    animation: heartbeat 1.5s ease-in-out infinite;
+  }
+
+  @keyframes heartbeat {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+
+  .donation-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    width: 100%;
+    padding-top: 1rem;
+    border-top: 1px solid;
+    font-size: 0.875rem;
+    opacity: 0.7;
+  }
+
+  .theme-arona .footer-bottom {
+    border-top-color: rgba(56, 189, 248, 0.2);
+  }
+
+  .theme-plana .footer-bottom {
+    border-top-color: rgba(192, 132, 252, 0.2);
   }
 
   /* Accessibility Improvements */
@@ -52,7 +203,7 @@
     border: 0;
   }
 
-  /* PERBAIKI CSS SELECTOR - VERSION FIXED */
+  /* PERBAIKAN CSS SELECTOR - VERSION FIXED */
   .sr-only:focus,
   .sr-only:focus-visible {
     position: static;
@@ -111,6 +262,10 @@
     .visualizer-bar {
       animation: none;
       height: 50% !important;
+    }
+
+    .donation-btn .heart {
+      animation: none;
     }
   }
 
@@ -1147,6 +1302,38 @@
       margin: 1rem;
     }
 
+    /* Footer Mobile Optimization - IMPROVED */
+    .footer-content {
+      padding: 1rem;
+      gap: 1rem;
+    }
+
+    .donation-links {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .donation-btn {
+      width: 100%;
+      max-width: 280px;
+      justify-content: center;
+      padding: 0.75rem;
+    }
+
+    .footer-brand h3 {
+      font-size: 1.1rem;
+    }
+
+    .footer-brand p {
+      font-size: 0.8rem;
+    }
+
+    .donation-title {
+      font-size: 1rem;
+      flex-wrap: wrap;
+    }
+
     /* Enhanced Touch Targets */
     .timer-controls button {
       min-height: 44px;
@@ -1168,6 +1355,7 @@
     .main-content {
       padding: 1rem;
       gap: 1.5rem;
+      margin-bottom: 1rem;
     }
 
     /* Improved readability */
@@ -1220,6 +1408,22 @@
     .splash-logo {
       font-size: 2rem;
     }
+
+    /* Footer small screen */
+    .footer-content {
+      padding: 0.75rem;
+    }
+
+    .donation-btn {
+      padding: 0.6rem 1rem;
+      font-size: 0.875rem;
+      min-width: 120px;
+    }
+
+    .footer-bottom {
+      font-size: 0.75rem;
+      padding-top: 0.75rem;
+    }
   }
 
   /* Tablet optimizations */
@@ -1236,6 +1440,18 @@
 
     .main-content {
       max-width: 95%;
+    }
+
+    /* Footer tablet */
+    .donation-btn {
+      min-width: 160px;
+    }
+  }
+
+  /* Large screen optimizations */
+  @media (min-width: 1025px) {
+    .footer-content {
+      padding: 2rem;
     }
   }
 
@@ -1885,6 +2101,56 @@
         </section>
       </div>
     </main>
+
+    <!-- FOOTER BARU YANG DIPERBAIKI -->
+    <footer class="site-footer theme-transition">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3>Study Companion</h3>
+          <p>Your anime partner for better focus & productivity</p>
+        </div>
+        
+        <div class="donation-section">
+          <div class="donation-title">
+            <span class="heart">❤️</span>
+            <span>Support CryvaStudio</span>
+            <span class="heart">❤️</span>
+          </div>
+          
+          <div class="donation-links">
+            <a 
+              href="https://paypal.me/ArvinFarrelP" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="donation-btn"
+              aria-label="Support CryvaStudio on PayPal"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.067 8.478c.492.88.556 2.014.3 3.327-.74 3.806-3.276 5.12-6.514 5.12h-.5a.805.805 0 0 0-.794.68l-.04.22-.63 3.993-.032.17a.804.804 0 0 1-.794.68h-2.66c-.66 0-1.204-.578-1.12-1.237l1.12-7.16a.98.98 0 0 1 .974-.882h.722c4.306 0 7.128-1.177 8.11-5.049zM8.768 20.06H5.56a.84.84 0 0 1-.833-.945l1.323-8.382a.65.65 0 0 1 .643-.56h3.9c2.82 0 5.03-1.528 5.804-4.858.36-1.552.174-2.625-.468-3.358a1.503 1.503 0 0 0-1.226-.453H6.448a1.15 1.15 0 0 0-1.148 1.053l-2.268 14.363a.9.9 0 0 0 .892 1.038h3.83a.96.96 0 0 0 .95-.827l.025-.14.48-3.043.03-.16a.96.96 0 0 1 .949-.827h.58c3.524 0 5.95-1.842 6.544-5.403.202-1.238.01-2.322-.573-3.153l.932.372c-.456.864-.624 1.934-.386 3.267.744 3.823 3.276 5.12 6.514 5.12h.5a.805.805 0 0 1 .794.68l.04.22.63 3.993.032.17a.804.804 0 0 0 .794.68h2.66c.66 0 1.204-.578 1.12-1.237l-1.12-7.16a.98.98 0 0 0-.974-.882h-.722c-4.306 0-7.128-1.177-8.11-5.049z"/>
+              </svg>
+              PayPal
+            </a>
+            
+            <a 
+              href="https://saweria.co/CryvaStudio" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="donation-btn"
+              aria-label="Support CryvaStudio on Saweria"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+              </svg>
+              Saweria
+            </a>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>© 2024 CryvaStudio. Made with ❤️ for productive minds.</p>
+        </div>
+      </div>
+    </footer>
 
     <!-- Audio Element untuk Music -->
     <audio id="audio-player" aria-label="Background music player">
@@ -2849,6 +3115,7 @@
   const characterContainer = document.getElementById("character-container");
   const backgroundOverlay = document.querySelector(".background-overlay");
   const splashScreen = document.getElementById("splash-screen");
+  const siteFooter = document.querySelector(".site-footer");
 
   function applyAronaThemeImmediately() {
     const characterImage = document.getElementById("character-image");
@@ -2908,11 +3175,12 @@
   }
 
   function enableAronaMode() {
-    if (!body || !backgroundOverlay || !characterContainer) return;
+    if (!body || !backgroundOverlay || !characterContainer || !siteFooter) return;
     
     body.style.transition = "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)";
     backgroundOverlay.style.transition =
       "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)";
+    siteFooter.style.transition = "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)";
 
     document.querySelectorAll(".fade-text").forEach((el) => {
       el.style.opacity = "0";
@@ -2942,11 +3210,12 @@
   }
 
   function enablePlanaMode() {
-    if (!body || !backgroundOverlay || !characterContainer) return;
+    if (!body || !backgroundOverlay || !characterContainer || !siteFooter) return;
     
     body.style.transition = "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)";
     backgroundOverlay.style.transition =
       "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)";
+    siteFooter.style.transition = "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)";
 
     document.querySelectorAll(".fade-text").forEach((el) => {
       el.style.opacity = "0";
