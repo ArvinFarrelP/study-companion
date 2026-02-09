@@ -1733,43 +1733,6 @@
             <!-- Detailed achievements will be generated here -->
           </div>
         </div>
-        
-        <!-- Weekly Report Section -->
-        <div class="glass rounded-xl p-4 mt-6">
-          <h3 class="text-lg font-semibold text-primary mb-3">
-            Weekly Report
-          </h3>
-          <div id="weekly-report-content">
-            <!-- Weekly report will be generated here -->
-          </div>
-          <button
-            id="generate-report-btn"
-            class="mt-4 px-4 py-2 bg-primary text-white rounded-lg hover:bg-opacity-80 transition"
-          >
-            Generate Weekly Report
-          </button>
-        </div>
-        
-        <!-- Data Management Section -->
-        <div class="glass rounded-xl p-4 mt-6">
-          <h3 class="text-lg font-semibold text-primary mb-3">
-            Data Management
-          </h3>
-          <div class="flex flex-wrap gap-3">
-            <button
-              id="export-data-btn"
-              class="px-4 py-2 bg-primary-opacity rounded-lg hover:bg-opacity-30 transition"
-            >
-              Export Data
-            </button>
-            <button
-              id="clear-data-btn"
-              class="px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition"
-            >
-              Clear All Data
-            </button>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -2664,79 +2627,6 @@
     return Math.round(totalDuration / studyMetrics.focusSessions.length);
   }
 
-  // Weekly report generation
-  function generateWeeklyReport() {
-    const report = {
-      totalSessions: progress.completedSessions,
-      totalTime: progress.totalStudyTime,
-      averageSessionLength: calculateAverageSession(),
-      mostProductiveDay: findMostProductiveDay(),
-      achievementsUnlocked: Object.values(achievements).filter(a => a.unlocked).length,
-      bestStudyTime: studyMetrics.calculateBestTime(),
-      productivityTrend: studyMetrics.getProductivityTrend(),
-      generatedAt: new Date().toISOString()
-    };
-    
-    studyMetrics.weeklyReports.push(report);
-    saveStudyMetrics();
-    
-    return report;
-  }
-
-  function displayWeeklyReport(report) {
-    const weeklyReportContent = document.getElementById('weekly-report-content');
-    if (!weeklyReportContent) return;
-    
-    weeklyReportContent.innerHTML = `
-      <div class="space-y-3">
-        <div class="flex justify-between">
-          <span class="text-gray-600">Total Sessions:</span>
-          <span class="font-semibold">${report.totalSessions}</span>
-        </div>
-        <div class="flex justify-between">
-          <span class="text-gray-600">Total Study Time:</span>
-          <span class="font-semibold">${Math.floor(report.totalTime / 60)}h ${report.totalTime % 60}m</span>
-        </div>
-        <div class="flex justify-between">
-          <span class="text-gray-600">Avg Session Length:</span>
-          <span class="font-semibold">${report.averageSessionLength}m</span>
-        </div>
-        <div class="flex justify-between">
-          <span class="text-gray-600">Most Productive Day:</span>
-          <span class="font-semibold">${report.mostProductiveDay}</span>
-        </div>
-        <div class="flex justify-between">
-          <span class="text-gray-600">Best Study Time:</span>
-          <span class="font-semibold capitalize">${report.bestStudyTime}</span>
-        </div>
-        <div class="flex justify-between">
-          <span class="text-gray-600">Productivity Trend:</span>
-          <span class="font-semibold capitalize ${report.productivityTrend === 'improving' ? 'text-green-600' : report.productivityTrend === 'declining' ? 'text-red-600' : 'text-yellow-600'}">
-            ${report.productivityTrend}
-          </span>
-        </div>
-        <div class="mt-4 p-3 bg-primary-opacity rounded-lg">
-          <p class="text-sm">
-            <span class="font-semibold">Insight:</span> 
-            ${generateInsightFromReport(report)}
-          </p>
-        </div>
-      </div>
-    `;
-  }
-
-  function generateInsightFromReport(report) {
-    if (report.totalSessions === 0) return "Start your first session to get insights!";
-    
-    if (report.productivityTrend === 'improving') {
-      return "Great work! Your productivity is improving. Keep maintaining this momentum!";
-    } else if (report.productivityTrend === 'declining') {
-      return "Your productivity has declined slightly. Try adjusting your study schedule or taking more breaks.";
-    } else {
-      return "You're maintaining consistent productivity. Consider trying new study techniques to improve further.";
-    }
-  }
-
   // ============================
   // SOCIAL & SHARING FEATURES
   // ============================
@@ -2778,86 +2668,6 @@
       document.body.removeChild(textArea);
       showNotification('Copied!', 'Achievement text copied to clipboard', 'success');
     });
-  }
-
-  // Export progress data
-  function exportProgressData() {
-    const data = {
-      progress,
-      achievements: Object.values(achievements).filter(a => a.unlocked),
-      studyHistory: getStudyHistory(),
-      studyMetrics,
-      exportedAt: new Date().toISOString(),
-      appVersion: "1.0.0"
-    };
-    
-    const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `study-companion-backup-${new Date().toISOString().split('T')[0]}.json`;
-    a.click();
-    
-    // Clean up
-    setTimeout(() => URL.revokeObjectURL(url), 100);
-    
-    showNotification('Data Exported', 'Your data has been exported successfully', 'success');
-  }
-
-  function getStudyHistory() {
-    // Simpan history studi (bisa diperluas)
-    return {
-      totalFocusSessions: progress.completedSessions,
-      totalStudyMinutes: progress.totalStudyTime,
-      lastActive: progress.lastSession,
-      achievementsUnlocked: Object.values(achievements).filter(a => a.unlocked).map(a => a.name)
-    };
-  }
-
-  // ============================
-  // SECURITY & PRIVACY FEATURES
-  // ============================
-
-  // Simple encryption untuk data sensitif
-  async function encryptData(data, password) {
-    // Ini adalah implementasi sederhana
-    // Dalam produksi, gunakan library encryption yang proper
-    try {
-      const encoder = new TextEncoder();
-      const dataBuffer = encoder.encode(JSON.stringify(data));
-      
-      // Simple XOR encryption (hanya untuk demo)
-      const keyBuffer = encoder.encode(password.padEnd(32, '0').slice(0, 32));
-      const encryptedBuffer = new Uint8Array(dataBuffer.length);
-      
-      for (let i = 0; i < dataBuffer.length; i++) {
-        encryptedBuffer[i] = dataBuffer[i] ^ keyBuffer[i % keyBuffer.length];
-      }
-      
-      return btoa(String.fromCharCode(...encryptedBuffer));
-    } catch (error) {
-      console.error('Encryption error:', error);
-      return null;
-    }
-  }
-
-  async function decryptData(encryptedData, password) {
-    try {
-      const encryptedBuffer = Uint8Array.from(atob(encryptedData), c => c.charCodeAt(0));
-      const encoder = new TextEncoder();
-      const keyBuffer = encoder.encode(password.padEnd(32, '0').slice(0, 32));
-      const decryptedBuffer = new Uint8Array(encryptedBuffer.length);
-      
-      for (let i = 0; i < encryptedBuffer.length; i++) {
-        decryptedBuffer[i] = encryptedBuffer[i] ^ keyBuffer[i % keyBuffer.length];
-      }
-      
-      const decoder = new TextDecoder();
-      return JSON.parse(decoder.decode(decryptedBuffer));
-    } catch (error) {
-      console.error('Decryption error:', error);
-      return null;
-    }
   }
 
   // Clear data option
@@ -4516,9 +4326,6 @@
   const analyticsBtn = document.getElementById("analytics-btn");
   const closeAnalytics = document.getElementById("close-analytics");
   const analyticsModal = document.getElementById("analytics-modal");
-  const generateReportBtn = document.getElementById("generate-report-btn");
-  const exportDataBtn = document.getElementById("export-data-btn");
-  const clearDataBtn = document.getElementById("clear-data-btn");
 
   if (analyticsBtn) {
     analyticsBtn.addEventListener("click", showAnalytics);
@@ -4536,22 +4343,6 @@
         analyticsModal.classList.remove("show");
       }
     });
-  }
-
-  if (generateReportBtn) {
-    generateReportBtn.addEventListener("click", () => {
-      const report = generateWeeklyReport();
-      displayWeeklyReport(report);
-      showNotification("Report Generated", "Weekly report has been generated", "success");
-    });
-  }
-
-  if (exportDataBtn) {
-    exportDataBtn.addEventListener("click", exportProgressData);
-  }
-
-  if (clearDataBtn) {
-    clearDataBtn.addEventListener("click", clearAllData);
   }
 
   // Theme toggle event
