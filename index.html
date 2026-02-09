@@ -888,15 +888,28 @@
     opacity: 0.7;
   }
 
+  /* PERBAIKAN: Ganti CSS untuk achievement-icon */
   .achievement-icon {
-    font-size: 28px;
-    margin-bottom: 4px;
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
     transition: transform 0.2s ease;
+    margin-bottom: 4px;
   }
 
   .achievement-badge:hover .achievement-icon {
     transform: scale(1.1);
+  }
+
+  /* Class untuk achievement yang locked dan unlocked */
+  .achievement.locked .achievement-icon {
+    filter: grayscale(100%);
+    opacity: 0.4;
+  }
+
+  .achievement.unlocked .achievement-icon {
+    filter: drop-shadow(0 0 6px rgba(80, 160, 255, 0.6));
   }
 
   .achievement-tooltip {
@@ -1386,7 +1399,8 @@
     }
 
     .achievement-icon {
-      font-size: 24px;
+      width: 42px;
+      height: 42px;
     }
 
     .analytics-content {
@@ -1494,7 +1508,8 @@
     }
 
     .achievement-icon {
-      font-size: 20px;
+      width: 36px;
+      height: 36px;
     }
 
     .splash-logo {
@@ -2886,54 +2901,6 @@
     };
   }
 
-  function getDefaultAchievements() {
-    return {
-      first_session: {
-        id: "first_session",
-        name: "First Steps",
-        description: "Complete your first focus session",
-        icon: "🎯",
-        unlocked: false,
-        rarity: "common",
-      },
-      focus_master: {
-        id: "focus_master",
-        name: "Focus Master",
-        description: "Complete 10 focus sessions",
-        icon: "⚡",
-        unlocked: false,
-        requirement: 10,
-        rarity: "rare",
-      },
-      marathon_runner: {
-        id: "marathon_runner",
-        name: "Marathon Runner",
-        description: "Study for 60+ minutes total",
-        icon: "🏃‍♂️",
-        unlocked: false,
-        requirement: 60,
-        rarity: "common",
-      },
-      consistency_king: {
-        id: "consistency_king",
-        name: "Consistency King",
-        description: "Complete 5 sessions in one day",
-        icon: "👑",
-        unlocked: false,
-        requirement: 5,
-        rarity: "rare",
-      },
-      early_bird: {
-        id: "early_bird",
-        name: "Early Bird",
-        description: "Start your first session before 8 AM",
-        icon: "🌅",
-        unlocked: false,
-        rarity: "common",
-      },
-    };
-  }
-
   // ============================
   // AUDIO FILES MANAGEMENT SYSTEM
   // ============================
@@ -3068,7 +3035,7 @@
       id: "first_session",
       name: "First Steps",
       description: "Complete your first focus session",
-      icon: "🎯",
+      icon: "assets/images/achievements/first_steps.png",
       unlocked: false,
       rarity: "common",
     },
@@ -3076,7 +3043,7 @@
       id: "focus_master",
       name: "Focus Master",
       description: "Complete 10 focus sessions",
-      icon: "⚡",
+      icon: "assets/images/achievements/focus_master.png",
       unlocked: false,
       requirement: 10,
       rarity: "rare",
@@ -3085,7 +3052,7 @@
       id: "marathon_runner",
       name: "Marathon Runner",
       description: "Study for 60+ minutes total",
-      icon: "🏃‍♂️",
+      icon: "assets/images/achievements/marathon_runner.png",
       unlocked: false,
       requirement: 60,
       rarity: "common",
@@ -3094,7 +3061,7 @@
       id: "consistency_king",
       name: "Consistency King",
       description: "Complete 5 sessions in one day",
-      icon: "👑",
+      icon: "assets/images/achievements/consistency_king.png",
       unlocked: false,
       requirement: 5,
       rarity: "rare",
@@ -3103,7 +3070,7 @@
       id: "early_bird",
       name: "Early Bird",
       description: "Start your first session before 8 AM",
-      icon: "🌅",
+      icon: "assets/images/achievements/early_bird.png",
       unlocked: false,
       rarity: "common",
     },
@@ -3197,24 +3164,17 @@
     hasUnsavedChanges = true;
   }
 
+  // PERBAIKAN: Fungsi updateAchievementsUI yang telah diperbaiki
   function updateAchievementsUI() {
-    const achievementsContainer = document.getElementById(
-      "achievements-container"
-    );
-    const achievementProgress = document.getElementById(
-      "achievement-progress"
-    );
+    const achievementsContainer = document.getElementById("achievements-container");
+    const achievementProgress = document.getElementById("achievement-progress");
     
     if (!achievementsContainer || !achievementProgress) return;
     
     achievementsContainer.innerHTML = "";
 
-    const unlockedCount = Object.values(achievements).filter(
-      (a) => a.unlocked
-    ).length;
-    achievementProgress.textContent = `${unlockedCount}/${
-      Object.keys(achievements).length
-    }`;
+    const unlockedCount = Object.values(achievements).filter((a) => a.unlocked).length;
+    achievementProgress.textContent = `${unlockedCount}/${Object.keys(achievements).length}`;
 
     Object.values(achievements).forEach((achievement) => {
       const badge = document.createElement("div");
@@ -3226,7 +3186,7 @@
         achievement.rarity === "rare"
           ? "achievement-rare"
           : "achievement-common"
-      }`;
+      } ${isUnlocked ? "achievement unlocked" : "achievement locked"}`;
 
       // Add click event for sharing
       badge.addEventListener('click', () => {
@@ -3253,9 +3213,26 @@
         );
       }
 
-      const icon = document.createElement("div");
+      // PERBAIKAN: Menggunakan tag <img> untuk ikon
+      const icon = document.createElement("img");
       icon.className = "achievement-icon";
-      icon.textContent = achievement.icon;
+      icon.src = achievement.icon;
+      icon.alt = achievement.name;
+      icon.loading = "lazy";
+
+      // Fallback jika gambar gagal dimuat
+      icon.addEventListener('error', function() {
+        console.warn(`Icon failed to load: ${achievement.icon}`);
+        // Fallback ke emoji berdasarkan nama achievement
+        const fallbackEmojis = {
+          "first_session": "🎯",
+          "focus_master": "⚡", 
+          "marathon_runner": "🏃‍♂️",
+          "consistency_king": "👑",
+          "early_bird": "🌅"
+        };
+        this.replaceWith(document.createTextNode(fallbackEmojis[achievement.id] || "🏆"));
+      });
 
       const tooltip = document.createElement("div");
       tooltip.className = "achievement-tooltip";
@@ -3530,7 +3507,9 @@
       }
 
       achievementEl.innerHTML = `
-        <div class="text-2xl mb-2">${achievement.icon}</div>
+        <div class="text-2xl mb-2">
+          <img src="${achievement.icon}" alt="${achievement.name}" class="w-12 h-12 mx-auto object-contain">
+        </div>
         <h4 class="font-semibold text-sm mb-1">${
           achievement.name
         }</h4>
