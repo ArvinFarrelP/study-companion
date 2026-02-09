@@ -11,6 +11,17 @@
       content="Anime-style Pomodoro timer with focus companions, achievements, and productivity analytics. Stay focused with Arona and Plana!"
     />
     <meta name="theme-color" content="#38bdf8" />
+    
+    <!-- Meta tags untuk social sharing -->
+    <meta property="og:title" content="Study Companion - Anime Pomodoro Timer">
+    <meta property="og:description" content="Focus with Arona & Plana - Your anime study partner for better focus & productivity">
+    <meta property="og:image" content="/assets/images/social-preview.png">
+    <meta property="og:url" content="https://yourwebsite.com">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -32,6 +43,11 @@
     overflow-x: hidden;
   }
 
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     font-family: "Inter", sans-serif;
     min-height: 100vh;
@@ -44,6 +60,47 @@
   main {
     flex: 1 0 auto;
     width: 100%;
+  }
+
+  /* ============================ */
+  /* ENHANCED MICRO-INTERACTIONS */
+  /* ============================ */
+  .timer-controls button:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+  }
+
+  .music-controls button:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+  }
+
+  .theme-toggle-btn:active {
+    transform: scale(0.95) rotate(15deg);
+    transition: transform 0.1s ease;
+  }
+
+  /* Loading skeleton untuk analytics */
+  .skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 8px;
+    min-height: 20px;
+  }
+
+  .skeleton-circle {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+  }
+
+  @keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
   }
 
   /* FOOTER STYLES - NEW & IMPROVED */
@@ -292,6 +349,14 @@
     }
 
     .donation-btn .heart {
+      animation: none;
+    }
+    
+    .timer-controls button:active {
+      transform: none;
+    }
+    
+    .skeleton, .skeleton-circle {
       animation: none;
     }
   }
@@ -1653,6 +1718,43 @@
             <!-- Detailed achievements will be generated here -->
           </div>
         </div>
+        
+        <!-- Weekly Report Section -->
+        <div class="glass rounded-xl p-4 mt-6">
+          <h3 class="text-lg font-semibold text-primary mb-3">
+            Weekly Report
+          </h3>
+          <div id="weekly-report-content">
+            <!-- Weekly report will be generated here -->
+          </div>
+          <button
+            id="generate-report-btn"
+            class="mt-4 px-4 py-2 bg-primary text-white rounded-lg hover:bg-opacity-80 transition"
+          >
+            Generate Weekly Report
+          </button>
+        </div>
+        
+        <!-- Data Management Section -->
+        <div class="glass rounded-xl p-4 mt-6">
+          <h3 class="text-lg font-semibold text-primary mb-3">
+            Data Management
+          </h3>
+          <div class="flex flex-wrap gap-3">
+            <button
+              id="export-data-btn"
+              class="px-4 py-2 bg-primary-opacity rounded-lg hover:bg-opacity-30 transition"
+            >
+              Export Data
+            </button>
+            <button
+              id="clear-data-btn"
+              class="px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition"
+            >
+              Clear All Data
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -2194,6 +2296,17 @@
     totalStudyTime: 0,
     lastSession: null,
     dailySessions: Array(8).fill(false),
+    studyHistory: []
+  };
+
+  // Variables untuk fitur baru
+  let hasUnsavedChanges = false;
+  const offlineQueue = [];
+  const studyMetrics = {
+    focusSessions: [],
+    breaks: [],
+    productivityPatterns: [],
+    weeklyReports: []
   };
 
   // ============================
@@ -2353,6 +2466,475 @@
   }
 
   // ============================
+  // ENHANCED UX FEATURES
+  // ============================
+
+  // Auto-save progress
+  function autoSaveProgress() {
+    // Auto-save setiap 30 detik
+    setInterval(() => {
+      if (hasUnsavedChanges) {
+        saveProgressWithBackup(progress);
+        showAutoSaveNotification();
+        hasUnsavedChanges = false;
+      }
+    }, 30000);
+  }
+
+  function showAutoSaveNotification() {
+    // Create a subtle notification for auto-save
+    const notification = document.createElement('div');
+    notification.className = 'sr-only';
+    notification.setAttribute('aria-live', 'polite');
+    notification.textContent = 'Progress auto-saved';
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      notification.remove();
+    }, 1000);
+  }
+
+  // Hotkeys
+  document.addEventListener('keydown', (e) => {
+    // Ctrl+Space untuk play/pause musik
+    if (e.ctrlKey && e.key === ' ') {
+      e.preventDefault();
+      const playPauseBtn = document.getElementById('play-pause-btn');
+      if (playPauseBtn) playPauseBtn.click();
+    }
+    
+    // Esc untuk close modal
+    if (e.key === 'Escape') {
+      const analyticsModal = document.getElementById('analytics-modal');
+      if (analyticsModal && analyticsModal.classList.contains('show')) {
+        analyticsModal.classList.remove('show');
+      }
+    }
+    
+    // Space untuk play/pause timer
+    if (e.key === ' ' && !e.ctrlKey) {
+      e.preventDefault();
+      const startTimerBtn = document.getElementById('start-timer');
+      if (startTimerBtn) startTimerBtn.click();
+    }
+    
+    // R untuk reset timer
+    if (e.key === 'r' || e.key === 'R') {
+      const resetTimerBtn = document.getElementById('reset-timer');
+      if (resetTimerBtn) resetTimerBtn.click();
+    }
+  });
+
+  // ============================
+  // ACCESSIBILITY IMPROVEMENTS
+  // ============================
+
+  // ARIA live regions
+  const liveRegion = document.createElement('div');
+  liveRegion.setAttribute('aria-live', 'polite');
+  liveRegion.setAttribute('aria-atomic', 'true');
+  liveRegion.className = 'sr-only';
+  document.body.appendChild(liveRegion);
+
+  function announceTimerChange(message) {
+    liveRegion.textContent = message;
+    setTimeout(() => liveRegion.textContent = '', 1000);
+  }
+
+  // ============================
+  // OFFLINE FEATURES
+  // ============================
+
+  // Network status detection
+  let isOnline = navigator.onLine;
+
+  window.addEventListener("online", () => {
+    isOnline = true;
+    showNotification("Back Online", "Connection restored!", "success");
+
+    // Retry pending actions
+    if (offlineQueue.length > 0) {
+      showNotification("Syncing", "Syncing offline data...", "info");
+      while (offlineQueue.length) {
+        const action = offlineQueue.shift();
+        action();
+      }
+      showNotification("Sync Complete", "All data synced successfully", "success");
+    }
+  });
+
+  window.addEventListener("offline", () => {
+    isOnline = false;
+    showNotification("Offline Mode", "Some features limited", "info");
+  });
+
+  function queueOfflineAction(action) {
+    if (!navigator.onLine) {
+      offlineQueue.push(action);
+      showNotification('Action queued', 'Will sync when online', 'info');
+      return false;
+    }
+    return true;
+  }
+
+  // ============================
+  // ENHANCED ANALYTICS & INSIGHTS
+  // ============================
+
+  studyMetrics.calculateBestTime = function() {
+    // Analisis waktu paling produktif user
+    if (this.focusSessions.length === 0) return 'No data yet';
+    
+    const morningSessions = this.focusSessions.filter(s => 
+      new Date(s.startTime).getHours() < 12
+    );
+    const afternoonSessions = this.focusSessions.filter(s => 
+      new Date(s.startTime).getHours() >= 12 && new Date(s.startTime).getHours() < 18
+    );
+    const eveningSessions = this.focusSessions.filter(s => 
+      new Date(s.startTime).getHours() >= 18
+    );
+    
+    const sessionsByTime = [
+      { time: 'morning', count: morningSessions.length },
+      { time: 'afternoon', count: afternoonSessions.length },
+      { time: 'evening', count: eveningSessions.length }
+    ];
+    
+    sessionsByTime.sort((a, b) => b.count - a.count);
+    return sessionsByTime[0].time;
+  };
+
+  studyMetrics.getProductivityTrend = function() {
+    if (this.productivityPatterns.length < 2) return 'stable';
+    
+    const lastWeek = this.productivityPatterns.slice(-7);
+    const avgProductivity = lastWeek.reduce((sum, day) => sum + day.productivity, 0) / lastWeek.length;
+    const previousWeek = this.productivityPatterns.slice(-14, -7);
+    const prevAvgProductivity = previousWeek.length > 0 ? 
+      previousWeek.reduce((sum, day) => sum + day.productivity, 0) / previousWeek.length : 0;
+    
+    if (avgProductivity > prevAvgProductivity * 1.1) return 'improving';
+    if (avgProductivity < prevAvgProductivity * 0.9) return 'declining';
+    return 'stable';
+  };
+
+  function findMostProductiveDay() {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const dayCounts = {};
+    
+    studyMetrics.focusSessions.forEach(session => {
+      const day = new Date(session.startTime).getDay();
+      dayCounts[day] = (dayCounts[day] || 0) + 1;
+    });
+    
+    if (Object.keys(dayCounts).length === 0) return 'No data';
+    
+    const mostProductiveDayIndex = Object.keys(dayCounts).reduce((a, b) => 
+      dayCounts[a] > dayCounts[b] ? a : b
+    );
+    
+    return days[mostProductiveDayIndex];
+  }
+
+  function calculateAverageSession() {
+    if (studyMetrics.focusSessions.length === 0) return 0;
+    
+    const totalDuration = studyMetrics.focusSessions.reduce((sum, session) => {
+      const endTime = session.endTime || new Date();
+      const duration = (endTime - new Date(session.startTime)) / 1000 / 60; // in minutes
+      return sum + duration;
+    }, 0);
+    
+    return Math.round(totalDuration / studyMetrics.focusSessions.length);
+  }
+
+  // Weekly report generation
+  function generateWeeklyReport() {
+    const report = {
+      totalSessions: progress.completedSessions,
+      totalTime: progress.totalStudyTime,
+      averageSessionLength: calculateAverageSession(),
+      mostProductiveDay: findMostProductiveDay(),
+      achievementsUnlocked: Object.values(achievements).filter(a => a.unlocked).length,
+      bestStudyTime: studyMetrics.calculateBestTime(),
+      productivityTrend: studyMetrics.getProductivityTrend(),
+      generatedAt: new Date().toISOString()
+    };
+    
+    studyMetrics.weeklyReports.push(report);
+    saveStudyMetrics();
+    
+    return report;
+  }
+
+  function displayWeeklyReport(report) {
+    const weeklyReportContent = document.getElementById('weekly-report-content');
+    if (!weeklyReportContent) return;
+    
+    weeklyReportContent.innerHTML = `
+      <div class="space-y-3">
+        <div class="flex justify-between">
+          <span class="text-gray-600">Total Sessions:</span>
+          <span class="font-semibold">${report.totalSessions}</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-600">Total Study Time:</span>
+          <span class="font-semibold">${Math.floor(report.totalTime / 60)}h ${report.totalTime % 60}m</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-600">Avg Session Length:</span>
+          <span class="font-semibold">${report.averageSessionLength}m</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-600">Most Productive Day:</span>
+          <span class="font-semibold">${report.mostProductiveDay}</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-600">Best Study Time:</span>
+          <span class="font-semibold capitalize">${report.bestStudyTime}</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-600">Productivity Trend:</span>
+          <span class="font-semibold capitalize ${report.productivityTrend === 'improving' ? 'text-green-600' : report.productivityTrend === 'declining' ? 'text-red-600' : 'text-yellow-600'}">
+            ${report.productivityTrend}
+          </span>
+        </div>
+        <div class="mt-4 p-3 bg-primary-opacity rounded-lg">
+          <p class="text-sm">
+            <span class="font-semibold">Insight:</span> 
+            ${generateInsightFromReport(report)}
+          </p>
+        </div>
+      </div>
+    `;
+  }
+
+  function generateInsightFromReport(report) {
+    if (report.totalSessions === 0) return "Start your first session to get insights!";
+    
+    if (report.productivityTrend === 'improving') {
+      return "Great work! Your productivity is improving. Keep maintaining this momentum!";
+    } else if (report.productivityTrend === 'declining') {
+      return "Your productivity has declined slightly. Try adjusting your study schedule or taking more breaks.";
+    } else {
+      return "You're maintaining consistent productivity. Consider trying new study techniques to improve further.";
+    }
+  }
+
+  // ============================
+  // SOCIAL & SHARING FEATURES
+  // ============================
+
+  function shareAchievement(achievementId) {
+    const achievement = achievements[achievementId];
+    if (!achievement) return;
+    
+    const text = `I just unlocked "${achievement.name}" on Study Companion! 🎯 ${achievement.description}`;
+    const url = window.location.href;
+    
+    if (navigator.share) {
+      navigator.share({
+        title: 'Study Achievement Unlocked!',
+        text: text,
+        url: url
+      }).then(() => {
+        console.log('Achievement shared successfully');
+      }).catch((error) => {
+        console.log('Sharing failed:', error);
+        fallbackShare(text);
+      });
+    } else {
+      fallbackShare(text);
+    }
+  }
+
+  function fallbackShare(text) {
+    // Copy to clipboard as fallback
+    navigator.clipboard.writeText(text).then(() => {
+      showNotification('Copied!', 'Achievement text copied to clipboard', 'success');
+    }).catch(() => {
+      // Final fallback
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      showNotification('Copied!', 'Achievement text copied to clipboard', 'success');
+    });
+  }
+
+  // Export progress data
+  function exportProgressData() {
+    const data = {
+      progress,
+      achievements: Object.values(achievements).filter(a => a.unlocked),
+      studyHistory: getStudyHistory(),
+      studyMetrics,
+      exportedAt: new Date().toISOString(),
+      appVersion: "1.0.0"
+    };
+    
+    const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `study-companion-backup-${new Date().toISOString().split('T')[0]}.json`;
+    a.click();
+    
+    // Clean up
+    setTimeout(() => URL.revokeObjectURL(url), 100);
+    
+    showNotification('Data Exported', 'Your data has been exported successfully', 'success');
+  }
+
+  function getStudyHistory() {
+    // Simpan history studi (bisa diperluas)
+    return {
+      totalFocusSessions: progress.completedSessions,
+      totalStudyMinutes: progress.totalStudyTime,
+      lastActive: progress.lastSession,
+      achievementsUnlocked: Object.values(achievements).filter(a => a.unlocked).map(a => a.name)
+    };
+  }
+
+  // ============================
+  // SECURITY & PRIVACY FEATURES
+  // ============================
+
+  // Simple encryption untuk data sensitif
+  async function encryptData(data, password) {
+    // Ini adalah implementasi sederhana
+    // Dalam produksi, gunakan library encryption yang proper
+    try {
+      const encoder = new TextEncoder();
+      const dataBuffer = encoder.encode(JSON.stringify(data));
+      
+      // Simple XOR encryption (hanya untuk demo)
+      const keyBuffer = encoder.encode(password.padEnd(32, '0').slice(0, 32));
+      const encryptedBuffer = new Uint8Array(dataBuffer.length);
+      
+      for (let i = 0; i < dataBuffer.length; i++) {
+        encryptedBuffer[i] = dataBuffer[i] ^ keyBuffer[i % keyBuffer.length];
+      }
+      
+      return btoa(String.fromCharCode(...encryptedBuffer));
+    } catch (error) {
+      console.error('Encryption error:', error);
+      return null;
+    }
+  }
+
+  async function decryptData(encryptedData, password) {
+    try {
+      const encryptedBuffer = Uint8Array.from(atob(encryptedData), c => c.charCodeAt(0));
+      const encoder = new TextEncoder();
+      const keyBuffer = encoder.encode(password.padEnd(32, '0').slice(0, 32));
+      const decryptedBuffer = new Uint8Array(encryptedBuffer.length);
+      
+      for (let i = 0; i < encryptedBuffer.length; i++) {
+        decryptedBuffer[i] = encryptedBuffer[i] ^ keyBuffer[i % keyBuffer.length];
+      }
+      
+      const decoder = new TextDecoder();
+      return JSON.parse(decoder.decode(decryptedBuffer));
+    } catch (error) {
+      console.error('Decryption error:', error);
+      return null;
+    }
+  }
+
+  // Clear data option
+  function clearAllData() {
+    if (confirm('Are you sure? This will delete all your progress, achievements, and settings.')) {
+      // Clear semua data
+      localStorage.clear();
+      
+      // Reset progress
+      progress = {
+        completedSessions: 0,
+        totalStudyTime: 0,
+        lastSession: null,
+        dailySessions: Array(8).fill(false),
+        studyHistory: []
+      };
+      
+      // Reset achievements
+      Object.values(achievements).forEach(achievement => {
+        achievement.unlocked = false;
+      });
+      
+      // Reset study metrics
+      studyMetrics.focusSessions = [];
+      studyMetrics.breaks = [];
+      studyMetrics.productivityPatterns = [];
+      studyMetrics.weeklyReports = [];
+      
+      // Reload halaman
+      location.reload();
+    }
+  }
+
+  function getDefaultProgress() {
+    return {
+      completedSessions: 0,
+      totalStudyTime: 0,
+      lastSession: null,
+      dailySessions: Array(8).fill(false),
+      studyHistory: []
+    };
+  }
+
+  function getDefaultAchievements() {
+    return {
+      first_session: {
+        id: "first_session",
+        name: "First Steps",
+        description: "Complete your first focus session",
+        icon: "🎯",
+        unlocked: false,
+        rarity: "common",
+      },
+      focus_master: {
+        id: "focus_master",
+        name: "Focus Master",
+        description: "Complete 10 focus sessions",
+        icon: "⚡",
+        unlocked: false,
+        requirement: 10,
+        rarity: "rare",
+      },
+      marathon_runner: {
+        id: "marathon_runner",
+        name: "Marathon Runner",
+        description: "Study for 60+ minutes total",
+        icon: "🏃‍♂️",
+        unlocked: false,
+        requirement: 60,
+        rarity: "common",
+      },
+      consistency_king: {
+        id: "consistency_king",
+        name: "Consistency King",
+        description: "Complete 5 sessions in one day",
+        icon: "👑",
+        unlocked: false,
+        requirement: 5,
+        rarity: "rare",
+      },
+      early_bird: {
+        id: "early_bird",
+        name: "Early Bird",
+        description: "Start your first session before 8 AM",
+        icon: "🌅",
+        unlocked: false,
+        rarity: "common",
+      },
+    };
+  }
+
+  // ============================
   // AUDIO FILES MANAGEMENT SYSTEM
   // ============================
   const audioFallbacks = {
@@ -2435,6 +3017,17 @@
     return null;
   }
 
+  function saveStudyMetrics() {
+    safeSave("studyMetrics", studyMetrics);
+  }
+
+  function loadStudyMetrics() {
+    const savedMetrics = safeLoad("studyMetrics");
+    if (savedMetrics) {
+      Object.assign(studyMetrics, savedMetrics);
+    }
+  }
+
   // Enhanced save dengan backup system
   function saveProgressWithBackup(progressData) {
     // Buat backup sebelum menyimpan
@@ -2443,26 +3036,6 @@
     // Simpan progress utama
     saveProgressWithOfflineSupport(progressData);
   }
-
-  // Network status detection
-  let isOnline = navigator.onLine;
-  const pendingActions = [];
-
-  window.addEventListener("online", () => {
-    isOnline = true;
-    showNotification("Back Online", "Connection restored!", "success");
-
-    // Retry pending actions
-    if (pendingActions.length > 0) {
-      pendingActions.forEach((action) => action());
-      pendingActions.length = 0;
-    }
-  });
-
-  window.addEventListener("offline", () => {
-    isOnline = false;
-    showNotification("Offline Mode", "Some features limited", "info");
-  });
 
   // Enhanced save dengan offline support
   function saveProgressWithOfflineSupport(progressData) {
@@ -2482,7 +3055,7 @@
     if (isOnline) {
       saveAction();
     } else {
-      pendingActions.push(saveAction);
+      offlineQueue.push(saveAction);
       console.log("Progress save queued for when online");
     }
   }
@@ -2601,6 +3174,13 @@
         "success"
       );
       createConfettiEffect();
+      
+      // Add sharing option for rare achievements
+      setTimeout(() => {
+        if (confirm("Share this rare achievement with friends?")) {
+          shareAchievement(achievementId);
+        }
+      }, 1000);
     } else {
       showNotification(
         "Achievement Unlocked! 🏆",
@@ -2614,6 +3194,7 @@
 
     saveAchievements();
     updateAchievementsUI();
+    hasUnsavedChanges = true;
   }
 
   function updateAchievementsUI() {
@@ -2647,6 +3228,19 @@
           : "achievement-common"
       }`;
 
+      // Add click event for sharing
+      badge.addEventListener('click', () => {
+        if (isUnlocked) {
+          if (achievement.rarity === "rare") {
+            if (confirm(`Share "${achievement.name}" achievement?`)) {
+              shareAchievement(achievement.id);
+            }
+          } else {
+            showNotification(achievement.name, achievement.description, "info");
+          }
+        }
+      });
+
       // Set CSS variables for theming
       if (isUnlocked) {
         badge.style.setProperty(
@@ -2673,6 +3267,7 @@
             ? "<br>⭐ Rare Achievement"
             : ""
         }
+        ${isUnlocked ? '<br><small>Click to share</small>' : ''}
       `;
 
       badge.appendChild(icon);
@@ -3393,6 +3988,7 @@
     }
     
     updateDailyProgress(progressData.dailySessions);
+    hasUnsavedChanges = true;
   }
 
   function updateDailyProgress(dailySessions) {
@@ -3788,9 +4384,23 @@
         if (pomodoroCycles[currentCycleIndex].type === "focus") {
           showMotivationalQuote("session_start");
           triggerCharacterReaction("session_start");
+          
+          // Record session start
+          studyMetrics.focusSessions.push({
+            startTime: new Date().toISOString(),
+            duration: pomodoroCycles[currentCycleIndex].duration / 60
+          });
+          saveStudyMetrics();
         } else {
           showMotivationalQuote("break_start");
           triggerCharacterReaction("break_time");
+          
+          // Record break start
+          studyMetrics.breaks.push({
+            startTime: new Date().toISOString(),
+            duration: pomodoroCycles[currentCycleIndex].duration / 60
+          });
+          saveStudyMetrics();
         }
 
         timerInterval = setInterval(() => {
@@ -3814,13 +4424,28 @@
                 progress.dailySessions[sessionIndex] = true;
               }
 
+              // Update session end time
+              if (studyMetrics.focusSessions.length > 0) {
+                studyMetrics.focusSessions[studyMetrics.focusSessions.length - 1].endTime = new Date().toISOString();
+              }
+              
+              // Add productivity pattern
+              studyMetrics.productivityPatterns.push({
+                date: new Date().toISOString().split('T')[0],
+                productivity: calculateProductivityScore(),
+                sessions: progress.completedSessions
+              });
+              saveStudyMetrics();
+
               saveProgress(progress);
               checkAchievements();
               showMotivationalQuote("session_complete");
               triggerCharacterReaction("session_complete");
+              announceTimerChange("Focus session complete! Time for a break.");
             } else {
               showMotivationalQuote("break_start");
               triggerCharacterReaction("break_time");
+              announceTimerChange("Break time over! Ready for next focus session.");
             }
 
             currentCycleIndex =
@@ -3850,6 +4475,7 @@
         clearInterval(timerInterval);
 
         showMotivationalQuote("pause");
+        announceTimerChange("Timer paused.");
       }
     });
   }
@@ -3872,6 +4498,7 @@
       }
       initializeSessionProgress();
       updateTimerDisplay();
+      announceTimerChange("Timer reset to beginning.");
 
       timerButtons.forEach((btn) => {
         btn.classList.remove("bg-primary", "text-white");
@@ -3910,6 +4537,9 @@
   const analyticsBtn = document.getElementById("analytics-btn");
   const closeAnalytics = document.getElementById("close-analytics");
   const analyticsModal = document.getElementById("analytics-modal");
+  const generateReportBtn = document.getElementById("generate-report-btn");
+  const exportDataBtn = document.getElementById("export-data-btn");
+  const clearDataBtn = document.getElementById("clear-data-btn");
 
   if (analyticsBtn) {
     analyticsBtn.addEventListener("click", showAnalytics);
@@ -3927,6 +4557,22 @@
         analyticsModal.classList.remove("show");
       }
     });
+  }
+
+  if (generateReportBtn) {
+    generateReportBtn.addEventListener("click", () => {
+      const report = generateWeeklyReport();
+      displayWeeklyReport(report);
+      showNotification("Report Generated", "Weekly report has been generated", "success");
+    });
+  }
+
+  if (exportDataBtn) {
+    exportDataBtn.addEventListener("click", exportProgressData);
+  }
+
+  if (clearDataBtn) {
+    clearDataBtn.addEventListener("click", clearAllData);
   }
 
   // Theme toggle event
@@ -3986,6 +4632,7 @@
     // Load progress and achievements
     progress = loadProgress();
     loadAchievements();
+    loadStudyMetrics();
 
     // Initialize components
     playTrack(0);
@@ -4001,6 +4648,9 @@
     
     updatePlaylistNumbers();
     updateStartButtonText();
+
+    // Start auto-save
+    autoSaveProgress();
 
     // Hide splash screen after delay
     setTimeout(() => {
@@ -4030,6 +4680,15 @@
     document.addEventListener('DOMContentLoaded', safeInitializeApp);
   } else {
     safeInitializeApp();
+  }
+</script>
+
+<!-- Service Worker untuk offline capability -->
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').catch(error => {
+      console.log('Service Worker registration failed:', error);
+    });
   }
 </script>
   </body>
