@@ -2,12 +2,12 @@
   "name": "Study Companion - Anime Pomodoro Timer",
   "short_name": "StudyComp",
   "description": "Focus with Arona & Plana - Your anime study partner for better focus & productivity",
-  "start_url": "/?source=pwa",
+  "start_url": "./?source=pwa",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#38bdf8",
   "orientation": "any",
-  "scope": "/",
+  "scope": "./",
   "lang": "en-US",
   "dir": "ltr",
   "categories": ["productivity", "education", "utilities"],
@@ -15,61 +15,61 @@
   
   "icons": [
     {
-      "src": "/assets/images/icon-192x192.png",
+      "src": "./assets/images/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/assets/images/icon-512x512.png",
+      "src": "./assets/images/icon-512x512.png",
       "sizes": "512x512", 
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/assets/images/icon-72x72.png",
+      "src": "./assets/images/icon-72x72.png",
       "sizes": "72x72",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/assets/images/icon-96x96.png",
+      "src": "./assets/images/icon-96x96.png",
       "sizes": "96x96",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/assets/images/icon-128x128.png",
+      "src": "./assets/images/icon-128x128.png",
       "sizes": "128x128",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/assets/images/icon-144x144.png",
+      "src": "./assets/images/icon-144x144.png",
       "sizes": "144x144",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/assets/images/icon-152x152.png",
+      "src": "./assets/images/icon-152x152.png",
       "sizes": "152x152",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/assets/images/icon-192x192.png",
+      "src": "./assets/images/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/assets/images/icon-384x384.png",
+      "src": "./assets/images/icon-384x384.png",
       "sizes": "384x384",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/assets/images/icon-512x512.png",
+      "src": "./assets/images/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -78,28 +78,28 @@
   
   "screenshots": [
     {
-      "src": "/assets/screenshots/mobile-1.png",
+      "src": "./assets/screenshots/mobile-1.png",
       "sizes": "375x667",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "Timer & Music Player"
     },
     {
-      "src": "/assets/screenshots/mobile-2.png",
+      "src": "./assets/screenshots/mobile-2.png",
       "sizes": "375x667",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "Achievements & Analytics"
     },
     {
-      "src": "/assets/screenshots/desktop-1.png",
+      "src": "./assets/screenshots/desktop-1.png",
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
       "label": "Desktop View"
     },
     {
-      "src": "/assets/screenshots/desktop-2.png",
+      "src": "./assets/screenshots/desktop-2.png",
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
@@ -112,22 +112,22 @@
       "name": "Start 25 Min Focus",
       "short_name": "25 Min Focus",
       "description": "Start a 25-minute focus session",
-      "url": "/?start=25",
-      "icons": [{ "src": "/assets/icons/shortcut-25.png", "sizes": "96x96" }]
+      "url": "./?start=25",
+      "icons": [{ "src": "./assets/icons/shortcut-25.png", "sizes": "96x96" }]
     },
     {
       "name": "View Analytics",
       "short_name": "Analytics",
       "description": "Check your study progress",
-      "url": "/?show=analytics",
-      "icons": [{ "src": "/assets/icons/shortcut-stats.png", "sizes": "96x96" }]
+      "url": "./?show=analytics",
+      "icons": [{ "src": "./assets/icons/shortcut-stats.png", "sizes": "96x96" }]
     },
     {
       "name": "Play Study Music",
       "short_name": "Study Music",
       "description": "Start lo-fi study music",
-      "url": "/?play=music",
-      "icons": [{ "src": "/assets/icons/shortcut-music.png", "sizes": "96x96" }]
+      "url": "./?play=music",
+      "icons": [{ "src": "./assets/icons/shortcut-music.png", "sizes": "96x96" }]
     }
   ],
   
@@ -136,7 +136,7 @@
   "protocol_handlers": [
     {
       "protocol": "web+studytimer",
-      "url": "/?timer=%s"
+      "url": "./?timer=%s"
     }
   ]
 }
