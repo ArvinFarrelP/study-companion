@@ -1,0 +1,13 @@
+{
+  "name": "study-companion-pwa",
+  "version": "1.0.0",
+  "description": "Study Companion PWA - Anime Pomodoro Timer",
+  "scripts": {
+    "generate-icons": "node generate-icons.js",
+    "dev": "npx serve .",
+    "build": "node generate-icons.js"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.2"
+  }
+}

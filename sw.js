@@ -5,6 +5,11 @@ const PROGRESS_BACKUP_KEY = 'progress-backup';
 
 // Assets yang akan di-cache
 const ASSETS_TO_CACHE = [
+  '/apple-touch-icon.png',
+  '/favicon.ico',
+  '/assets/images/icon-180x180.png',
+  '/assets/images/icon-192x192.png',
+  '/assets/images/icon-512x512.png',
   // HTML dan root
   '/',
   '/index.html',
