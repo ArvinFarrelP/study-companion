@@ -44,8 +44,6 @@
     <link rel="manifest" href="./manifest.json">
     
     <script src="https://cdn.tailwindcss.com"></script>
-        <!-- Sebelum </body> -->
-    <script src="./mobile-fixes.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -2311,6 +2309,239 @@
   };
 
   // ============================
+  // WEB WORKER TIMER SYSTEM - MOBILE OPTIMIZED
+  // ============================
+  let timerWorker = null;
+  let timerInterval; // Legacy timer fallback
+  let timeLeft = 25 * 60; // Default 25 menit
+  let isRunning = false;
+  let currentCycleIndex = 0;
+  let hasStarted = false;
+
+  // Pomodoro cycles
+  const pomodoroCycles = [
+    { type: "focus", duration: 25 * 60, title: "Focus Session" },
+    { type: "short-break", duration: 5 * 60, title: "Short Break" },
+    { type: "focus", duration: 25 * 60, title: "Focus Session" },
+    { type: "short-break", duration: 5 * 60, title: "Short Break" },
+    { type: "focus", duration: 25 * 60, title: "Focus Session" },
+    { type: "long-break", duration: 15 * 60, title: "Long Break" },
+  ];
+
+  // Initialize Web Worker
+  function initTimerWorker() {
+    try {
+      if (window.Worker) {
+        timerWorker = new Worker('timer-worker.js');
+        
+        timerWorker.onmessage = (e) => {
+          const { event, timeLeft: workerTimeLeft, elapsed } = e.data;
+          
+          switch (event) {
+            case 'TICK':
+              timeLeft = workerTimeLeft;
+              updateTimerDisplay();
+              break;
+              
+            case 'COMPLETE':
+              timeLeft = 0;
+              updateTimerDisplay();
+              handleTimerComplete();
+              break;
+              
+            case 'RESET':
+              timeLeft = workerTimeLeft;
+              updateTimerDisplay();
+              break;
+              
+            case 'ERROR':
+              console.error('Timer Worker Error:', e.data.error);
+              useLegacyTimer();
+              break;
+              
+            case 'STATUS':
+              console.log('Worker Status:', e.data);
+              break;
+          }
+        };
+        
+        timerWorker.onerror = (e) => {
+          console.error('Worker failed, using fallback');
+          useLegacyTimer();
+        };
+        
+        console.log('Web Worker Timer initialized');
+      } else {
+        console.log('Web Worker not supported, using legacy timer');
+        useLegacyTimer();
+      }
+    } catch (e) {
+      console.log('Worker initialization failed:', e);
+      useLegacyTimer();
+    }
+  }
+
+  // Legacy timer fallback
+  function useLegacyTimer() {
+    console.log('Using legacy timer system');
+    
+    // Override timer functions
+    window.startTimer = function() {
+      if (isRunning) return;
+      
+      isRunning = true;
+      hasStarted = true;
+      updateStartButtonText();
+      
+      const startTime = Date.now();
+      const initialTime = timeLeft;
+      
+      timerInterval = setInterval(() => {
+        const elapsed = Math.floor((Date.now() - startTime) / 1000);
+        timeLeft = Math.max(0, initialTime - elapsed);
+        
+        updateTimerDisplay();
+        
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          isRunning = false;
+          hasStarted = false;
+          updateStartButtonText();
+          handleTimerComplete();
+        }
+      }, 250);
+    };
+    
+    window.pauseTimer = function() {
+      if (!isRunning) return;
+      
+      isRunning = false;
+      updateStartButtonText();
+      clearInterval(timerInterval);
+    };
+    
+    window.resetTimer = function(newTime = null) {
+      clearInterval(timerInterval);
+      isRunning = false;
+      hasStarted = false;
+      updateStartButtonText();
+      
+      if (newTime !== null) {
+        timeLeft = newTime;
+      }
+      
+      updateTimerDisplay();
+    };
+  }
+
+  // Timer control functions
+  function startTimer() {
+    if (!isRunning) {
+      isRunning = true;
+      hasStarted = true;
+      updateStartButtonText();
+      
+      if (pomodoroCycles[currentCycleIndex].type === "focus") {
+        showMotivationalQuote("session_start");
+        triggerCharacterReaction("session_start");
+        
+        // Record session start
+        studyMetrics.focusSessions.push({
+          startTime: new Date().toISOString(),
+          duration: pomodoroCycles[currentCycleIndex].duration / 60
+        });
+        saveStudyMetrics();
+      } else {
+        showMotivationalQuote("break_start");
+        triggerCharacterReaction("break_time");
+        
+        // Record break start
+        studyMetrics.breaks.push({
+          startTime: new Date().toISOString(),
+          duration: pomodoroCycles[currentCycleIndex].duration / 60
+        });
+        saveStudyMetrics();
+      }
+      
+      // Use Web Worker if available
+      if (timerWorker) {
+        timerWorker.postMessage({
+          action: 'START',
+          data: { timeLeft }
+        });
+      } else if (window.startTimer) {
+        window.startTimer();
+      } else {
+        // Fallback to original timer
+        startLegacyTimerFallback();
+      }
+    } else {
+      pauseTimer();
+    }
+  }
+
+  function pauseTimer() {
+    if (!isRunning) return;
+    
+    isRunning = false;
+    updateStartButtonText();
+    
+    if (timerWorker) {
+      timerWorker.postMessage({
+        action: 'PAUSE',
+        data: { timeLeft }
+      });
+    } else if (window.pauseTimer) {
+      window.pauseTimer();
+    } else {
+      clearInterval(timerInterval);
+    }
+    
+    showMotivationalQuote("pause");
+    announceTimerChange("Timer paused.");
+  }
+
+  function resetTimer(newTime = null) {
+    if (timerWorker) {
+      timerWorker.postMessage({
+        action: 'RESET',
+        data: { timeLeft: newTime !== null ? newTime : pomodoroCycles[0].duration }
+      });
+    } else if (window.resetTimer) {
+      window.resetTimer(newTime);
+    } else {
+      clearInterval(timerInterval);
+      isRunning = false;
+      hasStarted = false;
+      updateStartButtonText();
+      
+      if (newTime !== null) {
+        timeLeft = newTime;
+      }
+      
+      updateTimerDisplay();
+    }
+    
+    announceTimerChange("Timer reset.");
+  }
+
+  // Original legacy timer fallback
+  function startLegacyTimerFallback() {
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      updateTimerDisplay();
+      
+      if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        isRunning = false;
+        hasStarted = false;
+        updateStartButtonText();
+        handleTimerComplete();
+      }
+    }, 1000);
+  }
+
+  // ============================
   // ENHANCED ERROR BOUNDARY SYSTEM
   // ============================
 
@@ -2515,14 +2746,13 @@
     // Space untuk play/pause timer
     if (e.key === ' ' && !e.ctrlKey) {
       e.preventDefault();
-      const startTimerBtn = document.getElementById('start-timer');
-      if (startTimerBtn) startTimerBtn.click();
+      startTimer();
     }
     
     // R untuk reset timer
     if (e.key === 'r' || e.key === 'R') {
-      const resetTimerBtn = document.getElementById('reset-timer');
-      if (resetTimerBtn) resetTimerBtn.click();
+      e.preventDefault();
+      resetTimer();
     }
   });
 
@@ -2718,6 +2948,10 @@
       studyMetrics.breaks = [];
       studyMetrics.productivityPatterns = [];
       studyMetrics.weeklyReports = [];
+      
+      // Reset timer
+      resetTimer(25 * 60);
+      currentCycleIndex = 0;
       
       // Reload halaman
       location.reload();
@@ -3435,7 +3669,7 @@
     window.addEventListener("load", async () => {
       try {
         const registration = await navigator.serviceWorker.register(
-          "/sw.js"
+          '/sw.js'
         );
         console.log("SW registered: ", registration);
 
@@ -4103,7 +4337,7 @@
   }
 
   // ============================
-  // TIMER FUNCTIONALITY - BAGIAN YANG DIPERBAIKI
+  // TIMER UI COMPONENTS
   // ============================
   const timerDisplay = document.getElementById("timer-display");
   const startTimerBtn = document.getElementById("start-timer");
@@ -4112,21 +4346,6 @@
   const timerTitle = document.getElementById("timer-title");
   const currentCycle = document.getElementById("current-cycle");
   const sessionProgress = document.getElementById("session-progress");
-
-  const pomodoroCycles = [
-    { type: "focus", duration: 25 * 60, title: "Focus Session" },
-    { type: "short-break", duration: 5 * 60, title: "Short Break" },
-    { type: "focus", duration: 25 * 60, title: "Focus Session" },
-    { type: "short-break", duration: 5 * 60, title: "Short Break" },
-    { type: "focus", duration: 25 * 60, title: "Focus Session" },
-    { type: "long-break", duration: 15 * 60, title: "Long Break" },
-  ];
-
-  let timerInterval;
-  let timeLeft = pomodoroCycles[0].duration;
-  let isRunning = false;
-  let currentCycleIndex = 0;
-  let hasStarted = false;
 
   function initializeSessionProgress() {
     if (!sessionProgress) return;
@@ -4144,8 +4363,6 @@
     });
   }
 
-  initializeSessionProgress();
-
   function updateStartButtonText() {
     if (!startTimerBtn) return;
     
@@ -4159,170 +4376,6 @@
       startTimerBtn.textContent = "Continue";
       startTimerBtn.setAttribute("aria-label", "Continue timer");
     }
-  }
-
-  timerButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const minutes = parseInt(button.getAttribute("data-time"));
-
-      clearInterval(timerInterval);
-      isRunning = false;
-      hasStarted = false;
-
-      timeLeft = minutes * 60;
-
-      updateTimerDisplay();
-      updateStartButtonText();
-
-      timerButtons.forEach((btn) => {
-        btn.classList.remove("bg-primary", "text-white");
-        btn.classList.add("bg-primary-opacity");
-        btn.setAttribute("aria-pressed", "false");
-      });
-      button.classList.add("bg-primary", "text-white");
-      button.classList.remove("bg-primary-opacity");
-      button.setAttribute("aria-pressed", "true");
-    });
-  });
-
-  // PERBAIKAN: Bagian startTimerBtn yang bermasalah
-  if (startTimerBtn) {
-    startTimerBtn.addEventListener("click", () => {
-      if (!isRunning) {
-        isRunning = true;
-        hasStarted = true;
-        updateStartButtonText();
-
-        if (pomodoroCycles[currentCycleIndex].type === "focus") {
-          showMotivationalQuote("session_start");
-          triggerCharacterReaction("session_start");
-          
-          // Record session start
-          studyMetrics.focusSessions.push({
-            startTime: new Date().toISOString(),
-            duration: pomodoroCycles[currentCycleIndex].duration / 60
-          });
-          saveStudyMetrics();
-        } else {
-          showMotivationalQuote("break_start");
-          triggerCharacterReaction("break_time");
-          
-          // Record break start
-          studyMetrics.breaks.push({
-            startTime: new Date().toISOString(),
-            duration: pomodoroCycles[currentCycleIndex].duration / 60
-          });
-          saveStudyMetrics();
-        }
-
-        timerInterval = setInterval(() => {
-          timeLeft--;
-          updateTimerDisplay();
-
-          if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            isRunning = false;
-            hasStarted = false;
-            updateStartButtonText();
-
-            if (pomodoroCycles[currentCycleIndex].type === "focus") {
-              progress.completedSessions++;
-              progress.totalStudyTime +=
-                pomodoroCycles[currentCycleIndex].duration;
-              progress.lastSession = new Date().toISOString();
-
-              const sessionIndex = progress.completedSessions % 8;
-              if (sessionIndex < progress.dailySessions.length) {
-                progress.dailySessions[sessionIndex] = true;
-              }
-
-              // Update session end time
-              if (studyMetrics.focusSessions.length > 0) {
-                studyMetrics.focusSessions[studyMetrics.focusSessions.length - 1].endTime = new Date().toISOString();
-              }
-              
-              // Add productivity pattern
-              studyMetrics.productivityPatterns.push({
-                date: new Date().toISOString().split('T')[0],
-                productivity: calculateProductivityScore(),
-                sessions: progress.completedSessions
-              });
-              saveStudyMetrics();
-
-              saveProgress(progress);
-              checkAchievements();
-              showMotivationalQuote("session_complete");
-              triggerCharacterReaction("session_complete");
-              announceTimerChange("Focus session complete! Time for a break.");
-            } else {
-              showMotivationalQuote("break_start");
-              triggerCharacterReaction("break_time");
-              announceTimerChange("Break time over! Ready for next focus session.");
-            }
-
-            currentCycleIndex =
-              (currentCycleIndex + 1) % pomodoroCycles.length;
-            timeLeft = pomodoroCycles[currentCycleIndex].duration;
-
-            if (timerTitle) timerTitle.textContent = pomodoroCycles[currentCycleIndex].title;
-            if (currentCycle) {
-              currentCycle.textContent = `${currentCycleIndex + 1}/${
-                pomodoroCycles.length
-              }`;
-              currentCycle.setAttribute(
-                "aria-label",
-                `Current session ${currentCycleIndex + 1} of ${
-                  pomodoroCycles.length
-                }`
-              );
-            }
-
-            initializeSessionProgress();
-            updateTimerDisplay();
-          }
-        }, 1000);
-      } else {
-        isRunning = false;
-        updateStartButtonText();
-        clearInterval(timerInterval);
-
-        showMotivationalQuote("pause");
-        announceTimerChange("Timer paused.");
-      }
-    });
-  }
-
-  if (resetTimerBtn) {
-    resetTimerBtn.addEventListener("click", () => {
-      clearInterval(timerInterval);
-      isRunning = false;
-      hasStarted = false;
-      updateStartButtonText();
-      currentCycleIndex = 0;
-      timeLeft = pomodoroCycles[0].duration;
-      if (timerTitle) timerTitle.textContent = pomodoroCycles[0].title;
-      if (currentCycle) {
-        currentCycle.textContent = `1/${pomodoroCycles.length}`;
-        currentCycle.setAttribute(
-          "aria-label",
-          `Current session 1 of ${pomodoroCycles.length}`
-        );
-      }
-      initializeSessionProgress();
-      updateTimerDisplay();
-      announceTimerChange("Timer reset to beginning.");
-
-      timerButtons.forEach((btn) => {
-        btn.classList.remove("bg-primary", "text-white");
-        btn.classList.add("bg-primary-opacity");
-        btn.setAttribute("aria-pressed", "false");
-      });
-      if (timerButtons[0]) {
-        timerButtons[0].classList.add("bg-primary", "text-white");
-        timerButtons[0].classList.remove("bg-primary-opacity");
-        timerButtons[0].setAttribute("aria-pressed", "true");
-      }
-    });
   }
 
   function updateTimerDisplay() {
@@ -4340,6 +4393,152 @@
       currentMode === "arona" ? "Arona" : "Plana"
     }`;
   }
+
+  function handleTimerComplete() {
+    if (pomodoroCycles[currentCycleIndex].type === "focus") {
+      progress.completedSessions++;
+      progress.totalStudyTime += pomodoroCycles[currentCycleIndex].duration;
+      progress.lastSession = new Date().toISOString();
+
+      const sessionIndex = progress.completedSessions % 8;
+      if (sessionIndex < progress.dailySessions.length) {
+        progress.dailySessions[sessionIndex] = true;
+      }
+
+      // Update session end time
+      if (studyMetrics.focusSessions.length > 0) {
+        studyMetrics.focusSessions[studyMetrics.focusSessions.length - 1].endTime = new Date().toISOString();
+      }
+      
+      // Add productivity pattern
+      studyMetrics.productivityPatterns.push({
+        date: new Date().toISOString().split('T')[0],
+        productivity: calculateProductivityScore(),
+        sessions: progress.completedSessions
+      });
+      saveStudyMetrics();
+
+      saveProgress(progress);
+      checkAchievements();
+      showMotivationalQuote("session_complete");
+      triggerCharacterReaction("session_complete");
+      announceTimerChange("Focus session complete! Time for a break.");
+    } else {
+      showMotivationalQuote("break_start");
+      triggerCharacterReaction("break_time");
+      announceTimerChange("Break time over! Ready for next focus session.");
+    }
+
+    currentCycleIndex = (currentCycleIndex + 1) % pomodoroCycles.length;
+    timeLeft = pomodoroCycles[currentCycleIndex].duration;
+
+    if (timerTitle) timerTitle.textContent = pomodoroCycles[currentCycleIndex].title;
+    if (currentCycle) {
+      currentCycle.textContent = `${currentCycleIndex + 1}/${pomodoroCycles.length}`;
+      currentCycle.setAttribute(
+        "aria-label",
+        `Current session ${currentCycleIndex + 1} of ${pomodoroCycles.length}`
+      );
+    }
+
+    initializeSessionProgress();
+    updateTimerDisplay();
+    
+    // Auto-start next session jika di mobile (opsional)
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      setTimeout(() => {
+        if (confirm("Start next session automatically?")) {
+          startTimer();
+        }
+      }, 1000);
+    }
+  }
+
+  // ============================
+  // TIMER EVENT LISTENERS
+  // ============================
+
+  if (startTimerBtn) {
+    startTimerBtn.addEventListener("click", startTimer);
+    
+    // Tambahkan touch event untuk mobile
+    startTimerBtn.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      startTimerBtn.style.transform = 'scale(0.95)';
+    }, { passive: false });
+    
+    startTimerBtn.addEventListener("touchend", (e) => {
+      e.preventDefault();
+      startTimerBtn.style.transform = '';
+      startTimer();
+    }, { passive: false });
+  }
+
+  if (resetTimerBtn) {
+    resetTimerBtn.addEventListener("click", () => {
+      resetTimer(pomodoroCycles[0].duration);
+      currentCycleIndex = 0;
+      timeLeft = pomodoroCycles[0].duration;
+      if (timerTitle) timerTitle.textContent = pomodoroCycles[0].title;
+      if (currentCycle) {
+        currentCycle.textContent = `1/${pomodoroCycles.length}`;
+      }
+      initializeSessionProgress();
+      
+      timerButtons.forEach((btn) => {
+        btn.classList.remove("bg-primary", "text-white");
+        btn.classList.add("bg-primary-opacity");
+        btn.setAttribute("aria-pressed", "false");
+      });
+      if (timerButtons[0]) {
+        timerButtons[0].classList.add("bg-primary", "text-white");
+        timerButtons[0].setAttribute("aria-pressed", "true");
+      }
+    });
+    
+    // Tambahkan touch event untuk mobile
+    resetTimerBtn.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      resetTimerBtn.style.transform = 'scale(0.95)';
+    }, { passive: false });
+    
+    resetTimerBtn.addEventListener("touchend", (e) => {
+      e.preventDefault();
+      resetTimerBtn.style.transform = '';
+      resetTimerBtn.click();
+    }, { passive: false });
+  }
+
+  timerButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const minutes = parseInt(button.getAttribute("data-time"));
+      
+      // Reset timer dengan waktu baru
+      resetTimer(minutes * 60);
+      currentCycleIndex = 0;
+      
+      timerButtons.forEach((btn) => {
+        btn.classList.remove("bg-primary", "text-white");
+        btn.classList.add("bg-primary-opacity");
+        btn.setAttribute("aria-pressed", "false");
+      });
+      button.classList.add("bg-primary", "text-white");
+      button.classList.remove("bg-primary-opacity");
+      button.setAttribute("aria-pressed", "true");
+    });
+    
+    // Tambahkan touch event untuk mobile
+    button.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      button.style.transform = 'scale(0.95)';
+    }, { passive: false });
+    
+    button.addEventListener("touchend", (e) => {
+      e.preventDefault();
+      button.style.transform = '';
+      button.click();
+    }, { passive: false });
+  });
 
   // ============================
   // EVENT LISTENERS & INITIALIZATION
@@ -4417,6 +4616,9 @@
       applyPlanaThemeImmediately();
     }
 
+    // Initialize Web Worker Timer
+    initTimerWorker();
+
     // Preload critical assets
     preloadCriticalAssets().then(() => {
       console.log("Critical assets preloaded");
@@ -4431,6 +4633,8 @@
     playTrack(0);
     updateAchievementsUI();
     updateDailyProgress(progress.dailySessions);
+    initializeSessionProgress();
+    updateTimerDisplay();
 
     // Set initial timer button state
     if (timerButtons[0]) {
@@ -4444,6 +4648,9 @@
 
     // Start auto-save
     autoSaveProgress();
+
+    // Handle visibility changes untuk mobile
+    setupVisibilityHandler();
 
     // Hide splash screen after delay
     setTimeout(() => {
@@ -4466,6 +4673,24 @@
         }, 1000);
       }
     }, 2000);
+  }
+
+  // Tambahkan function untuk handle visibility change
+  function setupVisibilityHandler() {
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        // App di background
+        console.log('App moved to background');
+        if (isRunning && timerWorker) {
+          // Minta status dari worker sebelum pause
+          timerWorker.postMessage({ action: 'GET_STATUS' });
+        }
+      } else {
+        // App kembali ke foreground
+        console.log('App returned to foreground');
+        // Timer akan terus berjalan di worker
+      }
+    });
   }
 
   // Start the app when DOM is ready dengan error boundary
