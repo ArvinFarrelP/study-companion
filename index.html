@@ -4029,6 +4029,7 @@
     });
   }
 
+  // PERBAIKAN: Fungsi playTrack dengan urutan yang benar
   function playTrack(index) {
     try {
       currentTrackIndex = index;
@@ -4039,13 +4040,16 @@
         throw new Error("Invalid track data");
       }
 
-      // Reset fallback index when changing tracks
-      currentFallbackIndex = 0;
-
-      audioPlayer.src = track.src;
+      // Set UI dulu sebelum mengubah audio source
       if (currentTrack) currentTrack.textContent = track.title;
       if (currentArtist) currentArtist.textContent = track.artist;
       if (totalTime) totalTime.textContent = track.duration;
+
+      // Reset fallback index when changing tracks
+      currentFallbackIndex = 0;
+
+      // Set audio source setelah UI diupdate
+      audioPlayer.src = track.src;
 
       updatePlaylistNumbers();
 
@@ -4477,15 +4481,5 @@
     safeInitializeApp();
   }
 </script>
-
-<!-- Service Worker untuk offline capability -->
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').catch(error => {
-      console.log('Service Worker registration failed:', error);
-    });
-  }
-</script>
   </body>
 </html>
-
