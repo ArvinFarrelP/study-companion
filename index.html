@@ -3633,6 +3633,9 @@
       currentMode = "arona";
       localStorage.setItem("studyCompanionMode", "arona");
 
+      // ===== SMOOTH SCROLL ADDED HERE =====
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
       loadAchievements();
       triggerCharacterReaction("greeting");
 
@@ -3667,6 +3670,9 @@
       characterContainer.style.transform = "scale(1.08) rotateY(-5deg)";
       currentMode = "plana";
       localStorage.setItem("studyCompanionMode", "plana");
+
+      // ===== SMOOTH SCROLL ADDED HERE =====
+      window.scrollTo({ top: 0, behavior: 'smooth' });
 
       loadAchievements();
       triggerCharacterReaction("greeting");
@@ -3883,6 +3889,17 @@
   let currentTrackIndex = 0;
   let isMusicPlaying = false;
 
+  // ===== VOLUME MEMORY IMPLEMENTATION - BAGIAN 1: INISIALISASI =====
+  // Load saved volume from localStorage
+  const savedVolume = localStorage.getItem('musicVolume');
+  if (savedVolume !== null) {
+    audioPlayer.volume = parseFloat(savedVolume);
+    volumeSlider.value = savedVolume * 100;
+  } else {
+    audioPlayer.volume = 0.7; // default
+    volumeSlider.value = 70;
+  }
+
   // Enhanced Audio Error Handling dengan multiple fallbacks
   if (audioPlayer) {
     audioPlayer.addEventListener('error', function handleAudioError(e) {
@@ -3981,9 +3998,12 @@
     });
   }
 
+  // ===== VOLUME MEMORY IMPLEMENTATION - BAGIAN 2: EVENT LISTENER =====
   if (volumeSlider) {
-    volumeSlider.addEventListener("input", () => {
-      audioPlayer.volume = volumeSlider.value / 100;
+    volumeSlider.addEventListener('input', () => {
+      const vol = volumeSlider.value / 100;
+      audioPlayer.volume = vol;
+      localStorage.setItem('musicVolume', vol);
     });
   }
 
