@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
   <!-- PWA Head Tags -->
   <link rel="icon" href="./favicon.ico" type="image/x-icon">
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
@@ -43,9 +43,6 @@
     <meta property="og:image" content="/assets/images/social-preview.png">
     <meta property="og:url" content="https://yourwebsite.com">
     <meta name="twitter:card" content="summary_large_image">
-    
-    <!-- PWA Manifest -->
-    <!-- <link rel="manifest" href="./manifest.json"> -->
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -139,19 +136,17 @@
   margin-top: auto;
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
   padding: 20px 0;
-  cursor: grab; /* Tangan buat drag */
+  cursor: grab;
   position: relative;
   transform-origin: center top;
 }
 
-/* Saat di-grab (mouse down) */
 .site-footer:active {
   cursor: grabbing;
   transform: scaleY(0.95);
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Kelas untuk JavaScript tambahkan saat ditarik */
 .site-footer.pulled {
   transform: translateY(-40px) scaleY(1.05);
   border-radius: 20px;
@@ -159,7 +154,6 @@
   transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Efek lepas setelah ditarik */
 .site-footer.released {
   transform: translateY(0) scaleY(1);
   transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -312,7 +306,6 @@
     border: 0;
   }
 
-  /* PERBAIKAN CSS SELECTOR - VERSION FIXED */
   .sr-only:focus,
   .sr-only:focus-visible {
     position: static;
@@ -520,8 +513,8 @@
 
 /* 1. Tombol Timer Controls - PERBAIKAN (SOFT VERSION) */
 .theme-arona .timer-controls button {
-  color: #475569 !important;  /* DIUBAH: Lebih soft, gray medium */
-  font-weight: 500;           /* DIUBAH: Sedikit lebih ringan */
+  color: #475569 !important;
+  font-weight: 500;
   transition: all 0.3s ease;
 }
 
@@ -531,12 +524,12 @@
 }
 
 .theme-arona .timer-controls button:hover {
-  color: #334155 !important;  /* Sedikit lebih gelap saat hover */
+  color: #334155 !important;
 }
 
 .theme-plana .timer-controls button {
-  color: #6b7280 !important;  /* DIUBAH: Lebih soft, gray medium */
-  font-weight: 500;           /* DIUBAH: Sedikit lebih ringan */
+  color: #6b7280 !important;
+  font-weight: 500;
   transition: all 0.3s ease;
 }
 
@@ -546,7 +539,7 @@
 }
 
 .theme-plana .timer-controls button:hover {
-  color: #4b5563 !important;  /* Sedikit lebih gelap saat hover */
+  color: #4b5563 !important;
 }
 
 /* Tombol Reset khusus - lebih soft */
@@ -871,7 +864,6 @@
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
   }
 
-  /* Enhanced focus states untuk accessibility */
   .character-fallback:focus {
     outline: 2px solid currentColor;
     outline-offset: 2px;
@@ -913,7 +905,6 @@
     opacity: 0.7;
   }
 
-  /* PERBAIKAN: Ganti CSS untuk achievement-icon */
   .achievement-icon {
     width: 48px;
     height: 48px;
@@ -927,7 +918,6 @@
     transform: scale(1.1);
   }
 
-  /* Class untuk achievement yang locked dan unlocked */
   .achievement.locked .achievement-icon {
     filter: grayscale(100%);
     opacity: 0.4;
@@ -1469,7 +1459,7 @@
     .timer-controls button {
       min-height: 44px;
       padding: 12px 20px;
-      font-size: 16px; /* Prevent zoom on iOS */
+      font-size: 16px;
     }
 
     .music-controls button {
@@ -1503,6 +1493,26 @@
     .character-interaction {
       max-width: 150px;
       font-size: 11px;
+    }
+
+    /* ============================ */
+    /* MOBILE INSTALL BUTTON - FIXED */
+    /* ============================ */
+    #install-container {
+      bottom: 80px !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      width: auto !important;
+      max-width: 90% !important;
+      z-index: 9999 !important;
+    }
+
+    #install-btn {
+      padding: 12px 24px !important;
+      font-size: 16px !important;
+      min-width: 200px !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+      border-radius: 40px !important;
     }
   }
 
@@ -1556,6 +1566,17 @@
       font-size: 0.75rem;
       padding-top: 0.75rem;
     }
+
+    /* Mobile install button - very small screens */
+    #install-container {
+      bottom: 70px !important;
+    }
+
+    #install-btn {
+      padding: 10px 20px !important;
+      font-size: 14px !important;
+      min-width: 180px !important;
+    }
   }
 
   /* Tablet optimizations */
@@ -1601,6 +1622,74 @@
       color: #faf5ff;
     }
   }
+  
+  /* ============================ */
+  /* INSTALL BUTTON STYLES - DIPERBAIKI UNTUK MOBILE */
+  /* ============================ */
+  #install-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9999;
+    animation: slideIn 0.5s ease;
+    display: block !important;
+  }
+  
+  #install-container.hidden {
+    display: none !important;
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateX(100px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInMobile {
+    from {
+      transform: translateX(-50%) translateY(50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  #install-btn {
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    min-width: 180px;
+  }
+  
+  #install-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  }
+  
+  .theme-arona #install-btn {
+    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+  }
+  
+  .theme-plana #install-btn {
+    background: linear-gradient(135deg, #c084fc, #a855f7);
+  }
 </style>
   </head>
   <body
@@ -1617,6 +1706,16 @@
 
     <!-- Background overlay -->
     <div class="background-overlay" aria-hidden="true"></div>
+
+    <!-- Install Container - PWA Install Button (DIPERBAIKI UNTUK MOBILE) -->
+    <div id="install-container" class="hidden">
+      <button id="install-btn" class="install-btn" aria-label="Install Study Companion as app">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+        Install App
+      </button>
+    </div>
 
     <!-- Theme Toggle Button dengan ARIA labels -->
     <div class="theme-toggle page-transition">
@@ -3432,6 +3531,67 @@
   // PWA & OFFLINE FUNCTIONALITY
   // ============================
 
+  // PWA Installation Prompt
+  let deferredPrompt;
+  
+  // Cek apakah aplikasi berjalan dalam mode standalone (PWA)
+  function isRunningStandalone() {
+    return (window.matchMedia('(display-mode: standalone)').matches ||
+            window.navigator.standalone === true);
+  }
+
+  window.addEventListener("beforeinstallprompt", (e) => {
+    // Jangan tampilkan prompt install jika sudah dalam mode PWA
+    if (isRunningStandalone()) {
+      return;
+    }
+    
+    e.preventDefault();
+    deferredPrompt = e;
+    
+    const installContainer = document.getElementById('install-container');
+    if (installContainer) {
+      console.log('Showing install button'); // Debug
+      installContainer.classList.remove('hidden');
+    }
+    
+    // Notifikasi dengan action
+    showNotification(
+      "Install App", 
+      "Install Study Companion for better experience! Click to install.", 
+      "info"
+    );
+  });
+
+  // Sembunyikan tombol jika sudah diinstall
+  window.addEventListener('appinstalled', () => {
+    console.log('PWA installed successfully');
+    const installContainer = document.getElementById('install-container');
+    if (installContainer) {
+      installContainer.classList.add('hidden');
+    }
+    deferredPrompt = null;
+  });
+
+  // Install function
+  async function installPWA() {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+
+      if (outcome === "accepted") {
+        console.log("User accepted PWA installation");
+        showNotification(
+          "App Installed",
+          "Thank you for installing!",
+          "success"
+        );
+      }
+
+      deferredPrompt = null;
+    }
+  }
+
   // Register Service Worker
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", async () => {
@@ -3463,41 +3623,6 @@
         console.log("SW registration failed: ", error);
       }
     });
-  }
-
-  // PWA Installation Prompt
-  let deferredPrompt;
-  window.addEventListener("beforeinstallprompt", (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-
-    // Show install button (bisa ditambahkan UI)
-    setTimeout(() => {
-      showNotification(
-        "Install App",
-        "Install Study Companion for better experience!",
-        "info"
-      );
-    }, 10000);
-  });
-
-  // Install function
-  async function installPWA() {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-
-      if (outcome === "accepted") {
-        console.log("User accepted PWA installation");
-        showNotification(
-          "App Installed",
-          "Thank you for installing!",
-          "success"
-        );
-      }
-
-      deferredPrompt = null;
-    }
   }
 
   // ============================
@@ -4347,6 +4472,12 @@
   // EVENT LISTENERS & INITIALIZATION
   // ============================
 
+  // Install button event listener
+  const installBtn = document.getElementById("install-btn");
+  if (installBtn) {
+    installBtn.addEventListener("click", installPWA);
+  }
+
   // Analytics Modal Events
   const analyticsBtn = document.getElementById("analytics-btn");
   const closeAnalytics = document.getElementById("close-analytics");
@@ -4488,4 +4619,3 @@
 </script>
   </body>
 </html>
-
