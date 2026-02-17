@@ -4158,7 +4158,9 @@
     ],
     plana: [
       "assets/images/plana.png",
+      "assets/images/plana_swimsuitSummer.jpg",
       "assets/images/plana_bunnyGirl.jpg",
+      "assets/images/plana_kimono.jpg",
     ],
   };
 
@@ -4177,16 +4179,34 @@
     "Outfit baru! Arona makin cantik kan? 🌟",
   ];
 
-  const planaOutfitMessages = [
-    "Plana... in... ini... outfit spesial! 🌸✨",  // malu-malu
-    "U-untuk Sensei... Plana berani pakai ini... 💕",  // masih malu
-    "Apakah... apakah ini terlalu berlebihan? 🙈",  // malu banget
-    "Plana merasa... berbeda dengan outfit ini... 🌙",  // masih ada sisi Plana
-    "Hanya untuk Sensei... janji ya? 💝",  // sweet
-    "Bunnygirl Plana... siap menemani belajar! 🐰",  // mulai pede
-    "Telinga ini... bisa dengar detak jantung Sensei... 💓",  // little bit flirt
-    "Plana... masih Plana yang dulu... hanya bajunya beda... 📖",  // balancing
-  ];
+const planaOutfitMessages = {
+  default: [
+    "Plana... hanya punya ini... maaf Sensei... 📖",
+    "Seragam biasa ini... cukup untuk belajar... 📚",
+    "Plana merasa nyaman dengan ini... Sensei juga? 🌙"
+  ],
+  kimono: [
+    "Kimono... apakah cocok? Plana agak malu... 🌸",
+    "Sensei suka? Plana... senang... sedikit... ✨",
+    "Untuk acara spesial... Plana pakai ini... 🎋",
+    "Kimono ini... warisan dari Sensei... eh, bukan! 💕"
+  ],
+  bunny: [
+    "S-sensei... jangan lihat... Plana salah ambil baju... 🐰💦",
+    "A-Arona yang suruh... Plana gak mau... tapi... 🙈",
+    "Telinganya... jangan dipegang... Kyaa! 🐰💕",
+    "Plana... jadi kelinci... mau Sensei elus? ... Eh?! 😳"
+  ],
+  swimsuit: [
+    "I-ini cuma untuk berenang... jangan salah sangka... 🏊‍♀️",
+    "Sensei kenapa lihat terus? Plana... Plana... 🫣",
+    "Airnya dingin... tapi Sensei lihat... jadi panas... 💦",
+    "Jangan foto! ... Eh, Sensei? ... Boleh dikit... 📸"
+  ]
+};
+
+// Mapping index outfit ke key dialog
+const planaOutfitKeys = ["default", "kimono", "bunny", "swimsuit"];
 
   function changeOutfit(direction) {
     console.log("Changing outfit, direction:", direction, "mode:", currentMode);
