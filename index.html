@@ -3,50 +3,68 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- PWA Head Tags -->
-  <link rel="icon" href="./favicon.ico" type="image/x-icon">
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon-16x16.png">
-  
-  <!-- Apple Touch Icon -->
-  <link rel="apple-touch-icon" href="./apple-touch-icon.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/icon-180x180.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="./assets/images/icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="167x167" href="./assets/images/icon-167x167.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="./assets/images/icon-120x120.png">
-  
-  <!-- PWA Manifest -->
-  <link rel="manifest" href="./manifest.json">
-  
-  <!-- Theme Colors -->
-  <meta name="theme-color" content="#38bdf8">
-  <!-- TETAP PERTAHANKAN yang ini untuk iOS: -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- PWA Head Tags -->
+    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./assets/images/favicon-16x16.png"
+    />
 
-<!-- TAMBAHKAN ini untuk Chrome/Android: -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="msapplication-TileColor" content="#38bdf8">
-  <meta name="msapplication-TileImage" content="/assets/images/mstile-150x150.png">
-    <title>
-      Study Companion
-    </title>
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./assets/images/icon-180x180.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="./assets/images/icon-152x152.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="167x167"
+      href="./assets/images/icon-167x167.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="./assets/images/icon-120x120.png"
+    />
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="./manifest.json" />
+
+    <!-- Theme Colors -->
+    <meta name="theme-color" content="#38bdf8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="msapplication-TileColor" content="#38bdf8" />
+    <meta name="msapplication-TileImage" content="/assets/images/mstile-150x150.png" />
+    <title>Study Companion</title>
     <meta
       name="description"
       content="Anime-style Pomodoro timer with focus companions, achievements, and productivity analytics. Stay focused with Arona and Plana!"
     />
     <meta name="theme-color" content="#38bdf8" />
-    
+
     <!-- Meta tags untuk social sharing -->
-    <meta property="og:title" content="Study Companion - Anime Pomodoro Timer">
-    <meta property="og:description" content="Focus with Arona & Plana - Your anime study partner for better focus & productivity">
-    <meta property="og:image" content="/assets/images/social-preview.png">
-    <meta property="og:url" content="https://yourwebsite.com">
-    <meta name="twitter:card" content="summary_large_image">
-    
-    <!-- PWA Manifest -->
-    <!-- <link rel="manifest" href="./manifest.json"> -->
-    
+    <meta property="og:title" content="Study Companion - Anime Pomodoro Timer" />
+    <meta property="og:description" content="Focus with Arona & Plana - Your anime study partner for better focus & productivity" />
+    <meta property="og:image" content="/assets/images/social-preview.png" />
+    <meta property="og:url" content="https://yourwebsite.com" />
+    <meta name="twitter:card" content="summary_large_image" />
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -54,1571 +72,1519 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
-<style>
-  /* CSS yang sudah ada tetap sama */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  html,
-  body {
-    height: 100%;
-    overflow-x: hidden;
-  }
-
-  /* Smooth scrolling */
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    font-family: "Inter", sans-serif;
-    min-height: 100vh;
-    background-attachment: fixed;
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex;
-    flex-direction: column;
-  }
-
-  main {
-    flex: 1 0 auto;
-    width: 100%;
-  }
-
-  /* ============================ */
-  /* ENHANCED MICRO-INTERACTIONS */
-  /* ============================ */
-  .timer-controls button:active {
-    transform: scale(0.95);
-    transition: transform 0.1s ease;
-  }
-
-  .music-controls button:active {
-    transform: scale(0.95);
-    transition: transform 0.1s ease;
-  }
-
-  .theme-toggle-btn:active {
-    transform: scale(0.95) rotate(15deg);
-    transition: transform 0.1s ease;
-  }
-
-  /* Loading skeleton untuk analytics */
-  .skeleton {
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: loading 1.5s infinite;
-    border-radius: 8px;
-    min-height: 20px;
-  }
-
-  .skeleton-circle {
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: loading 1.5s infinite;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-  }
-
-  @keyframes loading {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-  }
-
-  /* FOOTER STYLES - NEW & IMPROVED */
-.site-footer {
-  flex-shrink: 0;
-  width: 100%;
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 24px 24px 0 0;
-  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-  margin-top: auto;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
-  padding: 20px 0;
-  cursor: grab; /* Tangan buat drag */
-  position: relative;
-  transform-origin: center top;
-}
-
-/* Saat di-grab (mouse down) */
-.site-footer:active {
-  cursor: grabbing;
-  transform: scaleY(0.95);
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-/* Kelas untuk JavaScript tambahkan saat ditarik */
-.site-footer.pulled {
-  transform: translateY(-40px) scaleY(1.05);
-  border-radius: 20px;
-  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-/* Efek lepas setelah ditarik */
-.site-footer.released {
-  transform: translateY(0) scaleY(1);
-  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-  .theme-arona .site-footer {
-    background: rgba(255, 255, 255, 0.95);
-    border-top-color: rgba(56, 189, 248, 0.3);
-    color: #0c4a6e;
-  }
-
-  .theme-plana .site-footer {
-    background: rgba(255, 255, 255, 0.95);
-    border-top-color: rgba(192, 132, 252, 0.3);
-    color: #4a044e;
-  }
-
-  .footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1.5rem 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-  }
-
-  .footer-brand {
-    text-align: center;
-  }
-
-  .footer-brand h3 {
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    font-size: 1.25rem;
-  }
-
-  .footer-brand p {
-    opacity: 0.8;
-    font-size: 0.875rem;
-  }
-
-  .donation-section {
-    text-align: center;
-    width: 100%;
-  }
-
-  .donation-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-    font-weight: 600;
-    font-size: 1.1rem;
-  }
-
-  .donation-links {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    width: 100%;
-  }
-
-  .donation-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
-    border-radius: 12px;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-    min-width: 140px;
-  }
-
-  .theme-arona .donation-btn {
-    background: rgba(56, 189, 248, 0.1);
-    color: #0c4a6e;
-    border-color: rgba(56, 189, 248, 0.3);
-  }
-
-  .theme-arona .donation-btn:hover {
-    background: rgba(56, 189, 248, 0.2);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(56, 189, 248, 0.2);
-  }
-
-  .theme-plana .donation-btn {
-    background: rgba(192, 132, 252, 0.1);
-    color: #4a044e;
-    border-color: rgba(192, 132, 252, 0.3);
-  }
-
-  .theme-plana .donation-btn:hover {
-    background: rgba(192, 132, 252, 0.2);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(192, 132, 252, 0.2);
-  }
-
-  .donation-btn .heart {
-    color: #ef4444;
-    animation: heartbeat 1.5s ease-in-out infinite;
-  }
-
-  @keyframes heartbeat {
-    0%, 100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.1);
-    }
-  }
-
-  .donation-btn svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  .footer-bottom {
-    text-align: center;
-    width: 100%;
-    padding-top: 1rem;
-    border-top: 1px solid;
-    font-size: 0.875rem;
-    opacity: 0.7;
-  }
-
-  .theme-arona .footer-bottom {
-    border-top-color: rgba(56, 189, 248, 0.2);
-  }
-
-  .theme-plana .footer-bottom {
-    border-top-color: rgba(192, 132, 252, 0.2);
-  }
-
-  /* Accessibility Improvements */
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-
-  /* PERBAIKAN CSS SELECTOR - VERSION FIXED */
-  .sr-only:focus,
-  .sr-only:focus-visible {
-    position: static;
-    width: auto;
-    height: auto;
-    padding: 1rem;
-    margin: 0;
-    overflow: visible;
-    clip: auto;
-    white-space: normal;
-    background: white;
-    border-radius: 4px;
-    z-index: 10000;
-    border: 2px solid currentColor;
-  }
-
-  button:focus-visible,
-  input:focus-visible {
-    outline: 2px solid currentColor;
-    outline-offset: 2px;
-    border-radius: 4px;
-  }
-
-  .glass:focus-within {
-    outline: 2px solid rgba(56, 189, 248, 0.5);
-    outline-offset: 2px;
-  }
-
-  /* High contrast mode support */
-  @media (prefers-contrast: high) {
-    .glass {
-      border: 2px solid;
-    }
-
-    .theme-arona .glass {
-      border-color: #0c4a6e;
-    }
-
-    .theme-plana .glass {
-      border-color: #4a044e;
-    }
-  }
-
-  /* Reduced motion support */
-  @media (prefers-reduced-motion: reduce) {
-    * {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-
-    .float {
-      animation: none;
-    }
-
-    .visualizer-bar {
-      animation: none;
-      height: 50% !important;
-    }
-
-    .donation-btn .heart {
-      animation: none;
-    }
-    
-    .timer-controls button:active {
-      transform: none;
-    }
-    
-    .skeleton, .skeleton-circle {
-      animation: none;
-    }
-  }
-
-  /* Tema Arona (Light Mode - Biru) */
-  .theme-arona {
-    background: linear-gradient(
-      135deg,
-      #f0f9ff 0%,
-      #e0f2fe 50%,
-      #bae6fd 100%
-    );
-    color: #0c4a6e;
-  }
-
-  .theme-arona .glass {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(56, 189, 248, 0.3);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  }
-
-  .theme-arona .glow-box {
-    box-shadow: 0 0 25px rgba(56, 189, 248, 0.3),
-      inset 0 0 15px rgba(56, 189, 248, 0.1);
-  }
-
-  .theme-arona .character-glow {
-    background: radial-gradient(
-      circle,
-      rgba(56, 189, 248, 0.3) 0%,
-      transparent 70%
-    );
-  }
-
-  .theme-arona .progress-fill {
-    background: linear-gradient(90deg, #38bdf8, #0ea5e9);
-  }
-
-  .theme-arona .visualizer-bar {
-    background-color: #38bdf8;
-  }
-
-  .theme-arona .text-primary {
-    color: #38bdf8;
-  }
-
-  .theme-arona .bg-primary {
-    background-color: #38bdf8;
-  }
-
-  .theme-arona .bg-primary-opacity {
-    background-color: rgba(56, 189, 248, 0.2);
-  }
-
-  .theme-arona .bg-pattern {
-    background-image: radial-gradient(
-        circle at 20% 30%,
-        rgba(56, 189, 248, 0.1) 0%,
-        transparent 50%
-      ),
-      radial-gradient(
-        circle at 80% 70%,
-        rgba(56, 189, 248, 0.1) 0%,
-        transparent 50%
-      );
-  }
-
-  /* Tema Plana (Light Mode - Ungu) */
-  .theme-plana {
-    background: linear-gradient(
-      135deg,
-      #fff5f5 0%,
-      #fef7ff 50%,
-      #faf0ff 100%
-    );
-    color: #4a044e;
-  }
-
-  .theme-plana .glass {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(192, 132, 252, 0.3);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  }
-
-  .theme-plana .glow-box {
-    box-shadow: 0 0 25px rgba(192, 132, 252, 0.3),
-      inset 0 0 15px rgba(192, 132, 252, 0.1);
-  }
-
-  .theme-plana .character-glow {
-    background: radial-gradient(
-      circle,
-      rgba(192, 132, 252, 0.3) 0%,
-      transparent 70%
-    );
-  }
-
-  .theme-plana .progress-fill {
-    background: linear-gradient(90deg, #c084fc, #a855f7);
-  }
-
-  .theme-plana .visualizer-bar {
-    background-color: #c084fc;
-  }
-
-  .theme-plana .text-primary {
-    color: #c084fc;
-  }
-
-  .theme-plana .bg-primary {
-    background-color: #c084fc;
-  }
-
-  .theme-plana .bg-primary-opacity {
-    background-color: rgba(192, 132, 252, 0.2);
-  }
-
-  .theme-plana .bg-pattern {
-    background-image: radial-gradient(
-        circle at 20% 30%,
-        rgba(192, 132, 252, 0.1) 0%,
-        transparent 50%
-      ),
-      radial-gradient(
-        circle at 80% 70%,
-        rgba(192, 132, 252, 0.1) 0%,
-        transparent 50%
-      );
-  }
-
-/* ============================ */
-/* PERBAIKAN KONTRAST WARNA - FIXED */
-/* ============================ */
-
-/* 1. Tombol Timer Controls - PERBAIKAN (SOFT VERSION) */
-.theme-arona .timer-controls button {
-  color: #475569 !important;  /* DIUBAH: Lebih soft, gray medium */
-  font-weight: 500;           /* DIUBAH: Sedikit lebih ringan */
-  transition: all 0.3s ease;
-}
-
-.theme-arona .timer-controls button.bg-primary {
-  color: white !important;
-  font-weight: 600;
-}
-
-.theme-arona .timer-controls button:hover {
-  color: #334155 !important;  /* Sedikit lebih gelap saat hover */
-}
-
-.theme-plana .timer-controls button {
-  color: #6b7280 !important;  /* DIUBAH: Lebih soft, gray medium */
-  font-weight: 500;           /* DIUBAH: Sedikit lebih ringan */
-  transition: all 0.3s ease;
-}
-
-.theme-plana .timer-controls button.bg-primary {
-  color: white !important;
-  font-weight: 600;
-}
-
-.theme-plana .timer-controls button:hover {
-  color: #4b5563 !important;  /* Sedikit lebih gelap saat hover */
-}
-
-/* Tombol Reset khusus - lebih soft */
-.theme-arona #reset-timer {
-  color: #64748b !important;
-  background-color: #e2e8f0 !important;
-}
-
-.theme-arona #reset-timer:hover {
-  color: #475569 !important;
-  background-color: #cbd5e1 !important;
-}
-
-.theme-plana #reset-timer {
-  color: #9ca3af !important;
-  background-color: #f3f4f6 !important;
-}
-
-.theme-plana #reset-timer:hover {
-  color: #6b7280 !important;
-  background-color: #e5e7eb !important;
-}
-
-/* 2. Study Playlist Items - PERBAIKAN */
-.theme-arona .playlist-container .text-sm {
-  color: #0c4a6e !important;
-  font-weight: 600;
-}
-
-.theme-arona .playlist-container .text-xs.text-gray-400 {
-  color: #475569 !important;
-  font-weight: 500;
-}
-
-.theme-plana .playlist-container .text-sm {
-  color: #4a044e !important;
-  font-weight: 600;
-}
-
-.theme-plana .playlist-container .text-xs.text-gray-400 {
-  color: #6b7280 !important;
-  font-weight: 500;
-}
-
-/* 3. Analytics Modal Improvements - PERBAIKAN */
-.theme-arona .analytics-content {
-  color: #0c4a6e;
-}
-
-.theme-arona .analytics-content .text-gray-600 {
-  color: #475569 !important;
-  font-weight: 500;
-}
-
-.theme-arona .analytics-content .bg-primary-opacity {
-  background: rgba(56, 189, 248, 0.15);
-  border: 1px solid rgba(56, 189, 248, 0.2);
-}
-
-.theme-arona #weekly-stats span {
-  color: #0c4a6e;
-  font-weight: 600;
-}
-
-.theme-arona #weekly-stats span.font-semibold {
-  color: #0369a1;
-  font-weight: 700;
-}
-
-.theme-plana .analytics-content {
-  color: #4a044e;
-}
-
-.theme-plana .analytics-content .text-gray-600 {
-  color: #6b7280 !important;
-  font-weight: 500;
-}
-
-.theme-plana .analytics-content .bg-primary-opacity {
-  background: rgba(192, 132, 252, 0.15);
-  border: 1px solid rgba(192, 132, 252, 0.2);
-}
-
-.theme-plana #weekly-stats span {
-  color: #4a044e;
-  font-weight: 600;
-}
-
-.theme-plana #weekly-stats span.font-semibold {
-  color: #7c3aed;
-  font-weight: 700;
-}
-
-/* Progress bars di analytics */
-.theme-arona .analytics-content .progress-bar {
-  background: rgba(12, 74, 110, 0.25);
-  height: 8px;
-}
-
-.theme-plana .analytics-content .progress-bar {
-  background: rgba(74, 4, 78, 0.25);
-  height: 8px;
-}
-
-/* 4. Additional contrast improvements */
-.theme-arona .glass {
-  color: #0c4a6e;
-}
-
-.theme-plana .glass {
-  color: #4a044e;
-}
-
-/* Text di Today's Progress */
-.theme-arona #progress-title {
-  color: #0c4a6e;
-  font-weight: 700;
-}
-
-.theme-plana #progress-title {
-  color: #4a044e;
-  font-weight: 700;
-}
-
-.theme-arona #analytics-btn {
-  color: #0369a1;
-  font-weight: 600;
-}
-
-.theme-plana #analytics-btn {
-  color: #7c3aed;
-  font-weight: 600;
-}
-
-/* Now Playing text improvements */
-.theme-arona #current-track {
-  color: #0c4a6e !important;
-  font-weight: 600;
-}
-
-.theme-arona #current-artist {
-  color: #475569 !important;
-  font-weight: 500;
-}
-
-.theme-plana #current-track {
-  color: #4a044e !important;
-  font-weight: 600;
-}
-
-.theme-plana #current-artist {
-  color: #6b7280 !important;
-  font-weight: 500;
-}
-
-/* Styles Umum */
-.glass {
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.character-glow {
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  filter: blur(60px);
-  animation: pulse 3s ease-in-out infinite;
-  pointer-events: none;
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.6;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 0.8;
-  }
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.float {
-  animation: float 4s ease-in-out infinite;
-}
-
-.bg-pattern {
-  background-attachment: fixed;
-  background-size: cover;
-}
-
-.progress-bar {
-  width: 100%;
-  height: 6px;
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-.theme-arona .progress-bar {
-  background: rgba(12, 74, 110, 0.15);
-}
-
-.theme-plana .progress-bar {
-  background: rgba(74, 4, 78, 0.15);
-}
-
-.progress-fill {
-  height: 100%;
-  border-radius: 3px;
-  transition: width 0.3s ease;
-}
-
-.visualizer-bar {
-  animation: visualizer 1.5s ease-in-out infinite alternate;
-}
-
-@keyframes visualizer {
-  0% {
-    transform: scaleY(0.3);
-  }
-  100% {
-    transform: scaleY(1);
-  }
-}
-
-.theme-transition {
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.text-gray-300 {
-  color: #64748b;
-}
-
-.theme-plana .text-gray-300 {
-  color: #6b7280;
-}
-
-.text-gray-400 {
-  color: #94a3b8;
-}
-
-.theme-plana .text-gray-400 {
-  color: #9ca3af;
-}
-
-.bg-gray-600 {
-  background-color: #cbd5e1;
-}
-
-.bg-gray-700 {
-  background-color: #e2e8f0;
-}
-
-/* Efek transformasi karakter */
-.character-transform {
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.character-transform:hover {
-  transform: scale(1.05);
-}
-
-/* Efek fade untuk teks */
-.fade-text {
-  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Particle effect */
-.particle {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  pointer-events: none;
-  opacity: 0;
-}
-
-.theme-arona .particle {
-  background: #38bdf8;
-}
-
-.theme-plana .particle {
-  background: #c084fc;
-}
-
-@keyframes particle-float {
-  0% {
-    transform: translateY(0) translateX(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-100px) translateX(var(--tx, 0));
-    opacity: 0;
-  }
-}
-  /* ============================ */
-  /* CHARACTER FALLBACK STYLES - BARU */
-  /* ============================ */
-  .character-fallback {
-    border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  .character-fallback:hover {
-    transform: scale(1.02);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-  }
-
-  /* Enhanced focus states untuk accessibility */
-  .character-fallback:focus {
-    outline: 2px solid currentColor;
-    outline-offset: 2px;
-  }
-
-  /* ============================ */
-  /* ENHANCED ACHIEVEMENT STYLES */
-  /* ============================ */
-  .achievement-badge {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 80px;
-    height: 80px;
-    border-radius: 16px;
-    margin: 5px;
-    transition: all 0.3s ease;
-    position: relative;
-    cursor: pointer;
-    padding: 8px;
-    border: 2px solid transparent;
-  }
-
-  .achievement-unlocked {
-    background: linear-gradient(
-      135deg,
-      var(--primary-color, #38bdf8),
-      var(--secondary-color, #0ea5e9)
-    );
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    transform: scale(1.05);
-  }
-
-  .achievement-locked {
-    background: rgba(255, 255, 255, 0.5);
-    border: 2px dashed rgba(0, 0, 0, 0.2);
-    filter: grayscale(1);
-    opacity: 0.7;
-  }
-
-  /* PERBAIKAN: Ganti CSS untuk achievement-icon */
-  .achievement-icon {
-    width: 48px;
-    height: 48px;
-    object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-    transition: transform 0.2s ease;
-    margin-bottom: 4px;
-  }
-
-  .achievement-badge:hover .achievement-icon {
-    transform: scale(1.1);
-  }
-
-  /* Class untuk achievement yang locked dan unlocked */
-  .achievement.locked .achievement-icon {
-    filter: grayscale(100%);
-    opacity: 0.4;
-  }
-
-  .achievement.unlocked .achievement-icon {
-    filter: drop-shadow(0 0 6px rgba(80, 160, 255, 0.6));
-  }
-
-  .achievement-tooltip {
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.9);
-    color: white;
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-size: 12px;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s;
-    z-index: 10;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .achievement-badge:hover .achievement-tooltip {
-    opacity: 1;
-  }
-
-  .achievement-progress {
-    font-size: 10px;
-    margin-top: 2px;
-    font-weight: 600;
-    background: rgba(0, 0, 0, 0.1);
-    padding: 2px 6px;
-    border-radius: 8px;
-  }
-
-  .achievement-rare {
-    border: 2px solid gold;
-    box-shadow: 0 0 15px gold;
-  }
-
-  .achievement-common {
-    border: 2px solid silver;
-  }
-
-  /* ============================ */
-  /* ENHANCED PROGRESS RING */
-  /* ============================ */
-  .progress-ring {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: conic-gradient(
-      var(--primary-color) 0% var(--progress),
-      #e5e7eb var(--progress) 100%
-    );
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: bold;
-    position: relative;
-  }
-
-  .progress-ring::before {
-    content: '';
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    background: white;
-    border-radius: 50%;
-    z-index: 1;
-  }
-
-  .progress-ring span {
-    position: relative;
-    z-index: 2;
-  }
-
-  /* Splash Screen */
-  #splash-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    transition: opacity 1s ease, transform 1s ease;
-  }
-
-  .theme-arona #splash-screen {
-    background: linear-gradient(
-      135deg,
-      #f0f9ff 0%,
-      #e0f2fe 50%,
-      #bae6fd 100%
-    );
-  }
-
-  .theme-plana #splash-screen {
-    background: linear-gradient(
-      135deg,
-      #fff5f5 0%,
-      #fef7ff 50%,
-      #faf0ff 100%
-    );
-  }
-
-  .splash-logo {
-    font-size: 3rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    transition: all 0.8s ease;
-  }
-
-  .theme-arona .splash-logo {
-    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .theme-plana .splash-logo {
-    background: linear-gradient(135deg, #c084fc, #a855f7);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .splash-loader {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-  }
-
-  .theme-arona .splash-loader {
-    border: 3px solid rgba(56, 189, 248, 0.3);
-    border-top: 3px solid #38bdf8;
-  }
-
-  .theme-plana .splash-loader {
-    border: 3px solid rgba(192, 132, 252, 0.3);
-    border-top: 3px solid #c084fc;
-  }
-
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-
-  /* Smooth page transition */
-  .page-transition {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .page-loaded {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Background overlay */
-  .background-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2;
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .theme-arona .background-overlay {
-    background: linear-gradient(
-      135deg,
-      #f0f9ff 0%,
-      #e0f2fe 50%,
-      #bae6fd 100%
-    );
-  }
-
-  .theme-plana .background-overlay {
-    background: linear-gradient(
-      135deg,
-      #fff5f5 0%,
-      #fef7ff 50%,
-      #faf0ff 100%
-    );
-  }
-
-  /* Notification styles */
-  .notification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    backdrop-filter: blur(12px);
-    border-radius: 12px;
-    padding: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    transform: translateX(120%);
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    max-width: 300px;
-  }
-
-  .theme-arona .notification {
-    background: rgba(255, 255, 255, 0.95);
-    border: 1px solid rgba(56, 189, 248, 0.3);
-  }
-
-  .theme-plana .notification {
-    background: rgba(255, 255, 255, 0.95);
-    border: 1px solid rgba(192, 132, 252, 0.3);
-  }
-
-  .notification.show {
-    transform: translateX(0);
-  }
-
-  .notification.success {
-    border-left: 4px solid #10b981;
-  }
-
-  .notification.info {
-    border-left: 4px solid;
-  }
-
-  .theme-arona .notification.info {
-    border-left-color: #38bdf8;
-  }
-
-  .theme-plana .notification.info {
-    border-left-color: #c084fc;
-  }
-
-  /* Session progress circles */
-  .session-circle {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-  }
-
-  .session-completed {
-    background-color: #10b981;
-  }
-
-  .session-current {
-    animation: pulse 2s infinite;
-  }
-
-  .theme-arona .session-current {
-    background-color: #38bdf8;
-  }
-
-  .theme-plana .session-current {
-    background-color: #c084fc;
-  }
-
-  .session-pending {
-    background-color: #e5e7eb;
-  }
-
-  .theme-plana .session-pending {
-    background-color: #e5e7eb;
-  }
-
-  /* Session Counter */
-  .session-counter {
-    font-size: 0.875rem;
-    font-weight: 600;
-    padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
-    backdrop-filter: blur(8px);
-  }
-
-  .theme-arona .session-counter {
-    background: rgba(56, 189, 248, 0.2);
-    border: 1px solid rgba(56, 189, 248, 0.3);
-    color: #0c4a6e;
-  }
-
-  .theme-plana .session-counter {
-    background: rgba(192, 132, 252, 0.2);
-    border: 1px solid rgba(192, 132, 252, 0.3);
-    color: #7c3aed;
-  }
-
-  /* Playlist Numbering */
-  .playlist-number {
-    width: 1.75rem;
-    height: 1.75rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.75rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-
-  .playlist-active {
-    color: white;
-  }
-
-  .theme-arona .playlist-active {
-    background: rgba(56, 189, 248, 0.2);
-    color: #0c4a6e;
-  }
-
-  .theme-plana .playlist-active {
-    background: rgba(192, 132, 252, 0.2);
-    color: #7c3aed;
-  }
-
-  .playlist-inactive {
-    background: rgba(156, 163, 175, 0.1);
-    color: #64748b;
-  }
-
-  .theme-plana .playlist-inactive {
-    color: #6b7280;
-  }
-
-  /* Character Interaction Styles */
-  .character-interaction {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 12px;
-    padding: 8px 12px;
-    font-size: 12px;
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    pointer-events: none;
-    z-index: 5;
-    max-width: 200px;
-    word-wrap: break-word;
-  }
-
-  .character-interaction.show {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Theme Toggle Button */
-  .theme-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 100;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .theme-toggle-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    backdrop-filter: blur(12px);
-    cursor: pointer;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    border: none;
-  }
-
-  .theme-arona .theme-toggle-btn {
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(56, 189, 248, 0.3);
-    box-shadow: 0 0 25px rgba(56, 189, 248, 0.3),
-      inset 0 0 15px rgba(56, 189, 248, 0.1);
-  }
-
-  .theme-plana .theme-toggle-btn {
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(192, 132, 252, 0.3);
-    box-shadow: 0 0 25px rgba(192, 132, 252, 0.3),
-      inset 0 0 15px rgba(192, 132, 252, 0.1);
-  }
-
-  .theme-toggle-btn:hover {
-    transform: scale(1.1) rotate(15deg);
-  }
-
-  .theme-toggle-btn:focus {
-    outline: 2px solid currentColor;
-    outline-offset: 2px;
-  }
-
-  /* Analytics Modal */
-  .analytics-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-  }
-
-  .analytics-modal.show {
-    opacity: 1;
-    pointer-events: all;
-  }
-
-  .analytics-content {
-    background: white;
-    border-radius: 20px;
-    padding: 2rem;
-    max-width: 800px;
-    width: 90%;
-    max-height: 80vh;
-    overflow-y: auto;
-    transform: scale(0.9);
-    transition: transform 0.3s ease;
-  }
-
-  .analytics-modal.show .analytics-content {
-    transform: scale(1);
-  }
-
-  /* Confetti Effect */
-  .confetti {
-    position: fixed;
-    width: 10px;
-    height: 10px;
-    background: var(--confetti-color);
-    opacity: 0;
-    z-index: 9999;
-  }
-
-  /* ============================ */
-  /* ENHANCED MOBILE OPTIMIZATION */
-  /* ============================ */
-  @media (max-width: 768px) {
-    .flex-col.lg\:flex-row {
-      flex-direction: column;
-    }
-
-    .character-container img {
-      width: 200px;
-      height: 250px;
-    }
-
-    .character-fallback {
-      width: 200px !important;
-      height: 250px !important;
-    }
-
-    .glass {
-      padding: 1rem;
-    }
-
-    .text-3xl {
-      font-size: 1.5rem;
-    }
-
-    .text-4xl {
-      font-size: 2rem;
-    }
-
-    .theme-toggle {
-      top: 10px;
-      right: 10px;
-    }
-
-    .achievement-badge {
-      width: 70px;
-      height: 70px;
-    }
-
-    .achievement-icon {
-      width: 42px;
-      height: 42px;
-    }
-
-    .analytics-content {
-      padding: 1rem;
-      margin: 1rem;
-    }
-
-    /* Footer Mobile Optimization - IMPROVED */
-    .footer-content {
-      padding: 1rem;
-      gap: 1rem;
-    }
-
-    .donation-links {
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .donation-btn {
-      width: 100%;
-      max-width: 280px;
-      justify-content: center;
-      padding: 0.75rem;
-    }
-
-    .footer-brand h3 {
-      font-size: 1.1rem;
-    }
-
-    .footer-brand p {
-      font-size: 0.8rem;
-    }
-
-    .donation-title {
-      font-size: 1rem;
-      flex-wrap: wrap;
-    }
-
-    /* Enhanced Touch Targets */
-    .timer-controls button {
-      min-height: 44px;
-      padding: 12px 20px;
-      font-size: 16px; /* Prevent zoom on iOS */
-    }
-
-    .music-controls button {
-      min-width: 44px;
-      min-height: 44px;
-    }
-
-    .theme-toggle-btn {
-      width: 44px;
-      height: 44px;
-    }
-
-    /* Better spacing for mobile */
-    .main-content {
-      padding: 1rem;
-      gap: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    /* Improved readability */
-    .timer-display {
-      font-size: 3rem;
-    }
-
-    /* Better scroll experience */
-    .playlist-container {
-      max-height: 200px;
-    }
-
-    /* Mobile character interaction */
-    .character-interaction {
-      max-width: 150px;
-      font-size: 11px;
-    }
-  }
-
-  /* Additional mobile optimizations for very small screens */
-  @media (max-width: 480px) {
-    .character-container img {
-      width: 150px;
-      height: 200px;
-    }
-
-    .character-fallback {
-      width: 150px !important;
-      height: 200px !important;
-    }
-
-    .timer-controls {
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .timer-controls button {
-      width: 100%;
-    }
-
-    .achievement-badge {
-      width: 60px;
-      height: 60px;
-    }
-
-    .achievement-icon {
-      width: 36px;
-      height: 36px;
-    }
-
-    .splash-logo {
-      font-size: 2rem;
-    }
-
-    /* Footer small screen */
-    .footer-content {
-      padding: 0.75rem;
-    }
-
-    .donation-btn {
-      padding: 0.6rem 1rem;
-      font-size: 0.875rem;
-      min-width: 120px;
-    }
-
-    .footer-bottom {
-      font-size: 0.75rem;
-      padding-top: 0.75rem;
-    }
-  }
-
-  /* Tablet optimizations */
-  @media (min-width: 769px) and (max-width: 1024px) {
-    .character-container img {
-      width: 250px;
-      height: 300px;
-    }
-
-    .character-fallback {
-      width: 250px !important;
-      height: 300px !important;
-    }
-
-    .main-content {
-      max-width: 95%;
-    }
-
-    /* Footer tablet */
-    .donation-btn {
-      min-width: 160px;
-    }
-  }
-
-  /* Large screen optimizations */
-  @media (min-width: 1025px) {
-    .footer-content {
-      padding: 2rem;
-    }
-  }
-
-  /* ============================ */
-  /* DARK MODE SUPPORT - OPTIONAL */
-  /* ============================ */
-  @media (prefers-color-scheme: dark) {
-    .theme-arona {
-      background: linear-gradient(135deg, #0c4a6e 0%, #075985 50%, #0369a1 100%);
-      color: #f0f9ff;
-    }
-
-    .theme-plana {
-      background: linear-gradient(135deg, #4a044e 0%, #6b21a8 50%, #7e22ce 100%);
-      color: #faf5ff;
-    }
-  }
-</style>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        overflow-x: hidden;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        min-height: 100vh;
+        background-attachment: fixed;
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+      }
+
+      main {
+        flex: 1 0 auto;
+        width: 100%;
+      }
+
+      .timer-controls button:active {
+        transform: scale(0.95);
+        transition: transform 0.1s ease;
+      }
+
+      .music-controls button:active {
+        transform: scale(0.95);
+        transition: transform 0.1s ease;
+      }
+
+      .theme-toggle-btn:active {
+        transform: scale(0.95) rotate(15deg);
+        transition: transform 0.1s ease;
+      }
+
+      .skeleton {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+        border-radius: 8px;
+        min-height: 20px;
+      }
+
+      .skeleton-circle {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+      }
+
+      @keyframes loading {
+        0% {
+          background-position: 200% 0;
+        }
+        100% {
+          background-position: -200% 0;
+        }
+      }
+
+      .site-footer {
+        flex-shrink: 0;
+        width: 100%;
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 24px 24px 0 0;
+        transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        margin-top: auto;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+        padding: 20px 0;
+        cursor: grab;
+        position: relative;
+        transform-origin: center top;
+      }
+
+      .site-footer:active {
+        cursor: grabbing;
+        transform: scaleY(0.95);
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
+      .site-footer.pulled {
+        transform: translateY(-40px) scaleY(1.05);
+        border-radius: 20px;
+        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
+      .site-footer.released {
+        transform: translateY(0) scaleY(1);
+        transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
+      .theme-arona .site-footer {
+        background: rgba(255, 255, 255, 0.95);
+        border-top-color: rgba(56, 189, 248, 0.3);
+        color: #0c4a6e;
+      }
+
+      .theme-plana .site-footer {
+        background: rgba(255, 255, 255, 0.95);
+        border-top-color: rgba(192, 132, 252, 0.3);
+        color: #4a044e;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1.5rem 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .footer-brand {
+        text-align: center;
+      }
+
+      .footer-brand h3 {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        font-size: 1.25rem;
+      }
+
+      .footer-brand p {
+        opacity: 0.8;
+        font-size: 0.875rem;
+      }
+
+      .donation-section {
+        text-align: center;
+        width: 100%;
+      }
+
+      .donation-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+
+      .donation-links {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        width: 100%;
+      }
+
+      .donation-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        border-radius: 12px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        min-width: 140px;
+      }
+
+      .theme-arona .donation-btn {
+        background: rgba(56, 189, 248, 0.1);
+        color: #0c4a6e;
+        border-color: rgba(56, 189, 248, 0.3);
+      }
+
+      .theme-arona .donation-btn:hover {
+        background: rgba(56, 189, 248, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(56, 189, 248, 0.2);
+      }
+
+      .theme-plana .donation-btn {
+        background: rgba(192, 132, 252, 0.1);
+        color: #4a044e;
+        border-color: rgba(192, 132, 252, 0.3);
+      }
+
+      .theme-plana .donation-btn:hover {
+        background: rgba(192, 132, 252, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(192, 132, 252, 0.2);
+      }
+
+      .donation-btn .heart {
+        color: #ef4444;
+        animation: heartbeat 1.5s ease-in-out infinite;
+      }
+
+      @keyframes heartbeat {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
+
+      .donation-btn svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        width: 100%;
+        padding-top: 1rem;
+        border-top: 1px solid;
+        font-size: 0.875rem;
+        opacity: 0.7;
+      }
+
+      .theme-arona .footer-bottom {
+        border-top-color: rgba(56, 189, 248, 0.2);
+      }
+
+      .theme-plana .footer-bottom {
+        border-top-color: rgba(192, 132, 252, 0.2);
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .sr-only:focus,
+      .sr-only:focus-visible {
+        position: static;
+        width: auto;
+        height: auto;
+        padding: 1rem;
+        margin: 0;
+        overflow: visible;
+        clip: auto;
+        white-space: normal;
+        background: white;
+        border-radius: 4px;
+        z-index: 10000;
+        border: 2px solid currentColor;
+      }
+
+      button:focus-visible,
+      input:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+
+      .glass:focus-within {
+        outline: 2px solid rgba(56, 189, 248, 0.5);
+        outline-offset: 2px;
+      }
+
+      @media (prefers-contrast: high) {
+        .glass {
+          border: 2px solid;
+        }
+
+        .theme-arona .glass {
+          border-color: #0c4a6e;
+        }
+
+        .theme-plana .glass {
+          border-color: #4a044e;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+
+        .float {
+          animation: none;
+        }
+
+        .visualizer-bar {
+          animation: none;
+          height: 50% !important;
+        }
+
+        .donation-btn .heart {
+          animation: none;
+        }
+
+        .timer-controls button:active {
+          transform: none;
+        }
+
+        .skeleton,
+        .skeleton-circle {
+          animation: none;
+        }
+      }
+
+      .theme-arona {
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%);
+        color: #0c4a6e;
+      }
+
+      .theme-arona .glass {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(56, 189, 248, 0.3);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+
+      .theme-arona .glow-box {
+        box-shadow: 0 0 25px rgba(56, 189, 248, 0.3),
+          inset 0 0 15px rgba(56, 189, 248, 0.1);
+      }
+
+      .theme-arona .character-glow {
+        background: radial-gradient(circle, rgba(56, 189, 248, 0.3) 0%, transparent 70%);
+      }
+
+      .theme-arona .progress-fill {
+        background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+      }
+
+      .theme-arona .visualizer-bar {
+        background-color: #38bdf8;
+      }
+
+      .theme-arona .text-primary {
+        color: #38bdf8;
+      }
+
+      .theme-arona .bg-primary {
+        background-color: #38bdf8;
+      }
+
+      .theme-arona .bg-primary-opacity {
+        background-color: rgba(56, 189, 248, 0.2);
+      }
+
+      .theme-arona .bg-pattern {
+        background-image: radial-gradient(
+            circle at 20% 30%,
+            rgba(56, 189, 248, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 70%,
+            rgba(56, 189, 248, 0.1) 0%,
+            transparent 50%
+          );
+      }
+
+      .theme-plana {
+        background: linear-gradient(135deg, #fff5f5 0%, #fef7ff 50%, #faf0ff 100%);
+        color: #4a044e;
+      }
+
+      .theme-plana .glass {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(192, 132, 252, 0.3);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+
+      .theme-plana .glow-box {
+        box-shadow: 0 0 25px rgba(192, 132, 252, 0.3),
+          inset 0 0 15px rgba(192, 132, 252, 0.1);
+      }
+
+      .theme-plana .character-glow {
+        background: radial-gradient(circle, rgba(192, 132, 252, 0.3) 0%, transparent 70%);
+      }
+
+      .theme-plana .progress-fill {
+        background: linear-gradient(90deg, #c084fc, #a855f7);
+      }
+
+      .theme-plana .visualizer-bar {
+        background-color: #c084fc;
+      }
+
+      .theme-plana .text-primary {
+        color: #c084fc;
+      }
+
+      .theme-plana .bg-primary {
+        background-color: #c084fc;
+      }
+
+      .theme-plana .bg-primary-opacity {
+        background-color: rgba(192, 132, 252, 0.2);
+      }
+
+      .theme-plana .bg-pattern {
+        background-image: radial-gradient(
+            circle at 20% 30%,
+            rgba(192, 132, 252, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 70%,
+            rgba(192, 132, 252, 0.1) 0%,
+            transparent 50%
+          );
+      }
+
+      .theme-arona .timer-controls button {
+        color: #475569 !important;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .theme-arona .timer-controls button.bg-primary {
+        color: white !important;
+        font-weight: 600;
+      }
+
+      .theme-arona .timer-controls button:hover {
+        color: #334155 !important;
+      }
+
+      .theme-plana .timer-controls button {
+        color: #6b7280 !important;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .theme-plana .timer-controls button.bg-primary {
+        color: white !important;
+        font-weight: 600;
+      }
+
+      .theme-plana .timer-controls button:hover {
+        color: #4b5563 !important;
+      }
+
+      .theme-arona #reset-timer {
+        color: #64748b !important;
+        background-color: #e2e8f0 !important;
+      }
+
+      .theme-arona #reset-timer:hover {
+        color: #475569 !important;
+        background-color: #cbd5e1 !important;
+      }
+
+      .theme-plana #reset-timer {
+        color: #9ca3af !important;
+        background-color: #f3f4f6 !important;
+      }
+
+      .theme-plana #reset-timer:hover {
+        color: #6b7280 !important;
+        background-color: #e5e7eb !important;
+      }
+
+      .theme-arona .playlist-container .text-sm {
+        color: #0c4a6e !important;
+        font-weight: 600;
+      }
+
+      .theme-arona .playlist-container .text-xs.text-gray-400 {
+        color: #475569 !important;
+        font-weight: 500;
+      }
+
+      .theme-plana .playlist-container .text-sm {
+        color: #4a044e !important;
+        font-weight: 600;
+      }
+
+      .theme-plana .playlist-container .text-xs.text-gray-400 {
+        color: #6b7280 !important;
+        font-weight: 500;
+      }
+
+      .theme-arona .analytics-content {
+        color: #0c4a6e;
+      }
+
+      .theme-arona .analytics-content .text-gray-600 {
+        color: #475569 !important;
+        font-weight: 500;
+      }
+
+      .theme-arona .analytics-content .bg-primary-opacity {
+        background: rgba(56, 189, 248, 0.15);
+        border: 1px solid rgba(56, 189, 248, 0.2);
+      }
+
+      .theme-arona #weekly-stats span {
+        color: #0c4a6e;
+        font-weight: 600;
+      }
+
+      .theme-arona #weekly-stats span.font-semibold {
+        color: #0369a1;
+        font-weight: 700;
+      }
+
+      .theme-plana .analytics-content {
+        color: #4a044e;
+      }
+
+      .theme-plana .analytics-content .text-gray-600 {
+        color: #6b7280 !important;
+        font-weight: 500;
+      }
+
+      .theme-plana .analytics-content .bg-primary-opacity {
+        background: rgba(192, 132, 252, 0.15);
+        border: 1px solid rgba(192, 132, 252, 0.2);
+      }
+
+      .theme-plana #weekly-stats span {
+        color: #4a044e;
+        font-weight: 600;
+      }
+
+      .theme-plana #weekly-stats span.font-semibold {
+        color: #7c3aed;
+        font-weight: 700;
+      }
+
+      .theme-arona .analytics-content .progress-bar {
+        background: rgba(12, 74, 110, 0.25);
+        height: 8px;
+      }
+
+      .theme-plana .analytics-content .progress-bar {
+        background: rgba(74, 4, 78, 0.25);
+        height: 8px;
+      }
+
+      .theme-arona .glass {
+        color: #0c4a6e;
+      }
+
+      .theme-plana .glass {
+        color: #4a044e;
+      }
+
+      .theme-arona #progress-title {
+        color: #0c4a6e;
+        font-weight: 700;
+      }
+
+      .theme-plana #progress-title {
+        color: #4a044e;
+        font-weight: 700;
+      }
+
+      .theme-arona #analytics-btn {
+        color: #0369a1;
+        font-weight: 600;
+      }
+
+      .theme-plana #analytics-btn {
+        color: #7c3aed;
+        font-weight: 600;
+      }
+
+      .theme-arona #current-track {
+        color: #0c4a6e !important;
+        font-weight: 600;
+      }
+
+      .theme-arona #current-artist {
+        color: #475569 !important;
+        font-weight: 500;
+      }
+
+      .theme-plana #current-track {
+        color: #4a044e !important;
+        font-weight: 600;
+      }
+
+      .theme-plana #current-artist {
+        color: #6b7280 !important;
+        font-weight: 500;
+      }
+
+      .glass {
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .character-glow {
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        filter: blur(60px);
+        animation: pulse 3s ease-in-out infinite;
+        pointer-events: none;
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.6;
+        }
+        50% {
+          transform: scale(1.1);
+          opacity: 0.8;
+        }
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .float {
+        animation: float 4s ease-in-out infinite;
+      }
+
+      .bg-pattern {
+        background-attachment: fixed;
+        background-size: cover;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 6px;
+        border-radius: 3px;
+        overflow: hidden;
+      }
+
+      .theme-arona .progress-bar {
+        background: rgba(12, 74, 110, 0.15);
+      }
+
+      .theme-plana .progress-bar {
+        background: rgba(74, 4, 78, 0.15);
+      }
+
+      .progress-fill {
+        height: 100%;
+        border-radius: 3px;
+        transition: width 0.3s ease;
+      }
+
+      .visualizer-bar {
+        animation: visualizer 1.5s ease-in-out infinite alternate;
+      }
+
+      @keyframes visualizer {
+        0% {
+          transform: scaleY(0.3);
+        }
+        100% {
+          transform: scaleY(1);
+        }
+      }
+
+      .theme-transition {
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .text-gray-300 {
+        color: #64748b;
+      }
+
+      .theme-plana .text-gray-300 {
+        color: #6b7280;
+      }
+
+      .text-gray-400 {
+        color: #94a3b8;
+      }
+
+      .theme-plana .text-gray-400 {
+        color: #9ca3af;
+      }
+
+      .bg-gray-600 {
+        background-color: #cbd5e1;
+      }
+
+      .bg-gray-700 {
+        background-color: #e2e8f0;
+      }
+
+      .character-transform {
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .character-transform:hover {
+        transform: scale(1.05);
+      }
+
+      .fade-text {
+        transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        pointer-events: none;
+        opacity: 0;
+      }
+
+      .theme-arona .particle {
+        background: #38bdf8;
+      }
+
+      .theme-plana .particle {
+        background: #c084fc;
+      }
+
+      @keyframes particle-float {
+        0% {
+          transform: translateY(0) translateX(0);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100px) translateX(var(--tx, 0));
+          opacity: 0;
+        }
+      }
+
+      .character-fallback {
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .character-fallback:hover {
+        transform: scale(1.02);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .character-fallback:focus {
+        outline: 2px solid currentColor;
+        outline-offset: 2px;
+      }
+
+      .achievement-badge {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 80px;
+        height: 80px;
+        border-radius: 16px;
+        margin: 5px;
+        transition: all 0.3s ease;
+        position: relative;
+        cursor: pointer;
+        padding: 8px;
+        border: 2px solid transparent;
+      }
+
+      .achievement-unlocked {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color, #38bdf8),
+          var(--secondary-color, #0ea5e9)
+        );
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        transform: scale(1.05);
+      }
+
+      .achievement-locked {
+        background: rgba(255, 255, 255, 0.5);
+        border: 2px dashed rgba(0, 0, 0, 0.2);
+        filter: grayscale(1);
+        opacity: 0.7;
+      }
+
+      .achievement-icon {
+        width: 48px;
+        height: 48px;
+        object-fit: contain;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        transition: transform 0.2s ease;
+        margin-bottom: 4px;
+      }
+
+      .achievement-badge:hover .achievement-icon {
+        transform: scale(1.1);
+      }
+
+      .achievement.locked .achievement-icon {
+        filter: grayscale(100%);
+        opacity: 0.4;
+      }
+
+      .achievement.unlocked .achievement-icon {
+        filter: drop-shadow(0 0 6px rgba(80, 160, 255, 0.6));
+      }
+
+      .achievement-tooltip {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.9);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-size: 12px;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+        z-index: 10;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .achievement-badge:hover .achievement-tooltip {
+        opacity: 1;
+      }
+
+      .achievement-progress {
+        font-size: 10px;
+        margin-top: 2px;
+        font-weight: 600;
+        background: rgba(0, 0, 0, 0.1);
+        padding: 2px 6px;
+        border-radius: 8px;
+      }
+
+      .achievement-rare {
+        border: 2px solid gold;
+        box-shadow: 0 0 15px gold;
+      }
+
+      .achievement-common {
+        border: 2px solid silver;
+      }
+
+      .progress-ring {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: conic-gradient(
+          var(--primary-color) 0% var(--progress),
+          #e5e7eb var(--progress) 100%
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: bold;
+        position: relative;
+      }
+
+      .progress-ring::before {
+        content: "";
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background: white;
+        border-radius: 50%;
+        z-index: 1;
+      }
+
+      .progress-ring span {
+        position: relative;
+        z-index: 2;
+      }
+
+      #splash-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 1s ease, transform 1s ease;
+      }
+
+      .theme-arona #splash-screen {
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%);
+      }
+
+      .theme-plana #splash-screen {
+        background: linear-gradient(135deg, #fff5f5 0%, #fef7ff 50%, #faf0ff 100%);
+      }
+
+      .splash-logo {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        transition: all 0.8s ease;
+      }
+
+      .theme-arona .splash-logo {
+        background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .theme-plana .splash-logo {
+        background: linear-gradient(135deg, #c084fc, #a855f7);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .splash-loader {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      .theme-arona .splash-loader {
+        border: 3px solid rgba(56, 189, 248, 0.3);
+        border-top: 3px solid #38bdf8;
+      }
+
+      .theme-plana .splash-loader {
+        border: 3px solid rgba(192, 132, 252, 0.3);
+        border-top: 3px solid #c084fc;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .page-transition {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .page-loaded {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .background-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .theme-arona .background-overlay {
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%);
+      }
+
+      .theme-plana .background-overlay {
+        background: linear-gradient(135deg, #fff5f5 0%, #fef7ff 50%, #faf0ff 100%);
+      }
+
+      .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        backdrop-filter: blur(12px);
+        border-radius: 12px;
+        padding: 16px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        transform: translateX(120%);
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        max-width: 300px;
+      }
+
+      .theme-arona .notification {
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid rgba(56, 189, 248, 0.3);
+      }
+
+      .theme-plana .notification {
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid rgba(192, 132, 252, 0.3);
+      }
+
+      .notification.show {
+        transform: translateX(0);
+      }
+
+      .notification.success {
+        border-left: 4px solid #10b981;
+      }
+
+      .notification.info {
+        border-left: 4px solid;
+      }
+
+      .theme-arona .notification.info {
+        border-left-color: #38bdf8;
+      }
+
+      .theme-plana .notification.info {
+        border-left-color: #c084fc;
+      }
+
+      .session-circle {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+      }
+
+      .session-completed {
+        background-color: #10b981;
+      }
+
+      .session-current {
+        animation: pulse 2s infinite;
+      }
+
+      .theme-arona .session-current {
+        background-color: #38bdf8;
+      }
+
+      .theme-plana .session-current {
+        background-color: #c084fc;
+      }
+
+      .session-pending {
+        background-color: #e5e7eb;
+      }
+
+      .theme-plana .session-pending {
+        background-color: #e5e7eb;
+      }
+
+      .session-counter {
+        font-size: 0.875rem;
+        font-weight: 600;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        backdrop-filter: blur(8px);
+      }
+
+      .theme-arona .session-counter {
+        background: rgba(56, 189, 248, 0.2);
+        border: 1px solid rgba(56, 189, 248, 0.3);
+        color: #0c4a6e;
+      }
+
+      .theme-plana .session-counter {
+        background: rgba(192, 132, 252, 0.2);
+        border: 1px solid rgba(192, 132, 252, 0.3);
+        color: #7c3aed;
+      }
+
+      .playlist-number {
+        width: 1.75rem;
+        height: 1.75rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .playlist-active {
+        color: white;
+      }
+
+      .theme-arona .playlist-active {
+        background: rgba(56, 189, 248, 0.2);
+        color: #0c4a6e;
+      }
+
+      .theme-plana .playlist-active {
+        background: rgba(192, 132, 252, 0.2);
+        color: #7c3aed;
+      }
+
+      .playlist-inactive {
+        background: rgba(156, 163, 175, 0.1);
+        color: #64748b;
+      }
+
+      .theme-plana .playlist-inactive {
+        color: #6b7280;
+      }
+
+      .character-interaction {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 12px;
+        padding: 8px 12px;
+        font-size: 12px;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        pointer-events: none;
+        z-index: 5;
+        max-width: 200px;
+        word-wrap: break-word;
+      }
+
+      .character-interaction.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .theme-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 100;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .theme-toggle-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        backdrop-filter: blur(12px);
+        cursor: pointer;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        border: none;
+      }
+
+      .theme-arona .theme-toggle-btn {
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(56, 189, 248, 0.3);
+        box-shadow: 0 0 25px rgba(56, 189, 248, 0.3),
+          inset 0 0 15px rgba(56, 189, 248, 0.1);
+      }
+
+      .theme-plana .theme-toggle-btn {
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(192, 132, 252, 0.3);
+        box-shadow: 0 0 25px rgba(192, 132, 252, 0.3),
+          inset 0 0 15px rgba(192, 132, 252, 0.1);
+      }
+
+      .theme-toggle-btn:hover {
+        transform: scale(1.1) rotate(15deg);
+      }
+
+      .theme-toggle-btn:focus {
+        outline: 2px solid currentColor;
+        outline-offset: 2px;
+      }
+
+      .analytics-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .analytics-modal.show {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      .analytics-content {
+        background: white;
+        border-radius: 20px;
+        padding: 2rem;
+        max-width: 800px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+      }
+
+      .analytics-modal.show .analytics-content {
+        transform: scale(1);
+      }
+
+      .confetti {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        background: var(--confetti-color);
+        opacity: 0;
+        z-index: 9999;
+      }
+
+      @media (max-width: 768px) {
+        .flex-col.lg\:flex-row {
+          flex-direction: column;
+        }
+
+        .character-container img {
+          width: 200px;
+          height: 250px;
+        }
+
+        .character-fallback {
+          width: 200px !important;
+          height: 250px !important;
+        }
+
+        .glass {
+          padding: 1rem;
+        }
+
+        .text-3xl {
+          font-size: 1.5rem;
+        }
+
+        .text-4xl {
+          font-size: 2rem;
+        }
+
+        .theme-toggle {
+          top: 10px;
+          right: 10px;
+        }
+
+        .achievement-badge {
+          width: 70px;
+          height: 70px;
+        }
+
+        .achievement-icon {
+          width: 42px;
+          height: 42px;
+        }
+
+        .analytics-content {
+          padding: 1rem;
+          margin: 1rem;
+        }
+
+        .footer-content {
+          padding: 1rem;
+          gap: 1rem;
+        }
+
+        .donation-links {
+          flex-direction: column;
+          align-items: center;
+          gap: 0.75rem;
+        }
+
+        .donation-btn {
+          width: 100%;
+          max-width: 280px;
+          justify-content: center;
+          padding: 0.75rem;
+        }
+
+        .footer-brand h3 {
+          font-size: 1.1rem;
+        }
+
+        .footer-brand p {
+          font-size: 0.8rem;
+        }
+
+        .donation-title {
+          font-size: 1rem;
+          flex-wrap: wrap;
+        }
+
+        .timer-controls button {
+          min-height: 44px;
+          padding: 12px 20px;
+          font-size: 16px;
+        }
+
+        .music-controls button {
+          min-width: 44px;
+          min-height: 44px;
+        }
+
+        .theme-toggle-btn {
+          width: 44px;
+          height: 44px;
+        }
+
+        .main-content {
+          padding: 1rem;
+          gap: 1.5rem;
+          margin-bottom: 1rem;
+        }
+
+        .timer-display {
+          font-size: 3rem;
+        }
+
+        .playlist-container {
+          max-height: 200px;
+        }
+
+        .character-interaction {
+          max-width: 150px;
+          font-size: 11px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .character-container img {
+          width: 150px;
+          height: 200px;
+        }
+
+        .character-fallback {
+          width: 150px !important;
+          height: 200px !important;
+        }
+
+        .timer-controls {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .timer-controls button {
+          width: 100%;
+        }
+
+        .achievement-badge {
+          width: 60px;
+          height: 60px;
+        }
+
+        .achievement-icon {
+          width: 36px;
+          height: 36px;
+        }
+
+        .splash-logo {
+          font-size: 2rem;
+        }
+
+        .footer-content {
+          padding: 0.75rem;
+        }
+
+        .donation-btn {
+          padding: 0.6rem 1rem;
+          font-size: 0.875rem;
+          min-width: 120px;
+        }
+
+        .footer-bottom {
+          font-size: 0.75rem;
+          padding-top: 0.75rem;
+        }
+      }
+
+      @media (min-width: 769px) and (max-width: 1024px) {
+        .character-container img {
+          width: 250px;
+          height: 300px;
+        }
+
+        .character-fallback {
+          width: 250px !important;
+          height: 300px !important;
+        }
+
+        .main-content {
+          max-width: 95%;
+        }
+
+        .donation-btn {
+          min-width: 160px;
+        }
+      }
+
+      @media (min-width: 1025px) {
+        .footer-content {
+          padding: 2rem;
+        }
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .theme-arona {
+          background: linear-gradient(135deg, #0c4a6e 0%, #075985 50%, #0369a1 100%);
+          color: #f0f9ff;
+        }
+
+        .theme-plana {
+          background: linear-gradient(135deg, #4a044e 0%, #6b21a8 50%, #7e22ce 100%);
+          color: #faf5ff;
+        }
+      }
+
+      .character-progress-container {
+        width: 100%;
+        height: 8px;
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        margin-top: 15px;
+        overflow: hidden;
+      }
+
+      .character-progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+        border-radius: 4px;
+        transition: width 0.3s ease;
+      }
+
+      .theme-plana .character-progress-fill {
+        background: linear-gradient(90deg, #c084fc, #a855f7);
+      }
+
+      .character-progress-text {
+        font-size: 0.75rem;
+        margin-top: 5px;
+        color: #64748b;
+      }
+
+      .theme-plana .character-progress-text {
+        color: #6b7280;
+      }
+
+      .dragging {
+        opacity: 0.8 !important;
+        transition: none !important;
+        cursor: grabbing !important;
+      }
+
+      #character-container {
+        cursor: grab;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+      }
+
+      #character-container:active {
+        cursor: grabbing;
+      }
+
+      #character-container img {
+        pointer-events: none;
+        -webkit-user-drag: none;
+        user-drag: none;
+      }
+
+      .dragging {
+        opacity: 0.7;
+        transition: opacity 0.1s ease;
+        cursor: grabbing;
+      }
+    </style>
   </head>
   <body
     class="theme-arona bg-pattern"
     aria-label="Study Companion with Anime Pomodoro Timer"
   >
-    <!-- Skip to main content for screen readers -->
-    <a
-      href="#main-content"
-      class="sr-only"
-    >
-      Skip to main content
-    </a>
+    <a href="#main-content" class="sr-only"> Skip to main content </a>
 
-    <!-- Background overlay -->
     <div class="background-overlay" aria-hidden="true"></div>
 
-    <!-- Theme Toggle Button dengan ARIA labels -->
     <div class="theme-toggle page-transition">
       <button
         id="theme-toggle-btn"
@@ -1657,7 +1623,6 @@
       </button>
     </div>
 
-    <!-- Notification Container dengan ARIA live regions -->
     <div
       id="notification"
       class="notification info"
@@ -1693,7 +1658,6 @@
       </div>
     </div>
 
-    <!-- Analytics Modal dengan proper ARIA -->
     <div
       id="analytics-modal"
       class="analytics-modal"
@@ -1733,7 +1697,6 @@
               Weekly Progress
             </h3>
             <div class="space-y-2" id="weekly-stats">
-              <!-- Weekly stats will be generated here -->
             </div>
           </div>
 
@@ -1742,7 +1705,6 @@
               Productivity Insights
             </h3>
             <div id="productivity-insights">
-              <!-- Insights will be generated here -->
             </div>
           </div>
         </div>
@@ -1755,13 +1717,11 @@
             class="grid grid-cols-2 md:grid-cols-3 gap-4"
             id="detailed-achievements"
           >
-            <!-- Detailed achievements will be generated here -->
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Splash Screen -->
     <div
       id="splash-screen"
       class="theme-arona"
@@ -1773,12 +1733,10 @@
       <p class="text-gray-400 mt-4">Loading your study companion...</p>
     </div>
 
-    <!-- Main Container -->
     <main
       id="main-content"
       class="min-h-screen flex flex-col items-center justify-center p-6 theme-transition page-transition"
     >
-      <!-- Header -->
       <header class="text-center mb-8">
         <h1
           class="text-3xl md:text-4xl font-bold text-primary mb-2 fade-text"
@@ -1791,11 +1749,9 @@
         </p>
       </header>
 
-      <!-- Main Content -->
       <div
         class="flex flex-col lg:flex-row items-center justify-center gap-8 w-full max-w-6xl main-content"
       >
-        <!-- Character Section -->
         <section
           aria-labelledby="character-section-title"
           class="flex flex-col items-center"
@@ -1810,10 +1766,9 @@
               id="character-container"
               role="button"
               tabindex="0"
-              aria-label="Interact with character"
+              aria-label="Interact with character. Drag left or right to change outfit."
               aria-live="polite"
             >
-              <!-- Character Interaction Bubble -->
               <div
                 class="character-interaction"
                 id="character-bubble"
@@ -1829,7 +1784,22 @@
             </div>
           </div>
 
-          <!-- Study Timer Section -->
+          <div class="w-full max-w-md mt-4">
+            <div class="character-progress-container">
+              <div
+                id="character-progress"
+                class="character-progress-fill"
+                style="width: 0%"
+              ></div>
+            </div>
+            <div
+              id="character-progress-text"
+              class="character-progress-text text-center"
+            >
+              Progress Belajar: 0%
+            </div>
+          </div>
+
           <section
             aria-labelledby="timer-title"
             class="glass rounded-2xl p-6 mt-6 glow-box w-full max-w-md"
@@ -1846,13 +1816,11 @@
               >
             </div>
 
-            <!-- Session Progress dengan ARIA -->
             <div
               class="flex justify-center gap-2 mb-4"
               id="session-progress"
               aria-label="Session progress"
             >
-              <!-- Session circles akan di-generate -->
             </div>
 
             <div
@@ -1914,7 +1882,6 @@
               </div>
             </div>
 
-            <!-- Progress Tracking -->
             <section
               aria-labelledby="progress-title"
               class="glass rounded-xl p-4 mt-4"
@@ -1948,11 +1915,9 @@
                 id="daily-progress"
                 aria-label="Daily session progress"
               >
-                <!-- Progress circles -->
               </div>
             </section>
 
-            <!-- Achievement Section dengan ARIA -->
             <section
               aria-labelledby="achievements-title"
               class="glass rounded-xl p-4 mt-4"
@@ -1974,20 +1939,17 @@
                 role="list"
                 aria-label="Achievements list"
               >
-                <!-- Achievement badges -->
               </div>
             </section>
           </section>
         </section>
 
-        <!-- Music Player Section -->
         <section
           aria-labelledby="music-player-title"
           class="glass rounded-3xl p-8 glow-box w-full max-w-md"
         >
           <h2 id="music-player-title" class="sr-only">Music Player</h2>
 
-          <!-- Now Playing -->
           <div class="text-center mb-8" aria-live="polite">
             <h3 class="text-2xl font-bold text-primary mb-2">Now Playing</h3>
             <p class="text-gray-300" id="current-track">Lo-fi Study Beats</p>
@@ -1996,7 +1958,6 @@
             </p>
           </div>
 
-          <!-- Progress Bar -->
           <div class="mb-6">
             <div
               class="progress-bar"
@@ -2019,7 +1980,6 @@
             </div>
           </div>
 
-          <!-- Audio Visualizer -->
           <div
             class="flex justify-center items-end h-16 gap-1 mb-8"
             aria-hidden="true"
@@ -2054,7 +2014,6 @@
             ></div>
           </div>
 
-          <!-- Music Controls dengan ARIA labels -->
           <div
             class="flex justify-center items-center gap-6 mb-6 music-controls"
             role="group"
@@ -2143,7 +2102,6 @@
             </button>
           </div>
 
-          <!-- Volume Control -->
           <div class="mb-6">
             <div class="flex items-center gap-3">
               <svg
@@ -2172,13 +2130,11 @@
             </div>
           </div>
 
-          <!-- Playlist -->
           <div class="max-h-48 overflow-y-auto playlist-container">
             <h3 class="text-lg font-semibold text-primary mb-3">
               Study Playlist
             </h3>
             <div class="space-y-2" role="listbox" aria-label="Music playlist">
-              <!-- Playlist dengan numbering yang konsisten -->
               <div
                 class="flex items-center gap-3 p-2 rounded-lg bg-primary-opacity cursor-pointer"
                 data-track="0"
@@ -2234,139 +2190,138 @@
       </div>
     </main>
 
-    <!-- FOOTER BARU YANG DIPERBAIKI -->
     <footer class="site-footer theme-transition">
       <div class="footer-content">
         <div class="footer-brand">
           <h3>Study Companion</h3>
           <p>Your anime partner for better focus & productivity</p>
         </div>
-        
+
         <div class="donation-section">
           <div class="donation-title">
             <span class="heart">❤️</span>
             <span>Support CryvaStudio</span>
             <span class="heart">❤️</span>
           </div>
-          
+
           <div class="donation-links">
-            <a 
-              href="https://paypal.me/ArvinFarrelP" 
+            <a
+              href="https://paypal.me/ArvinFarrelP"
               target="_blank"
               rel="noopener noreferrer"
               class="donation-btn"
               aria-label="Support CryvaStudio on PayPal"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20.067 8.478c.492.88.556 2.014.3 3.327-.74 3.806-3.276 5.12-6.514 5.12h-.5a.805.805 0 0 0-.794.68l-.04.22-.63 3.993-.032.17a.804.804 0 0 1-.794.68h-2.66c-.66 0-1.204-.578-1.12-1.237l1.12-7.16a.98.98 0 0 1 .974-.882h.722c4.306 0 7.128-1.177 8.11-5.049zM8.768 20.06H5.56a.84.84 0 0 1-.833-.945l1.323-8.382a.65.65 0 0 1 .643-.56h3.9c2.82 0 5.03-1.528 5.804-4.858.36-1.552.174-2.625-.468-3.358a1.503 1.503 0 0 0-1.226-.453H6.448a1.15 1.15 0 0 0-1.148 1.053l-2.268 14.363a.9.9 0 0 0 .892 1.038h3.83a.96.96 0 0 0 .95-.827l.025-.14.48-3.043.03-.16a.96.96 0 0 1 .949-.827h.58c3.524 0 5.95-1.842 6.544-5.403.202-1.238.01-2.322-.573-3.153l.932.372c-.456.864-.624 1.934-.386 3.267.744 3.823 3.276 5.12 6.514 5.12h.5a.805.805 0 0 1 .794.68l.04.22.63 3.993.032.17a.804.804 0 0 0 .794.68h2.66c.66 0 1.204-.578 1.12-1.237l-1.12-7.16a.98.98 0 0 0-.974-.882h-.722c-4.306 0-7.128-1.177-8.11-5.049z"/>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M20.067 8.478c.492.88.556 2.014.3 3.327-.74 3.806-3.276 5.12-6.514 5.12h-.5a.805.805 0 0 0-.794.68l-.04.22-.63 3.993-.032.17a.804.804 0 0 1-.794.68h-2.66c-.66 0-1.204-.578-1.12-1.237l1.12-7.16a.98.98 0 0 1 .974-.882h.722c4.306 0 7.128-1.177 8.11-5.049zM8.768 20.06H5.56a.84.84 0 0 1-.833-.945l1.323-8.382a.65.65 0 0 1 .643-.56h3.9c2.82 0 5.03-1.528 5.804-4.858.36-1.552.174-2.625-.468-3.358a1.503 1.503 0 0 0-1.226-.453H6.448a1.15 1.15 0 0 0-1.148 1.053l-2.268 14.363a.9.9 0 0 0 .892 1.038h3.83a.96.96 0 0 0 .95-.827l.025-.14.48-3.043.03-.16a.96.96 0 0 1 .949-.827h.58c3.524 0 5.95-1.842 6.544-5.403.202-1.238.01-2.322-.573-3.153l.932.372c-.456.864-.624 1.934-.386 3.267.744 3.823 3.276 5.12 6.514 5.12h.5a.805.805 0 0 1 .794.68l.04.22.63 3.993.032.17a.804.804 0 0 0 .794.68h2.66c.66 0 1.204-.578 1.12-1.237l-1.12-7.16a.98.98 0 0 0-.974-.882h-.722c-4.306 0-7.128-1.177-8.11-5.049z"
+                />
               </svg>
               PayPal
             </a>
-            
-            <a 
-              href="https://saweria.co/CryvaStudio" 
+
+            <a
+              href="https://saweria.co/CryvaStudio"
               target="_blank"
               rel="noopener noreferrer"
               class="donation-btn"
               aria-label="Support CryvaStudio on Saweria"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"
+                />
               </svg>
               Saweria
             </a>
           </div>
         </div>
-        
+
         <div class="footer-bottom">
           <p>© 2025 CryvaStudio. Made with ❤️ for productive minds.</p>
         </div>
       </div>
     </footer>
 
-    <!-- Audio Element untuk Music -->
     <audio id="audio-player" aria-label="Background music player">
-      <!-- Source akan diatur oleh JavaScript -->
     </audio>
 
 <script>
-  // ============================
-  // GLOBAL VARIABLES - HARUS DI ATAS
-  // ============================
   let currentMode = "arona";
   let progress = {
     completedSessions: 0,
     totalStudyTime: 0,
     lastSession: null,
     dailySessions: Array(8).fill(false),
-    studyHistory: []
+    studyHistory: [],
   };
 
-  // Variables untuk fitur baru
   let hasUnsavedChanges = false;
   const offlineQueue = [];
   const studyMetrics = {
     focusSessions: [],
     breaks: [],
     productivityPatterns: [],
-    weeklyReports: []
+    weeklyReports: [],
   };
 
-  // ============================
-  // ENHANCED ERROR BOUNDARY SYSTEM
-  // ============================
+  window.addEventListener("error", (e) => {
+    console.error("Global error caught:", e.error);
+    showNotification(
+      "Application Error",
+      "Something went wrong. The app will try to recover.",
+      "info"
+    );
 
-  // Global error handler
-  window.addEventListener('error', (e) => {
-    console.error('Global error caught:', e.error);
-    showNotification('Application Error', 'Something went wrong. The app will try to recover.', 'info');
-    
-    // Try to save current state before crash
     try {
       const progressKey = `${currentMode}Progress`;
       safeSave(progressKey, progress);
     } catch (saveError) {
-      console.error('Failed to save during error:', saveError);
+      console.error("Failed to save during error:", saveError);
     }
   });
 
-  // Promise rejection handler
-  window.addEventListener('unhandledrejection', (e) => {
-    console.error('Unhandled promise rejection:', e.reason);
+  window.addEventListener("unhandledrejection", (e) => {
+    console.error("Unhandled promise rejection:", e.reason);
     e.preventDefault();
-    showNotification('Async Error', 'A background operation failed.', 'info');
+    showNotification("Async Error", "A background operation failed.", "info");
   });
 
-  // Enhanced initialization with error boundary
   function safeInitializeApp() {
     try {
       initializeApp();
     } catch (error) {
-      console.error('App initialization failed:', error);
-      
-      // Emergency recovery
-      const splashScreen = document.getElementById('splash-screen');
+      console.error("App initialization failed:", error);
+
+      const splashScreen = document.getElementById("splash-screen");
       if (splashScreen) {
         splashScreen.innerHTML = `
-          <div class="text-center">
-            <div class="text-2xl text-red-500 mb-4">😵 Loading Error</div>
-            <p class="text-gray-600 mb-4">Failed to load the application</p>
-            <button onclick="window.location.reload()" class="px-4 py-2 bg-primary rounded-lg text-white">
-              Reload App
-            </button>
-          </div>
-        `;
+        <div class="text-center">
+          <div class="text-2xl text-red-500 mb-4">😵 Loading Error</div>
+          <p class="text-gray-600 mb-4">Failed to load the application</p>
+          <button onclick="window.location.reload()" class="px-4 py-2 bg-primary rounded-lg text-white">
+            Reload App
+          </button>
+        </div>
+      `;
       }
-      
-      showNotification('Startup Error', 'Please refresh the page', 'info');
+
+      showNotification("Startup Error", "Please refresh the page", "info");
     }
   }
 
-  // ============================
-  // ENHANCED ERROR HANDLING SYSTEM
-  // ============================
-
-  // Safe localStorage functions
   function safeSave(key, data) {
     try {
       localStorage.setItem(key, JSON.stringify(data));
@@ -2388,54 +2343,45 @@
     }
   }
 
-  // ============================
-  // ENHANCED CHARACTER IMAGE FALLBACK SYSTEM
-  // ============================
-
-  // Dapatkan reference ke character image
   const characterImage = document.getElementById("character-image");
 
-  // Enhanced image fallback dengan multiple fallback options
   if (characterImage) {
-    characterImage.addEventListener('error', function handleImageError() {
-      console.warn('Character image failed to load, using fallback');
-      
-      // Remove the broken image listener to prevent loops
-      this.removeEventListener('error', handleImageError);
-      
-      // Try multiple fallback strategies
+    characterImage.addEventListener("error", function handleImageError() {
+      console.warn("Character image failed to load, using fallback");
+      this.removeEventListener("error", handleImageError);
+
       const fallbackStrategies = [
-        // Strategy 1: SVG fallback
         () => {
           this.src = `data:image/svg+xml;base64,${btoa(`
-            <svg width="320" height="384" viewBox="0 0 320 384" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="320" height="384" rx="16" fill="${currentMode === 'arona' ? '#38bdf8' : '#c084fc'}"/>
-              <circle cx="160" cy="150" r="40" fill="white" fill-opacity="0.9"/>
-              <rect x="100" y="200" width="120" height="100" rx="8" fill="white" fill-opacity="0.9"/>
-              <text x="160" y="260" text-anchor="middle" fill="${currentMode === 'arona' ? '#0c4a6e' : '#4a044e'}" font-family="Arial" font-size="24">${currentMode === 'arona' ? 'Arona' : 'Plana'}</text>
-            </svg>
-          `)}`;
+        <svg width="320" height="384" viewBox="0 0 320 384" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="320" height="384" rx="16" fill="${
+            currentMode === "arona" ? "#38bdf8" : "#c084fc"
+          }"/>
+          <circle cx="160" cy="150" r="40" fill="white" fill-opacity="0.9"/>
+          <rect x="100" y="200" width="120" height="100" rx="8" fill="white" fill-opacity="0.9"/>
+          <text x="160" y="260" text-anchor="middle" fill="${
+            currentMode === "arona" ? "#0c4a6e" : "#4a044e"
+          }" font-family="Arial" font-size="24">${
+            currentMode === "arona" ? "Arona" : "Plana"
+          }</text>
+        </svg>
+      `)}`;
         },
-        
-        // Strategy 2: Emoji fallback
         () => {
           this.replaceWith(createEmojiFallback());
         },
-        
-        // Strategy 3: Colored div fallback
         () => {
           this.replaceWith(createDivFallback());
-        }
+        },
       ];
-      
-      // Execute fallback strategies until one works
+
       for (const strategy of fallbackStrategies) {
         try {
           strategy();
           showNotification("Image Load Error", "Using fallback character image", "info");
           break;
         } catch (strategyError) {
-          console.warn('Fallback strategy failed:', strategyError);
+          console.warn("Fallback strategy failed:", strategyError);
           continue;
         }
       }
@@ -2443,38 +2389,39 @@
   }
 
   function createEmojiFallback() {
-    const fallbackDiv = document.createElement('div');
-    fallbackDiv.className = 'character-fallback flex items-center justify-center text-6xl';
-    fallbackDiv.style.width = '320px';
-    fallbackDiv.style.height = '384px';
-    fallbackDiv.style.background = currentMode === 'arona' 
-      ? 'linear-gradient(135deg, #38bdf8, #0ea5e9)' 
-      : 'linear-gradient(135deg, #c084fc, #a855f7)';
-    fallbackDiv.style.borderRadius = '16px';
-    fallbackDiv.textContent = currentMode === 'arona' ? '📘' : '📙';
+    const fallbackDiv = document.createElement("div");
+    fallbackDiv.className = "character-fallback flex items-center justify-center text-6xl";
+    fallbackDiv.style.width = "320px";
+    fallbackDiv.style.height = "384px";
+    fallbackDiv.style.background =
+      currentMode === "arona"
+        ? "linear-gradient(135deg, #38bdf8, #0ea5e9)"
+        : "linear-gradient(135deg, #c084fc, #a855f7)";
+    fallbackDiv.style.borderRadius = "16px";
+    fallbackDiv.textContent = currentMode === "arona" ? "📘" : "📙";
     return fallbackDiv;
   }
 
   function createDivFallback() {
-    const fallbackDiv = document.createElement('div');
-    fallbackDiv.className = 'character-fallback';
+    const fallbackDiv = document.createElement("div");
+    fallbackDiv.className = "character-fallback";
     fallbackDiv.innerHTML = `
-      <div style="width: 320px; height: 384px; background: ${currentMode === 'arona' ? '#38bdf8' : '#c084fc'}; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; padding: 20px; text-align: center;">
-        <div style="font-size: 48px; margin-bottom: 16px;">${currentMode === 'arona' ? '📚' : '🌸'}</div>
-        <div style="font-size: 18px; font-weight: bold;">${currentMode === 'arona' ? 'Arona' : 'Plana'}</div>
-        <div style="font-size: 14px; opacity: 0.8;">Study Companion</div>
-      </div>
-    `;
+    <div style="width: 320px; height: 384px; background: ${
+      currentMode === "arona" ? "#38bdf8" : "#c084fc"
+    }; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; padding: 20px; text-align: center;">
+      <div style="font-size: 48px; margin-bottom: 16px;">${
+        currentMode === "arona" ? "📚" : "🌸"
+      }</div>
+      <div style="font-size: 18px; font-weight: bold;">${
+        currentMode === "arona" ? "Arona" : "Plana"
+      }</div>
+      <div style="font-size: 14px; opacity: 0.8;">Study Companion</div>
+    </div>
+  `;
     return fallbackDiv;
   }
 
-  // ============================
-  // ENHANCED UX FEATURES
-  // ============================
-
-  // Auto-save progress
   function autoSaveProgress() {
-    // Auto-save setiap 30 detik
     setInterval(() => {
       if (hasUnsavedChanges) {
         saveProgressWithBackup(progress);
@@ -2485,77 +2432,60 @@
   }
 
   function showAutoSaveNotification() {
-    // Create a subtle notification for auto-save
-    const notification = document.createElement('div');
-    notification.className = 'sr-only';
-    notification.setAttribute('aria-live', 'polite');
-    notification.textContent = 'Progress auto-saved';
+    const notification = document.createElement("div");
+    notification.className = "sr-only";
+    notification.setAttribute("aria-live", "polite");
+    notification.textContent = "Progress auto-saved";
     document.body.appendChild(notification);
-    
+
     setTimeout(() => {
       notification.remove();
     }, 1000);
   }
 
-  // Hotkeys
-  document.addEventListener('keydown', (e) => {
-    // Ctrl+Space untuk play/pause musik
-    if (e.ctrlKey && e.key === ' ') {
+  document.addEventListener("keydown", (e) => {
+    if (e.ctrlKey && e.key === " ") {
       e.preventDefault();
-      const playPauseBtn = document.getElementById('play-pause-btn');
+      const playPauseBtn = document.getElementById("play-pause-btn");
       if (playPauseBtn) playPauseBtn.click();
     }
-    
-    // Esc untuk close modal
-    if (e.key === 'Escape') {
-      const analyticsModal = document.getElementById('analytics-modal');
-      if (analyticsModal && analyticsModal.classList.contains('show')) {
-        analyticsModal.classList.remove('show');
+
+    if (e.key === "Escape") {
+      const analyticsModal = document.getElementById("analytics-modal");
+      if (analyticsModal && analyticsModal.classList.contains("show")) {
+        analyticsModal.classList.remove("show");
       }
     }
-    
-    // Space untuk play/pause timer
-    if (e.key === ' ' && !e.ctrlKey) {
+
+    if (e.key === " " && !e.ctrlKey) {
       e.preventDefault();
-      const startTimerBtn = document.getElementById('start-timer');
+      const startTimerBtn = document.getElementById("start-timer");
       if (startTimerBtn) startTimerBtn.click();
     }
-    
-    // R untuk reset timer
-    if (e.key === 'r' || e.key === 'R') {
-      const resetTimerBtn = document.getElementById('reset-timer');
+
+    if (e.key === "r" || e.key === "R") {
+      const resetTimerBtn = document.getElementById("reset-timer");
       if (resetTimerBtn) resetTimerBtn.click();
     }
   });
 
-  // ============================
-  // ACCESSIBILITY IMPROVEMENTS
-  // ============================
-
-  // ARIA live regions
-  const liveRegion = document.createElement('div');
-  liveRegion.setAttribute('aria-live', 'polite');
-  liveRegion.setAttribute('aria-atomic', 'true');
-  liveRegion.className = 'sr-only';
+  const liveRegion = document.createElement("div");
+  liveRegion.setAttribute("aria-live", "polite");
+  liveRegion.setAttribute("aria-atomic", "true");
+  liveRegion.className = "sr-only";
   document.body.appendChild(liveRegion);
 
   function announceTimerChange(message) {
     liveRegion.textContent = message;
-    setTimeout(() => liveRegion.textContent = '', 1000);
+    setTimeout(() => (liveRegion.textContent = ""), 1000);
   }
 
-  // ============================
-  // OFFLINE FEATURES
-  // ============================
-
-  // Network status detection
   let isOnline = navigator.onLine;
 
   window.addEventListener("online", () => {
     isOnline = true;
     showNotification("Back Online", "Connection restored!", "success");
 
-    // Retry pending actions
     if (offlineQueue.length > 0) {
       showNotification("Syncing", "Syncing offline data...", "info");
       while (offlineQueue.length) {
@@ -2574,154 +2504,146 @@
   function queueOfflineAction(action) {
     if (!navigator.onLine) {
       offlineQueue.push(action);
-      showNotification('Action queued', 'Will sync when online', 'info');
+      showNotification("Action queued", "Will sync when online", "info");
       return false;
     }
     return true;
   }
 
-  // ============================
-  // ENHANCED ANALYTICS & INSIGHTS
-  // ============================
+  studyMetrics.calculateBestTime = function () {
+    if (this.focusSessions.length === 0) return "No data yet";
 
-  studyMetrics.calculateBestTime = function() {
-    // Analisis waktu paling produktif user
-    if (this.focusSessions.length === 0) return 'No data yet';
-    
-    const morningSessions = this.focusSessions.filter(s => 
-      new Date(s.startTime).getHours() < 12
+    const morningSessions = this.focusSessions.filter(
+      (s) => new Date(s.startTime).getHours() < 12
     );
-    const afternoonSessions = this.focusSessions.filter(s => 
-      new Date(s.startTime).getHours() >= 12 && new Date(s.startTime).getHours() < 18
+    const afternoonSessions = this.focusSessions.filter(
+      (s) => new Date(s.startTime).getHours() >= 12 && new Date(s.startTime).getHours() < 18
     );
-    const eveningSessions = this.focusSessions.filter(s => 
-      new Date(s.startTime).getHours() >= 18
+    const eveningSessions = this.focusSessions.filter(
+      (s) => new Date(s.startTime).getHours() >= 18
     );
-    
+
     const sessionsByTime = [
-      { time: 'morning', count: morningSessions.length },
-      { time: 'afternoon', count: afternoonSessions.length },
-      { time: 'evening', count: eveningSessions.length }
+      { time: "morning", count: morningSessions.length },
+      { time: "afternoon", count: afternoonSessions.length },
+      { time: "evening", count: eveningSessions.length },
     ];
-    
+
     sessionsByTime.sort((a, b) => b.count - a.count);
     return sessionsByTime[0].time;
   };
 
-  studyMetrics.getProductivityTrend = function() {
-    if (this.productivityPatterns.length < 2) return 'stable';
-    
+  studyMetrics.getProductivityTrend = function () {
+    if (this.productivityPatterns.length < 2) return "stable";
+
     const lastWeek = this.productivityPatterns.slice(-7);
-    const avgProductivity = lastWeek.reduce((sum, day) => sum + day.productivity, 0) / lastWeek.length;
+    const avgProductivity =
+      lastWeek.reduce((sum, day) => sum + day.productivity, 0) / lastWeek.length;
     const previousWeek = this.productivityPatterns.slice(-14, -7);
-    const prevAvgProductivity = previousWeek.length > 0 ? 
-      previousWeek.reduce((sum, day) => sum + day.productivity, 0) / previousWeek.length : 0;
-    
-    if (avgProductivity > prevAvgProductivity * 1.1) return 'improving';
-    if (avgProductivity < prevAvgProductivity * 0.9) return 'declining';
-    return 'stable';
+    const prevAvgProductivity =
+      previousWeek.length > 0
+        ? previousWeek.reduce((sum, day) => sum + day.productivity, 0) / previousWeek.length
+        : 0;
+
+    if (avgProductivity > prevAvgProductivity * 1.1) return "improving";
+    if (avgProductivity < prevAvgProductivity * 0.9) return "declining";
+    return "stable";
   };
 
   function findMostProductiveDay() {
-    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const dayCounts = {};
-    
-    studyMetrics.focusSessions.forEach(session => {
+
+    studyMetrics.focusSessions.forEach((session) => {
       const day = new Date(session.startTime).getDay();
       dayCounts[day] = (dayCounts[day] || 0) + 1;
     });
-    
-    if (Object.keys(dayCounts).length === 0) return 'No data';
-    
-    const mostProductiveDayIndex = Object.keys(dayCounts).reduce((a, b) => 
+
+    if (Object.keys(dayCounts).length === 0) return "No data";
+
+    const mostProductiveDayIndex = Object.keys(dayCounts).reduce((a, b) =>
       dayCounts[a] > dayCounts[b] ? a : b
     );
-    
+
     return days[mostProductiveDayIndex];
   }
 
   function calculateAverageSession() {
     if (studyMetrics.focusSessions.length === 0) return 0;
-    
+
     const totalDuration = studyMetrics.focusSessions.reduce((sum, session) => {
       const endTime = session.endTime || new Date();
-      const duration = (endTime - new Date(session.startTime)) / 1000 / 60; // in minutes
+      const duration = (endTime - new Date(session.startTime)) / 1000 / 60;
       return sum + duration;
     }, 0);
-    
+
     return Math.round(totalDuration / studyMetrics.focusSessions.length);
   }
-
-  // ============================
-  // SOCIAL & SHARING FEATURES
-  // ============================
 
   function shareAchievement(achievementId) {
     const achievement = achievements[achievementId];
     if (!achievement) return;
-    
+
     const text = `I just unlocked "${achievement.name}" on Study Companion! 🎯 ${achievement.description}`;
     const url = window.location.href;
-    
+
     if (navigator.share) {
-      navigator.share({
-        title: 'Study Achievement Unlocked!',
-        text: text,
-        url: url
-      }).then(() => {
-        console.log('Achievement shared successfully');
-      }).catch((error) => {
-        console.log('Sharing failed:', error);
-        fallbackShare(text);
-      });
+      navigator
+        .share({
+          title: "Study Achievement Unlocked!",
+          text: text,
+          url: url,
+        })
+        .then(() => {
+          console.log("Achievement shared successfully");
+        })
+        .catch((error) => {
+          console.log("Sharing failed:", error);
+          fallbackShare(text);
+        });
     } else {
       fallbackShare(text);
     }
   }
 
   function fallbackShare(text) {
-    // Copy to clipboard as fallback
-    navigator.clipboard.writeText(text).then(() => {
-      showNotification('Copied!', 'Achievement text copied to clipboard', 'success');
-    }).catch(() => {
-      // Final fallback
-      const textArea = document.createElement('textarea');
-      textArea.value = text;
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textArea);
-      showNotification('Copied!', 'Achievement text copied to clipboard', 'success');
-    });
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        showNotification("Copied!", "Achievement text copied to clipboard", "success");
+      })
+      .catch(() => {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+        showNotification("Copied!", "Achievement text copied to clipboard", "success");
+      });
   }
 
-  // Clear data option
   function clearAllData() {
-    if (confirm('Are you sure? This will delete all your progress, achievements, and settings.')) {
-      // Clear semua data
+    if (confirm("Are you sure? This will delete all your progress, achievements, and settings.")) {
       localStorage.clear();
-      
-      // Reset progress
+
       progress = {
         completedSessions: 0,
         totalStudyTime: 0,
         lastSession: null,
         dailySessions: Array(8).fill(false),
-        studyHistory: []
+        studyHistory: [],
       };
-      
-      // Reset achievements
-      Object.values(achievements).forEach(achievement => {
+
+      Object.values(achievements).forEach((achievement) => {
         achievement.unlocked = false;
       });
-      
-      // Reset study metrics
+
       studyMetrics.focusSessions = [];
       studyMetrics.breaks = [];
       studyMetrics.productivityPatterns = [];
       studyMetrics.weeklyReports = [];
-      
-      // Reload halaman
+
       location.reload();
     }
   }
@@ -2732,34 +2654,30 @@
       totalStudyTime: 0,
       lastSession: null,
       dailySessions: Array(8).fill(false),
-      studyHistory: []
+      studyHistory: [],
     };
   }
 
-  // ============================
-  // AUDIO FILES MANAGEMENT SYSTEM
-  // ============================
   const audioFallbacks = {
     "lofi-study.mp3": [
       "https://cdn.pixabay.com/download/audio/2022/03/15/audio_d17187f128.mp3?filename=lofi-study-112191.mp3",
       "./assets/music/fallback/lofi-study.mp3",
-      "https://assets.mixkit.co/music/preview/mixkit-chill-abstract-loop-229.mp3"
+      "https://assets.mixkit.co/music/preview/mixkit-chill-abstract-loop-229.mp3",
     ],
     "rainy-coding.mp3": [
       "https://cdn.pixabay.com/download/audio/2022/11/16/audio_8c97a94dbf.mp3?filename=rain-ambient-113157.mp3",
-      "./assets/music/fallback/rainy-coding.mp3", 
-      "https://assets.mixkit.co/music/preview/mixkit-rainy-jazz-229.mp3"
+      "./assets/music/fallback/rainy-coding.mp3",
+      "https://assets.mixkit.co/music/preview/mixkit-rainy-jazz-229.mp3",
     ],
     "coffee-vibes.mp3": [
       "https://cdn.pixabay.com/download/audio/2022/10/25/audio_1e779eb41f.mp3?filename=relaxing-acoustic-guitar-112677.mp3",
       "./assets/music/fallback/coffee-vibes.mp3",
-      "https://assets.mixkit.co/music/preview/mixkit-coffee-shop-ambience-230.mp3"
-    ]
+      "https://assets.mixkit.co/music/preview/mixkit-coffee-shop-ambience-230.mp3",
+    ],
   };
 
   let currentFallbackIndex = 0;
 
-  // Enhanced asset loading dengan retry mechanism
   async function loadWithRetry(url, maxRetries = 3, delay = 1000) {
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
       try {
@@ -2773,20 +2691,15 @@
       }
 
       if (attempt < maxRetries) {
-        await new Promise((resolve) =>
-          setTimeout(resolve, delay * attempt)
-        );
+        await new Promise((resolve) => setTimeout(resolve, delay * attempt));
       }
     }
     return false;
   }
 
-  // Preload critical assets
   async function preloadCriticalAssets() {
     const assets = ["arona.png", "plana.png"];
-    const loadPromises = assets.map((asset) =>
-      loadWithRetry(`assets/images/${asset}`, 2)
-    );
+    const loadPromises = assets.map((asset) => loadWithRetry(`assets/images/${asset}`, 2));
 
     const results = await Promise.allSettled(loadPromises);
     results.forEach((result, index) => {
@@ -2796,9 +2709,6 @@
     });
   }
 
-  // ============================
-  // DATA PERSISTENCE IMPROVEMENT
-  // ============================
   function backupProgress(progress) {
     const backup = {
       data: progress,
@@ -2830,22 +2740,16 @@
     }
   }
 
-  // Enhanced save dengan backup system
   function saveProgressWithBackup(progressData) {
-    // Buat backup sebelum menyimpan
     backupProgress(progressData);
-
-    // Simpan progress utama
     saveProgressWithOfflineSupport(progressData);
   }
 
-  // Enhanced save dengan offline support
   function saveProgressWithOfflineSupport(progressData) {
     const saveAction = () => {
       const progressKey = `${currentMode}Progress`;
       if (!safeSave(progressKey, progressData)) {
         console.warn("Failed to save progress");
-        // Coba restore dari backup jika save gagal
         const backup = restoreBackup();
         if (backup) {
           console.log("Using backup data");
@@ -2862,9 +2766,6 @@
     }
   }
 
-  // ============================
-  // ENHANCED ACHIEVEMENT SYSTEM
-  // ============================
   const achievements = {
     first_session: {
       id: "first_session",
@@ -2911,43 +2812,30 @@
     },
   };
 
-  // Enhanced achievement tracking
   function checkAchievements() {
     Object.values(achievements).forEach((achievement) => {
       if (!achievement.unlocked) {
         let unlocked = false;
 
-        if (
-          achievement.id === "first_session" &&
-          progress.completedSessions >= 1
-        ) {
+        if (achievement.id === "first_session" && progress.completedSessions >= 1) {
           unlocked = true;
         }
-        if (
-          achievement.id === "focus_master" &&
-          progress.completedSessions >= achievement.requirement
-        ) {
+        if (achievement.id === "focus_master" && progress.completedSessions >= achievement.requirement) {
           unlocked = true;
         }
-        if (
-          achievement.id === "marathon_runner" &&
-          progress.totalStudyTime >= achievement.requirement * 60
-        ) {
+        if (achievement.id === "marathon_runner" && progress.totalStudyTime >= achievement.requirement * 60) {
           unlocked = true;
         }
         if (
           achievement.id === "consistency_king" &&
-          progress.dailySessions.filter((s) => s).length >=
-            achievement.requirement
+          progress.dailySessions.filter((s) => s).length >= achievement.requirement
         ) {
           unlocked = true;
         }
         if (achievement.id === "early_bird") {
           const now = new Date();
           const firstSessionToday =
-            progress.lastSession &&
-            new Date(progress.lastSession).toDateString() ===
-              now.toDateString();
+            progress.lastSession && new Date(progress.lastSession).toDateString() === now.toDateString();
           if (firstSessionToday && now.getHours() < 8) {
             unlocked = true;
           }
@@ -2968,7 +2856,6 @@
 
     achievements[achievementId].unlocked = true;
 
-    // Show special notification for rare achievements
     if (achievements[achievementId].rarity === "rare") {
       showNotification(
         "Rare Achievement Unlocked! 💎",
@@ -2976,8 +2863,7 @@
         "success"
       );
       createConfettiEffect();
-      
-      // Add sharing option for rare achievements
+
       setTimeout(() => {
         if (confirm("Share this rare achievement with friends?")) {
           shareAchievement(achievementId);
@@ -2991,7 +2877,6 @@
       );
     }
 
-    // Trigger character reaction
     triggerCharacterReaction("achievement");
 
     saveAchievements();
@@ -2999,13 +2884,12 @@
     hasUnsavedChanges = true;
   }
 
-  // PERBAIKAN: Fungsi updateAchievementsUI yang telah diperbaiki
   function updateAchievementsUI() {
     const achievementsContainer = document.getElementById("achievements-container");
     const achievementProgress = document.getElementById("achievement-progress");
-    
+
     if (!achievementsContainer || !achievementProgress) return;
-    
+
     achievementsContainer.innerHTML = "";
 
     const unlockedCount = Object.values(achievements).filter((a) => a.unlocked).length;
@@ -3017,14 +2901,11 @@
 
       badge.className = `achievement-badge ${
         isUnlocked ? "achievement-unlocked" : "achievement-locked"
-      } ${
-        achievement.rarity === "rare"
-          ? "achievement-rare"
-          : "achievement-common"
-      } ${isUnlocked ? "achievement unlocked" : "achievement locked"}`;
+      } ${achievement.rarity === "rare" ? "achievement-rare" : "achievement-common"} ${
+        isUnlocked ? "achievement unlocked" : "achievement locked"
+      }`;
 
-      // Add click event for sharing
-      badge.addEventListener('click', () => {
+      badge.addEventListener("click", () => {
         if (isUnlocked) {
           if (achievement.rarity === "rare") {
             if (confirm(`Share "${achievement.name}" achievement?`)) {
@@ -3036,35 +2917,25 @@
         }
       });
 
-      // Set CSS variables for theming
       if (isUnlocked) {
-        badge.style.setProperty(
-          "--primary-color",
-          currentMode === "arona" ? "#38bdf8" : "#c084fc"
-        );
-        badge.style.setProperty(
-          "--secondary-color",
-          currentMode === "arona" ? "#0ea5e9" : "#a855f7"
-        );
+        badge.style.setProperty("--primary-color", currentMode === "arona" ? "#38bdf8" : "#c084fc");
+        badge.style.setProperty("--secondary-color", currentMode === "arona" ? "#0ea5e9" : "#a855f7");
       }
 
-      // PERBAIKAN: Menggunakan tag <img> untuk ikon
       const icon = document.createElement("img");
       icon.className = "achievement-icon";
       icon.src = achievement.icon;
       icon.alt = achievement.name;
       icon.loading = "lazy";
 
-      // Fallback jika gambar gagal dimuat
-      icon.addEventListener('error', function() {
+      icon.addEventListener("error", function () {
         console.warn(`Icon failed to load: ${achievement.icon}`);
-        // Fallback ke emoji berdasarkan nama achievement
         const fallbackEmojis = {
-          "first_session": "🎯",
-          "focus_master": "⚡", 
-          "marathon_runner": "🏃‍♂️",
-          "consistency_king": "👑",
-          "early_bird": "🌅"
+          first_session: "🎯",
+          focus_master: "⚡",
+          marathon_runner: "🏃‍♂️",
+          consistency_king: "👑",
+          early_bird: "🌅",
         };
         this.replaceWith(document.createTextNode(fallbackEmojis[achievement.id] || "🏆"));
       });
@@ -3072,20 +2943,15 @@
       const tooltip = document.createElement("div");
       tooltip.className = "achievement-tooltip";
       tooltip.innerHTML = `
-        <strong>${achievement.name}</strong><br>
-        ${achievement.description}
-        ${
-          achievement.rarity === "rare"
-            ? "<br>⭐ Rare Achievement"
-            : ""
-        }
-        ${isUnlocked ? '<br><small>Click to share</small>' : ''}
-      `;
+    <strong>${achievement.name}</strong><br>
+    ${achievement.description}
+    ${achievement.rarity === "rare" ? "<br>⭐ Rare Achievement" : ""}
+    ${isUnlocked ? "<br><small>Click to share</small>" : ""}
+  `;
 
       badge.appendChild(icon);
       badge.appendChild(tooltip);
 
-      // Add progress for achievements with requirements
       if (achievement.requirement && !isUnlocked) {
         let progressValue = 0;
         let maxValue = achievement.requirement;
@@ -3093,15 +2959,9 @@
         if (achievement.id === "focus_master") {
           progressValue = Math.min(progress.completedSessions, maxValue);
         } else if (achievement.id === "marathon_runner") {
-          progressValue = Math.min(
-            Math.floor(progress.totalStudyTime / 60),
-            maxValue
-          );
+          progressValue = Math.min(Math.floor(progress.totalStudyTime / 60), maxValue);
         } else if (achievement.id === "consistency_king") {
-          progressValue = Math.min(
-            progress.dailySessions.filter((s) => s).length,
-            maxValue
-          );
+          progressValue = Math.min(progress.dailySessions.filter((s) => s).length, maxValue);
         }
 
         const progressText = document.createElement("div");
@@ -3114,82 +2974,94 @@
     });
   }
 
-  // ============================
-  // PERSONALIZED CHARACTER INTERACTIONS - ENHANCED VERSION
-  // ============================
   const characterInteractions = {
-    // ARONA - Energetic, playful, cute
     arona: {
       greeting: [
         "Sensei! Arona has been waiting! Let's study together! 🌟",
-        "Welcome back, Sensei! Arona is ready to help you have a productive day! 💫", 
+        "Welcome back, Sensei! Arona is ready to help you have a productive day! 💫",
         "Ara~ Sensei is here! Are you ready to focus today? 📚",
-        "Pla-... eh, hello Sensei! Ready to focus? ✨"
+        "Pla-... eh, hello Sensei! Ready to focus? ✨",
+      ],
+      outfit_change: [
+        "Ehehe~ Outfit baru! Arona suka! 👗",
+        "Kamu suka outfit Arona yang ini, Sensei? 😊",
+        "Arona jadi lebih semangat belajar dengan outfit baru! ✨",
+        "Cute? Arona selalu cute! Tapi makasih Sensei! 💕",
       ],
       session_start: [
         "Focus time! Let's do our best, Sensei! 💪",
         "Arona will support you, Sensei! Don't give up! 🌸",
-        "Time to focus! Arona believes in you, Sensei! 🚀", 
-        "Pomodoro session start! Ganbatte, Sensei! ✨"
+        "Time to focus! Arona believes in you, Sensei! 🚀",
+        "Pomodoro session start! Ganbatte, Sensei! ✨",
       ],
       session_complete: [
         "Yatta! Great work, Sensei! Arona is proud! 🎉",
         "Session complete! You did amazing, Sensei! 💫",
         "Arona will give you virtual pyroxenes for your hard work! 💎",
-        "Mission complete! Amazing work, Sensei! 🌟"
+        "Mission complete! Amazing work, Sensei! 🌟",
       ],
       achievement: [
         "Wow! Achievement unlocked! You're amazing, Sensei! 🏆",
-        "Arona is happy to see you growing, Sensei! 💝", 
+        "Arona is happy to see you growing, Sensei! 💝",
         "Incredible! This is definitely because of your hard work, Sensei! ✨",
-        "Congratulations, Sensei! You deserve this! 🎊"
+        "Congratulations, Sensei! You deserve this! 🎊",
       ],
       break_time: [
         "Break time! Don't forget to drink water, Sensei! 💧",
         "Short break~ Arona will wait here for you! ☕",
         "Time to recharge your energy! Don't push yourself too hard! 🌸",
-        "Tea break! Arona will guard your progress! 🍵"
-      ]
+        "Tea break! Arona will guard your progress! 🍵",
+      ],
     },
-    
-    // PLANA - Gentle, philosophical, mysterious  
+
     plana: {
       greeting: [
         "Welcome, Sensei... Let's find peace in studying together 🌙",
         "Hello Sensei... Is today filled with hope? 💭",
-        "Nice to meet you again, Sensei... 📖", 
-        "The library is quiet today... perfect for focus... 📚"
+        "Nice to meet you again, Sensei... 📖",
+        "The library is quiet today... perfect for focus... 📚",
+      ],
+      outfit_change: [
+        "Meskipun hanya satu outfit... aku tetap di sini untukmu, Sensei... 🌙",
+        "Kamu ingin aku berganti pakaian? Maaf, ini satu-satunya... 📖",
+        "Setiap hari dengan pakaian yang sama... seperti kesetiaan yang tak berubah... ✨",
+        "Aku harap Sensei tidak bosan melihatku seperti ini... 🌸",
       ],
       session_start: [
         "Every moment of focus is a step toward the future... ✨",
         "Let's begin this small journey together... 🌸",
         "Your concentration is a beautiful light, Sensei... 💫",
-        "Let's begin our journey of knowledge... 🌙"
+        "Let's begin our journey of knowledge... 🌙",
       ],
       session_complete: [
-        "Small consistent steps lead to great achievements... 🌟", 
+        "Small consistent steps lead to great achievements... 🌟",
         "Sensei... your dedication is truly inspiring... 💝",
         "Today's achievement is a seed for the future... 🌱",
-        "Another step forward in your journey... well done... ✨"
+        "Another step forward in your journey... well done... ✨",
       ],
       achievement: [
         "This achievement proves your growth, Sensei... ✨",
         "Every accomplishment is a beautiful story in our journey... 📚",
-        "Sensei... continue walking with confidence... 🌙", 
-        "Your efforts bear fruit... beautiful, isn't it? 💫"
+        "Sensei... continue walking with confidence... 🌙",
+        "Your efforts bear fruit... beautiful, isn't it? 💫",
       ],
       break_time: [
         "Time to rest... the world can wait for a moment... ☁️",
         "Rest is part of a wise journey... 🍵",
         "Take a deep breath... let your mind rest for a while... 💮",
-        "Time to rest... even stars need to recharge... 🌙"
-      ]
-    }
+        "Time to rest... even stars need to recharge... 🌙",
+      ],
+    },
   };
 
   function triggerCharacterReaction(type) {
+    console.log("Triggering reaction:", type, "for mode:", currentMode);
+    
     const bubble = document.getElementById("character-bubble");
-    if (!bubble) return;
+    if (!bubble) {
+      console.error("Character bubble not found!");
+      return;
+    }
 
     const characterQuotes = characterInteractions[currentMode];
     if (!characterQuotes) {
@@ -3197,13 +3069,14 @@
       return;
     }
 
-    const messages = characterQuotes[type] || characterQuotes.greeting;
+    let messages = characterQuotes[type];
     if (!messages || messages.length === 0) {
-      console.error("No messages found for type:", type);
-      return;
+      console.warn("No messages found for type:", type, "using greeting instead");
+      messages = characterQuotes.greeting;
     }
 
     const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+    console.log("Selected message:", randomMessage);
 
     bubble.textContent = randomMessage;
     bubble.classList.add("show");
@@ -3213,18 +3086,10 @@
     }, 5000);
   }
 
-  // Character click interaction
-  document.getElementById("character-container").addEventListener("click", () => {
-    triggerCharacterReaction("greeting");
-  });
-
-  // ============================
-  // ADVANCED ANALYTICS & INSIGHTS
-  // ============================
   function showAnalytics() {
     const modal = document.getElementById("analytics-modal");
     if (!modal) return;
-    
+
     modal.classList.add("show");
 
     updateWeeklyStats();
@@ -3235,79 +3100,71 @@
   function updateWeeklyStats() {
     const weeklyStats = document.getElementById("weekly-stats");
     if (!weeklyStats) return;
-    
+
     const weekData = getWeeklyData();
 
     weeklyStats.innerHTML = `
-      <div class="flex justify-between">
-        <span>Sessions Completed:</span>
-        <span class="font-semibold">${weekData.sessions}</span>
-      </div>
-      <div class="flex justify-between">
-        <span>Total Study Time:</span>
-        <span class="font-semibold">${Math.floor(
-          weekData.totalTime / 60
-        )}h ${weekData.totalTime % 60}m</span>
-      </div>
-      <div class="flex justify-between">
-        <span>Average Session:</span>
-        <span class="font-semibold">${
-          weekData.sessions > 0
-            ? Math.floor(weekData.totalTime / weekData.sessions)
-            : 0
-        }m</span>
-      </div>
-      <div class="flex justify-between">
-        <span>Productivity Score:</span>
-        <span class="font-semibold">${calculateProductivityScore()}%</span>
-      </div>
-    `;
+    <div class="flex justify-between">
+      <span>Sessions Completed:</span>
+      <span class="font-semibold">${weekData.sessions}</span>
+    </div>
+    <div class="flex justify-between">
+      <span>Total Study Time:</span>
+      <span class="font-semibold">${Math.floor(weekData.totalTime / 60)}h ${
+      weekData.totalTime % 60
+    }m</span>
+    </div>
+    <div class="flex justify-between">
+      <span>Average Session:</span>
+      <span class="font-semibold">${
+        weekData.sessions > 0 ? Math.floor(weekData.totalTime / weekData.sessions) : 0
+      }m</span>
+    </div>
+    <div class="flex justify-between">
+      <span>Productivity Score:</span>
+      <span class="font-semibold">${calculateProductivityScore()}%</span>
+    </div>
+  `;
   }
 
   function updateProductivityInsights() {
     const insights = document.getElementById("productivity-insights");
     if (!insights) return;
-    
+
     const weekData = getWeeklyData();
 
     let insightText = "";
     if (weekData.sessions === 0) {
       insightText = "Start your first session to unlock insights!";
     } else if (weekData.sessions < 3) {
-      insightText =
-        "Try to maintain consistency - aim for 3+ sessions per week!";
+      insightText = "Try to maintain consistency - aim for 3+ sessions per week!";
     } else if (weekData.totalTime < 180) {
-      insightText =
-        "Great consistency! Consider longer sessions for deeper focus.";
+      insightText = "Great consistency! Consider longer sessions for deeper focus.";
     } else {
-      insightText =
-        "Excellent productivity! You're building strong study habits!";
+      insightText = "Excellent productivity! You're building strong study habits!";
     }
 
     insights.innerHTML = `
-      <p class="text-sm text-gray-600 mb-3">${insightText}</p>
-      <div class="bg-primary-opacity rounded-lg p-3">
-        <div class="flex justify-between text-sm mb-1">
-          <span>Weekly Goal Progress</span>
-          <span>${Math.min(
-            100,
-            Math.floor((weekData.sessions / 7) * 100)
-          )}%</span>
-        </div>
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: ${Math.min(
-            100,
-            Math.floor((weekData.sessions / 7) * 100)
-          )}%"></div>
-        </div>
+    <p class="text-sm text-gray-600 mb-3">${insightText}</p>
+    <div class="bg-primary-opacity rounded-lg p-3">
+      <div class="flex justify-between text-sm mb-1">
+        <span>Weekly Goal Progress</span>
+        <span>${Math.min(100, Math.floor((weekData.sessions / 7) * 100))}%</span>
       </div>
-    `;
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: ${Math.min(
+          100,
+          Math.floor((weekData.sessions / 7) * 100)
+        )}%"></div>
+      </div>
+    </div>
+  `;
   }
 
   function updateDetailedAchievements() {
     const container = document.getElementById("detailed-achievements");
     if (!container) return;
-    
+
     container.innerHTML = "";
 
     Object.values(achievements).forEach((achievement) => {
@@ -3322,41 +3179,31 @@
         if (achievement.id === "focus_master") {
           progressValue = Math.min(progress.completedSessions, maxValue);
         } else if (achievement.id === "marathon_runner") {
-          progressValue = Math.min(
-            Math.floor(progress.totalStudyTime / 60),
-            maxValue
-          );
+          progressValue = Math.min(Math.floor(progress.totalStudyTime / 60), maxValue);
         } else if (achievement.id === "consistency_king") {
-          progressValue = Math.min(
-            progress.dailySessions.filter((s) => s).length,
-            maxValue
-          );
+          progressValue = Math.min(progress.dailySessions.filter((s) => s).length, maxValue);
         }
 
         const progressPercent = (progressValue / maxValue) * 100;
         progressHtml = `
-          <div class="progress-ring mt-2 mx-auto" style="--progress: ${progressPercent}%">
-            ${progressValue}/${maxValue}
-          </div>
-        `;
+        <div class="progress-ring mt-2 mx-auto" style="--progress: ${progressPercent}%">
+          ${progressValue}/${maxValue}
+        </div>
+      `;
       }
 
       achievementEl.innerHTML = `
-        <div class="text-2xl mb-2">
-          <img src="${achievement.icon}" alt="${achievement.name}" class="w-12 h-12 mx-auto object-contain">
-        </div>
-        <h4 class="font-semibold text-sm mb-1">${
-          achievement.name
-        }</h4>
-        <p class="text-xs text-gray-600 mb-2">${
-          achievement.description
-        }</p>
-        ${
-          achievement.unlocked
-            ? '<span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">Unlocked</span>'
-            : progressHtml
-        }
-      `;
+      <div class="text-2xl mb-2">
+        <img src="${achievement.icon}" alt="${achievement.name}" class="w-12 h-12 mx-auto object-contain">
+      </div>
+      <h4 class="font-semibold text-sm mb-1">${achievement.name}</h4>
+      <p class="text-xs text-gray-600 mb-2">${achievement.description}</p>
+      ${
+        achievement.unlocked
+          ? '<span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">Unlocked</span>'
+          : progressHtml
+      }
+    `;
 
       container.appendChild(achievementEl);
     });
@@ -3376,13 +3223,10 @@
   function calculateProductivityScore() {
     const weekData = getWeeklyData();
     const sessionScore = Math.min(100, (weekData.sessions / 7) * 100);
-    const timeScore = Math.min(100, (weekData.totalTime / 420) * 100); // 7 hours max
+    const timeScore = Math.min(100, (weekData.totalTime / 420) * 100);
     return Math.floor((sessionScore + timeScore) / 2);
   }
 
-  // ============================
-  // SPECIAL EFFECTS
-  // ============================
   function createConfettiEffect() {
     const colors =
       currentMode === "arona"
@@ -3392,24 +3236,18 @@
     for (let i = 0; i < 50; i++) {
       const confetti = document.createElement("div");
       confetti.className = "confetti";
-      confetti.style.setProperty(
-        "--confetti-color",
-        colors[Math.floor(Math.random() * colors.length)]
-      );
+      confetti.style.setProperty("--confetti-color", colors[Math.floor(Math.random() * colors.length)]);
       confetti.style.left = Math.random() * 100 + "vw";
       confetti.style.top = "-10px";
       confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
 
       document.body.appendChild(confetti);
 
-      // Animate confetti
       confetti.animate(
         [
           { transform: `translateY(0) rotate(0deg)`, opacity: 1 },
           {
-            transform: `translateY(${window.innerHeight}px) rotate(${
-              Math.random() * 360
-            }deg)`,
+            transform: `translateY(${window.innerHeight}px) rotate(${Math.random() * 360}deg)`,
             opacity: 0,
           },
         ],
@@ -3419,7 +3257,6 @@
         }
       );
 
-      // Remove after animation
       setTimeout(() => {
         if (confetti.parentNode) {
           confetti.remove();
@@ -3428,34 +3265,19 @@
     }
   }
 
-  // ============================
-  // PWA & OFFLINE FUNCTIONALITY
-  // ============================
-
-  // Register Service Worker
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", async () => {
       try {
-        const registration = await navigator.serviceWorker.register(
-          "/sw.js"
-        );
+        const registration = await navigator.serviceWorker.register("/sw.js");
         console.log("SW registered: ", registration);
 
-        // Check for updates
         registration.addEventListener("updatefound", () => {
           const newWorker = registration.installing;
           console.log("SW update found!");
 
           newWorker.addEventListener("statechange", () => {
-            if (
-              newWorker.state === "installed" &&
-              navigator.serviceWorker.controller
-            ) {
-              showNotification(
-                "Update Available",
-                "New version is ready! Refresh to update.",
-                "info"
-              );
+            if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
+              showNotification("Update Available", "New version is ready! Refresh to update.", "info");
             }
           });
         });
@@ -3465,23 +3287,16 @@
     });
   }
 
-  // PWA Installation Prompt
   let deferredPrompt;
   window.addEventListener("beforeinstallprompt", (e) => {
     e.preventDefault();
     deferredPrompt = e;
 
-    // Show install button (bisa ditambahkan UI)
     setTimeout(() => {
-      showNotification(
-        "Install App",
-        "Install Study Companion for better experience!",
-        "info"
-      );
+      showNotification("Install App", "Install Study Companion for better experience!", "info");
     }, 10000);
   });
 
-  // Install function
   async function installPWA() {
     if (deferredPrompt) {
       deferredPrompt.prompt();
@@ -3489,20 +3304,13 @@
 
       if (outcome === "accepted") {
         console.log("User accepted PWA installation");
-        showNotification(
-          "App Installed",
-          "Thank you for installing!",
-          "success"
-        );
+        showNotification("App Installed", "Thank you for installing!", "success");
       }
 
       deferredPrompt = null;
     }
   }
 
-  // ============================
-  // MOTIVATIONAL QUOTES
-  // ============================
   const motivationalQuotes = [
     {
       character: "Arona",
@@ -3527,28 +3335,22 @@
   ];
 
   function showMotivationalQuote(trigger) {
-    const availableQuotes = motivationalQuotes.filter(
-      (q) => q.trigger === trigger
-    );
+    const availableQuotes = motivationalQuotes.filter((q) => q.trigger === trigger);
     if (availableQuotes.length > 0) {
-      const randomQuote =
-        availableQuotes[Math.floor(Math.random() * availableQuotes.length)];
+      const randomQuote = availableQuotes[Math.floor(Math.random() * availableQuotes.length)];
       showNotification(randomQuote.character, randomQuote.text, "info");
     }
   }
 
-  // ============================
-  // THEME MANAGEMENT
-  // ============================
-
-  // Theme toggle functionality
   const themeToggleBtn = document.getElementById("theme-toggle-btn");
   const sunIcon = document.getElementById("sun-icon");
   const moonIcon = document.getElementById("moon-icon");
   const body = document.body;
   const splashLogo = document.getElementById("splash-logo");
   const appTitle = document.getElementById("app-title");
+  
   const characterContainer = document.getElementById("character-container");
+  
   const backgroundOverlay = document.querySelector(".background-overlay");
   const splashScreen = document.getElementById("splash-screen");
   const siteFooter = document.querySelector(".site-footer");
@@ -3556,7 +3358,7 @@
   function applyAronaThemeImmediately() {
     const characterImage = document.getElementById("character-image");
     if (!body || !splashScreen || !splashLogo || !characterImage || !appTitle) return;
-    
+
     body.className = "theme-arona bg-pattern";
     splashScreen.className = "theme-arona";
     splashLogo.textContent = "Arona Blue Archive";
@@ -3571,7 +3373,7 @@
   function applyPlanaThemeImmediately() {
     const characterImage = document.getElementById("character-image");
     if (!body || !splashScreen || !splashLogo || !characterImage || !appTitle) return;
-    
+
     body.className = "theme-plana bg-pattern";
     splashScreen.className = "theme-plana";
     splashLogo.textContent = "Plana Blue Archive";
@@ -3593,10 +3395,7 @@
       particle.className = "particle";
       particle.style.left = centerX + "px";
       particle.style.top = centerY + "px";
-      particle.style.setProperty(
-        "--tx",
-        (Math.random() - 0.5) * 150 + "px"
-      );
+      particle.style.setProperty("--tx", (Math.random() - 0.5) * 150 + "px");
 
       document.body.appendChild(particle);
 
@@ -3612,10 +3411,9 @@
 
   function enableAronaMode() {
     if (!body || !backgroundOverlay || !characterContainer || !siteFooter) return;
-    
+
     body.style.transition = "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)";
-    backgroundOverlay.style.transition =
-      "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)";
+    backgroundOverlay.style.transition = "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)";
     siteFooter.style.transition = "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)";
 
     document.querySelectorAll(".fade-text").forEach((el) => {
@@ -3633,8 +3431,7 @@
       currentMode = "arona";
       localStorage.setItem("studyCompanionMode", "arona");
 
-      // ===== SMOOTH SCROLL ADDED HERE =====
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: "smooth" });
 
       loadAchievements();
       triggerCharacterReaction("greeting");
@@ -3650,10 +3447,9 @@
 
   function enablePlanaMode() {
     if (!body || !backgroundOverlay || !characterContainer || !siteFooter) return;
-    
+
     body.style.transition = "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)";
-    backgroundOverlay.style.transition =
-      "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)";
+    backgroundOverlay.style.transition = "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)";
     siteFooter.style.transition = "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)";
 
     document.querySelectorAll(".fade-text").forEach((el) => {
@@ -3671,8 +3467,7 @@
       currentMode = "plana";
       localStorage.setItem("studyCompanionMode", "plana");
 
-      // ===== SMOOTH SCROLL ADDED HERE =====
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: "smooth" });
 
       loadAchievements();
       triggerCharacterReaction("greeting");
@@ -3686,15 +3481,10 @@
     }, 400);
   }
 
-  // ============================
-  // NOTIFICATION SYSTEM
-  // ============================
   function showNotification(title, message, type = "info") {
     const notification = document.getElementById("notification");
     const notificationTitle = document.getElementById("notification-title");
-    const notificationMessage = document.getElementById(
-      "notification-message"
-    );
+    const notificationMessage = document.getElementById("notification-message");
 
     if (!notification || !notificationTitle || !notificationMessage) return;
 
@@ -3730,8 +3520,7 @@
 
   function playCompletionSound() {
     try {
-      const audioContext = new (window.AudioContext ||
-        window.webkitAudioContext)();
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
       const oscillator = audioContext.createOscillator();
       const gainNode = audioContext.createGain();
 
@@ -3742,10 +3531,7 @@
       oscillator.type = "sine";
 
       gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-      gainNode.gain.exponentialRampToValueAtTime(
-        0.01,
-        audioContext.currentTime + 1
-      );
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1);
 
       oscillator.start(audioContext.currentTime);
       oscillator.stop(audioContext.currentTime + 1);
@@ -3754,14 +3540,10 @@
     }
   }
 
-  // ============================
-  // PROGRESS TRACKING
-  // ============================
   function loadProgress() {
     const progressKey = `${currentMode}Progress`;
     let savedProgress = safeLoad(progressKey);
 
-    // Jika tidak ada data utama, coba restore dari backup
     if (!savedProgress) {
       savedProgress = restoreBackup();
     }
@@ -3770,9 +3552,7 @@
       progress = savedProgress;
 
       const today = new Date().toDateString();
-      const lastSessionDate = progress.lastSession
-        ? new Date(progress.lastSession).toDateString()
-        : null;
+      const lastSessionDate = progress.lastSession ? new Date(progress.lastSession).toDateString() : null;
 
       if (lastSessionDate !== today) {
         progress.dailySessions = Array(8).fill(false);
@@ -3781,14 +3561,14 @@
 
     const completedSessionsEl = document.getElementById("completed-sessions");
     const totalStudyTimeEl = document.getElementById("total-study-time");
-    
+
     if (completedSessionsEl) {
       completedSessionsEl.textContent = progress.completedSessions;
     }
     if (totalStudyTimeEl) {
       totalStudyTimeEl.textContent = Math.floor(progress.totalStudyTime / 60);
     }
-    
+
     updateDailyProgress(progress.dailySessions);
 
     return progress;
@@ -3796,17 +3576,17 @@
 
   function saveProgress(progressData) {
     saveProgressWithBackup(progressData);
-    
+
     const completedSessionsEl = document.getElementById("completed-sessions");
     const totalStudyTimeEl = document.getElementById("total-study-time");
-    
+
     if (completedSessionsEl) {
       completedSessionsEl.textContent = progressData.completedSessions;
     }
     if (totalStudyTimeEl) {
       totalStudyTimeEl.textContent = Math.floor(progressData.totalStudyTime / 60);
     }
-    
+
     updateDailyProgress(progressData.dailySessions);
     hasUnsavedChanges = true;
   }
@@ -3814,17 +3594,13 @@
   function updateDailyProgress(dailySessions) {
     const dailyProgress = document.getElementById("daily-progress");
     if (!dailyProgress) return;
-    
+
     dailyProgress.innerHTML = "";
 
     dailySessions.forEach((completed, index) => {
       const circle = document.createElement("div");
-      circle.className = `session-circle ${
-        completed ? "session-completed" : "session-pending"
-      }`;
-      circle.title = `Session ${index + 1}: ${
-        completed ? "Completed" : "Pending"
-      }`;
+      circle.className = `session-circle ${completed ? "session-completed" : "session-pending"}`;
+      circle.title = `Session ${index + 1}: ${completed ? "Completed" : "Pending"}`;
       dailyProgress.appendChild(circle);
     });
   }
@@ -3849,9 +3625,6 @@
     updateAchievementsUI();
   }
 
-  // ============================
-  // MUSIC PLAYER FUNCTIONALITY
-  // ============================
   const audioPlayer = document.getElementById("audio-player");
   const playPauseBtn = document.getElementById("play-pause-btn");
   const playIcon = document.getElementById("play-icon");
@@ -3889,55 +3662,49 @@
   let currentTrackIndex = 0;
   let isMusicPlaying = false;
 
-  // ===== VOLUME MEMORY IMPLEMENTATION - BAGIAN 1: INISIALISASI =====
-  // Load saved volume from localStorage
-  const savedVolume = localStorage.getItem('musicVolume');
+  const savedVolume = localStorage.getItem("musicVolume");
   if (savedVolume !== null) {
     audioPlayer.volume = parseFloat(savedVolume);
     volumeSlider.value = savedVolume * 100;
   } else {
-    audioPlayer.volume = 0.7; // default
+    audioPlayer.volume = 0.7;
     volumeSlider.value = 70;
   }
 
-  // Enhanced Audio Error Handling dengan multiple fallbacks
   if (audioPlayer) {
-    audioPlayer.addEventListener('error', function handleAudioError(e) {
-      console.error('Audio error:', e);
-      
+    audioPlayer.addEventListener("error", function handleAudioError(e) {
+      console.error("Audio error:", e);
+
       const currentTrack = playlist[currentTrackIndex];
-      const trackFilename = currentTrack.src.split('/').pop();
+      const trackFilename = currentTrack.src.split("/").pop();
       const fallbackUrls = audioFallbacks[trackFilename] || [];
-      
+
       if (currentFallbackIndex < fallbackUrls.length) {
         const fallbackUrl = fallbackUrls[currentFallbackIndex];
         console.log(`Trying fallback ${currentFallbackIndex + 1}:`, fallbackUrl);
-        
-        // Prevent multiple rapid retries
-        this.removeEventListener('error', handleAudioError);
-        
+
+        this.removeEventListener("error", handleAudioError);
+
         setTimeout(() => {
           this.src = fallbackUrl;
           currentFallbackIndex++;
-          this.addEventListener('error', handleAudioError);
-          
+          this.addEventListener("error", handleAudioError);
+
           if (isMusicPlaying) {
-            this.play().catch(fallbackError => {
+            this.play().catch((fallbackError) => {
               console.error(`Fallback ${currentFallbackIndex} failed:`, fallbackError);
-              handleAudioError(e); // Try next fallback
+              handleAudioError(e);
             });
           }
         }, 1000);
       } else {
-        // All fallbacks failed
-        console.error('All audio fallbacks failed for:', currentTrack.title);
+        console.error("All audio fallbacks failed for:", currentTrack.title);
         showNotification(
-          'Audio Unavailable', 
+          "Audio Unavailable",
           `Cannot play: ${currentTrack.title}. Skipping to next track.`,
-          'info'
+          "info"
         );
-        
-        // Reset fallback index and skip to next track
+
         currentFallbackIndex = 0;
         setTimeout(() => {
           playTrack((currentTrackIndex + 1) % playlist.length);
@@ -3989,29 +3756,24 @@
           })
           .catch((e) => {
             console.log("Play failed:", e);
-            showNotification(
-              "Music Error",
-              "Cannot play audio. Please check your music files."
-            );
+            showNotification("Music Error", "Cannot play audio. Please check your music files.");
           });
       }
     });
   }
 
-  // ===== VOLUME MEMORY IMPLEMENTATION - BAGIAN 2: EVENT LISTENER =====
   if (volumeSlider) {
-    volumeSlider.addEventListener('input', () => {
+    volumeSlider.addEventListener("input", () => {
       const vol = volumeSlider.value / 100;
       audioPlayer.volume = vol;
-      localStorage.setItem('musicVolume', vol);
+      localStorage.setItem("musicVolume", vol);
     });
   }
 
   if (audioPlayer) {
     audioPlayer.addEventListener("timeupdate", () => {
       if (audioPlayer.duration) {
-        const progress =
-          (audioPlayer.currentTime / audioPlayer.duration) * 100;
+        const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
         if (progressFill) progressFill.style.width = `${progress}%`;
 
         if (currentTime) currentTime.textContent = formatTime(audioPlayer.currentTime);
@@ -4049,26 +3811,21 @@
     });
   }
 
-  // PERBAIKAN: Fungsi playTrack dengan urutan yang benar
   function playTrack(index) {
     try {
       currentTrackIndex = index;
       const track = playlist[index];
 
-      // Validate track data
       if (!track || !track.src) {
         throw new Error("Invalid track data");
       }
 
-      // Set UI dulu sebelum mengubah audio source
       if (currentTrack) currentTrack.textContent = track.title;
       if (currentArtist) currentArtist.textContent = track.artist;
       if (totalTime) totalTime.textContent = track.duration;
 
-      // Reset fallback index when changing tracks
       currentFallbackIndex = 0;
 
-      // Set audio source setelah UI diupdate
       audioPlayer.src = track.src;
 
       updatePlaylistNumbers();
@@ -4092,12 +3849,8 @@
           .catch((e) => {
             console.log("Auto-play failed:", e);
             isMusicPlaying = false;
-            showNotification(
-              "Playback Error",
-              "Cannot play: " + track.title
-            );
+            showNotification("Playback Error", "Cannot play: " + track.title);
 
-            // Auto-pause and reset state
             if (playIcon) playIcon.classList.remove("hidden");
             if (pauseIcon) pauseIcon.classList.add("hidden");
             playPauseBtn.setAttribute("aria-label", "Play music");
@@ -4108,7 +3861,6 @@
       console.error("Play track error:", error);
       showNotification("Playback Error", "Failed to load track");
 
-      // Skip to next track if current fails
       if (playlist.length > 1) {
         setTimeout(() => playTrack((index + 1) % playlist.length), 1000);
       }
@@ -4128,9 +3880,6 @@
     return `${mins}:${secs.toString().padStart(2, "0")}`;
   }
 
-  // ============================
-  // TIMER FUNCTIONALITY - BAGIAN YANG DIPERBAIKI
-  // ============================
   const timerDisplay = document.getElementById("timer-display");
   const startTimerBtn = document.getElementById("start-timer");
   const resetTimerBtn = document.getElementById("reset-timer");
@@ -4156,16 +3905,12 @@
 
   function initializeSessionProgress() {
     if (!sessionProgress) return;
-    
+
     sessionProgress.innerHTML = "";
     pomodoroCycles.forEach((cycle, index) => {
       const circle = document.createElement("div");
-      circle.className = `session-circle ${
-        index === currentCycleIndex ? "session-current" : "session-pending"
-      }`;
-      circle.title = `${cycle.title} (${Math.floor(
-        cycle.duration / 60
-      )} min)`;
+      circle.className = `session-circle ${index === currentCycleIndex ? "session-current" : "session-pending"}`;
+      circle.title = `${cycle.title} (${Math.floor(cycle.duration / 60)} min)`;
       sessionProgress.appendChild(circle);
     });
   }
@@ -4174,7 +3919,7 @@
 
   function updateStartButtonText() {
     if (!startTimerBtn) return;
-    
+
     if (!hasStarted && !isRunning) {
       startTimerBtn.textContent = "Start";
       startTimerBtn.setAttribute("aria-label", "Start timer");
@@ -4211,7 +3956,46 @@
     });
   });
 
-  // PERBAIKAN: Bagian startTimerBtn yang bermasalah
+  function updateCharacterProgress() {
+    const progressBar = document.getElementById("character-progress");
+    const progressText = document.getElementById("character-progress-text");
+    const characterBubble = document.getElementById("character-bubble");
+    if (!progressBar || !progressText || !characterBubble) return;
+
+    const totalSessionTime = pomodoroCycles[currentCycleIndex]?.duration || 25 * 60;
+    const progressPercent = ((totalSessionTime - timeLeft) / totalSessionTime) * 100;
+    const clampedPercent = Math.min(100, Math.max(0, progressPercent));
+
+    progressBar.style.width = `${clampedPercent}%`;
+    progressText.textContent = `Progress Belajar: ${Math.round(clampedPercent)}%`;
+
+    if (clampedPercent >= 95 && clampedPercent < 100) {
+      triggerCharacterReaction("session_complete");
+    } else if (clampedPercent >= 66) {
+      if (!characterBubble.classList.contains("show")) {
+        const quotes =
+          currentMode === "arona"
+            ? ["Hampir selesai, Sensei! Semangat! 💪", "Sedikit lagi! Kamu pasti bisa! ✨"]
+            : ["Hampir selesai... tetaplah fokus... 🌙", "Perjalananmu hampir berakhir... indah sekali... 💫"];
+        const bubble = document.getElementById("character-bubble");
+        bubble.textContent = quotes[Math.floor(Math.random() * quotes.length)];
+        bubble.classList.add("show");
+        setTimeout(() => bubble.classList.remove("show"), 3000);
+      }
+    } else if (clampedPercent >= 33) {
+      if (!characterBubble.classList.contains("show")) {
+        const quotes =
+          currentMode === "arona"
+            ? ["Teruskan, Sensei! Kamu hebat! 🌟", "Fokus! Jangan menyerah! 💫"]
+            : ["Kamu sudah sejauh ini... luar biasa... ✨", "Teruslah melangkah... 🌸"];
+        const bubble = document.getElementById("character-bubble");
+        bubble.textContent = quotes[Math.floor(Math.random() * quotes.length)];
+        bubble.classList.add("show");
+        setTimeout(() => bubble.classList.remove("show"), 3000);
+      }
+    }
+  }
+
   if (startTimerBtn) {
     startTimerBtn.addEventListener("click", () => {
       if (!isRunning) {
@@ -4222,21 +4006,19 @@
         if (pomodoroCycles[currentCycleIndex].type === "focus") {
           showMotivationalQuote("session_start");
           triggerCharacterReaction("session_start");
-          
-          // Record session start
+
           studyMetrics.focusSessions.push({
             startTime: new Date().toISOString(),
-            duration: pomodoroCycles[currentCycleIndex].duration / 60
+            duration: pomodoroCycles[currentCycleIndex].duration / 60,
           });
           saveStudyMetrics();
         } else {
           showMotivationalQuote("break_start");
           triggerCharacterReaction("break_time");
-          
-          // Record break start
+
           studyMetrics.breaks.push({
             startTime: new Date().toISOString(),
-            duration: pomodoroCycles[currentCycleIndex].duration / 60
+            duration: pomodoroCycles[currentCycleIndex].duration / 60,
           });
           saveStudyMetrics();
         }
@@ -4244,6 +4026,7 @@
         timerInterval = setInterval(() => {
           timeLeft--;
           updateTimerDisplay();
+          updateCharacterProgress();
 
           if (timeLeft <= 0) {
             clearInterval(timerInterval);
@@ -4253,8 +4036,7 @@
 
             if (pomodoroCycles[currentCycleIndex].type === "focus") {
               progress.completedSessions++;
-              progress.totalStudyTime +=
-                pomodoroCycles[currentCycleIndex].duration;
+              progress.totalStudyTime += pomodoroCycles[currentCycleIndex].duration;
               progress.lastSession = new Date().toISOString();
 
               const sessionIndex = progress.completedSessions % 8;
@@ -4262,16 +4044,15 @@
                 progress.dailySessions[sessionIndex] = true;
               }
 
-              // Update session end time
               if (studyMetrics.focusSessions.length > 0) {
-                studyMetrics.focusSessions[studyMetrics.focusSessions.length - 1].endTime = new Date().toISOString();
+                studyMetrics.focusSessions[studyMetrics.focusSessions.length - 1].endTime =
+                  new Date().toISOString();
               }
-              
-              // Add productivity pattern
+
               studyMetrics.productivityPatterns.push({
-                date: new Date().toISOString().split('T')[0],
+                date: new Date().toISOString().split("T")[0],
                 productivity: calculateProductivityScore(),
-                sessions: progress.completedSessions
+                sessions: progress.completedSessions,
               });
               saveStudyMetrics();
 
@@ -4286,25 +4067,21 @@
               announceTimerChange("Break time over! Ready for next focus session.");
             }
 
-            currentCycleIndex =
-              (currentCycleIndex + 1) % pomodoroCycles.length;
+            currentCycleIndex = (currentCycleIndex + 1) % pomodoroCycles.length;
             timeLeft = pomodoroCycles[currentCycleIndex].duration;
 
             if (timerTitle) timerTitle.textContent = pomodoroCycles[currentCycleIndex].title;
             if (currentCycle) {
-              currentCycle.textContent = `${currentCycleIndex + 1}/${
-                pomodoroCycles.length
-              }`;
+              currentCycle.textContent = `${currentCycleIndex + 1}/${pomodoroCycles.length}`;
               currentCycle.setAttribute(
                 "aria-label",
-                `Current session ${currentCycleIndex + 1} of ${
-                  pomodoroCycles.length
-                }`
+                `Current session ${currentCycleIndex + 1} of ${pomodoroCycles.length}`
               );
             }
 
             initializeSessionProgress();
             updateTimerDisplay();
+            updateCharacterProgress();
           }
         }, 1000);
       } else {
@@ -4329,13 +4106,11 @@
       if (timerTitle) timerTitle.textContent = pomodoroCycles[0].title;
       if (currentCycle) {
         currentCycle.textContent = `1/${pomodoroCycles.length}`;
-        currentCycle.setAttribute(
-          "aria-label",
-          `Current session 1 of ${pomodoroCycles.length}`
-        );
+        currentCycle.setAttribute("aria-label", `Current session 1 of ${pomodoroCycles.length}`);
       }
       initializeSessionProgress();
       updateTimerDisplay();
+      updateCharacterProgress();
       announceTimerChange("Timer reset to beginning.");
 
       timerButtons.forEach((btn) => {
@@ -4353,12 +4128,12 @@
 
   function updateTimerDisplay() {
     if (!timerDisplay) return;
-    
+
     const minutes = Math.floor(timeLeft / 60);
     const seconds = timeLeft % 60;
-    timerDisplay.textContent = `${minutes
+    timerDisplay.textContent = `${minutes.toString().padStart(2, "0")}:${seconds
       .toString()
-      .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+      .padStart(2, "0")}`;
 
     document.title = `${minutes.toString().padStart(2, "0")}:${seconds
       .toString()
@@ -4367,11 +4142,200 @@
     }`;
   }
 
-  // ============================
-  // EVENT LISTENERS & INITIALIZATION
-  // ============================
+  const characterImg = document.getElementById("character-image");
+  const charContainer = document.getElementById("character-container");
+  let isDragging = false;
+  let startX = 0;
+  let currentOutfit = 0;
 
-  // Analytics Modal Events
+  console.log("CHARACTER CONTAINER FOUND:", charContainer);
+  console.log("CHARACTER IMAGE FOUND:", characterImg);
+
+  const outfits = {
+    arona: [
+      "assets/images/arona.png",
+      "assets/images/arona_yukata.jpg",
+    ],
+    plana: [
+      "assets/images/plana.png",
+    ],
+  };
+
+  const planaSingleOutfitMessages = [
+    "Plana hanya punya outfit ini... 🌙",
+    "Maaf Sensei... ini satu-satunya pakaianku... 📖",
+    "Setiap hari dengan pakaian yang sama... seperti kesetiaan yang tak berubah... ✨",
+    "Aku harap Sensei tidak bosan melihatku seperti ini... 🌸",
+  ];
+
+  const aronaOutfitMessages = [
+    "Ehehe~ Outfit baru! Arona suka! 👗",
+    "Kamu suka outfit Arona yang ini, Sensei? 😊",
+    "Arona jadi lebih semangat belajar dengan outfit baru! ✨",
+    "Cute? Arona selalu cute! Tapi makasih Sensei! 💕",
+    "Outfit baru! Arona makin cantik kan? 🌟",
+  ];
+
+  const planaOutfitMessages = [
+    "Meskipun hanya satu outfit... aku tetap di sini untukmu, Sensei... 🌙",
+    "Kamu ingin aku berganti pakaian? Maaf, ini satu-satunya... 📖",
+    "Aku harap Sensei tidak bosan melihatku seperti ini... 🌸",
+    "Plana akan tetap setia dengan pakaian ini... ✨",
+  ];
+
+  function changeOutfit(direction) {
+    console.log("Changing outfit, direction:", direction, "mode:", currentMode);
+    
+    const bubble = document.getElementById("character-bubble");
+    
+    if (!bubble) {
+      console.error("Character bubble not found!");
+      return;
+    }
+    
+    if (outfits[currentMode].length === 1) {
+      if (currentMode === "plana") {
+        bubble.textContent = planaSingleOutfitMessages[Math.floor(Math.random() * planaSingleOutfitMessages.length)];
+      } else {
+        bubble.textContent = "Ini satu-satunya outfit Arona saat ini! 🎀";
+      }
+      
+      bubble.classList.add("show");
+      setTimeout(() => bubble.classList.remove("show"), 3000);
+      
+      triggerCharacterReaction("outfit_change");
+      return;
+    }
+    
+    currentOutfit = (currentOutfit + direction + outfits[currentMode].length) % outfits[currentMode].length;
+    console.log("New outfit index:", currentOutfit);
+    
+    if (characterImg) {
+      characterImg.src = outfits[currentMode][currentOutfit];
+      localStorage.setItem(`${currentMode}Outfit`, currentOutfit);
+      console.log("Image src changed to:", characterImg.src);
+    }
+    
+    if (currentMode === "arona") {
+      bubble.textContent = aronaOutfitMessages[Math.floor(Math.random() * aronaOutfitMessages.length)];
+    } else {
+      bubble.textContent = planaOutfitMessages[Math.floor(Math.random() * planaOutfitMessages.length)];
+    }
+    
+    bubble.classList.add("show");
+    setTimeout(() => bubble.classList.remove("show"), 3000);
+    
+    triggerCharacterReaction("outfit_change");
+  }
+
+  if (charContainer) {
+    console.log("✅ Adding drag event listeners to:", charContainer);
+    
+    charContainer.addEventListener("mousedown", (e) => {
+      console.log("🖱️ Mouse down on character");
+      isDragging = true;
+      startX = e.clientX;
+      charContainer.classList.add("dragging");
+      e.preventDefault();
+    });
+
+    document.addEventListener("mousemove", (e) => {
+      if (!isDragging) return;
+
+      const deltaX = e.clientX - startX;
+      if (Math.abs(deltaX) > 10) {
+        charContainer.style.transform = `scale(1.05) translateX(${deltaX * 0.3}px)`;
+        charContainer.style.transition = "none";
+      }
+    });
+
+    document.addEventListener("mouseup", (e) => {
+      if (!isDragging) return;
+
+      console.log("🖱️ Mouse up, isDragging:", isDragging);
+      
+      const deltaX = e.clientX - startX;
+      const threshold = 50;
+
+      console.log("Delta X:", deltaX, "Threshold:", threshold);
+
+      if (Math.abs(deltaX) > threshold) {
+        if (deltaX > threshold) {
+          console.log("👉 Dragged right - next outfit");
+          changeOutfit(1);
+        } else if (deltaX < -threshold) {
+          console.log("👈 Dragged left - previous outfit");
+          changeOutfit(-1);
+        }
+      } else {
+        console.log("❌ Drag too short, no outfit change");
+      }
+
+      charContainer.style.transform = "";
+      charContainer.style.transition = "";
+      charContainer.classList.remove("dragging");
+      isDragging = false;
+    });
+
+    charContainer.addEventListener("touchstart", (e) => {
+      console.log("📱 Touch start on character");
+      isDragging = true;
+      startX = e.touches[0].clientX;
+      charContainer.classList.add("dragging");
+      e.preventDefault();
+    });
+
+    document.addEventListener("touchmove", (e) => {
+      if (!isDragging) return;
+
+      const deltaX = e.touches[0].clientX - startX;
+      if (Math.abs(deltaX) > 10) {
+        charContainer.style.transform = `scale(1.05) translateX(${deltaX * 0.3}px)`;
+        charContainer.style.transition = "none";
+      }
+    });
+
+    document.addEventListener("touchend", (e) => {
+      if (!isDragging) return;
+
+      console.log("📱 Touch end, isDragging:", isDragging);
+      
+      const deltaX = e.changedTouches[0].clientX - startX;
+      const threshold = 50;
+
+      console.log("Delta X:", deltaX, "Threshold:", threshold);
+
+      if (Math.abs(deltaX) > threshold) {
+        if (deltaX > threshold) {
+          console.log("👉 Swiped right - next outfit");
+          changeOutfit(1);
+        } else if (deltaX < -threshold) {
+          console.log("👈 Swiped left - previous outfit");
+          changeOutfit(-1);
+        }
+      }
+
+      charContainer.style.transform = "";
+      charContainer.style.transition = "";
+      charContainer.classList.remove("dragging");
+      isDragging = false;
+    });
+
+    charContainer.addEventListener("dragstart", (e) => {
+      e.preventDefault();
+    });
+
+  } else {
+    console.error("❌ Character container NOT FOUND!");
+  }
+
+  if (charContainer) {
+    charContainer.addEventListener("click", () => {
+      console.log("Click on character - greeting");
+      triggerCharacterReaction("greeting");
+    });
+  }
+
   const analyticsBtn = document.getElementById("analytics-btn");
   const closeAnalytics = document.getElementById("close-analytics");
   const analyticsModal = document.getElementById("analytics-modal");
@@ -4394,7 +4358,6 @@
     });
   }
 
-  // Theme toggle event
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener("click", () => {
       createParticleEffect(themeToggleBtn);
@@ -4407,18 +4370,20 @@
     });
   }
 
-  // Character interactions
-  if (characterContainer) {
-    characterContainer.addEventListener("mouseenter", () => {
-      characterContainer.style.transform = "scale(1.05)";
+  if (charContainer) {
+    charContainer.addEventListener("mouseenter", () => {
+      if (!isDragging) {
+        charContainer.style.transform = "scale(1.05)";
+      }
     });
 
-    characterContainer.addEventListener("mouseleave", () => {
-      characterContainer.style.transform = "scale(1)";
+    charContainer.addEventListener("mouseleave", () => {
+      if (!isDragging) {
+        charContainer.style.transform = "scale(1)";
+      }
     });
 
-    // Keyboard navigation untuk character
-    characterContainer.addEventListener("keydown", (e) => {
+    charContainer.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
         triggerCharacterReaction("greeting");
@@ -4426,14 +4391,8 @@
     });
   }
 
-  // Enhanced mobile touch events
-  document.addEventListener("touchstart", function () {}, {
-    passive: true,
-  });
+  document.addEventListener("touchstart", function () {}, { passive: true });
 
-  // ============================
-  // APP INITIALIZATION
-  // ============================
   function initializeApp() {
     const savedMode = localStorage.getItem("studyCompanionMode") || "arona";
 
@@ -4443,60 +4402,66 @@
       applyPlanaThemeImmediately();
     }
 
-    // Preload critical assets
     preloadCriticalAssets().then(() => {
       console.log("Critical assets preloaded");
     });
 
-    // Load progress and achievements
     progress = loadProgress();
     loadAchievements();
     loadStudyMetrics();
 
-    // Initialize components
     playTrack(0);
     updateAchievementsUI();
     updateDailyProgress(progress.dailySessions);
 
-    // Set initial timer button state
     if (timerButtons[0]) {
       timerButtons[0].classList.add("bg-primary", "text-white");
       timerButtons[0].classList.remove("bg-primary-opacity");
       timerButtons[0].setAttribute("aria-pressed", "true");
     }
-    
+
     updatePlaylistNumbers();
     updateStartButtonText();
 
-    // Start auto-save
+    const savedOutfit = localStorage.getItem(`${currentMode}Outfit`);
+    if (savedOutfit !== null) {
+      currentOutfit = parseInt(savedOutfit);
+      const characterImage = document.getElementById("character-image");
+      if (characterImage) {
+        if (currentMode === "arona" && outfits.arona[currentOutfit]) {
+          characterImage.src = outfits.arona[currentOutfit];
+        } else if (currentMode === "plana" && outfits.plana[currentOutfit]) {
+          characterImage.src = outfits.plana[currentOutfit];
+        }
+      }
+    }
+
     autoSaveProgress();
 
-    // Hide splash screen after delay
     setTimeout(() => {
       const splashScreen = document.getElementById("splash-screen");
       if (splashScreen) {
         splashScreen.style.opacity = "0";
         splashScreen.style.transform = "scale(1.1)";
-        
+
         setTimeout(() => {
           splashScreen.style.display = "none";
           document.querySelectorAll(".page-transition").forEach((el) => {
             el.classList.add("page-loaded");
           });
-          
+
           if ("Notification" in window && Notification.permission === "default") {
             Notification.requestPermission();
           }
-          
+
           triggerCharacterReaction("greeting");
         }, 1000);
       }
     }, 2000);
   }
 
-  // Start the app when DOM is ready dengan error boundary
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', safeInitializeApp);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", safeInitializeApp);
   } else {
     safeInitializeApp();
   }

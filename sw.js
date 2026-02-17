@@ -3,20 +3,27 @@ const CACHE_NAME = 'study-companion-v1.4.0';
 const OFFLINE_QUEUE_KEY = 'offline-queue';
 const PROGRESS_BACKUP_KEY = 'progress-backup';
 
-// Assets yang akan di-cache
+// Assets yang akan di-cache - SESUAIKAN DENGAN STRUKTUR FOLDER ANDA
 const ASSETS_TO_CACHE = [
-  '/apple-touch-icon.png',
-  '/favicon.ico',
-  '/assets/images/icon-180x180.png',
-  '/assets/images/icon-192x192.png',
-  '/assets/images/icon-512x512.png',
   // HTML dan root
   '/',
   '/index.html',
   
+  // Favicon dan icons
+  '/favicon.ico',
+  '/apple-touch-icon.png',
+  '/assets/images/favicon-32x32.png',
+  '/assets/images/favicon-16x16.png',
+  '/assets/images/icon-180x180.png',
+  '/assets/images/icon-152x152.png',
+  '/assets/images/icon-167x167.png',
+  '/assets/images/icon-120x120.png',
+  '/assets/images/mstile-150x150.png',
+  
   // Gambar karakter
   '/assets/images/arona.png',
   '/assets/images/plana.png',
+  '/assets/images/arona_yukata.jpg', // Tambahkan outfit baru
   
   // Achievement icons
   '/assets/images/achievements/first_steps1.png',
@@ -54,8 +61,13 @@ self.addEventListener('install', (event) => {
         console.log('[SW] Caching app assets...');
         
         // Cache dengan prioritas: cache inti dulu, kemudian sisanya
-        const coreAssets = ASSETS_TO_CACHE.slice(0, 3); // HTML dan gambar utama
-        const otherAssets = ASSETS_TO_CACHE.slice(3);
+        const coreAssets = [
+          '/',
+          '/index.html',
+          '/assets/images/arona.png',
+          '/assets/images/plana.png'
+        ];
+        const otherAssets = ASSETS_TO_CACHE.filter(asset => !coreAssets.includes(asset));
         
         // Cache core assets dulu
         await Promise.allSettled(
@@ -207,11 +219,22 @@ async function handleAudioRequest(request) {
 
 // Strategy: Images
 async function handleImageRequest(request) {
+  const url = new URL(request.url);
+  
+  // Skip placeholder.com - jangan di-cache
+  if (url.hostname.includes('placeholder.com')) {
+    try {
+      return await fetch(request);
+    } catch (error) {
+      // Return fallback image lokal
+      return caches.match('/assets/images/arona.png');
+    }
+  }
+  
   const cache = await caches.open(CACHE_NAME);
   const cachedResponse = await cache.match(request);
   
   if (cachedResponse) {
-    // Return cached image, tapi update cache di background
     updateCacheInBackground(request, cache);
     return cachedResponse;
   }
@@ -232,6 +255,11 @@ async function handleImageRequest(request) {
       return new Response(fallbackSvg, {
         headers: { 'Content-Type': 'image/svg+xml' }
       });
+    }
+    
+    // Fallback untuk character images
+    if (request.url.includes('arona') || request.url.includes('plana')) {
+      return caches.match('/assets/images/arona.png');
     }
     
     throw error;
@@ -397,7 +425,6 @@ async function syncOfflineQueue() {
 
 async function processQueueItem(item) {
   // Implementasi sync data ke server
-  // Ini adalah placeholder - sesuaikan dengan backend Anda
   try {
     const response = await fetch(item.url, {
       method: item.method || 'POST',
@@ -429,30 +456,22 @@ self.addEventListener('sync', (event) => {
 
 async function syncProgressData() {
   try {
-    // Ambil data progress dari IndexedDB atau cache
-    const progress = await getStoredData('progress');
-    const achievements = await getStoredData('achievements');
+    const cache = await caches.open('offline-data');
+    const progressKey = 'progress-backup';
+    const progressResponse = await cache.match(progressKey);
     
-    if (progress || achievements) {
-      // Kirim ke server
-      const response = await fetch('/api/sync', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ progress, achievements })
-      });
+    if (progressResponse) {
+      const progress = await progressResponse.json();
+      console.log('[SW] Found progress data to sync');
       
-      if (response.ok) {
-        console.log('[SW] Progress data synced successfully');
-        
-        // Notify clients
-        const clients = await self.clients.matchAll();
-        clients.forEach(client => {
-          client.postMessage({
-            type: 'DATA_SYNCED',
-            dataType: 'progress'
-          });
+      // Kirim notifikasi ke client
+      const clients = await self.clients.matchAll();
+      clients.forEach(client => {
+        client.postMessage({
+          type: 'PROGRESS_BACKUP_FOUND',
+          data: progress
         });
-      }
+      });
     }
   } catch (error) {
     console.error('[SW] Progress sync failed:', error);
@@ -461,20 +480,11 @@ async function syncProgressData() {
 
 async function syncAchievements() {
   try {
-    const achievements = await getStoredData('achievements');
+    const cache = await caches.open('offline-data');
+    const achievementsResponse = await cache.match('achievements-backup');
     
-    if (achievements) {
-      // Simpan ke cache sebagai backup
-      const cache = await caches.open('user-data');
-      await cache.put(
-        'achievements-backup',
-        new Response(JSON.stringify({
-          data: achievements,
-          timestamp: Date.now()
-        }))
-      );
-      
-      console.log('[SW] Achievements backed up');
+    if (achievementsResponse) {
+      console.log('[SW] Found achievements backup');
     }
   } catch (error) {
     console.error('[SW] Achievements sync failed:', error);
@@ -496,7 +506,15 @@ async function updateCachedAssets() {
     
     console.log('[SW] Updating cached assets...');
     
-    const updatePromises = ASSETS_TO_CACHE.map(async (url) => {
+    // Update hanya file yang penting
+    const assetsToUpdate = [
+      '/assets/images/arona.png',
+      '/assets/images/plana.png',
+      '/assets/images/arona_yukata.jpg',
+      '/index.html'
+    ];
+    
+    const updatePromises = assetsToUpdate.map(async (url) => {
       try {
         const response = await fetch(url, {
           cache: 'no-store',
@@ -518,16 +536,6 @@ async function updateCachedAssets() {
     });
     
     const results = await Promise.allSettled(updatePromises);
-    
-    // Notify clients tentang update
-    const clients = await self.clients.matchAll();
-    clients.forEach(client => {
-      client.postMessage({
-        type: 'ASSETS_UPDATED',
-        timestamp: updateTime,
-        results: results.map(r => r.status === 'fulfilled' ? r.value : null)
-      });
-    });
     
     console.log('[SW] Asset update completed');
   } catch (error) {
@@ -551,7 +559,7 @@ self.addEventListener('push', (event) => {
   
   const options = {
     body: data.body || 'Time to focus! Your study companion is waiting.',
-    icon: data.icon || '/assets/images/arona.png',
+    icon: '/assets/images/arona.png',
     badge: '/assets/images/badge.png',
     tag: data.tag || 'study-reminder',
     requireInteraction: true,
@@ -657,6 +665,10 @@ self.addEventListener('message', (event) => {
     case 'GET_SW_VERSION':
       event.ports[0]?.postMessage({ version: CACHE_NAME });
       break;
+      
+    case 'BACKUP_PROGRESS':
+      backupProgress(data);
+      break;
   }
 });
 
@@ -674,6 +686,24 @@ async function cacheAsset(url) {
     console.warn('[SW] Failed to cache asset:', url, error);
   }
   return false;
+}
+
+async function backupProgress(progress) {
+  try {
+    const cache = await caches.open('offline-data');
+    await cache.put(
+      PROGRESS_BACKUP_KEY,
+      new Response(JSON.stringify({
+        data: progress,
+        timestamp: Date.now()
+      }))
+    );
+    console.log('[SW] Progress backed up');
+    return true;
+  } catch (error) {
+    console.error('[SW] Failed to backup progress:', error);
+    return false;
+  }
 }
 
 async function sendCacheInfo(event) {
@@ -738,19 +768,6 @@ async function clearCache() {
     console.error('[SW] Failed to clear cache:', error);
     return false;
   }
-}
-
-async function getStoredData(key) {
-  try {
-    const cache = await caches.open('user-data');
-    const response = await cache.match(key);
-    if (response) {
-      return await response.json();
-    }
-  } catch (error) {
-    console.warn('[SW] Failed to get stored data:', key, error);
-  }
-  return null;
 }
 
 function createOfflinePage() {
