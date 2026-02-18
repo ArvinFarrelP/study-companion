@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <!-- PWA Head Tags -->
     <link rel="icon" href="./favicon.ico" type="image/x-icon" />
     <link
@@ -69,7 +69,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -77,6 +77,7 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
       }
 
       html,
@@ -249,6 +250,7 @@
         transition: all 0.3s ease;
         border: 2px solid transparent;
         min-width: 140px;
+        min-height: 48px;
       }
 
       .theme-arona .donation-btn {
@@ -1337,6 +1339,7 @@
         transition: all 0.3s ease;
         width: 100%;
         margin-bottom: 0.5rem;
+        min-height: 48px;
       }
 
       .share-btn:hover {
@@ -1366,10 +1369,11 @@
         display: inline-flex;
         align-items: center;
         gap: 0.4rem;
-        padding: 0.3rem 0.75rem;
-        border-radius: 9999px;
-        font-size: 0.8rem;
+        padding: 0.5rem 1rem;
+        border-radius: 30px;
+        font-size: 0.9rem;
         font-weight: 700;
+        box-shadow: 0 2px 8px rgba(251, 191, 36, 0.2);
       }
 
       .theme-arona .streak-badge {
@@ -1501,6 +1505,7 @@
         font-size: 0.875rem;
         font-weight: 600;
         transition: opacity 0.2s;
+        min-height: 44px;
       }
 
       .theme-arona .todo-add-btn {
@@ -1528,6 +1533,8 @@
         transition: all 0.2s ease;
         font-size: 0.75rem;
         font-weight: 600;
+        min-width: 70px;
+        min-height: 70px;
       }
 
       .mood-btn:hover {
@@ -1612,17 +1619,17 @@
 
       .character-progress-container {
         width: 100%;
-        height: 8px;
+        height: 12px;
         background: rgba(0, 0, 0, 0.1);
-        border-radius: 4px;
-        margin-top: 15px;
+        border-radius: 20px;
+        margin-top: 20px;
         overflow: hidden;
       }
 
       .character-progress-fill {
         height: 100%;
         background: linear-gradient(90deg, #38bdf8, #0ea5e9);
-        border-radius: 4px;
+        border-radius: 20px;
         transition: width 0.3s ease;
       }
 
@@ -1669,6 +1676,7 @@
         cursor: grabbing;
       }
 
+      /* PERBAIKAN UTAMA UNTUK MOBILE */
       @media (max-width: 768px) {
         .flex-col.lg\:flex-row {
           flex-direction: column;
@@ -1688,12 +1696,24 @@
           padding: 1rem;
         }
 
+        .glass.rounded-2xl.p-6.mt-6 {
+          padding: 1.25rem;
+          border-radius: 28px;
+        }
+
         .text-3xl {
           font-size: 1.5rem;
         }
 
         .text-4xl {
           font-size: 2rem;
+        }
+
+        .text-4xl.timer-display {
+          font-size: 3.5rem;
+          font-weight: 700;
+          line-height: 1.2;
+          margin: 0.5rem 0;
         }
 
         .theme-toggle {
@@ -1732,6 +1752,7 @@
           max-width: 280px;
           justify-content: center;
           padding: 0.75rem;
+          min-height: 48px;
         }
 
         .footer-brand h3 {
@@ -1747,30 +1768,104 @@
           flex-wrap: wrap;
         }
 
+        /* PERBAIKAN TIMER CONTROLS */
         .timer-controls button {
-          min-height: 44px;
+          min-height: 48px;
           padding: 12px 20px;
           font-size: 16px;
+          font-weight: 600;
+          border-radius: 14px;
         }
 
-        .music-controls button {
-          min-width: 44px;
-          min-height: 44px;
+        .timer-controls {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 0.5rem;
+          width: 100%;
         }
 
-        .theme-toggle-btn {
-          width: 44px;
-          height: 44px;
+        .timer-controls button[data-time] {
+          min-height: 48px;
+          padding: 12px 8px;
+          font-size: 14px;
+          font-weight: 600;
+          border-radius: 12px;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.2s ease;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
-        .main-content {
-          padding: 1rem;
-          gap: 1.5rem;
+        .timer-controls button[data-time]:active {
+          transform: scale(0.96);
+        }
+
+        .timer-controls button[data-time].bg-primary {
+          box-shadow: 0 4px 12px currentColor;
+          animation: pulse-glow 2s infinite;
+        }
+
+        .flex.justify-center.gap-2.timer-controls {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+
+        .flex.justify-center.gap-2.timer-controls button {
+          flex: 1 1 auto;
+          min-width: 100px;
+          min-height: 48px;
+          padding: 12px 16px;
+          font-size: 15px;
+          font-weight: 600;
+          border-radius: 14px;
+          letter-spacing: 0.3px;
+        }
+
+        #todo-btn {
+          background: rgba(56, 189, 248, 0.15);
+          border: 1px solid rgba(56, 189, 248, 0.3);
+          backdrop-filter: blur(4px);
+        }
+
+        .theme-plana #todo-btn {
+          background: rgba(192, 132, 252, 0.15);
+          border-color: rgba(192, 132, 252, 0.3);
+        }
+
+        /* Container streak dan session */
+        .flex.justify-between.items-center.mb-4 {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(8px);
+          padding: 0.5rem;
+          border-radius: 40px;
           margin-bottom: 1rem;
         }
 
-        .timer-display {
-          font-size: 3rem;
+        .streak-badge {
+          padding: 0.5rem 1rem;
+          font-size: 0.9rem;
+          border-radius: 30px;
+        }
+
+        #current-cycle {
+          padding: 0.5rem 1rem;
+          font-size: 0.9rem;
+          font-weight: 700;
+          border-radius: 30px;
+        }
+
+        .session-circle {
+          width: 28px;
+          height: 28px;
+          border-width: 2px;
+        }
+
+        .music-controls button {
+          min-width: 48px;
+          min-height: 48px;
         }
 
         .playlist-container {
@@ -1780,6 +1875,12 @@
         .character-interaction {
           max-width: 150px;
           font-size: 11px;
+        }
+
+        .character-progress-container {
+          height: 12px;
+          border-radius: 20px;
+          margin: 20px 0 10px;
         }
       }
 
@@ -1795,12 +1896,15 @@
         }
 
         .timer-controls {
-          flex-direction: column;
-          gap: 0.5rem;
+          gap: 0.4rem;
         }
 
         .timer-controls button {
           width: 100%;
+        }
+
+        .text-4xl.timer-display {
+          font-size: 3rem;
         }
 
         .achievement-badge {
@@ -1833,6 +1937,40 @@
         }
       }
 
+      /* Untuk layar sangat kecil */
+      @media (max-width: 400px) {
+        .timer-controls button[data-time] {
+          min-height: 44px;
+          font-size: 13px;
+          padding: 8px 4px;
+        }
+
+        .flex.justify-center.gap-2.timer-controls button {
+          min-width: 80px;
+          min-height: 44px;
+          padding: 8px 12px;
+          font-size: 14px;
+        }
+
+        .text-4xl.timer-display {
+          font-size: 2.5rem;
+        }
+
+        .flex.justify-between.items-center.mb-4 {
+          padding: 0.4rem;
+        }
+
+        .streak-badge, #current-cycle {
+          padding: 0.4rem 0.8rem;
+          font-size: 0.8rem;
+        }
+
+        .session-circle {
+          width: 22px;
+          height: 22px;
+        }
+      }
+
       @media (min-width: 769px) and (max-width: 1024px) {
         .character-container img {
           width: 250px;
@@ -1857,6 +1995,48 @@
         .footer-content {
           padding: 2rem;
         }
+      }
+
+      @media (hover: hover) {
+        .timer-controls button:hover {
+          transform: translateY(-2px);
+        }
+      }
+
+      @keyframes pulse-glow {
+        0%, 100% {
+          box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+        }
+        50% {
+          box-shadow: 0 6px 16px rgba(56, 189, 248, 0.5);
+        }
+      }
+
+      .theme-plana .timer-controls button[data-time].bg-primary {
+        animation: pulse-glow-plana 2s infinite;
+      }
+
+      @keyframes pulse-glow-plana {
+        0%, 100% {
+          box-shadow: 0 4px 12px rgba(192, 132, 252, 0.3);
+        }
+        50% {
+          box-shadow: 0 6px 16px rgba(192, 132, 252, 0.5);
+        }
+      }
+
+      button, 
+      [role="button"],
+      .achievement-badge {
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      button:active,
+      [role="button"]:active,
+      .achievement-badge:active {
+        transform: scale(0.97);
+        transition: transform 0.1s;
       }
 
       @media (prefers-color-scheme: dark) {
@@ -2213,30 +2393,15 @@
             >
             </div>
 
-            <div
-              class="flex justify-center items-center gap-4 mb-4 timer-controls"
-              role="group"
-              aria-label="Timer duration options"
-            >
-              <button
-                class="px-4 py-2 bg-primary-opacity rounded-lg hover:bg-opacity-30 transition"
-                data-time="25"
-                aria-pressed="true"
-              >
+            <!-- PERBAIKAN: Tombol durasi dengan grid -->
+            <div class="grid grid-cols-3 gap-2 mb-4 timer-controls" role="group" aria-label="Timer duration options">
+              <button class="px-4 py-2 bg-primary-opacity rounded-lg hover:bg-opacity-30 transition" data-time="25" aria-pressed="true">
                 25 min
               </button>
-              <button
-                class="px-4 py-2 bg-primary-opacity rounded-lg hover:bg-opacity-30 transition"
-                data-time="45"
-                aria-pressed="false"
-              >
+              <button class="px-4 py-2 bg-primary-opacity rounded-lg hover:bg-opacity-30 transition" data-time="45" aria-pressed="false">
                 45 min
               </button>
-              <button
-                class="px-4 py-2 bg-primary-opacity rounded-lg hover:bg-opacity-30 transition"
-                data-time="60"
-                aria-pressed="false"
-              >
+              <button class="px-4 py-2 bg-primary-opacity rounded-lg hover:bg-opacity-30 transition" data-time="60" aria-pressed="false">
                 60 min
               </button>
             </div>
@@ -2250,28 +2415,16 @@
               >
                 25:00
               </div>
-              <div
-                class="flex justify-center gap-2 timer-controls"
-                role="group"
-                aria-label="Timer controls"
-              >
-                <button
-                  class="px-4 py-2 bg-primary-opacity rounded-lg hover:bg-opacity-30 transition text-sm"
-                  id="todo-btn"
-                  aria-label="Open task list"
-                >📋 Tasks</button>
-                <button
-                  class="px-6 py-2 bg-primary rounded-lg hover:bg-opacity-80 transition text-white"
-                  id="start-timer"
-                  aria-label="Start timer"
-                >
+              
+              <!-- PERBAIKAN: Tombol kontrol dengan ukuran yang lebih baik -->
+              <div class="flex justify-center gap-2 timer-controls" role="group" aria-label="Timer controls">
+                <button class="px-4 py-2 bg-primary-opacity rounded-lg hover:bg-opacity-30 transition text-sm font-semibold" id="todo-btn" aria-label="Open task list">
+                  📋 Tasks
+                </button>
+                <button class="px-6 py-2 bg-primary rounded-lg hover:bg-opacity-80 transition text-white font-semibold" id="start-timer" aria-label="Start timer">
                   Start
                 </button>
-                <button
-                  class="px-6 py-2 bg-gray-600 rounded-lg hover:bg-gray-500 transition text-white"
-                  id="reset-timer"
-                  aria-label="Reset timer"
-                >
+                <button class="px-6 py-2 bg-gray-600 rounded-lg hover:bg-gray-500 transition text-white font-semibold" id="reset-timer" aria-label="Reset timer">
                   Reset
                 </button>
               </div>
@@ -3781,15 +3934,28 @@
       }, 30000);
     }
 
-    // ============================================================
-    // IMAGE FALLBACK
-    // ============================================================
-    const charImageEl = document.getElementById("character-image");
-    if (charImageEl) {
-      charImageEl.addEventListener("error", function() {
-        this.src = `data:image/svg+xml;base64,${btoa(`<svg width="320" height="384" viewBox="0 0 320 384" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="384" rx="16" fill="${currentMode==="arona"?"#38bdf8":"#c084fc"}"/><circle cx="160" cy="150" r="40" fill="white" fill-opacity="0.9"/><text x="160" y="260" text-anchor="middle" fill="white" font-family="Arial" font-size="24">${currentMode==="arona"?"Arona":"Plana"}</text></svg>`)}`;
-      });
-    }
+// ============================================================
+// IMAGE FALLBACK - DIPERBAIKI
+// ============================================================
+const charImageEl = document.getElementById("character-image");
+if (charImageEl) {
+  charImageEl.addEventListener("error", function() {
+    // Buat SVG string dengan benar
+    const svgString = `<svg width="320" height="384" viewBox="0 0 320 384" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="320" height="384" rx="16" fill="${currentMode === "arona" ? "#38bdf8" : "#c084fc"}"/>
+      <circle cx="160" cy="150" r="40" fill="white" fill-opacity="0.9"/>
+      <text x="160" y="260" text-anchor="middle" fill="white" font-family="Arial" font-size="24">
+        ${currentMode === "arona" ? "Arona" : "Plana"}
+      </text>
+    </svg>`;
+    
+    // Encode ke base64 dengan benar
+    const encodedSvg = btoa(unescape(encodeURIComponent(svgString)));
+    
+    // Set source
+    this.src = `data:image/svg+xml;base64,${encodedSvg}`;
+  });
+}
 
     // ============================================================
     // INIT
