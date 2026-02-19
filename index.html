@@ -54,13 +54,13 @@
     <title>Study Companion</title>
     <meta
       name="description"
-      content="Anime-style Pomodoro timer with focus companions, achievements, and productivity analytics. Stay focused with Arona and Plana!"
+      content="Anime-style Pomodoro timer with focus companions, achievements, and productivity analytics. Stay focused with Arona, Plana, and Hina!"
     />
     <meta name="theme-color" content="#38bdf8" />
 
     <!-- Meta tags untuk social sharing -->
     <meta property="og:title" content="Study Companion - Anime Pomodoro Timer" />
-    <meta property="og:description" content="Focus with Arona & Plana - Your anime study partner for better focus & productivity" />
+    <meta property="og:description" content="Focus with Arona, Plana & Hina - Your anime study partner for better focus & productivity" />
     <meta property="og:image" content="/assets/images/social-preview.png" />
     <meta property="og:url" content="https://yourwebsite.com" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -190,6 +190,12 @@
         color: #4a044e;
       }
 
+      .theme-hina .site-footer {
+        background: rgba(255, 255, 255, 0.95);
+        border-top-color: rgba(167, 139, 250, 0.3);
+        color: #3b0764;
+      }
+
       .footer-content {
         max-width: 1200px;
         margin: 0 auto;
@@ -277,6 +283,18 @@
         box-shadow: 0 8px 25px rgba(192, 132, 252, 0.2);
       }
 
+      .theme-hina .donation-btn {
+        background: rgba(167, 139, 250, 0.1);
+        color: #3b0764;
+        border-color: rgba(167, 139, 250, 0.3);
+      }
+
+      .theme-hina .donation-btn:hover {
+        background: rgba(167, 139, 250, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(167, 139, 250, 0.2);
+      }
+
       .donation-btn .heart {
         color: #ef4444;
         animation: heartbeat 1.5s ease-in-out infinite;
@@ -312,6 +330,10 @@
 
       .theme-plana .footer-bottom {
         border-top-color: rgba(192, 132, 252, 0.2);
+      }
+
+      .theme-hina .footer-bottom {
+        border-top-color: rgba(167, 139, 250, 0.2);
       }
 
       .sr-only {
@@ -366,6 +388,10 @@
         .theme-plana .glass {
           border-color: #4a044e;
         }
+
+        .theme-hina .glass {
+          border-color: #3b0764;
+        }
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -408,6 +434,17 @@
         backdrop-filter: blur(12px);
         border: 1px solid rgba(56, 189, 248, 0.3);
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        color: #0c4a6e;
+      }
+
+      .theme-arona .glass p,
+      .theme-arona .glass span,
+      .theme-arona .glass h1,
+      .theme-arona .glass h2,
+      .theme-arona .glass h3,
+      .theme-arona .glass h4,
+      .theme-arona .glass div:not(.text-gray-400):not(.text-gray-500):not(.text-gray-600) {
+        color: #0c4a6e;
       }
 
       .theme-arona .glow-box {
@@ -428,7 +465,7 @@
       }
 
       .theme-arona .text-primary {
-        color: #38bdf8;
+        color: #38bdf8 !important;
       }
 
       .theme-arona .bg-primary {
@@ -453,7 +490,7 @@
       }
 
       .theme-plana {
-        background: linear-gradient(135deg, #fff5f5 0%, #fef7ff 50%, #faf0ff 100%);
+        background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #ede9fe 100%);
         color: #4a044e;
       }
 
@@ -462,6 +499,17 @@
         backdrop-filter: blur(12px);
         border: 1px solid rgba(192, 132, 252, 0.3);
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        color: #4a044e;
+      }
+
+      .theme-plana .glass p,
+      .theme-plana .glass span,
+      .theme-plana .glass h1,
+      .theme-plana .glass h2,
+      .theme-plana .glass h3,
+      .theme-plana .glass h4,
+      .theme-plana .glass div:not(.text-gray-400):not(.text-gray-500):not(.text-gray-600) {
+        color: #4a044e;
       }
 
       .theme-plana .glow-box {
@@ -482,7 +530,7 @@
       }
 
       .theme-plana .text-primary {
-        color: #c084fc;
+        color: #c084fc !important;
       }
 
       .theme-plana .bg-primary {
@@ -506,9 +554,74 @@
           );
       }
 
+      .theme-hina {
+        background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 50%, #e0e7ff 100%);
+        color: #3b0764;
+      }
+
+      .theme-hina .glass {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(167, 139, 250, 0.3);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        color: #3b0764;
+      }
+
+      .theme-hina .glass p,
+      .theme-hina .glass span,
+      .theme-hina .glass h1,
+      .theme-hina .glass h2,
+      .theme-hina .glass h3,
+      .theme-hina .glass h4,
+      .theme-hina .glass div:not(.text-gray-400):not(.text-gray-500):not(.text-gray-600) {
+        color: #3b0764;
+      }
+
+      .theme-hina .glow-box {
+        box-shadow: 0 0 25px rgba(167, 139, 250, 0.3),
+          inset 0 0 15px rgba(167, 139, 250, 0.1);
+      }
+
+      .theme-hina .character-glow {
+        background: radial-gradient(circle, rgba(167, 139, 250, 0.3) 0%, transparent 70%);
+      }
+
+      .theme-hina .progress-fill {
+        background: linear-gradient(90deg, #a78bfa, #7c3aed);
+      }
+
+      .theme-hina .visualizer-bar {
+        background-color: #a78bfa;
+      }
+
+      .theme-hina .text-primary {
+        color: #a78bfa !important;
+      }
+
+      .theme-hina .bg-primary {
+        background-color: #a78bfa;
+      }
+
+      .theme-hina .bg-primary-opacity {
+        background-color: rgba(167, 139, 250, 0.2);
+      }
+
+      .theme-hina .bg-pattern {
+        background-image: radial-gradient(
+            circle at 20% 30%,
+            rgba(167, 139, 250, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 70%,
+            rgba(167, 139, 250, 0.1) 0%,
+            transparent 50%
+          );
+      }
+
       .theme-arona .timer-controls button {
-        color: #475569 !important;
-        font-weight: 500;
+        color: #0c4a6e !important;
+        font-weight: 600;
         transition: all 0.3s ease;
       }
 
@@ -518,12 +631,12 @@
       }
 
       .theme-arona .timer-controls button:hover {
-        color: #334155 !important;
+        color: #0369a1 !important;
       }
 
       .theme-plana .timer-controls button {
-        color: #6b7280 !important;
-        font-weight: 500;
+        color: #4a044e !important;
+        font-weight: 600;
         transition: all 0.3s ease;
       }
 
@@ -533,27 +646,55 @@
       }
 
       .theme-plana .timer-controls button:hover {
-        color: #4b5563 !important;
+        color: #6b21a8 !important;
+      }
+
+      .theme-hina .timer-controls button {
+        color: #3b0764 !important;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .theme-hina .timer-controls button.bg-primary {
+        color: white !important;
+        font-weight: 600;
+      }
+
+      .theme-hina .timer-controls button:hover {
+        color: #5b21b6 !important;
       }
 
       .theme-arona #reset-timer {
-        color: #64748b !important;
-        background-color: #e2e8f0 !important;
+        color: #0c4a6e !important;
+        background-color: rgba(56, 189, 248, 0.15) !important;
+        border: 1px solid rgba(56, 189, 248, 0.3) !important;
       }
 
       .theme-arona #reset-timer:hover {
-        color: #475569 !important;
-        background-color: #cbd5e1 !important;
+        color: #0369a1 !important;
+        background-color: rgba(56, 189, 248, 0.25) !important;
       }
 
       .theme-plana #reset-timer {
-        color: #9ca3af !important;
-        background-color: #f3f4f6 !important;
+        color: #4a044e !important;
+        background-color: rgba(192, 132, 252, 0.15) !important;
+        border: 1px solid rgba(192, 132, 252, 0.3) !important;
       }
 
       .theme-plana #reset-timer:hover {
-        color: #6b7280 !important;
-        background-color: #e5e7eb !important;
+        color: #6b21a8 !important;
+        background-color: rgba(192, 132, 252, 0.25) !important;
+      }
+
+      .theme-hina #reset-timer {
+        color: #3b0764 !important;
+        background-color: rgba(167, 139, 250, 0.15) !important;
+        border: 1px solid rgba(167, 139, 250, 0.3) !important;
+      }
+
+      .theme-hina #reset-timer:hover {
+        color: #5b21b6 !important;
+        background-color: rgba(167, 139, 250, 0.25) !important;
       }
 
       .theme-arona .playlist-container .text-sm {
@@ -572,6 +713,16 @@
       }
 
       .theme-plana .playlist-container .text-xs.text-gray-400 {
+        color: #6b7280 !important;
+        font-weight: 500;
+      }
+
+      .theme-hina .playlist-container .text-sm {
+        color: #3b0764 !important;
+        font-weight: 600;
+      }
+
+      .theme-hina .playlist-container .text-xs.text-gray-400 {
         color: #6b7280 !important;
         font-weight: 500;
       }
@@ -624,6 +775,30 @@
         font-weight: 700;
       }
 
+      .theme-hina .analytics-content {
+        color: #3b0764;
+      }
+
+      .theme-hina .analytics-content .text-gray-600 {
+        color: #6b7280 !important;
+        font-weight: 500;
+      }
+
+      .theme-hina .analytics-content .bg-primary-opacity {
+        background: rgba(167, 139, 250, 0.15);
+        border: 1px solid rgba(167, 139, 250, 0.2);
+      }
+
+      .theme-hina #weekly-stats span {
+        color: #3b0764;
+        font-weight: 600;
+      }
+
+      .theme-hina #weekly-stats span.font-semibold {
+        color: #7c3aed;
+        font-weight: 700;
+      }
+
       .theme-arona .analytics-content .progress-bar {
         background: rgba(12, 74, 110, 0.25);
         height: 8px;
@@ -634,12 +809,21 @@
         height: 8px;
       }
 
+      .theme-hina .analytics-content .progress-bar {
+        background: rgba(59, 7, 100, 0.25);
+        height: 8px;
+      }
+
       .theme-arona .glass {
         color: #0c4a6e;
       }
 
       .theme-plana .glass {
         color: #4a044e;
+      }
+
+      .theme-hina .glass {
+        color: #3b0764;
       }
 
       .theme-arona #progress-title {
@@ -652,12 +836,22 @@
         font-weight: 700;
       }
 
+      .theme-hina #progress-title {
+        color: #3b0764;
+        font-weight: 700;
+      }
+
       .theme-arona #analytics-btn {
         color: #0369a1;
         font-weight: 600;
       }
 
       .theme-plana #analytics-btn {
+        color: #7c3aed;
+        font-weight: 600;
+      }
+
+      .theme-hina #analytics-btn {
         color: #7c3aed;
         font-weight: 600;
       }
@@ -678,6 +872,16 @@
       }
 
       .theme-plana #current-artist {
+        color: #6b7280 !important;
+        font-weight: 500;
+      }
+
+      .theme-hina #current-track-display {
+        color: #3b0764 !important;
+        font-weight: 600;
+      }
+
+      .theme-hina #current-artist {
         color: #6b7280 !important;
         font-weight: 500;
       }
@@ -743,6 +947,10 @@
         background: rgba(74, 4, 78, 0.15);
       }
 
+      .theme-hina .progress-bar {
+        background: rgba(59, 7, 100, 0.15);
+      }
+
       .progress-fill {
         height: 100%;
         border-radius: 3px;
@@ -774,11 +982,19 @@
         color: #6b7280;
       }
 
+      .theme-hina .text-gray-300 {
+        color: #6b7280;
+      }
+
       .text-gray-400 {
         color: #94a3b8;
       }
 
       .theme-plana .text-gray-400 {
+        color: #9ca3af;
+      }
+
+      .theme-hina .text-gray-400 {
         color: #9ca3af;
       }
 
@@ -817,6 +1033,10 @@
 
       .theme-plana .particle {
         background: #c084fc;
+      }
+
+      .theme-hina .particle {
+        background: #a78bfa;
       }
 
       @keyframes particle-float {
@@ -996,7 +1216,11 @@
       }
 
       .theme-plana #splash-screen {
-        background: linear-gradient(135deg, #fff5f5 0%, #fef7ff 50%, #faf0ff 100%);
+        background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #ede9fe 100%);
+      }
+
+      .theme-hina #splash-screen {
+        background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 50%, #e0e7ff 100%);
       }
 
       .splash-logo {
@@ -1020,6 +1244,13 @@
         background-clip: text;
       }
 
+      .theme-hina .splash-logo {
+        background: linear-gradient(135deg, #a78bfa, #7c3aed);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
       .splash-loader {
         width: 50px;
         height: 50px;
@@ -1035,6 +1266,11 @@
       .theme-plana .splash-loader {
         border: 3px solid rgba(192, 132, 252, 0.3);
         border-top: 3px solid #c084fc;
+      }
+
+      .theme-hina .splash-loader {
+        border: 3px solid rgba(167, 139, 250, 0.3);
+        border-top: 3px solid #a78bfa;
       }
 
       @keyframes spin {
@@ -1072,7 +1308,11 @@
       }
 
       .theme-plana .background-overlay {
-        background: linear-gradient(135deg, #fff5f5 0%, #fef7ff 50%, #faf0ff 100%);
+        background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #ede9fe 100%);
+      }
+
+      .theme-hina .background-overlay {
+        background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 50%, #e0e7ff 100%);
       }
 
       .notification {
@@ -1099,6 +1339,11 @@
         border: 1px solid rgba(192, 132, 252, 0.3);
       }
 
+      .theme-hina .notification {
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid rgba(167, 139, 250, 0.3);
+      }
+
       .notification.show {
         transform: translateX(0);
       }
@@ -1117,6 +1362,10 @@
 
       .theme-plana .notification.info {
         border-left-color: #c084fc;
+      }
+
+      .theme-hina .notification.info {
+        border-left-color: #a78bfa;
       }
 
       .session-circle {
@@ -1142,11 +1391,19 @@
         background-color: #c084fc;
       }
 
+      .theme-hina .session-current {
+        background-color: #a78bfa;
+      }
+
       .session-pending {
         background-color: #e5e7eb;
       }
 
       .theme-plana .session-pending {
+        background-color: #e5e7eb;
+      }
+
+      .theme-hina .session-pending {
         background-color: #e5e7eb;
       }
 
@@ -1168,6 +1425,12 @@
         background: rgba(192, 132, 252, 0.2);
         border: 1px solid rgba(192, 132, 252, 0.3);
         color: #7c3aed;
+      }
+
+      .theme-hina .session-counter {
+        background: rgba(167, 139, 250, 0.2);
+        border: 1px solid rgba(167, 139, 250, 0.3);
+        color: #3b0764;
       }
 
       .playlist-number {
@@ -1196,12 +1459,21 @@
         color: #7c3aed;
       }
 
+      .theme-hina .playlist-active {
+        background: rgba(167, 139, 250, 0.2);
+        color: #3b0764;
+      }
+
       .playlist-inactive {
         background: rgba(156, 163, 175, 0.1);
         color: #64748b;
       }
 
       .theme-plana .playlist-inactive {
+        color: #6b7280;
+      }
+
+      .theme-hina .playlist-inactive {
         color: #6b7280;
       }
 
@@ -1260,6 +1532,13 @@
         border: 1px solid rgba(192, 132, 252, 0.3);
         box-shadow: 0 0 25px rgba(192, 132, 252, 0.3),
           inset 0 0 15px rgba(192, 132, 252, 0.1);
+      }
+
+      .theme-hina .theme-toggle-btn {
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(167, 139, 250, 0.3);
+        box-shadow: 0 0 25px rgba(167, 139, 250, 0.3),
+          inset 0 0 15px rgba(167, 139, 250, 0.1);
       }
 
       .theme-toggle-btn:hover {
@@ -1357,6 +1636,12 @@
         border: 1px solid rgba(192, 132, 252, 0.3);
       }
 
+      .theme-hina .share-btn {
+        background: rgba(167, 139, 250, 0.1);
+        color: #3b0764;
+        border: 1px solid rgba(167, 139, 250, 0.3);
+      }
+
       .share-btn-cancel {
         background: #f1f5f9 !important;
         color: #64748b !important;
@@ -1387,6 +1672,12 @@
         border: 1px solid rgba(251, 191, 36, 0.4);
       }
 
+      .theme-hina .streak-badge {
+        background: rgba(251, 191, 36, 0.2);
+        color: #92400e;
+        border: 1px solid rgba(251, 191, 36, 0.4);
+      }
+
       .todo-item {
         display: flex;
         align-items: center;
@@ -1405,6 +1696,11 @@
       .theme-plana .todo-item {
         background: rgba(192, 132, 252, 0.06);
         border: 1px solid rgba(192, 132, 252, 0.15);
+      }
+
+      .theme-hina .todo-item {
+        background: rgba(167, 139, 250, 0.06);
+        border: 1px solid rgba(167, 139, 250, 0.15);
       }
 
       .todo-item.completed {
@@ -1436,6 +1732,10 @@
         border-color: #c084fc;
       }
 
+      .theme-hina .todo-checkbox {
+        border-color: #a78bfa;
+      }
+
       .todo-checkbox.checked {
         color: white;
       }
@@ -1448,6 +1748,11 @@
       .theme-plana .todo-checkbox.checked {
         background: #c084fc;
         border-color: #c084fc;
+      }
+
+      .theme-hina .todo-checkbox.checked {
+        background: #a78bfa;
+        border-color: #a78bfa;
       }
 
       .todo-text {
@@ -1495,6 +1800,11 @@
         color: #4a044e;
       }
 
+      .theme-hina .todo-input {
+        border-color: rgba(167, 139, 250, 0.3);
+        color: #3b0764;
+      }
+
       .todo-add-btn {
         padding: 0.5rem 0.75rem;
         border-radius: 8px;
@@ -1513,6 +1823,10 @@
 
       .theme-plana .todo-add-btn {
         background: #c084fc;
+      }
+
+      .theme-hina .todo-add-btn {
+        background: #a78bfa;
       }
 
       .todo-add-btn:hover {
@@ -1556,6 +1870,12 @@
         color: #4a044e;
       }
 
+      .theme-hina .mood-btn:hover, .theme-hina .mood-btn.selected {
+        background: rgba(167, 139, 250, 0.1);
+        border-color: #a78bfa;
+        color: #3b0764;
+      }
+
       .mood-emoji {
         font-size: 2rem;
       }
@@ -1591,6 +1911,15 @@
         border-color: #c084fc;
       }
 
+      .theme-hina .reflection-textarea {
+        border-color: rgba(167, 139, 250, 0.3);
+        color: #3b0764;
+      }
+
+      .theme-hina .reflection-textarea:focus {
+        border-color: #a78bfa;
+      }
+
       .reflection-entry {
         padding: 0.75rem;
         border-radius: 10px;
@@ -1605,6 +1934,11 @@
       .theme-plana .reflection-entry {
         background: rgba(192, 132, 252, 0.06);
         border-left: 3px solid #c084fc;
+      }
+
+      .theme-hina .reflection-entry {
+        background: rgba(167, 139, 250, 0.06);
+        border-left: 3px solid #a78bfa;
       }
 
       .confetti {
@@ -1675,6 +2009,10 @@
 
       .theme-plana .daily-progress-fill {
         background: linear-gradient(90deg, #c084fc, #a855f7);
+      }
+
+      .theme-hina .daily-progress-fill {
+        background: linear-gradient(90deg, #a78bfa, #7c3aed);
       }
 
       /* PERBAIKAN UTAMA UNTUK MOBILE */
@@ -1834,6 +2172,11 @@
         .theme-plana #todo-btn {
           background: rgba(192, 132, 252, 0.15);
           border-color: rgba(192, 132, 252, 0.3);
+        }
+
+        .theme-hina #todo-btn {
+          background: rgba(167, 139, 250, 0.15);
+          border-color: rgba(167, 139, 250, 0.3);
         }
 
         /* Container streak dan session */
@@ -2020,6 +2363,19 @@
         }
       }
 
+      .theme-hina .timer-controls button[data-time].bg-primary {
+        animation: pulse-glow-hina 2s infinite;
+      }
+
+      @keyframes pulse-glow-hina {
+        0%, 100% {
+          box-shadow: 0 4px 12px rgba(167, 139, 250, 0.3);
+        }
+        50% {
+          box-shadow: 0 6px 16px rgba(167, 139, 250, 0.5);
+        }
+      }
+
       button, 
       [role="button"],
       .achievement-badge {
@@ -2044,6 +2400,11 @@
           background: linear-gradient(135deg, #4a044e 0%, #6b21a8 50%, #7e22ce 100%);
           color: #faf5ff;
         }
+
+        .theme-hina {
+          background: linear-gradient(135deg, #3b0764 0%, #5b21b6 50%, #6d28d9 100%);
+          color: #f5f3ff;
+        }
       }
     </style>
   </head>
@@ -2059,7 +2420,7 @@
       <button
         id="theme-toggle-btn"
         class="theme-toggle-btn"
-        aria-label="Switch theme between Arona and Plana"
+        aria-label="Switch theme between Arona, Plana, and Hina"
         aria-live="polite"
       >
         <svg
@@ -2088,6 +2449,20 @@
             stroke-linejoin="round"
             stroke-width="2"
             d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+          />
+        </svg>
+        <svg
+          id="hina-icon"
+          class="w-6 h-6 text-violet-500 hidden"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
           />
         </svg>
       </button>
@@ -2458,7 +2833,7 @@
                   class="text-xs text-gray-500"
                   id="achievement-progress"
                   aria-live="polite"
-                  >0/5</span
+                  >0/7</span
                 >
               </div>
               <div
@@ -3280,8 +3655,8 @@
         const badge = document.createElement("div");
         badge.className = `achievement-badge ${a.unlocked?"achievement-unlocked":"achievement-locked"} ${a.rarity==="rare"?"achievement-rare":"achievement-common"} ${a.unlocked?"achievement unlocked":"achievement locked"}`;
         if (a.unlocked) {
-          badge.style.setProperty("--primary-color", currentMode==="arona"?"#38bdf8":"#c084fc");
-          badge.style.setProperty("--secondary-color", currentMode==="arona"?"#0ea5e9":"#a855f7");
+          badge.style.setProperty("--primary-color", currentMode==="arona"?"#38bdf8": currentMode==="plana"?"#c084fc":"#a78bfa");
+          badge.style.setProperty("--secondary-color", currentMode==="arona"?"#0ea5e9": currentMode==="plana"?"#a855f7":"#7c3aed");
           badge.addEventListener("click", () => showShareModal(a.id));
         } else {
           badge.addEventListener("click", () => showNotification(a.name, `${a.description} — keep going!`, "info"));
@@ -3330,14 +3705,22 @@
         achievement: ["This achievement proves your growth, Sensei... ✨","Every accomplishment is a beautiful story in our journey... 📚","Sensei... continue walking with confidence... 🌙","Your efforts bear fruit... beautiful, isn't it? 💫"],
         break_time: ["Time to rest... the world can wait for a moment... ☁️","Rest is part of a wise journey... 🍵","Take a deep breath... let your mind rest for a while... 💮","Time to rest... even stars need to recharge... 🌙"],
       },
+      hina: {
+        greeting: ["Hina akan menemani Sensei belajar hari ini... 📚","Selamat datang Sensei... Hina sudah siap... 🌸","Hina... ikut belajar sama Sensei ya... 💜","Perpustakaannya sepi... cocok untuk fokus... 📖"],
+        outfit_change: ["Hina... punya beberapa outfit... tapi agak malu... 😳","Apakah ini cocok untuk Sensei? Hina... tidak yakin... 💜","Hina akan pakai ini... khusus untuk Sensei... 💕","Outfit ini... Hina suka... tapi agak malu-malu... 🌸"],
+        session_start: ["Focus session dimulai... Hina akan menjaga konsentrasi Sensei... 👀","Ayo mulai... Hina akan di sini saja... 💜","Waktunya fokus... Hina percaya Sensei bisa... ✨","Hina akan bantu Sensei fokus hari ini... 📝"],
+        session_complete: ["Selamat, Sensei... Hina ikut senang... 🌸","Session selesai... Sensei hebat! 💜","Hina bangga dengan Sensei... terus semangat... 🌟","Kerja bagus, Sensei... Hina akan selalu mendukung... 💕"],
+        achievement: ["Wah... Sensei hebat sekali... Hina ikut bahagia... 🏆","Achievement baru! Sensei memang luar biasa... 💜","Hina senang melihat Sensei berkembang... 🌸","Sensei... semakin hebat saja... Hina salut... ✨"],
+        break_time: ["Waktunya istirahat... Hina tunggu di sini ya... 💤","Break time... Sensei harus minum air putih dulu... 💧","Istirahat sebentar... jangan lupa rileks... ☕","Hina akan jaga meja Sensei selama istirahat... 📚"],
+      },
     };
 
     function triggerCharacterReaction(type) {
       const bubble = document.getElementById("character-bubble");
       if (!bubble) return;
       const quotes = characterInteractions[currentMode];
-      if (!quotes) return;
-      const messages = quotes[type] || quotes.greeting;
+      if (!quotes || !quotes[type]) return;
+      const messages = quotes[type];
       bubble.textContent = messages[Math.floor(Math.random() * messages.length)];
       bubble.classList.add("show");
       setTimeout(() => bubble.classList.remove("show"), 5000);
@@ -3373,7 +3756,9 @@
     }
 
     function createConfettiEffect() {
-      const colors = currentMode==="arona" ? ["#38bdf8","#0ea5e9","#7dd3fc","#bae6fd"] : ["#c084fc","#a855f7","#d8b4fe","#f3e8ff"];
+      const colors = currentMode==="arona" ? ["#38bdf8","#0ea5e9","#7dd3fc","#bae6fd"] : 
+                     currentMode==="plana" ? ["#c084fc","#a855f7","#d8b4fe","#f3e8ff"] : 
+                     ["#a78bfa","#7c3aed","#ddd6fe","#ede9fe"];
       for (let i = 0; i < 30; i++) { // Reduced from 50 to 30
         const c = document.createElement("div");
         c.className = "confetti";
@@ -3686,7 +4071,7 @@
       if (!timerDisplay) return;
       const m = Math.floor(timeLeft/60), s = timeLeft%60;
       timerDisplay.textContent = `${m.toString().padStart(2,"0")}:${s.toString().padStart(2,"0")}`;
-      document.title = `${m.toString().padStart(2,"0")}:${s.toString().padStart(2,"0")} - ${timerTitle?timerTitle.textContent:"Focus Session"} | ${currentMode==="arona"?"Arona":"Plana"}`;
+      document.title = `${m.toString().padStart(2,"0")}:${s.toString().padStart(2,"0")} - ${timerTitle?timerTitle.textContent:"Focus Session"} | ${currentMode==="arona"?"Arona": currentMode==="plana"?"Plana":"Hina"}`;
     }
 
     // ============================================================
@@ -3715,6 +4100,7 @@
     const outfits = {
       arona: ["assets/images/arona.png","assets/images/arona_yukata.jpg"],
       plana: ["assets/images/plana.png","assets/images/plana_swimsuitSummer.jpg","assets/images/plana_bunnyGirl.jpg","assets/images/plana_kimono.jpg"],
+      hina: ["assets/images/hina.jpg","assets/images/hina_swimsuit.jpg","assets/images/hina_bunny.jpg","assets/images/hina_yukata.jpg"],
     };
 
     const planaOutfitKeys = ["default","swimsuit","bunny","kimono"];
@@ -3724,22 +4110,41 @@
       bunny: ["S-sensei... jangan lihat... Plana salah ambil baju... 🐰💦","A-Arona yang suruh... Plana gak mau... tapi... 🙈","Telinganya... jangan dipegang... Kyaa! 🐰💕","Plana... jadi kelinci... mau Sensei elus? ... Eh?! 😳"],
       swimsuit: ["I-ini cuma untuk berenang... jangan salah sangka... 🏊‍♀️","Sensei kenapa lihat terus? Plana... Plana... 🫣","Airnya dingin... tapi Sensei lihat... jadi panas... 💦","Jangan foto! ... Eh, Sensei? ... Boleh dikit... 📸"],
     };
+    
+    const hinaOutfitKeys = ["default","swimsuit","bunny","yukata"];
+    const hinaOutfitMessages = {
+      default: ["Hina... pakai seragam biasa saja... 📖","Ini pakaian Hina sehari-hari... cocok untuk belajar... 📚","Hina suka pakai ini... nyaman dan tidak ribet... 🌸"],
+      swimsuit: ["S-sensei... jangan lihat terlalu lama... Hina malu... 🏊‍♀️","Hina cuma mau berenang... tapi Sensei malah lihat terus... 😳","Airnya sejuk... tapi Sensei lihat Hina jadi panas... 🫣"],
+      bunny: ["K-Kenapa Hina harus pakai ini?! Sensei jahat... 🐰💦","Hina... jadi kelinci... apakah Sensei suka? 🙈","Tolong jangan lihat Hina terus... malu... 🐰"],
+      yukata: ["Hina... pakai yukata untuk festival... apakah cocok? 🎆","Sensei mau ikut festival dengan Hina? Hina... senang... 🌸","Yukata ini... Hina suka warnanya... 💜"],
+    };
+
     const aronaOutfitMessages = ["Ehehe~ Outfit baru! Arona suka! 👗","Kamu suka outfit Arona yang ini, Sensei? 😊","Arona jadi lebih semangat belajar dengan outfit baru! ✨","Cute? Arona selalu cute! Tapi makasih Sensei! 💕","Outfit baru! Arona makin cantik kan? 🌟"];
 
     function changeOutfit(direction) {
       const bubble = document.getElementById("character-bubble");
       if (!bubble) return;
       if (outfits[currentMode].length <= 1) {
-        bubble.textContent = currentMode === "arona" ? "Ini satu-satunya outfit Arona saat ini! 🎀" : planaOutfitMessages.default[0];
+        if (currentMode === "arona") {
+          bubble.textContent = "Ini satu-satunya outfit Arona saat ini! 🎀";
+        } else if (currentMode === "plana") {
+          bubble.textContent = planaOutfitMessages.default[0];
+        } else if (currentMode === "hina") {
+          bubble.textContent = hinaOutfitMessages.default[0];
+        }
         bubble.classList.add("show"); setTimeout(() => bubble.classList.remove("show"), 3000); return;
       }
       currentOutfit = (currentOutfit + direction + outfits[currentMode].length) % outfits[currentMode].length;
       if (characterImg) { characterImg.src = outfits[currentMode][currentOutfit]; safeSave(`${currentMode}Outfit`, currentOutfit); }
       if (currentMode === "arona") {
         bubble.textContent = aronaOutfitMessages[Math.floor(Math.random() * aronaOutfitMessages.length)];
-      } else {
+      } else if (currentMode === "plana") {
         const key = planaOutfitKeys[currentOutfit] || "default";
         const msgs = planaOutfitMessages[key];
+        bubble.textContent = msgs[Math.floor(Math.random() * msgs.length)];
+      } else if (currentMode === "hina") {
+        const key = hinaOutfitKeys[currentOutfit] || "default";
+        const msgs = hinaOutfitMessages[key];
         bubble.textContent = msgs[Math.floor(Math.random() * msgs.length)];
       }
       bubble.classList.add("show"); setTimeout(() => bubble.classList.remove("show"), 3000);
@@ -3801,6 +4206,7 @@
     const themeToggleBtn = document.getElementById("theme-toggle-btn");
     const sunIcon = document.getElementById("sun-icon");
     const moonIcon = document.getElementById("moon-icon");
+    const hinaIcon = document.getElementById("hina-icon");
     const body = document.body;
     const splashLogo = document.getElementById("splash-logo");
     const appTitle = document.getElementById("app-title");
@@ -3825,7 +4231,9 @@
       body.className = "theme-arona bg-pattern";
       if (splashScreen) splashScreen.className = "theme-arona";
       if (splashLogo) { splashLogo.textContent = "Arona Blue Archive"; splashLogo.className = "splash-logo theme-arona"; }
-      if (sunIcon) sunIcon.classList.remove("hidden"); if (moonIcon) moonIcon.classList.add("hidden");
+      if (sunIcon) sunIcon.classList.remove("hidden"); 
+      if (moonIcon) moonIcon.classList.add("hidden");
+      if (hinaIcon) hinaIcon.classList.add("hidden");
       if (img) img.src = "assets/images/arona.png";
       if (appTitle) appTitle.textContent = "Arona Study Companion";
       currentMode = "arona";
@@ -3836,27 +4244,54 @@
       body.className = "theme-plana bg-pattern";
       if (splashScreen) splashScreen.className = "theme-plana";
       if (splashLogo) { splashLogo.textContent = "Plana Blue Archive"; splashLogo.className = "splash-logo theme-plana"; }
-      if (sunIcon) sunIcon.classList.add("hidden"); if (moonIcon) moonIcon.classList.remove("hidden");
+      if (sunIcon) sunIcon.classList.add("hidden"); 
+      if (moonIcon) moonIcon.classList.remove("hidden");
+      if (hinaIcon) hinaIcon.classList.add("hidden");
       if (img) img.src = "assets/images/plana.png";
       if (appTitle) appTitle.textContent = "Plana Study Companion";
       currentMode = "plana";
+    }
+
+    function applyHinaThemeImmediately() {
+      const img = document.getElementById("character-image");
+      body.className = "theme-hina bg-pattern";
+      if (splashScreen) splashScreen.className = "theme-hina";
+      if (splashLogo) { splashLogo.textContent = "Hina Sorasaki"; splashLogo.className = "splash-logo theme-hina"; }
+      if (sunIcon) sunIcon.classList.add("hidden");
+      if (moonIcon) moonIcon.classList.add("hidden");
+      if (hinaIcon) hinaIcon.classList.remove("hidden");
+      if (img) img.src = "assets/images/hina.jpg";
+      if (appTitle) appTitle.textContent = "Hina Study Companion";
+      currentMode = "hina";
     }
 
     function switchTheme(toMode) {
       document.querySelectorAll(".fade-text").forEach(el => el.style.opacity = "0");
       setTimeout(() => {
         if (toMode === "arona") {
-          body.classList.remove("theme-plana"); body.classList.add("theme-arona");
-          if (sunIcon) sunIcon.classList.remove("hidden"); if (moonIcon) moonIcon.classList.add("hidden");
+          body.classList.remove("theme-plana", "theme-hina"); body.classList.add("theme-arona");
+          if (sunIcon) sunIcon.classList.remove("hidden"); 
+          if (moonIcon) moonIcon.classList.add("hidden");
+          if (hinaIcon) hinaIcon.classList.add("hidden");
           document.getElementById("character-image").src = "assets/images/arona.png";
           appTitle.textContent = "Arona Study Companion";
           currentMode = "arona";
-        } else {
-          body.classList.remove("theme-arona"); body.classList.add("theme-plana");
-          if (sunIcon) sunIcon.classList.add("hidden"); if (moonIcon) moonIcon.classList.remove("hidden");
+        } else if (toMode === "plana") {
+          body.classList.remove("theme-arona", "theme-hina"); body.classList.add("theme-plana");
+          if (sunIcon) sunIcon.classList.add("hidden"); 
+          if (moonIcon) moonIcon.classList.remove("hidden");
+          if (hinaIcon) hinaIcon.classList.add("hidden");
           document.getElementById("character-image").src = "assets/images/plana.png";
           appTitle.textContent = "Plana Study Companion";
           currentMode = "plana";
+        } else {
+          body.classList.remove("theme-arona", "theme-plana"); body.classList.add("theme-hina");
+          if (sunIcon) sunIcon.classList.add("hidden");
+          if (moonIcon) moonIcon.classList.add("hidden");
+          if (hinaIcon) hinaIcon.classList.remove("hidden");
+          document.getElementById("character-image").src = "assets/images/hina.jpg";
+          appTitle.textContent = "Hina Study Companion";
+          currentMode = "hina";
         }
         safeSave("studyCompanionMode", toMode);
         currentOutfit = 0;
@@ -3876,7 +4311,9 @@
 
     themeToggleBtn.addEventListener("click", () => {
       createParticleEffect(themeToggleBtn);
-      switchTheme(currentMode === "arona" ? "plana" : "arona");
+      if (currentMode === "arona") switchTheme("plana");
+      else if (currentMode === "plana") switchTheme("hina");
+      else switchTheme("arona");
     });
 
     // ============================================================
@@ -3911,10 +4348,10 @@
     if (charImageEl) {
       charImageEl.addEventListener("error", function() {
         const svgString = `<svg width="320" height="384" viewBox="0 0 320 384" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="320" height="384" rx="16" fill="${currentMode === "arona" ? "#38bdf8" : "#c084fc"}"/>
+          <rect width="320" height="384" rx="16" fill="${currentMode === "arona" ? "#38bdf8" : currentMode === "plana" ? "#c084fc" : "#a78bfa"}"/>
           <circle cx="160" cy="150" r="40" fill="white" fill-opacity="0.9"/>
           <text x="160" y="260" text-anchor="middle" fill="white" font-family="Arial" font-size="24">
-            ${currentMode === "arona" ? "Arona" : "Plana"}
+            ${currentMode === "arona" ? "Arona" : currentMode === "plana" ? "Plana" : "Hina"}
           </text>
         </svg>`;
         const encodedSvg = btoa(unescape(encodeURIComponent(svgString)));
@@ -3928,7 +4365,8 @@
     function initializeApp() {
       const savedMode = safeLoad("studyCompanionMode") || "arona";
       if (savedMode === "arona") applyAronaThemeImmediately();
-      else applyPlanaThemeImmediately();
+      else if (savedMode === "plana") applyPlanaThemeImmediately();
+      else applyHinaThemeImmediately();
 
       progress = loadProgress();
       loadAchievements();
