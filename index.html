@@ -136,16 +136,6 @@
         height: 24px;
       }
 
-      /* Skeleton loader khusus untuk outfit */
-      .outfit-skeleton {
-        width: 320px;
-        height: 384px;
-        border-radius: 16px;
-        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-        background-size: 200% 100%;
-        animation: loading 1.5s infinite;
-      }
-
       @keyframes loading {
         0% {
           background-position: 200% 0;
@@ -403,8 +393,7 @@
         }
 
         .skeleton,
-        .skeleton-circle,
-        .outfit-skeleton {
+        .skeleton-circle {
           animation: none;
         }
       }
@@ -2346,15 +2335,12 @@
                 id="character-bubble"
                 aria-live="polite"
               ></div>
-              <!-- Outfit skeleton loader akan muncul saat gambar loading -->
-              <div id="outfit-skeleton" class="outfit-skeleton hidden"></div>
               <img
                 src="assets/images/arona.png"
                 alt="Arona study companion character"
                 class="w-80 h-96 object-contain rounded-2xl"
                 id="character-image"
                 loading="eager"
-                style="transition: opacity 0.3s ease;"
               />
             </div>
           </div>
@@ -2819,16 +2805,6 @@
     function safeLoad(key, fallback = null) {
       try { const d = localStorage.getItem(key); return d ? JSON.parse(d) : fallback; }
       catch (e) { console.error("LocalStorage read error:", e); return fallback; }
-    }
-
-    // ============================================================
-    // PRELOAD IMAGES UNTUK OUTFIT
-    // ============================================================
-    function preloadOutfitImages() {
-      Object.values(outfits).flat().forEach(src => {
-        const img = new Image();
-        img.src = src;
-      });
     }
 
     // ============================================================
@@ -3731,7 +3707,6 @@
     // ============================================================
     const characterImg = document.getElementById("character-image");
     const charContainer = document.getElementById("character-container");
-    const outfitSkeleton = document.getElementById("outfit-skeleton");
     let isDragging = false;
     let startX = 0;
     let currentOutfit = 0;
@@ -3742,9 +3717,6 @@
       plana: ["assets/images/plana.png","assets/images/plana_swimsuitSummer.jpg","assets/images/plana_bunnyGirl.jpg","assets/images/plana_kimono.jpg"],
     };
 
-    // Preload semua outfit images
-    preloadOutfitImages();
-
     const planaOutfitKeys = ["default","swimsuit","bunny","kimono"];
     const planaOutfitMessages = {
       default: ["Plana... hanya punya ini... maaf Sensei... 📖","Seragam biasa ini... cukup untuk belajar... 📚","Plana merasa nyaman dengan ini... Sensei juga? 🌙"],
@@ -3754,7 +3726,6 @@
     };
     const aronaOutfitMessages = ["Ehehe~ Outfit baru! Arona suka! 👗","Kamu suka outfit Arona yang ini, Sensei? 😊","Arona jadi lebih semangat belajar dengan outfit baru! ✨","Cute? Arona selalu cute! Tapi makasih Sensei! 💕","Outfit baru! Arona makin cantik kan? 🌟"];
 
-    // Transition smoother untuk ganti outfit
     function changeOutfit(direction) {
       const bubble = document.getElementById("character-bubble");
       if (!bubble) return;
@@ -3763,23 +3734,7 @@
         bubble.classList.add("show"); setTimeout(() => bubble.classList.remove("show"), 3000); return;
       }
       currentOutfit = (currentOutfit + direction + outfits[currentMode].length) % outfits[currentMode].length;
-      
-      // Smooth transition effect
-      if (characterImg) {
-        characterImg.style.opacity = "0.5";
-        outfitSkeleton.classList.remove("hidden");
-        
-        // Set new src
-        characterImg.src = outfits[currentMode][currentOutfit];
-        safeSave(`${currentMode}Outfit`, currentOutfit);
-        
-        // Fade in when loaded
-        characterImg.onload = () => {
-          characterImg.style.opacity = "1";
-          outfitSkeleton.classList.add("hidden");
-        };
-      }
-      
+      if (characterImg) { characterImg.src = outfits[currentMode][currentOutfit]; safeSave(`${currentMode}Outfit`, currentOutfit); }
       if (currentMode === "arona") {
         bubble.textContent = aronaOutfitMessages[Math.floor(Math.random() * aronaOutfitMessages.length)];
       } else {
