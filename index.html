@@ -3706,12 +3706,71 @@
         break_time: ["Time to rest... the world can wait for a moment... ☁️","Rest is part of a wise journey... 🍵","Take a deep breath... let your mind rest for a while... 💮","Time to rest... even stars need to recharge... 🌙"],
       },
       hina: {
-        greeting: ["Hina akan menemani Sensei belajar hari ini... 📚","Selamat datang Sensei... Hina sudah siap... 🌸","Hina... ikut belajar sama Sensei ya... 💜","Perpustakaannya sepi... cocok untuk fokus... 📖"],
-        outfit_change: ["Hina... punya beberapa outfit... tapi agak malu... 😳","Apakah ini cocok untuk Sensei? Hina... tidak yakin... 💜","Hina akan pakai ini... khusus untuk Sensei... 💕","Outfit ini... Hina suka... tapi agak malu-malu... 🌸"],
-        session_start: ["Focus session dimulai... Hina akan menjaga konsentrasi Sensei... 👀","Ayo mulai... Hina akan di sini saja... 💜","Waktunya fokus... Hina percaya Sensei bisa... ✨","Hina akan bantu Sensei fokus hari ini... 📝"],
-        session_complete: ["Selamat, Sensei... Hina ikut senang... 🌸","Session selesai... Sensei hebat! 💜","Hina bangga dengan Sensei... terus semangat... 🌟","Kerja bagus, Sensei... Hina akan selalu mendukung... 💕"],
-        achievement: ["Wah... Sensei hebat sekali... Hina ikut bahagia... 🏆","Achievement baru! Sensei memang luar biasa... 💜","Hina senang melihat Sensei berkembang... 🌸","Sensei... semakin hebat saja... Hina salut... ✨"],
-        break_time: ["Waktunya istirahat... Hina tunggu di sini ya... 💤","Break time... Sensei harus minum air putih dulu... 💧","Istirahat sebentar... jangan lupa rileks... ☕","Hina akan jaga meja Sensei selama istirahat... 📚"],
+        greeting: [
+          "Hina akan menemani Sensei belajar hari ini... 📚",
+          "Selamat datang Sensei... Hina sudah siap... 🌸",
+          "Hina... ikut belajar sama Sensei ya... 💜",
+          "Perpustakaannya sepi... cocok untuk fokus... 📖",
+          // Untuk dress
+          "Hina pakai dress baru... khusus untuk Sensei... 👗",
+          "Dress ini... Hina pilih sendiri... apakah cocok? 🌸",
+          // Untuk maid
+          "Hina... akan melayani Sensei sebagai maid hari ini... 👗",
+          "Gokigenyou, Sensei~ Hina siap melayani... ✨"
+        ],
+        outfit_change: [
+          "Hina... ganti outfit dulu ya... jangan lihat dulu... 😳",
+          "Apakah ini cocok untuk Sensei? Hina... tidak yakin... 💜",
+          "Hina akan pakai ini... khusus untuk Sensei... 💕",
+          "Outfit ini... Hina suka... semoga Sensei juga suka... 🌸",
+          // Untuk dress
+          "Hina pakai dress baru... apakah Sensei suka? 👗",
+          "Dress ini... Hina beli khusus untuk hari ini... 💜",
+          // Untuk maid
+          "Hina... pakai outfit maid... apakah Sensei suka? 👗",
+          "Maid outfit ini... Hina pakai khusus untuk Sensei... 💕"
+        ],
+        session_start: [
+          "Focus session dimulai... Hina akan menjaga konsentrasi Sensei... 👀",
+          "Ayo mulai... Hina akan di sini saja... 💜",
+          "Waktunya fokus... Hina percaya Sensei bisa... ✨",
+          "Hina akan bantu Sensei fokus hari ini... 📝",
+          // Untuk dress
+          "Hina siap bantu Sensei fokus... pakai dress cantik ini... 👗",
+          "Dress ini... biar Hina makin semangat bantu Sensei... ✨",
+          // Untuk maid
+          "Hina siap bantu Sensei fokus belajar... sebagai maid... 🧹",
+          "Maid Hina... akan pastikan Sensei tetap konsentrasi... ✨"
+        ],
+        session_complete: [
+          "Selamat, Sensei... Hina ikut senang... 🌸",
+          "Session selesai... Sensei hebat! 💜",
+          "Hina bangga dengan Sensei... terus semangat... 🌟",
+          "Kerja bagus, Sensei... Hina akan selalu mendukung... 💕",
+          // Untuk dress
+          "Hina senang bisa menemani Sensei pakai dress ini... 👗",
+          "Dress ini... jadi saksi kebahagiaan Hina melihat Sensei sukses... ✨",
+          // Untuk maid
+          "Hina akan siapkan teh untuk Sensei setelah belajar... ☕",
+          "Session selesai... Hina bangga dengan Sensei... 💜"
+        ],
+        achievement: [
+          "Wah... Sensei hebat sekali... Hina ikut bahagia... 🏆",
+          "Achievement baru! Sensei memang luar biasa... 💜",
+          "Hina senang melihat Sensei berkembang... 🌸",
+          "Sensei... semakin hebat saja... Hina salut... ✨"
+        ],
+        break_time: [
+          "Waktunya istirahat... Hina tunggu di sini ya... 💤",
+          "Break time... Sensei harus minum air putih dulu... 💧",
+          "Istirahat sebentar... jangan lupa rileks... ☕",
+          "Hina akan jaga meja Sensei selama istirahat... 📚",
+          // Untuk dress
+          "Hina akan jaga dress ini tetap rapi sambil tunggu Sensei... 👗",
+          // Untuk maid
+          "Waktunya istirahat... Hina akan jaga meja Sensei... 💤",
+          "Break time... Hina siapkan teh untuk Sensei... ☕"
+        ],
       },
     };
 
@@ -4099,24 +4158,33 @@
 
     const outfits = {
       arona: ["assets/images/arona.png","assets/images/arona_yukata.jpg"],
-      plana: ["assets/images/plana.png","assets/images/plana_swimsuitSummer.jpg","assets/images/plana_bunnyGirl.jpg","assets/images/plana_kimono.jpg"],
-      hina: ["assets/images/hina.jpg","assets/images/hina_swimsuit.jpg","assets/images/hina_bunny.jpg","assets/images/hina_yukata.jpg"],
+      plana: ["assets/images/plana.png","assets/images/plana_bunnyGirl.jpg","assets/images/plana_kimono.jpg"], // SWIMSUIT DIHAPUS
+      hina: ["assets/images/hina_dress.jpg","assets/images/hina_maid.jpg"], // HINA: DRESS + MAID
     };
 
-    const planaOutfitKeys = ["default","swimsuit","bunny","kimono"];
+    const planaOutfitKeys = ["default","bunny","kimono"]; // SWIMSUIT DIHAPUS
     const planaOutfitMessages = {
       default: ["Plana... hanya punya ini... maaf Sensei... 📖","Seragam biasa ini... cukup untuk belajar... 📚","Plana merasa nyaman dengan ini... Sensei juga? 🌙"],
       kimono: ["Kimono... apakah cocok? Plana agak malu... 🌸","Sensei suka? Plana... senang... sedikit... ✨","Untuk acara spesial... Plana pakai ini... 🎋","Kimono ini... warisan dari Sensei... eh, bukan! 💕"],
       bunny: ["S-sensei... jangan lihat... Plana salah ambil baju... 🐰💦","A-Arona yang suruh... Plana gak mau... tapi... 🙈","Telinganya... jangan dipegang... Kyaa! 🐰💕","Plana... jadi kelinci... mau Sensei elus? ... Eh?! 😳"],
-      swimsuit: ["I-ini cuma untuk berenang... jangan salah sangka... 🏊‍♀️","Sensei kenapa lihat terus? Plana... Plana... 🫣","Airnya dingin... tapi Sensei lihat... jadi panas... 💦","Jangan foto! ... Eh, Sensei? ... Boleh dikit... 📸"],
     };
     
-    const hinaOutfitKeys = ["default","swimsuit","bunny","yukata"];
+    const hinaOutfitKeys = ["dress","maid"]; // HINA: DRESS + MAID
     const hinaOutfitMessages = {
-      default: ["Hina... pakai seragam biasa saja... 📖","Ini pakaian Hina sehari-hari... cocok untuk belajar... 📚","Hina suka pakai ini... nyaman dan tidak ribet... 🌸"],
-      swimsuit: ["S-sensei... jangan lihat terlalu lama... Hina malu... 🏊‍♀️","Hina cuma mau berenang... tapi Sensei malah lihat terus... 😳","Airnya sejuk... tapi Sensei lihat Hina jadi panas... 🫣"],
-      bunny: ["K-Kenapa Hina harus pakai ini?! Sensei jahat... 🐰💦","Hina... jadi kelinci... apakah Sensei suka? 🙈","Tolong jangan lihat Hina terus... malu... 🐰"],
-      yukata: ["Hina... pakai yukata untuk festival... apakah cocok? 🎆","Sensei mau ikut festival dengan Hina? Hina... senang... 🌸","Yukata ini... Hina suka warnanya... 💜"],
+      dress: [
+        "Hina... pakai dress cantik hari ini... apakah Sensei suka? 👗",
+        "Dress ini... Hina beli khusus untuk belajar dengan Sensei... 💜",
+        "Hina merasa lebih percaya diri dengan dress ini... 🌸",
+        "Sensei... Hina cantik pakai dress ini? ... Hina senang... ✨",
+        "Dress biru ini... warna favorit Hina... cocok untuk hari ini... 💙"
+      ],
+      maid: [
+        "Hina... akan melayani Sensei hari ini... sebagai maid... 👗",
+        "Selamat datang, Sensei... Hina siap membantu fokus belajar... 🧹",
+        "Hina... mau jadi maid spesial Sensei... hari ini... 💜",
+        "Ara ara~ Hina akan jaga Sensei selama belajar... ✨",
+        "Maid Hina... siap melayani Sensei dengan sepenuh hati... 💕"
+      ],
     };
 
     const aronaOutfitMessages = ["Ehehe~ Outfit baru! Arona suka! 👗","Kamu suka outfit Arona yang ini, Sensei? 😊","Arona jadi lebih semangat belajar dengan outfit baru! ✨","Cute? Arona selalu cute! Tapi makasih Sensei! 💕","Outfit baru! Arona makin cantik kan? 🌟"];
@@ -4256,12 +4324,12 @@
       const img = document.getElementById("character-image");
       body.className = "theme-hina bg-pattern";
       if (splashScreen) splashScreen.className = "theme-hina";
-      if (splashLogo) { splashLogo.textContent = "Hina Sorasaki"; splashLogo.className = "splash-logo theme-hina"; }
+      if (splashLogo) { splashLogo.textContent = "Hina Dress"; splashLogo.className = "splash-logo theme-hina"; }
       if (sunIcon) sunIcon.classList.add("hidden");
       if (moonIcon) moonIcon.classList.add("hidden");
       if (hinaIcon) hinaIcon.classList.remove("hidden");
-      if (img) img.src = "assets/images/hina.jpg";
-      if (appTitle) appTitle.textContent = "Hina Study Companion";
+      if (img) img.src = "assets/images/hina_dress.jpg"; // UBAH KE DRESS
+      if (appTitle) appTitle.textContent = "Hina Dress Companion";
       currentMode = "hina";
     }
 
@@ -4289,8 +4357,8 @@
           if (sunIcon) sunIcon.classList.add("hidden");
           if (moonIcon) moonIcon.classList.add("hidden");
           if (hinaIcon) hinaIcon.classList.remove("hidden");
-          document.getElementById("character-image").src = "assets/images/hina.jpg";
-          appTitle.textContent = "Hina Study Companion";
+          document.getElementById("character-image").src = "assets/images/hina_dress.jpg"; // UBAH KE DRESS
+          appTitle.textContent = "Hina Dress Companion";
           currentMode = "hina";
         }
         safeSave("studyCompanionMode", toMode);
