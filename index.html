@@ -3495,18 +3495,18 @@
 
     // Motivational messages berdasarkan streak
     function getStreakMessage(streak) {
-      if (streak === 0) return "Mulai streak hari ini! 🎯";
-      if (streak === 1) return "Hari pertama! Besok lanjut lagi! 🔥";
-      if (streak === 2) return "Day 2 - Mantap! Semangat! 💪";
-      if (streak === 3) return "3 hari berturut-turut! 🎉";
-      if (streak === 4) return "Day 4 - Kamu hebat! ✨";
-      if (streak === 5) return "5 hari! Almost a week! 🌟";
-      if (streak === 6) return "Besok streak 1 minggu! 🔥🔥";
-      if (streak === 7) return "🎊 SELAMAT! Streak 7 hari! 🎊";
-      if (streak < 14) return `${streak} days streak! Luar biasa! ⚡`;
-      if (streak < 21) return `${streak} days! Kamu mesin belajar! 🚀`;
-      if (streak < 30) return `${streak} days! Mendekati sebulan! 🌙`;
-      return `🏆 LEGEND! ${streak} hari berturut-turut! 🏆`;
+      if (streak === 0) return "Start your streak today! 🎯";
+      if (streak === 1) return "Day 1! Keep it going tomorrow! 🔥";
+      if (streak === 2) return "Day 2 — Nice! Keep the momentum! 💪";
+      if (streak === 3) return "3 days in a row! Amazing! 🎉";
+      if (streak === 4) return "Day 4 — You're doing great! ✨";
+      if (streak === 5) return "5 days! Almost a full week! 🌟";
+      if (streak === 6) return "One more day to a full week! 🔥🔥";
+      if (streak === 7) return "🎊 CONGRATS! 7-day streak! 🎊";
+      if (streak < 14) return `${streak} days streak! Incredible! ⚡`;
+      if (streak < 21) return `${streak} days! You're unstoppable! 🚀`;
+      if (streak < 30) return `${streak} days! Almost a month! 🌙`;
+      return `🏆 LEGEND! ${streak} days in a row! 🏆`;
     }
 
     // Streak Calendar dengan visual yang lebih menarik
@@ -3515,7 +3515,7 @@
         if (!calendarEl) return;
         
         const today = new Date();
-        const hariIndo = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
+        const hariIndo = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         let html = '';
         
         // Tampilkan 7 hari terakhir
@@ -3587,9 +3587,9 @@
         const goalEl = document.getElementById('next-streak-goal');
         if (goalEl) {
             if (remaining > 0) {
-                goalEl.innerHTML = `🎯 ${remaining} hari lagi menuju streak ${nextGoal} hari!`;
+                goalEl.innerHTML = `🎯 ${remaining} days left to reach a ${nextGoal}-day streak!`;
             } else {
-                goalEl.innerHTML = `✨ Selamat! Streak ${streak} hari! ✨`;
+                goalEl.innerHTML = `✨ Congratulations! ${streak}-day streak achieved! ✨`;
             }
         }
     }
