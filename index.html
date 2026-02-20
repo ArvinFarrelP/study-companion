@@ -4078,178 +4078,188 @@ function updateStreakDisplayEnhanced() {
       });
     }
 
-    // ============================================================
-    // CHARACTER INTERACTIONS
-    // ============================================================
-    const characterInteractions = {
-      arona: {
-        greeting: [
-          "Sensei! Arona has been waiting! Let's study together! 🌟",
-          "Welcome back, Sensei! Arona is ready to help you have a productive day! 💫",
-          "Ara~ Sensei is here! Are you ready to focus today? 📚",
-          "Pla-... eh, hello Sensei! Ready to focus? ✨"
-        ],
-        outfit_greeting: {
-          default: [
-            "Arona pakai seragam biasa hari ini... tetap semangat ya Sensei! 📚",
-            "Seragam Arona yang biasa... tapi semangatnya luar biasa! ✨",
-            "Arona siap belajar dengan Sensei hari ini! 💫"
-          ],
-          yukata: [
-            "Sensei lihat! Arona pakai yukata baru! Cantik tidak? 👘",
-            "Arona mau ikut festival dengan Sensei pakai yukata ini... 🎆",
-            "Yukata ini spesial... Arona pakai khusus untuk Sensei loh! 💕",
-            "Ehehe~ Arona jadi makin cantik pakai yukata ya Sensei? 🌸"
-          ]
-        },
-        outfit_change: [
-          "Ehehe~ Outfit baru! Arona suka! 👗",
-          "Kamu suka outfit Arona yang ini, Sensei? 😊",
-          "Arona jadi lebih semangat belajar dengan outfit baru! ✨",
-          "Cute? Arona selalu cute! Tapi makasih Sensei! 💕",
-          "Outfit baru! Arona makin cantik kan? 🌟"
-        ],
-        session_start: [
-          "Focus time! Let's do our best, Sensei! 💪",
-          "Arona will support you, Sensei! Don't give up! 🌸",
-          "Time to focus! Arona believes in you, Sensei! 🚀",
-          "Pomodoro session start! Ganbatte, Sensei! ✨"
-        ],
-        session_complete: [
-          "Yatta! Great work, Sensei! Arona is proud! 🎉",
-          "Session complete! You did amazing, Sensei! 💫",
-          "Arona will give you virtual pyroxenes for your hard work! 💎",
-          "Mission complete! Amazing work, Sensei! 🌟"
-        ],
-        achievement: [
-          "Wow! Achievement unlocked! You're amazing, Sensei! 🏆",
-          "Arona is happy to see you growing, Sensei! 💝",
-          "Incredible! This is definitely because of your hard work, Sensei! ✨",
-          "Congratulations, Sensei! You deserve this! 🎊"
-        ],
-        break_time: [
-          "Break time! Don't forget to drink water, Sensei! 💧",
-          "Short break~ Arona will wait here for you! ☕",
-          "Time to recharge your energy! Don't push yourself too hard! 🌸",
-          "Tea break! Arona will guard your progress! 🍵"
-        ],
-      },
-      plana: {
-        greeting: [
-          "Welcome, Sensei... Let's find peace in studying together 🌙",
-          "Hello Sensei... Is today filled with hope? 💭",
-          "Nice to meet you again, Sensei... 📖",
-          "The library is quiet today... perfect for focus... 📚"
-        ],
-        outfit_greeting: {
-          default: [
-            "Plana... pakai seragam biasa... seperti biasa saja... 📚",
-            "Hanya seragam ini yang Plana punya... maaf Sensei... 🌙",
-            "Plana merasa nyaman dengan seragam ini... Sensei juga? 💭"
-          ],
-          bunny: [
-            "S-sensei... jangan lihat... Plana salah ambil baju... 🐰💦",
-            "A-Arona yang suruh... Plana gak mau... tapi... 🙈",
-            "Telinganya... jangan dipegang... Kyaa! 🐰💕",
-            "Plana... jadi kelinci... mau Sensei elus? ... Eh?! 😳"
-          ],
-          kimono: [
-            "Kimono... apakah cocok? Plana agak malu... 🌸",
-            "Sensei suka? Plana... senang... sedikit... ✨",
-            "Untuk acara spesial... Plana pakai ini... 🎋",
-            "Kimono ini... warisan dari Sensei... eh, bukan! 💕"
-          ]
-        },
-        outfit_change: [
-          "Plana... in... ini... outfit spesial! 🌸✨",
-          "Hanya outfit ini yang Plana punya... apakah Sensei suka? 🙈",
-          "Plana pakai ini... khusus untuk Sensei... 💕",
-          "Bunnygirl Plana... satu-satunya outfit spesial! 🐰"
-        ],
-        session_start: [
-          "Every moment of focus is a step toward the future... ✨",
-          "Let's begin this small journey together... 🌸",
-          "Your concentration is a beautiful light, Sensei... 💫",
-          "Let's begin our journey of knowledge... 🌙"
-        ],
-        session_complete: [
-          "Small consistent steps lead to great achievements... 🌟",
-          "Sensei... your dedication is truly inspiring... 💝",
-          "Today's achievement is a seed for the future... 🌱",
-          "Another step forward in your journey... well done... ✨"
-        ],
-        achievement: [
-          "This achievement proves your growth, Sensei... ✨",
-          "Every accomplishment is a beautiful story in our journey... 📚",
-          "Sensei... continue walking with confidence... 🌙",
-          "Your efforts bear fruit... beautiful, isn't it? 💫"
-        ],
-        break_time: [
-          "Time to rest... the world can wait for a moment... ☁️",
-          "Rest is part of a wise journey... 🍵",
-          "Take a deep breath... let your mind rest for a while... 💮",
-          "Time to rest... even stars need to recharge... 🌙"
-        ],
-      },
-      hina: {
-        greeting: [
-          "Hina akan menemani Sensei belajar hari ini... 📚",
-          "Selamat datang Sensei... Hina sudah siap... 🌸",
-          "Hina... ikut belajar sama Sensei ya... 💜",
-          "Perpustakaannya sepi... cocok untuk fokus... 📖"
-        ],
-        outfit_greeting: {
-          dress: [
-            "Hina pakai dress baru... khusus untuk Sensei... 👗",
-            "Dress ini... Hina pilih sendiri... apakah cocok? 🌸",
-            "Hina merasa lebih cantik pakai dress ini... untuk Sensei... 💜",
-            "Dress biru ini... warna favorit Hina... semoga Sensei suka... ✨"
-          ],
-          maid: [
-            "Hina... akan melayani Sensei sebagai maid hari ini... 👗",
-            "Gokigenyou, Sensei~ Hina siap melayani... ✨",
-            "Hina... jadi maid spesial Sensei... hari ini... 💕",
-            "Maid Hina... akan jaga Sensei selama belajar... 🧹"
-          ]
-        },
-        outfit_change: [
-          "Hina... punya beberapa outfit... tapi agak malu... 😳",
-          "Apakah ini cocok untuk Sensei? Hina... tidak yakin... 💜",
-          "Hina akan pakai ini... khusus untuk Sensei... 💕",
-          "Outfit ini... Hina suka... tapi agak malu-malu... 🌸"
-        ],
-        session_start: [
-          "Focus session dimulai... Hina akan menjaga konsentrasi Sensei... 👀",
-          "Ayo mulai... Hina akan di sini saja... 💜",
-          "Waktunya fokus... Hina percaya Sensei bisa... ✨",
-          "Hina akan bantu Sensei fokus hari ini... 📝",
-          "Hina siap bantu Sensei fokus... pakai outfit ini... 👗",
-          "Hina akan jaga Sensei tetap fokus... dengan outfit spesial ini... ✨"
-        ],
-        session_complete: [
-          "Selamat, Sensei... Hina ikut senang... 🌸",
-          "Session selesai... Sensei hebat! 💜",
-          "Hina bangga dengan Sensei... terus semangat... 🌟",
-          "Kerja bagus, Sensei... Hina akan selalu mendukung... 💕",
-          "Hina senang bisa menemani Sensei pakai outfit ini... 👗",
-          "Outfit ini... jadi saksi kebahagiaan Hina melihat Sensei sukses... ✨"
-        ],
-        achievement: [
-          "Wah... Sensei hebat sekali... Hina ikut bahagia... 🏆",
-          "Achievement baru! Sensei memang luar biasa... 💜",
-          "Hina senang melihat Sensei berkembang... 🌸",
-          "Sensei... semakin hebat saja... Hina salut... ✨"
-        ],
-        break_time: [
-          "Waktunya istirahat... Hina tunggu di sini ya... 💤",
-          "Break time... Sensei harus minum air putih dulu... 💧",
-          "Istirahat sebentar... jangan lupa rileks... ☕",
-          "Hina akan jaga meja Sensei selama istirahat... 📚",
-          "Hina akan jaga outfit ini tetap rapi sambil tunggu Sensei... 👗",
-          "Break time... Hina siapkan teh untuk Sensei... ☕"
-        ],
-      },
-    };
+// ============================================================
+// CHARACTER INTERACTIONS
+// ============================================================
+const characterInteractions = {
+  arona: {
+    greeting: [
+      "Sensei! Arona has been waiting! Let's study together! 🌟",
+      "Welcome back, Sensei! Arona is ready to help you today! 💫",
+      "Ara~ Sensei is here! Ready to focus? 📚",
+      "Hehe~ Sensei! Let’s make today productive! ✨"
+    ],
+
+    outfit_greeting: {
+      default: [
+        "Arona is in her usual outfit today! Let’s do our best! 📚",
+        "Simple outfit, but full of energy! ✨",
+        "Arona is always ready to support you, Sensei! 💫"
+      ],
+      maid: [
+        "Ehehe~ Maid Arona reporting for duty! 👗",
+        "Gokigenyou, Sensei~ Arona will take care of everything! ✨",
+        "Arona is your special maid today! 💕",
+        "Maid Arona will help you stay focused! 🧹",
+        "Do you like this outfit, Sensei? Arona feels extra cute! 👗"
+      ]
+    },
+
+    outfit_change: [
+      "Ehehe~ A new outfit! Arona loves it! 👗",
+      "Do you like this one, Sensei? 😊",
+      "Arona feels extra motivated now! ✨",
+      "Cute? Arona is always cute! But thank you! 💕",
+      "New outfit! Arona looks even better now, right? 🌟"
+    ],
+
+    session_start: [
+      "Focus time! Let’s do our best, Sensei! 💪",
+      "Arona will support you! Don’t give up! 🌸",
+      "Time to focus! Arona believes in you! 🚀",
+      "Pomodoro session started! Ganbatte, Sensei! ✨"
+    ],
+
+    session_complete: [
+      "Yatta! Great work, Sensei! 🎉",
+      "Session complete! You did amazing! 💫",
+      "Arona will reward you with virtual pyroxenes! 💎",
+      "Mission complete! Amazing work! 🌟"
+    ],
+
+    achievement: [
+      "Wow! Achievement unlocked! You're amazing! 🏆",
+      "Arona is so happy to see your progress! 💝",
+      "Incredible! Your hard work paid off! ✨",
+      "Congratulations, Sensei! 🎊"
+    ],
+
+    break_time: [
+      "Break time! Don’t forget to drink water! 💧",
+      "Short break~ Arona will wait for you! ☕",
+      "Recharge your energy! 🌸",
+      "Tea break! Arona will guard your progress! 🍵"
+    ],
+  },
+
+  plana: {
+    greeting: [
+      "Welcome, Sensei... let us find peace in studying together... 🌙",
+      "Hello, Sensei... is today filled with hope? 💭",
+      "It's quiet today... perfect for focus... 📚",
+      "I’ve been waiting... let us begin... ✨"
+    ],
+
+    outfit_greeting: {
+      default: [
+        "This is all Plana has... but it is enough... 📖",
+        "A simple outfit... for a quiet journey... 📚",
+        "Plana feels at ease like this... do you feel the same? 🌙"
+      ],
+      maid: [
+        "Plana... will serve as your maid today... 👗",
+        "M-maid Plana... is this acceptable...? 🙈",
+        "Plana chose this... just for you... 💕",
+        "Plana will stay by your side... 🧹",
+        "This outfit... feels unfamiliar... but warm... 🌸"
+      ]
+    },
+
+    outfit_change: [
+      "This outfit... is different... 🌸",
+      "Plana hopes... you like it... 🙈",
+      "It was chosen... with care... 💕",
+      "If it pleases you... Plana is happy... 🌙"
+    ],
+
+    session_start: [
+      "Every moment of focus shapes your future... ✨",
+      "Let us begin this small journey... 🌸",
+      "Your concentration shines beautifully... 💫",
+      "Let us walk this path of knowledge... 🌙"
+    ],
+
+    session_complete: [
+      "Small steps... lead to great things... 🌟",
+      "Your dedication is inspiring... 💝",
+      "Today’s effort will bloom... 🌱",
+      "Another step forward... well done... ✨"
+    ],
+
+    achievement: [
+      "This reflects your growth... ✨",
+      "Every achievement tells a story... 📚",
+      "Walk forward with confidence... 🌙",
+      "Your efforts have blossomed... 💫"
+    ],
+
+    break_time: [
+      "Time to rest... the world can wait... ☁️",
+      "Rest is part of the journey... 🍵",
+      "Take a breath... let your mind be still... 💮",
+      "Even stars must rest... 🌙"
+    ],
+  },
+
+  hina: {
+    greeting: [
+      "Hina... will stay with you today... 📚",
+      "Welcome back, Sensei... Hina is ready... 🌸",
+      "Hina... wants to study together... 💜",
+      "It's quiet here... perfect for focusing... 📖"
+    ],
+
+    outfit_greeting: {
+      dress: [
+        "Hina... is wearing a dress today... just for you... 👗",
+        "This dress... Hina chose it carefully... 💜",
+        "It makes Hina feel... a little more confident... 🌸",
+        "Sensei... does it look nice?... Hina is a bit nervous... ✨"
+      ],
+      maid: [
+        "Hina... will serve you today... as your maid... 👗",
+        "M-maid Hina... will do her best... 🙈",
+        "Hina chose this... for you... 💕",
+        "Hina will stay by your side... 🧹"
+      ]
+    },
+
+    outfit_change: [
+      "Hina... will change outfits now... please don't look... 😳",
+      "Does this suit you...? Hina... isn't sure... 💜",
+      "Hina chose this... just for you... 💕",
+      "Hina likes it... but feels a little shy... 🌸"
+    ],
+
+    session_start: [
+      "Focus session started... Hina will stay with you... 👀",
+      "Let’s begin... Hina is right here... 💜",
+      "Time to focus... Hina believes in you... ✨",
+      "Hina will help you concentrate... 📝"
+    ],
+
+    session_complete: [
+      "Good job... Hina is happy... 🌸",
+      "Session complete... you did well... 💜",
+      "Hina is proud of you... 🌟",
+      "Well done... Hina will support you... 💕"
+    ],
+
+    achievement: [
+      "Sensei... is amazing... Hina feels happy... 🏆",
+      "A new achievement... incredible... 💜",
+      "Hina is glad to see your growth... 🌸",
+      "Sensei... is getting stronger... ✨"
+    ],
+
+    break_time: [
+      "Time to rest... Hina will wait here... 💤",
+      "Break time... don’t forget water... 💧",
+      "Take a short rest... relax... ☕",
+      "Hina will guard your desk... 📚"
+    ],
+  },
+};
 
     function triggerCharacterReaction(type) {
       const bubble = document.getElementById("character-bubble");
