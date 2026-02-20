@@ -1453,6 +1453,49 @@
         filter: drop-shadow(0 8px 20px rgba(0,0,0,0.15));
       }
 
+      /* Memastikan semua foto dalam bubble lingkaran sempurna */
+      #character-bubble img,
+      .character-bubble img,
+      .bubble-avatar {
+          width: 40px !important;
+          height: 40px !important;
+          border-radius: 50% !important;
+          object-fit: cover !important;      /* Memotong foto agar pas di lingkaran */
+          object-position: center !important; /* Fokus ke tengah gambar */
+          aspect-ratio: 1 / 1 !important;    /* Memaksa rasio 1:1 (lingkaran sempurna) */
+          border: 2px solid;
+          transition: all 0.3s ease;
+          background-color: #f0f0f0; /* Warna background sementara */
+      }
+
+      /* Efek saat gambar loading */
+      .bubble-avatar {
+          background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+          background-size: 200% 100%;
+          animation: loading 1.5s infinite;
+      }
+
+      @keyframes loading {
+          0% { background-position: 200% 0; }
+          100% { background-position: -200% 0; }
+      }
+
+      /* Hilangkan loading saat gambar sudah load */
+      .bubble-avatar:not([src=""]) {
+          animation: none;
+          background: none;
+      }
+
+      /* Untuk mobile */
+      @media (max-width: 768px) {
+          #character-bubble img,
+          .character-bubble img,
+          .bubble-avatar {
+              width: 32px !important;
+              height: 32px !important;
+          }
+      }
+
       #character-bubble.show {
         opacity: 1;
         transform: translateX(-50%) translateY(-5px);
@@ -1503,12 +1546,6 @@
         border-right: 12px solid transparent;
         border-top: 12px solid rgba(255, 255, 255, 0.95);
         filter: drop-shadow(0 4px 4px rgba(0,0,0,0.05));
-      }
-
-      /* Warna border foto mengikuti tema */
-      #character-bubble img {
-        border: 2px solid;
-        transition: border-color 0.3s ease;
       }
 
       /* Dark mode support - TETAP TERANG */
@@ -4265,11 +4302,15 @@ function updateStreakDisplayEnhanced() {
       else borderColor = "#a78bfa";
       
       // Buat bubble dengan foto
+      // Buat bubble dengan foto - SUDAH DIPERBAIKI
       bubble.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 8px; background: white; border-radius: 12px; padding: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-          <img src="${photoPath}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid ${borderColor};" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'%3E%3Ccircle cx=\'20\' cy=\'20\' r=\'20\' fill=\'%23${borderColor.replace('#', '')}\'/%3E%3Ctext x=\'20\' y=\'25\' text-anchor=\'middle\' fill=\'white\' font-size=\'12\'%3E${currentMode.charAt(0).toUpperCase()}%3C/text%3E%3C/svg%3E'">
-          <span style="font-size: 13px; color: #333; max-width: 150px;">${selectedMessage}</span>
-        </div>
+          <div style="display: flex; align-items: center; gap: 8px; background: white; border-radius: 16px; padding: 6px 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+              <img src="${photoPath}" 
+                  class="bubble-avatar" 
+                  style="border-color: ${borderColor};"
+                  onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'%3E%3Ccircle cx=\'20\' cy=\'20\' r=\'20\' fill=\'%23${borderColor.replace('#', '')}\'/%3E%3Ctext x=\'20\' y=\'25\' text-anchor=\'middle\' fill=\'white\' font-size=\'12\'%3E${currentMode.charAt(0).toUpperCase()}%3C/text%3E%3C/svg%3E'">
+              <span style="font-size: 13px; color: #333; font-weight: 500; max-width: 180px;">${selectedMessage}</span>
+          </div>
       `;
       
       bubble.classList.add("show");
@@ -4702,20 +4743,20 @@ function updateStreakDisplayEnhanced() {
     
     if (outfits[currentMode].length <= 1) {
       let selected;
-      if (currentMode === "arona") {
-        selected = { text: "Ini satu-satunya outfit Arona saat ini! 🎀", photo: "assets/images/arona.png" };
-      } else if (currentMode === "plana") {
-        selected = planaOutfitMessages.default[0];
-      } else if (currentMode === "hina") {
-        selected = hinaOutfitMessages.dress[0];
-      }
-      
-      bubble.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 8px; background: white; border-radius: 12px; padding: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-          <img src="${selected.photo}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid ${currentMode === 'arona' ? '#38bdf8' : currentMode === 'plana' ? '#c084fc' : '#a78bfa'};" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'%3E%3Ccircle cx=\'20\' cy=\'20\' r=\'20\' fill=\'%23${currentMode === 'arona' ? '38bdf8' : currentMode === 'plana' ? 'c084fc' : 'a78bfa'}\'/%3E%3Ctext x=\'20\' y=\'25\' text-anchor=\'middle\' fill=\'white\' font-size=\'12\'%3E${currentMode.charAt(0).toUpperCase()}%3C/text%3E%3C/svg%3E'">
-          <span style="font-size: 13px; color: #333;">${selected.text}</span>
-        </div>
-      `;
+    if (currentMode === "arona") {
+        const outfitKey = aronaOutfitKeys[currentOutfit] || "default";
+        const messages = aronaOutfitMessages[outfitKey];
+        const selected = messages[Math.floor(Math.random() * messages.length)];
+        const photoPath = outfits.arona[currentOutfit] || "assets/images/arona.png";
+        
+        // 🟢 GANTI DENGAN INI (style baru)
+        bubble.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 8px; background: white; border-radius: 16px; padding: 6px 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                <img src="${photoPath}" class="bubble-avatar" style="border-color: #38bdf8;" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'%3E%3Ccircle cx=\'20\' cy=\'20\' r=\'20\' fill=\'%2338bdf8\'/%3E%3Ctext x=\'20\' y=\'25\' text-anchor=\'middle\' fill=\'white\' font-size=\'12\'%3EA%3C/text%3E%3C/svg%3E'">
+                <span style="font-size: 13px; color: #333; font-weight: 500;">${selected}</span>
+            </div>
+        `;
+    }
       
       bubble.classList.add("show"); 
       setTimeout(() => bubble.classList.remove("show"), 3000); 
@@ -4729,17 +4770,19 @@ function updateStreakDisplayEnhanced() {
     }
     
     if (currentMode === "arona") {
-      const outfitKey = aronaOutfitKeys[currentOutfit] || "default";
-      const messages = aronaOutfitMessages[outfitKey];
-      const selected = messages[Math.floor(Math.random() * messages.length)];
-      const photoPath = outfits.arona[currentOutfit] || "assets/images/arona.png";
-      
-      bubble.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 8px; background: white; border-radius: 12px; padding: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-          <img src="${photoPath}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #38bdf8;" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'%3E%3Ccircle cx=\'20\' cy=\'20\' r=\'20\' fill=\'%2338bdf8\'/%3E%3Ctext x=\'20\' y=\'25\' text-anchor=\'middle\' fill=\'white\' font-size=\'12\'%3EA%3C/text%3E%3C/svg%3E'">
-          <span style="font-size: 13px; color: #333;">${selected}</span>
-        </div>
-      `;
+        const outfitKey = aronaOutfitKeys[currentOutfit] || "default";
+        const messages = aronaOutfitMessages[outfitKey];
+        const selected = messages[Math.floor(Math.random() * messages.length)];
+        const photoPath = outfits.arona[currentOutfit] || "assets/images/arona.png";
+        
+        // ✅ GANTI DENGAN INI (style baru)
+        bubble.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 8px; background: white; border-radius: 16px; padding: 6px 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                <img src="${photoPath}" class="bubble-avatar" style="border-color: #38bdf8;" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'%3E%3Ccircle cx=\'20\' cy=\'20\' r=\'20\' fill=\'%2338bdf8\'/%3E%3Ctext x=\'20\' y=\'25\' text-anchor=\'middle\' fill=\'white\' font-size=\'12\'%3EA%3C/text%3E%3C/svg%3E'">
+                <span style="font-size: 13px; color: #333; font-weight: 500;">${selected}</span>
+            </div>
+        `;
+
     } else if (currentMode === "plana") {
       const key = planaOutfitKeys[currentOutfit] || "default";
       const msgs = planaOutfitMessages[key];
@@ -4747,11 +4790,12 @@ function updateStreakDisplayEnhanced() {
       const photoPath = outfits.plana[currentOutfit] || "assets/images/plana.png";
       
       bubble.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 8px; background: white; border-radius: 12px; padding: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-          <img src="${photoPath}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #c084fc;" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'%3E%3Ccircle cx=\'20\' cy=\'20\' r=\'20\' fill=\'%23c084fc\'/%3E%3Ctext x=\'20\' y=\'25\' text-anchor=\'middle\' fill=\'white\' font-size=\'12\'%3EP%3C/text%3E%3C/svg%3E'">
-          <span style="font-size: 13px; color: #333;">${selected}</span>
-        </div>
+          <div style="display: flex; align-items: center; gap: 8px; background: white; border-radius: 16px; padding: 6px 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+              <img src="${photoPath}" class="bubble-avatar" style="border-color: #c084fc;" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'%3E%3Ccircle cx=\'20\' cy=\'20\' r=\'20\' fill=\'%23c084fc\'/%3E%3Ctext x=\'20\' y=\'25\' text-anchor=\'middle\' fill=\'white\' font-size=\'12\'%3EP%3C/text%3E%3C/svg%3E'">
+              <span style="font-size: 13px; color: #333; font-weight: 500;">${selected}</span>
+          </div>
       `;
+      
     } else if (currentMode === "hina") {
       const key = hinaOutfitKeys[currentOutfit] || "dress";
       const msgs = hinaOutfitMessages[key];
@@ -4759,10 +4803,10 @@ function updateStreakDisplayEnhanced() {
       const photoPath = outfits.hina[currentOutfit] || "assets/images/hina_dress.jpg";
       
       bubble.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 8px; background: white; border-radius: 12px; padding: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-          <img src="${photoPath}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #a78bfa;" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'%3E%3Ccircle cx=\'20\' cy=\'20\' r=\'20\' fill=\'%23a78bfa\'/%3E%3Ctext x=\'20\' y=\'25\' text-anchor=\'middle\' fill=\'white\' font-size=\'12\'%3EH%3C/text%3E%3C/svg%3E'">
-          <span style="font-size: 13px; color: #333;">${selected}</span>
-        </div>
+          <div style="display: flex; align-items: center; gap: 8px; background: white; border-radius: 16px; padding: 6px 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+              <img src="${photoPath}" class="bubble-avatar" style="border-color: #a78bfa;" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'%3E%3Ccircle cx=\'20\' cy=\'20\' r=\'20\' fill=\'%23a78bfa\'/%3E%3Ctext x=\'20\' y=\'25\' text-anchor=\'middle\' fill=\'white\' font-size=\'12\'%3EH%3C/text%3E%3C/svg%3E'">
+              <span style="font-size: 13px; color: #333; font-weight: 500;">${selected}</span>
+          </div>
       `;
     }
     
