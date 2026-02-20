@@ -1477,27 +1477,115 @@
         color: #6b7280;
       }
 
-      .character-interaction {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        background: rgba(255, 255, 255, 0.9);
-        border-radius: 12px;
-        padding: 8px 12px;
-        font-size: 12px;
-        opacity: 0;
-        transform: translateY(-10px);
-        transition: all 0.3s ease;
-        pointer-events: none;
-        z-index: 5;
-        max-width: 200px;
-        word-wrap: break-word;
-      }
+/* Character bubble with photo styles - Glassmorphism Effect */
+#character-bubble {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  min-width: 220px;
+  max-width: 280px;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,0.15));
+}
 
-      .character-interaction.show {
-        opacity: 1;
-        transform: translateY(0);
-      }
+#character-bubble.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-5px);
+}
+
+/* Bubble content with glass effect - TERANG */
+#character-bubble > div {
+  background: rgba(255, 255, 255, 0.95) !important; /* Lebih terang */
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 16px !important;
+  padding: 10px !important;
+}
+
+/* Teks di bubble */
+#character-bubble > div span {
+  color: #1e293b !important; /* Lebih gelap agar kontras */
+  font-weight: 500;
+}
+
+/* Efek glow saat muncul */
+#character-bubble.show > div {
+  animation: bubble-appear 0.3s ease-out;
+}
+
+@keyframes bubble-appear {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Panah bubble */
+#character-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 12px solid rgba(255, 255, 255, 0.95);
+  filter: drop-shadow(0 4px 4px rgba(0,0,0,0.05));
+}
+
+/* Warna border foto mengikuti tema */
+#character-bubble img {
+  border: 2px solid;
+  transition: border-color 0.3s ease;
+}
+
+/* Dark mode support - TETAP TERANG */
+@media (prefers-color-scheme: dark) {
+  #character-bubble > div {
+    background: rgba(255, 255, 255, 0.9) !important; /* Tetap terang meskipun dark mode */
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+  #character-bubble > div span {
+    color: #0f172a !important; /* Lebih gelap untuk kontras */
+  }
+  #character-bubble::after {
+    border-top-color: rgba(255, 255, 255, 0.9);
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  #character-bubble {
+    top: -50px;
+    min-width: 180px;
+    max-width: 220px;
+  }
+  
+  #character-bubble > div {
+    padding: 6px !important;
+  }
+  
+  #character-bubble img {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  
+  #character-bubble span {
+    font-size: 11px !important;
+  }
+}
 
       .theme-toggle {
         position: fixed;
