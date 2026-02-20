@@ -1528,6 +1528,19 @@
 
       /* Mobile responsive */
       @media (max-width: 768px) {
+        /* Perkecil streak badge di focus session */
+        .streak-badge {
+            padding: 0.4rem 0.8rem !important;  /* Lebih kecil */
+            font-size: 0.8rem !important;       /* Lebih kecil */
+        }
+        
+        #streak-emoji {
+            font-size: 1rem !important;         /* Sama dengan teks */
+        }
+        
+        #streak-number {
+            font-size: 0.9rem !important;
+        }
         #character-bubble {
           top: -50px;
           min-width: 180px;
@@ -2064,6 +2077,37 @@
         background: linear-gradient(90deg, #a78bfa, #7c3aed);
       }
 
+      /* ===== TAMBAHKAN INI DI BAGIAN STREAK CALENDAR STYLES ===== */
+
+      /* Animasi api sederhana */
+      @keyframes flicker {
+          0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px #ff6b00); }
+          50% { transform: scale(1.2); filter: drop-shadow(0 0 8px #ff4500); }
+      }
+
+      #streak-display {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          transition: all 0.3s ease;
+      }
+
+      .streak-fire {
+          display: inline-block;
+          animation: flicker 1.5s ease-in-out infinite;
+          transform-origin: center;
+      }
+
+      /* Warna berbeda tiap streak */
+      .streak-fire[data-streak="1-3"] { color: #ff9800; }
+      .streak-fire[data-streak="4-6"] { color: #ff5722; animation-duration: 1s; }
+      .streak-fire[data-streak="7-13"] { color: #f44336; animation-duration: 0.8s; }
+      .streak-fire[data-streak="14+"] { 
+          color: #ffd700; 
+          animation-duration: 0.6s;
+          text-shadow: 0 0 10px #ff4500;
+      }
+
       /* Streak Calendar Styles */
       .streak-calendar {
         display: flex;
@@ -2305,21 +2349,6 @@
         .theme-hina #todo-btn {
           background: rgba(167, 139, 250, 0.15);
           border-color: rgba(167, 139, 250, 0.3);
-        }
-
-        /* Container streak dan session */
-        .flex.justify-between.items-center.mb-4 {
-          background: rgba(255, 255, 255, 0.1);
-          backdrop-filter: blur(8px);
-          padding: 0.5rem;
-          border-radius: 40px;
-          margin-bottom: 1rem;
-        }
-
-        .streak-badge {
-          padding: 0.5rem 1rem;
-          font-size: 0.9rem;
-          border-radius: 30px;
         }
 
         #current-cycle {
@@ -2870,7 +2899,10 @@
                 Focus Session
               </h3>
               <div class="flex items-center gap-2">
-                <span id="streak-display" class="streak-badge" title="Study streak">🔥 0 days</span>
+                <span id="streak-display" class="streak-badge" title="Study streak">
+    <span class="streak-fire" id="streak-emoji">🔥</span>
+    <span id="streak-number">0</span> days
+</span>
                 <span
                   class="session-counter"
                   id="current-cycle"
@@ -3526,26 +3558,45 @@
     }
 
     // Enhanced streak display function
-    function updateStreakDisplayEnhanced() {
-      const el = document.getElementById("streak-display");
-      if (!el) return;
-      
-      const s = progress.streak || 0;
-      // Tambahin emoji yang berbeda berdasarkan streak
-      let emoji = "🔥";
-      if (s >= 30) emoji = "🏆🔥";
-      else if (s >= 14) emoji = "⚡🔥";
-      else if (s >= 7) emoji = "🌟🔥";
-      
-      el.textContent = `${emoji} ${s} day${s !== 1 ? "s" : ""}`;
-      el.title = getStreakMessage(s);
-      
-      // Update komponen baru
-      document.getElementById('streak-message').textContent = getStreakMessage(s);
-      renderStreakCalendar();
-      updateBestStreak();
-      updateNextGoal();
+function updateStreakDisplayEnhanced() {
+    const el = document.getElementById("streak-display");
+    if (!el) return;
+    
+    const s = progress.streak || 0;
+    
+    // Update angka streak
+    document.getElementById('streak-number').textContent = s;
+    
+    // Update emoji dan warna
+    const fireEl = document.getElementById('streak-emoji');
+    if (s >= 30) {
+        fireEl.textContent = '🔥🔥';
+        fireEl.dataset.streak = '14+';
+    } else if (s >= 14) {
+        fireEl.textContent = '⚡🔥';
+        fireEl.dataset.streak = '14+';
+    } else if (s >= 7) {
+        fireEl.textContent = '🌟🔥';
+        fireEl.dataset.streak = '7-13';
+    } else if (s >= 4) {
+        fireEl.textContent = '🔥';
+        fireEl.dataset.streak = '4-6';
+    } else if (s >= 1) {
+        fireEl.textContent = '🔥';
+        fireEl.dataset.streak = '1-3';
+    } else {
+        fireEl.textContent = '🔥';
+        fireEl.dataset.streak = '1-3';
     }
+    
+    el.title = getStreakMessage(s);
+    
+    // Update komponen lain
+    document.getElementById('streak-message').textContent = getStreakMessage(s);
+    renderStreakCalendar();
+    updateBestStreak();
+    updateNextGoal();
+}
 
     // ============================================================
     // SESSION REFLECTION (Mood + Journal)
