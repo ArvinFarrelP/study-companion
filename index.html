@@ -3690,69 +3690,156 @@
     // ============================================================
     const characterInteractions = {
       arona: {
-        greeting: ["Sensei! Arona has been waiting! Let's study together! 🌟","Welcome back, Sensei! Arona is ready to help you have a productive day! 💫","Ara~ Sensei is here! Are you ready to focus today? 📚","Pla-... eh, hello Sensei! Ready to focus? ✨"],
-        outfit_change: ["Ehehe~ Outfit baru! Arona suka! 👗","Kamu suka outfit Arona yang ini, Sensei? 😊","Arona jadi lebih semangat belajar dengan outfit baru! ✨","Cute? Arona selalu cute! Tapi makasih Sensei! 💕"],
-        session_start: ["Focus time! Let's do our best, Sensei! 💪","Arona will support you, Sensei! Don't give up! 🌸","Time to focus! Arona believes in you, Sensei! 🚀","Pomodoro session start! Ganbatte, Sensei! ✨"],
-        session_complete: ["Yatta! Great work, Sensei! Arona is proud! 🎉","Session complete! You did amazing, Sensei! 💫","Arona will give you virtual pyroxenes for your hard work! 💎","Mission complete! Amazing work, Sensei! 🌟"],
-        achievement: ["Wow! Achievement unlocked! You're amazing, Sensei! 🏆","Arona is happy to see you growing, Sensei! 💝","Incredible! This is definitely because of your hard work, Sensei! ✨","Congratulations, Sensei! You deserve this! 🎊"],
-        break_time: ["Break time! Don't forget to drink water, Sensei! 💧","Short break~ Arona will wait here for you! ☕","Time to recharge your energy! Don't push yourself too hard! 🌸","Tea break! Arona will guard your progress! 🍵"],
+        greeting: [
+          "Sensei! Arona has been waiting! Let's study together! 🌟",
+          "Welcome back, Sensei! Arona is ready to help you have a productive day! 💫",
+          "Ara~ Sensei is here! Are you ready to focus today? 📚",
+          "Pla-... eh, hello Sensei! Ready to focus? ✨"
+        ],
+        outfit_greeting: {
+          default: [
+            "Arona pakai seragam biasa hari ini... tetap semangat ya Sensei! 📚",
+            "Seragam Arona yang biasa... tapi semangatnya luar biasa! ✨",
+            "Arona siap belajar dengan Sensei hari ini! 💫"
+          ],
+          yukata: [
+            "Sensei lihat! Arona pakai yukata baru! Cantik tidak? 👘",
+            "Arona mau ikut festival dengan Sensei pakai yukata ini... 🎆",
+            "Yukata ini spesial... Arona pakai khusus untuk Sensei loh! 💕",
+            "Ehehe~ Arona jadi makin cantik pakai yukata ya Sensei? 🌸"
+          ]
+        },
+        outfit_change: [
+          "Ehehe~ Outfit baru! Arona suka! 👗",
+          "Kamu suka outfit Arona yang ini, Sensei? 😊",
+          "Arona jadi lebih semangat belajar dengan outfit baru! ✨",
+          "Cute? Arona selalu cute! Tapi makasih Sensei! 💕",
+          "Outfit baru! Arona makin cantik kan? 🌟"
+        ],
+        session_start: [
+          "Focus time! Let's do our best, Sensei! 💪",
+          "Arona will support you, Sensei! Don't give up! 🌸",
+          "Time to focus! Arona believes in you, Sensei! 🚀",
+          "Pomodoro session start! Ganbatte, Sensei! ✨"
+        ],
+        session_complete: [
+          "Yatta! Great work, Sensei! Arona is proud! 🎉",
+          "Session complete! You did amazing, Sensei! 💫",
+          "Arona will give you virtual pyroxenes for your hard work! 💎",
+          "Mission complete! Amazing work, Sensei! 🌟"
+        ],
+        achievement: [
+          "Wow! Achievement unlocked! You're amazing, Sensei! 🏆",
+          "Arona is happy to see you growing, Sensei! 💝",
+          "Incredible! This is definitely because of your hard work, Sensei! ✨",
+          "Congratulations, Sensei! You deserve this! 🎊"
+        ],
+        break_time: [
+          "Break time! Don't forget to drink water, Sensei! 💧",
+          "Short break~ Arona will wait here for you! ☕",
+          "Time to recharge your energy! Don't push yourself too hard! 🌸",
+          "Tea break! Arona will guard your progress! 🍵"
+        ],
       },
       plana: {
-        greeting: ["Welcome, Sensei... Let's find peace in studying together 🌙","Hello Sensei... Is today filled with hope? 💭","Nice to meet you again, Sensei... 📖","The library is quiet today... perfect for focus... 📚"],
-        outfit_change: ["Plana... in... ini... outfit spesial! 🌸✨","Hanya outfit ini yang Plana punya... apakah Sensei suka? 🙈","Plana pakai ini... khusus untuk Sensei... 💕","Bunnygirl Plana... satu-satunya outfit spesial! 🐰"],
-        session_start: ["Every moment of focus is a step toward the future... ✨","Let's begin this small journey together... 🌸","Your concentration is a beautiful light, Sensei... 💫","Let's begin our journey of knowledge... 🌙"],
-        session_complete: ["Small consistent steps lead to great achievements... 🌟","Sensei... your dedication is truly inspiring... 💝","Today's achievement is a seed for the future... 🌱","Another step forward in your journey... well done... ✨"],
-        achievement: ["This achievement proves your growth, Sensei... ✨","Every accomplishment is a beautiful story in our journey... 📚","Sensei... continue walking with confidence... 🌙","Your efforts bear fruit... beautiful, isn't it? 💫"],
-        break_time: ["Time to rest... the world can wait for a moment... ☁️","Rest is part of a wise journey... 🍵","Take a deep breath... let your mind rest for a while... 💮","Time to rest... even stars need to recharge... 🌙"],
+        greeting: [
+          "Welcome, Sensei... Let's find peace in studying together 🌙",
+          "Hello Sensei... Is today filled with hope? 💭",
+          "Nice to meet you again, Sensei... 📖",
+          "The library is quiet today... perfect for focus... 📚"
+        ],
+        outfit_greeting: {
+          default: [
+            "Plana... pakai seragam biasa... seperti biasa saja... 📚",
+            "Hanya seragam ini yang Plana punya... maaf Sensei... 🌙",
+            "Plana merasa nyaman dengan seragam ini... Sensei juga? 💭"
+          ],
+          bunny: [
+            "S-sensei... jangan lihat... Plana salah ambil baju... 🐰💦",
+            "A-Arona yang suruh... Plana gak mau... tapi... 🙈",
+            "Telinganya... jangan dipegang... Kyaa! 🐰💕",
+            "Plana... jadi kelinci... mau Sensei elus? ... Eh?! 😳"
+          ],
+          kimono: [
+            "Kimono... apakah cocok? Plana agak malu... 🌸",
+            "Sensei suka? Plana... senang... sedikit... ✨",
+            "Untuk acara spesial... Plana pakai ini... 🎋",
+            "Kimono ini... warisan dari Sensei... eh, bukan! 💕"
+          ]
+        },
+        outfit_change: [
+          "Plana... in... ini... outfit spesial! 🌸✨",
+          "Hanya outfit ini yang Plana punya... apakah Sensei suka? 🙈",
+          "Plana pakai ini... khusus untuk Sensei... 💕",
+          "Bunnygirl Plana... satu-satunya outfit spesial! 🐰"
+        ],
+        session_start: [
+          "Every moment of focus is a step toward the future... ✨",
+          "Let's begin this small journey together... 🌸",
+          "Your concentration is a beautiful light, Sensei... 💫",
+          "Let's begin our journey of knowledge... 🌙"
+        ],
+        session_complete: [
+          "Small consistent steps lead to great achievements... 🌟",
+          "Sensei... your dedication is truly inspiring... 💝",
+          "Today's achievement is a seed for the future... 🌱",
+          "Another step forward in your journey... well done... ✨"
+        ],
+        achievement: [
+          "This achievement proves your growth, Sensei... ✨",
+          "Every accomplishment is a beautiful story in our journey... 📚",
+          "Sensei... continue walking with confidence... 🌙",
+          "Your efforts bear fruit... beautiful, isn't it? 💫"
+        ],
+        break_time: [
+          "Time to rest... the world can wait for a moment... ☁️",
+          "Rest is part of a wise journey... 🍵",
+          "Take a deep breath... let your mind rest for a while... 💮",
+          "Time to rest... even stars need to recharge... 🌙"
+        ],
       },
       hina: {
         greeting: [
           "Hina akan menemani Sensei belajar hari ini... 📚",
           "Selamat datang Sensei... Hina sudah siap... 🌸",
           "Hina... ikut belajar sama Sensei ya... 💜",
-          "Perpustakaannya sepi... cocok untuk fokus... 📖",
-          // Untuk dress
-          "Hina pakai dress baru... khusus untuk Sensei... 👗",
-          "Dress ini... Hina pilih sendiri... apakah cocok? 🌸",
-          // Untuk maid
-          "Hina... akan melayani Sensei sebagai maid hari ini... 👗",
-          "Gokigenyou, Sensei~ Hina siap melayani... ✨"
+          "Perpustakaannya sepi... cocok untuk fokus... 📖"
         ],
+        outfit_greeting: {
+          dress: [
+            "Hina pakai dress baru... khusus untuk Sensei... 👗",
+            "Dress ini... Hina pilih sendiri... apakah cocok? 🌸",
+            "Hina merasa lebih cantik pakai dress ini... untuk Sensei... 💜",
+            "Dress biru ini... warna favorit Hina... semoga Sensei suka... ✨"
+          ],
+          maid: [
+            "Hina... akan melayani Sensei sebagai maid hari ini... 👗",
+            "Gokigenyou, Sensei~ Hina siap melayani... ✨",
+            "Hina... jadi maid spesial Sensei... hari ini... 💕",
+            "Maid Hina... akan jaga Sensei selama belajar... 🧹"
+          ]
+        },
         outfit_change: [
-          "Hina... ganti outfit dulu ya... jangan lihat dulu... 😳",
+          "Hina... punya beberapa outfit... tapi agak malu... 😳",
           "Apakah ini cocok untuk Sensei? Hina... tidak yakin... 💜",
           "Hina akan pakai ini... khusus untuk Sensei... 💕",
-          "Outfit ini... Hina suka... semoga Sensei juga suka... 🌸",
-          // Untuk dress
-          "Hina pakai dress baru... apakah Sensei suka? 👗",
-          "Dress ini... Hina beli khusus untuk hari ini... 💜",
-          // Untuk maid
-          "Hina... pakai outfit maid... apakah Sensei suka? 👗",
-          "Maid outfit ini... Hina pakai khusus untuk Sensei... 💕"
+          "Outfit ini... Hina suka... tapi agak malu-malu... 🌸"
         ],
         session_start: [
           "Focus session dimulai... Hina akan menjaga konsentrasi Sensei... 👀",
           "Ayo mulai... Hina akan di sini saja... 💜",
           "Waktunya fokus... Hina percaya Sensei bisa... ✨",
           "Hina akan bantu Sensei fokus hari ini... 📝",
-          // Untuk dress
-          "Hina siap bantu Sensei fokus... pakai dress cantik ini... 👗",
-          "Dress ini... biar Hina makin semangat bantu Sensei... ✨",
-          // Untuk maid
-          "Hina siap bantu Sensei fokus belajar... sebagai maid... 🧹",
-          "Maid Hina... akan pastikan Sensei tetap konsentrasi... ✨"
+          "Hina siap bantu Sensei fokus... pakai outfit ini... 👗",
+          "Hina akan jaga Sensei tetap fokus... dengan outfit spesial ini... ✨"
         ],
         session_complete: [
           "Selamat, Sensei... Hina ikut senang... 🌸",
           "Session selesai... Sensei hebat! 💜",
           "Hina bangga dengan Sensei... terus semangat... 🌟",
           "Kerja bagus, Sensei... Hina akan selalu mendukung... 💕",
-          // Untuk dress
-          "Hina senang bisa menemani Sensei pakai dress ini... 👗",
-          "Dress ini... jadi saksi kebahagiaan Hina melihat Sensei sukses... ✨",
-          // Untuk maid
-          "Hina akan siapkan teh untuk Sensei setelah belajar... ☕",
-          "Session selesai... Hina bangga dengan Sensei... 💜"
+          "Hina senang bisa menemani Sensei pakai outfit ini... 👗",
+          "Outfit ini... jadi saksi kebahagiaan Hina melihat Sensei sukses... ✨"
         ],
         achievement: [
           "Wah... Sensei hebat sekali... Hina ikut bahagia... 🏆",
@@ -3765,10 +3852,7 @@
           "Break time... Sensei harus minum air putih dulu... 💧",
           "Istirahat sebentar... jangan lupa rileks... ☕",
           "Hina akan jaga meja Sensei selama istirahat... 📚",
-          // Untuk dress
-          "Hina akan jaga dress ini tetap rapi sambil tunggu Sensei... 👗",
-          // Untuk maid
-          "Waktunya istirahat... Hina akan jaga meja Sensei... 💤",
+          "Hina akan jaga outfit ini tetap rapi sambil tunggu Sensei... 👗",
           "Break time... Hina siapkan teh untuk Sensei... ☕"
         ],
       },
@@ -3777,10 +3861,61 @@
     function triggerCharacterReaction(type) {
       const bubble = document.getElementById("character-bubble");
       if (!bubble) return;
+      
       const quotes = characterInteractions[currentMode];
       if (!quotes || !quotes[type]) return;
-      const messages = quotes[type];
-      bubble.textContent = messages[Math.floor(Math.random() * messages.length)];
+      
+      let messagePool = [];
+      
+      // Untuk semua karakter, gabungkan dengan outfit-specific greeting jika type = "greeting"
+      if (type === "greeting" && quotes.outfit_greeting) {
+        // Ambil greeting biasa
+        messagePool = [...quotes.greeting];
+        
+        // Tambahkan outfit-specific greeting berdasarkan currentOutfit
+        let outfitKey;
+        if (currentMode === "arona") {
+          outfitKey = aronaOutfitKeys[currentOutfit] || "default";
+        } else if (currentMode === "plana") {
+          outfitKey = planaOutfitKeys[currentOutfit] || "default";
+        } else if (currentMode === "hina") {
+          outfitKey = hinaOutfitKeys[currentOutfit] || "dress";
+        }
+        
+        if (quotes.outfit_greeting[outfitKey]) {
+          messagePool = [...messagePool, ...quotes.outfit_greeting[outfitKey]];
+        }
+      } else {
+        messagePool = quotes[type];
+      }
+      
+      // Pilih random message
+      const selectedMessage = messagePool[Math.floor(Math.random() * messagePool.length)];
+      
+      // Tentukan foto yang akan ditampilkan di bubble
+      let photoPath;
+      if (currentMode === "arona") {
+        photoPath = outfits.arona[currentOutfit] || "assets/images/arona.png";
+      } else if (currentMode === "plana") {
+        photoPath = outfits.plana[currentOutfit] || "assets/images/plana.png";
+      } else if (currentMode === "hina") {
+        photoPath = outfits.hina[currentOutfit] || "assets/images/hina_dress.jpg";
+      }
+      
+      // Tentukan warna border berdasarkan mode
+      let borderColor;
+      if (currentMode === "arona") borderColor = "#38bdf8";
+      else if (currentMode === "plana") borderColor = "#c084fc";
+      else borderColor = "#a78bfa";
+      
+      // Buat bubble dengan foto
+      bubble.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 8px; background: white; border-radius: 12px; padding: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+          <img src="${photoPath}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid ${borderColor};" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'%3E%3Ccircle cx=\'20\' cy=\'20\' r=\'20\' fill=\'%23${borderColor.replace('#', '')}\'/%3E%3Ctext x=\'20\' y=\'25\' text-anchor=\'middle\' fill=\'white\' font-size=\'12\'%3E${currentMode.charAt(0).toUpperCase()}%3C/text%3E%3C/svg%3E'">
+          <span style="font-size: 13px; color: #333; max-width: 150px;">${selectedMessage}</span>
+        </div>
+      `;
+      
       bubble.classList.add("show");
       setTimeout(() => bubble.classList.remove("show"), 5000);
     }
@@ -4162,6 +4297,22 @@
       hina: ["assets/images/hina_dress.jpg","assets/images/hina_maid.jpg"], // HINA: DRESS + MAID
     };
 
+    const aronaOutfitKeys = ["default", "yukata"]; // ARONA: DEFAULT + YUKATA
+    const aronaOutfitMessages = {
+      default: [
+        "Arona pakai seragam biasa hari ini... tetap semangat ya Sensei! 📚",
+        "Seragam Arona yang biasa... tapi semangatnya luar biasa! ✨",
+        "Arona siap belajar dengan Sensei hari ini! 💫"
+      ],
+      yukata: [
+        "Sensei lihat! Arona pakai yukata baru! Cantik tidak? 👘",
+        "Arona mau ikut festival dengan Sensei pakai yukata ini... 🎆",
+        "Yukata ini spesial... Arona pakai khusus untuk Sensei loh! 💕",
+        "Ehehe~ Arona jadi makin cantik pakai yukata ya Sensei? 🌸",
+        "Arona suka warna yukata ini... biru seperti langit! 💙"
+      ]
+    };
+
     const planaOutfitKeys = ["default","bunny","kimono"]; // SWIMSUIT DIHAPUS
     const planaOutfitMessages = {
       default: ["Plana... hanya punya ini... maaf Sensei... 📖","Seragam biasa ini... cukup untuk belajar... 📚","Plana merasa nyaman dengan ini... Sensei juga? 🌙"],
@@ -4170,53 +4321,96 @@
     };
     
     const hinaOutfitKeys = ["dress","maid"]; // HINA: DRESS + MAID
-    const hinaOutfitMessages = {
+    const hinaOutfitMessages = { //Swich
       dress: [
-        "Hina... pakai dress cantik hari ini... apakah Sensei suka? 👗",
-        "Dress ini... Hina beli khusus untuk belajar dengan Sensei... 💜",
-        "Hina merasa lebih percaya diri dengan dress ini... 🌸",
-        "Sensei... Hina cantik pakai dress ini? ... Hina senang... ✨",
-        "Dress biru ini... warna favorit Hina... cocok untuk hari ini... 💙"
+        "Hina... is wearing a beautiful dress today... do you like it, Sensei? 👗",
+        "Hina chose this dress... especially to study with you... 💜",
+        "This dress... makes Hina feel a little more confident... 🌸",
+        "Sensei... does Hina look nice in this dress?... Hina is happy... ✨",
+        "This blue dress... is Hina's favorite... it feels perfect for today... 💙"
       ],
       maid: [
-        "Hina... akan melayani Sensei hari ini... sebagai maid... 👗",
-        "Selamat datang, Sensei... Hina siap membantu fokus belajar... 🧹",
-        "Hina... mau jadi maid spesial Sensei... hari ini... 💜",
-        "Ara ara~ Hina akan jaga Sensei selama belajar... ✨",
-        "Maid Hina... siap melayani Sensei dengan sepenuh hati... 💕"
+        "Hina... will serve you today... as your maid... 👗",
+        "Welcome, Sensei... Hina is ready to help you focus... 🧹",
+        "Hina... wants to be your special maid today... 💜",
+        "Ara... Hina will stay by your side while you study... ✨",
+        "Maid Hina... will do her best for you, Sensei... 💕"
       ],
     };
 
-    const aronaOutfitMessages = ["Ehehe~ Outfit baru! Arona suka! 👗","Kamu suka outfit Arona yang ini, Sensei? 😊","Arona jadi lebih semangat belajar dengan outfit baru! ✨","Cute? Arona selalu cute! Tapi makasih Sensei! 💕","Outfit baru! Arona makin cantik kan? 🌟"];
-
-    function changeOutfit(direction) {
-      const bubble = document.getElementById("character-bubble");
-      if (!bubble) return;
-      if (outfits[currentMode].length <= 1) {
-        if (currentMode === "arona") {
-          bubble.textContent = "Ini satu-satunya outfit Arona saat ini! 🎀";
-        } else if (currentMode === "plana") {
-          bubble.textContent = planaOutfitMessages.default[0];
-        } else if (currentMode === "hina") {
-          bubble.textContent = hinaOutfitMessages.default[0];
-        }
-        bubble.classList.add("show"); setTimeout(() => bubble.classList.remove("show"), 3000); return;
-      }
-      currentOutfit = (currentOutfit + direction + outfits[currentMode].length) % outfits[currentMode].length;
-      if (characterImg) { characterImg.src = outfits[currentMode][currentOutfit]; safeSave(`${currentMode}Outfit`, currentOutfit); }
+  function changeOutfit(direction) {
+    const bubble = document.getElementById("character-bubble");
+    if (!bubble) return;
+    
+    if (outfits[currentMode].length <= 1) {
+      let selected;
       if (currentMode === "arona") {
-        bubble.textContent = aronaOutfitMessages[Math.floor(Math.random() * aronaOutfitMessages.length)];
+        selected = { text: "Ini satu-satunya outfit Arona saat ini! 🎀", photo: "assets/images/arona.png" };
       } else if (currentMode === "plana") {
-        const key = planaOutfitKeys[currentOutfit] || "default";
-        const msgs = planaOutfitMessages[key];
-        bubble.textContent = msgs[Math.floor(Math.random() * msgs.length)];
+        selected = planaOutfitMessages.default[0];
       } else if (currentMode === "hina") {
-        const key = hinaOutfitKeys[currentOutfit] || "default";
-        const msgs = hinaOutfitMessages[key];
-        bubble.textContent = msgs[Math.floor(Math.random() * msgs.length)];
+        selected = hinaOutfitMessages.dress[0];
       }
-      bubble.classList.add("show"); setTimeout(() => bubble.classList.remove("show"), 3000);
+      
+      bubble.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 8px; background: white; border-radius: 12px; padding: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+          <img src="${selected.photo}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid ${currentMode === 'arona' ? '#38bdf8' : currentMode === 'plana' ? '#c084fc' : '#a78bfa'};" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'%3E%3Ccircle cx=\'20\' cy=\'20\' r=\'20\' fill=\'%23${currentMode === 'arona' ? '38bdf8' : currentMode === 'plana' ? 'c084fc' : 'a78bfa'}\'/%3E%3Ctext x=\'20\' y=\'25\' text-anchor=\'middle\' fill=\'white\' font-size=\'12\'%3E${currentMode.charAt(0).toUpperCase()}%3C/text%3E%3C/svg%3E'">
+          <span style="font-size: 13px; color: #333;">${selected.text}</span>
+        </div>
+      `;
+      
+      bubble.classList.add("show"); 
+      setTimeout(() => bubble.classList.remove("show"), 3000); 
+      return;
     }
+    
+    currentOutfit = (currentOutfit + direction + outfits[currentMode].length) % outfits[currentMode].length;
+    if (characterImg) { 
+      characterImg.src = outfits[currentMode][currentOutfit]; 
+      safeSave(`${currentMode}Outfit`, currentOutfit); 
+    }
+    
+    if (currentMode === "arona") {
+      const outfitKey = aronaOutfitKeys[currentOutfit] || "default";
+      const messages = aronaOutfitMessages[outfitKey];
+      const selected = messages[Math.floor(Math.random() * messages.length)];
+      const photoPath = outfits.arona[currentOutfit] || "assets/images/arona.png";
+      
+      bubble.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 8px; background: white; border-radius: 12px; padding: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+          <img src="${photoPath}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #38bdf8;" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'%3E%3Ccircle cx=\'20\' cy=\'20\' r=\'20\' fill=\'%2338bdf8\'/%3E%3Ctext x=\'20\' y=\'25\' text-anchor=\'middle\' fill=\'white\' font-size=\'12\'%3EA%3C/text%3E%3C/svg%3E'">
+          <span style="font-size: 13px; color: #333;">${selected}</span>
+        </div>
+      `;
+    } else if (currentMode === "plana") {
+      const key = planaOutfitKeys[currentOutfit] || "default";
+      const msgs = planaOutfitMessages[key];
+      const selected = msgs[Math.floor(Math.random() * msgs.length)];
+      const photoPath = outfits.plana[currentOutfit] || "assets/images/plana.png";
+      
+      bubble.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 8px; background: white; border-radius: 12px; padding: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+          <img src="${photoPath}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #c084fc;" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'%3E%3Ccircle cx=\'20\' cy=\'20\' r=\'20\' fill=\'%23c084fc\'/%3E%3Ctext x=\'20\' y=\'25\' text-anchor=\'middle\' fill=\'white\' font-size=\'12\'%3EP%3C/text%3E%3C/svg%3E'">
+          <span style="font-size: 13px; color: #333;">${selected}</span>
+        </div>
+      `;
+    } else if (currentMode === "hina") {
+      const key = hinaOutfitKeys[currentOutfit] || "dress";
+      const msgs = hinaOutfitMessages[key];
+      const selected = msgs[Math.floor(Math.random() * msgs.length)];
+      const photoPath = outfits.hina[currentOutfit] || "assets/images/hina_dress.jpg";
+      
+      bubble.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 8px; background: white; border-radius: 12px; padding: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+          <img src="${photoPath}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #a78bfa;" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\' viewBox=\'0 0 40 40\'%3E%3Ccircle cx=\'20\' cy=\'20\' r=\'20\' fill=\'%23a78bfa\'/%3E%3Ctext x=\'20\' y=\'25\' text-anchor=\'middle\' fill=\'white\' font-size=\'12\'%3EH%3C/text%3E%3C/svg%3E'">
+          <span style="font-size: 13px; color: #333;">${selected}</span>
+        </div>
+      `;
+    }
+    
+    bubble.classList.add("show"); 
+    setTimeout(() => bubble.classList.remove("show"), 3000);
+  }
 
     if (charContainer) {
       charContainer.addEventListener("mousedown", (e) => {
