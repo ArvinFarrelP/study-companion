@@ -3,48 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
-    <!-- PWA Head Tags -->
+    <!-- PWA Head Tags (same as before) -->
     <link rel="icon" href="./favicon.ico" type="image/x-icon" />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="./assets/images/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="./assets/images/favicon-16x16.png"
-    />
-
-    <!-- Apple Touch Icon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon-16x16.png" />
     <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="./assets/images/icon-180x180.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="152x152"
-      href="./assets/images/icon-152x152.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="167x167"
-      href="./assets/images/icon-167x167.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="120x120"
-      href="./assets/images/icon-120x120.png"
-    />
-
-    <!-- PWA Manifest -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/icon-180x180.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="./assets/images/icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="167x167" href="./assets/images/icon-167x167.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="./assets/images/icon-120x120.png" />
     <link rel="manifest" href="./manifest.json" />
-
-    <!-- Theme Colors -->
     <meta name="theme-color" content="#38bdf8" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="mobile-web-app-capable" content="yes" />
@@ -52,13 +20,8 @@
     <meta name="msapplication-TileColor" content="#38bdf8" />
     <meta name="msapplication-TileImage" content="/assets/images/mstile-150x150.png" />
     <title>Study Companion</title>
-    <meta
-      name="description"
-      content="Anime-style Pomodoro timer with focus companions, achievements, and productivity analytics. Stay focused with Arona, Plana, and Hina!"
-    />
+    <meta name="description" content="Anime-style Pomodoro timer with focus companions, achievements, and productivity analytics. Stay focused with Arona, Plana, and Hina!" />
     <meta name="theme-color" content="#38bdf8" />
-
-    <!-- Meta tags untuk social sharing -->
     <meta property="og:title" content="Study Companion - Anime Pomodoro Timer" />
     <meta property="og:description" content="Focus with Arona, Plana & Hina - Your anime study partner for better focus & productivity" />
     <meta property="og:image" content="/assets/images/social-preview.png" />
@@ -68,11 +31,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <style>
+      /* All your existing CSS styles remain exactly the same */
       * {
         margin: 0;
         padding: 0;
@@ -2103,6 +2064,85 @@
         background: linear-gradient(90deg, #a78bfa, #7c3aed);
       }
 
+      /* Streak Calendar Styles */
+      .streak-calendar {
+        display: flex;
+        justify-content: space-between;
+        gap: 4px;
+        margin-top: 8px;
+      }
+
+      .streak-day {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
+      }
+
+      .streak-day-circle {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .streak-day-circle:hover {
+        transform: scale(1.1);
+      }
+
+      .streak-day-label {
+        font-size: 10px;
+        margin-top: 4px;
+        color: #64748b;
+      }
+
+      .streak-studied {
+        background: var(--primary-color);
+        color: white;
+        box-shadow: 0 2px 8px rgba(var(--primary-rgb), 0.3);
+      }
+
+      .streak-today {
+        border: 2px solid var(--primary-color);
+        background: transparent;
+        color: var(--primary-color);
+      }
+
+      .streak-missed {
+        background: #e5e7eb;
+        color: #9ca3af;
+      }
+
+      .streak-goal {
+        font-size: 11px;
+        text-align: center;
+        margin-top: 8px;
+        padding: 4px 8px;
+        border-radius: 12px;
+        background: rgba(0,0,0,0.05);
+      }
+
+      .theme-arona {
+        --primary-color: #38bdf8;
+        --primary-rgb: 56, 189, 248;
+      }
+
+      .theme-plana {
+        --primary-color: #c084fc;
+        --primary-rgb: 192, 132, 252;
+      }
+
+      .theme-hina {
+        --primary-color: #a78bfa;
+        --primary-rgb: 167, 139, 250;
+      }
+
       /* PERBAIKAN UTAMA UNTUK MOBILE */
       @media (max-width: 768px) {
         .flex-col.lg\:flex-row {
@@ -2308,6 +2348,13 @@
           max-width: 150px;
           font-size: 11px;
         }
+
+        /* Streak calendar mobile */
+        .streak-day-circle {
+          width: 28px;
+          height: 28px;
+          font-size: 11px;
+        }
       }
 
       @media (max-width: 480px) {
@@ -2360,6 +2407,12 @@
         .footer-bottom {
           font-size: 0.75rem;
           padding-top: 0.75rem;
+        }
+
+        .streak-day-circle {
+          width: 24px;
+          height: 24px;
+          font-size: 10px;
         }
       }
 
@@ -2907,6 +2960,29 @@
                 </div>
                 <div id="daily-progress-text" class="daily-progress-text">0/8 sessions completed</div>
               </div>
+
+              <!-- STREAK CALENDAR - TAMBAHAN BARU -->
+              <div class="mt-4 pt-3 border-t border-white/20">
+                <div class="flex justify-between items-center mb-2">
+                  <div class="flex items-center gap-2">
+                    <span class="text-sm font-semibold">🔥 Streak Tracker</span>
+                    <span class="text-xs bg-primary/20 px-2 py-1 rounded-full" id="best-streak">
+                      Best: 0
+                    </span>
+                  </div>
+                  <span class="text-xs text-primary" id="streak-message"></span>
+                </div>
+                
+                <!-- Streak Calendar 7 hari -->
+                <div id="streak-calendar" class="flex justify-between gap-1 mt-2">
+                  <!-- Akan diisi JavaScript -->
+                </div>
+                
+                <!-- Progress ke achievement berikutnya -->
+                <div class="mt-2 text-xs text-gray-500 text-center" id="next-streak-goal">
+                  🔜 Next: 7 days streak
+                </div>
+              </div>
             </section>
 
             <section
@@ -3281,6 +3357,7 @@
       dailySessions: Array(8).fill(false),
       studyHistory: [],
       streak: 0,
+      bestStreak: 0, // Tambahan untuk best streak
       lastStudyDate: null
     };
     let hasUnsavedChanges = false;
@@ -3307,28 +3384,167 @@
     window.addEventListener("unhandledrejection", (e) => { console.error("Unhandled rejection:", e.reason); e.preventDefault(); });
 
     // ============================================================
-    // STREAK SYSTEM
+    // STREAK SYSTEM - ENHANCED VERSION
     // ============================================================
     function updateStreak() {
       const today = new Date().toDateString();
       const last = progress.lastStudyDate;
-      if (!last) { progress.streak = 1; }
-      else if (last === today) { /* same day, no change */ }
-      else {
-        const yesterday = new Date(); yesterday.setDate(yesterday.getDate() - 1);
-        if (last === yesterday.toDateString()) { progress.streak = (progress.streak || 0) + 1; }
-        else { progress.streak = 1; }
+      
+      // Simpan ke study history
+      if (!progress.studyHistory) progress.studyHistory = [];
+      if (!progress.studyHistory.includes(today)) {
+          progress.studyHistory.push(today);
+          // Keep only last 30 days
+          if (progress.studyHistory.length > 30) progress.studyHistory.shift();
       }
+      
+      if (!last) { 
+        progress.streak = 1; 
+      }
+      else if (last === today) { 
+        /* same day, no change */ 
+      }
+      else {
+        const yesterday = new Date(); 
+        yesterday.setDate(yesterday.getDate() - 1);
+        if (last === yesterday.toDateString()) { 
+          progress.streak = (progress.streak || 0) + 1; 
+        }
+        else { 
+          progress.streak = 1; 
+        }
+      }
+      
+      // Update best streak
+      if (progress.streak > (progress.bestStreak || 0)) {
+          progress.bestStreak = progress.streak;
+      }
+      
       progress.lastStudyDate = today;
-      updateStreakDisplay();
+      updateStreakDisplayEnhanced();
     }
 
-    function updateStreakDisplay() {
+    // Motivational messages berdasarkan streak
+    function getStreakMessage(streak) {
+      if (streak === 0) return "Mulai streak hari ini! 🎯";
+      if (streak === 1) return "Hari pertama! Besok lanjut lagi! 🔥";
+      if (streak === 2) return "Day 2 - Mantap! Semangat! 💪";
+      if (streak === 3) return "3 hari berturut-turut! 🎉";
+      if (streak === 4) return "Day 4 - Kamu hebat! ✨";
+      if (streak === 5) return "5 hari! Almost a week! 🌟";
+      if (streak === 6) return "Besok streak 1 minggu! 🔥🔥";
+      if (streak === 7) return "🎊 SELAMAT! Streak 7 hari! 🎊";
+      if (streak < 14) return `${streak} days streak! Luar biasa! ⚡`;
+      if (streak < 21) return `${streak} days! Kamu mesin belajar! 🚀`;
+      if (streak < 30) return `${streak} days! Mendekati sebulan! 🌙`;
+      return `🏆 LEGEND! ${streak} hari berturut-turut! 🏆`;
+    }
+
+    // Streak Calendar dengan visual yang lebih menarik
+    function renderStreakCalendar() {
+        const calendarEl = document.getElementById('streak-calendar');
+        if (!calendarEl) return;
+        
+        const today = new Date();
+        const hariIndo = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
+        let html = '';
+        
+        // Tampilkan 7 hari terakhir
+        for (let i = 6; i >= 0; i--) {
+            const date = new Date(today);
+            date.setDate(date.getDate() - i);
+            const dateStr = date.toDateString();
+            
+            // Cek apakah tanggal ini pernah belajar
+            const studied = progress.studyHistory ? 
+                progress.studyHistory.includes(dateStr) : 
+                (progress.lastStudyDate === dateStr);
+            
+            // Di bagian renderStreakCalendar, ganti logic warna jadi:
+            let bgColor, textColor, borderStyle, opacity = '';
+            if (studied) {
+                bgColor = 'bg-primary';
+                textColor = 'text-white';
+                opacity = 'opacity-100';
+            } else if (dateStr === today.toDateString()) {
+                bgColor = 'bg-transparent';
+                textColor = 'text-primary';
+                borderStyle = 'border-2 border-primary';
+                opacity = 'opacity-100';
+            } else {
+                bgColor = 'bg-white/20'; // Putih transparan
+                textColor = 'text-gray-300';
+                borderStyle = 'backdrop-blur-sm border border-white/10';
+                opacity = 'opacity-60';
+            }
+            
+            html += `
+                <div class="flex flex-col items-center">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold
+                              ${bgColor} ${textColor} ${borderStyle} transition-all duration-300
+                              hover:scale-110 cursor-pointer"
+                         title="${hariIndo[date.getDay()]}, ${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}">
+                        ${date.getDate()}
+                    </div>
+                    <span class="text-[10px] mt-1 text-gray-400">${hariIndo[date.getDay()]}</span>
+                </div>
+            `;
+        }
+        
+        calendarEl.innerHTML = html;
+    }
+
+    // Update best streak display
+    function updateBestStreak() {
+        const bestEl = document.getElementById('best-streak');
+        if (bestEl) {
+            bestEl.textContent = `Best: ${progress.bestStreak || 0}`;
+        }
+    }
+
+    // Update next goal
+    function updateNextGoal() {
+        const streak = progress.streak || 0;
+        let nextGoal = 7; // default
+        
+        if (streak < 3) nextGoal = 3;
+        else if (streak < 7) nextGoal = 7;
+        else if (streak < 14) nextGoal = 14;
+        else if (streak < 21) nextGoal = 21;
+        else if (streak < 30) nextGoal = 30;
+        else nextGoal = streak + 7;
+        
+        const remaining = nextGoal - streak;
+        const goalEl = document.getElementById('next-streak-goal');
+        if (goalEl) {
+            if (remaining > 0) {
+                goalEl.innerHTML = `🎯 ${remaining} hari lagi menuju streak ${nextGoal} hari!`;
+            } else {
+                goalEl.innerHTML = `✨ Selamat! Streak ${streak} hari! ✨`;
+            }
+        }
+    }
+
+    // Enhanced streak display function
+    function updateStreakDisplayEnhanced() {
       const el = document.getElementById("streak-display");
       if (!el) return;
+      
       const s = progress.streak || 0;
-      el.textContent = `🔥 ${s} day${s !== 1 ? "s" : ""}`;
-      el.title = s > 0 ? `${s}-day study streak! Keep it up!` : "Start studying to build a streak!";
+      // Tambahin emoji yang berbeda berdasarkan streak
+      let emoji = "🔥";
+      if (s >= 30) emoji = "🏆🔥";
+      else if (s >= 14) emoji = "⚡🔥";
+      else if (s >= 7) emoji = "🌟🔥";
+      
+      el.textContent = `${emoji} ${s} day${s !== 1 ? "s" : ""}`;
+      el.title = getStreakMessage(s);
+      
+      // Update komponen baru
+      document.getElementById('streak-message').textContent = getStreakMessage(s);
+      renderStreakCalendar();
+      updateBestStreak();
+      updateNextGoal();
     }
 
     // ============================================================
@@ -3632,6 +3848,7 @@
         <div class="flex justify-between"><span>Average Session:</span><span class="font-semibold">${d.sessions>0?Math.floor(d.totalTime/d.sessions):0}m</span></div>
         <div class="flex justify-between"><span>Productivity Score:</span><span class="font-semibold">${calculateProductivityScore()}%</span></div>
         <div class="flex justify-between"><span>Current Streak:</span><span class="font-semibold">🔥 ${progress.streak||0} days</span></div>
+        <div class="flex justify-between"><span>Best Streak:</span><span class="font-semibold">🏆 ${progress.bestStreak||0} days</span></div>
       `;
     }
 
@@ -4066,6 +4283,8 @@
       if (saved) {
         progress = saved;
         if (!Array.isArray(progress.dailySessions)) progress.dailySessions = Array(8).fill(false);
+        if (!Array.isArray(progress.studyHistory)) progress.studyHistory = [];
+        if (typeof progress.bestStreak === "undefined") progress.bestStreak = 0;
         const today = new Date().toDateString();
         if (progress.lastSession && new Date(progress.lastSession).toDateString() !== today) {
           progress.dailySessions = Array(8).fill(false);
@@ -4075,7 +4294,7 @@
       document.getElementById("completed-sessions").textContent = progress.completedSessions;
       document.getElementById("total-study-time").textContent = Math.floor(progress.totalStudyTime / 60);
       updateDailyProgressBar();
-      updateStreakDisplay();
+      updateStreakDisplayEnhanced();
       return progress;
     }
 
@@ -4725,7 +4944,7 @@
       renderTodoMini();
       updateAchievementsUI();
       updateDailyProgressBar();
-      updateStreakDisplay();
+      updateStreakDisplayEnhanced();
 
       playTrack(0);
 
