@@ -4696,54 +4696,57 @@ function updateStreakDisplayEnhanced() {
         hina: ["assets/images/hina_dress.jpg", "assets/images/hina_maid.jpg"], // TETAP
     };
 
-    const aronaOutfitKeys = ["default", "maid"]; // Ganti "yukata" → "maid"
+    const aronaOutfitKeys = ["default", "maid"];
+
     const aronaOutfitMessages = {
-        default: [
-            "Arona pakai seragam biasa hari ini... tetap semangat ya Sensei! 📚",
-            "Seragam Arona yang biasa... tapi semangatnya luar biasa! ✨",
-            "Arona siap belajar dengan Sensei hari ini! 💫"
-        ],
-        maid: [
-            "Arona... akan melayani Sensei sebagai maid hari ini! 👗",
-            "Gokigenyou, Sensei~ Arona siap membantu! ✨",
-            "Arona jadi maid spesial Sensei hari ini... 💕",
-            "Maid Arona akan jaga Sensei selama belajar! 🧹",
-            "Arona suka pakai outfit maid ini... cocok tidak Sensei? 👗"
-        ]
+      default: [
+        "Arona is in her usual outfit today! Let's do our best, Sensei! 🌟",
+        "Simple outfit, but full energy! Arona is ready! ✨",
+        "Hehe~ Arona is always ready to support you, Sensei! 💫"
+      ],
+      maid: [
+        "Ehehe~ Maid Arona reporting for duty, Sensei! 👗",
+        "Gokigenyou, Sensei~ Arona will take care of everything today! ✨",
+        "Arona is your special maid today! Leave it to me! 💕",
+        "Maid Arona will make sure you stay focused! 🧹",
+        "Do you like this outfit, Sensei? Arona feels extra cute! 👗"
+      ]
     };
 
-    const planaOutfitKeys = ["default", "maid"]; // HAPUS "bunny" & "kimono", TAMBAH "maid"
+    const planaOutfitKeys = ["default", "maid"];
+
     const planaOutfitMessages = {
-        default: [
-            "Plana... hanya punya ini... maaf Sensei... 📖",
-            "Seragam biasa ini... cukup untuk belajar... 📚",
-            "Plana merasa nyaman dengan ini... Sensei juga? 🌙"
-        ],
-        maid: [
-            "Plana... akan melayani sebagai maid... hari ini... 👗",
-            "M-maid Plana... apakah cocok Sensei? 🙈",
-            "Plana... jadi maid... untuk Sensei... spesial... 💕",
-            "Plana akan jaga Sensei... selama belajar... 🧹",
-            "Outfit maid ini... Plana pilih sendiri... malu... 🌸"
-        ]
+      default: [
+        "This is all Plana has... but it is enough... 📖",
+        "A simple outfit... for a quiet journey of learning... 📚",
+        "Plana feels at ease like this... do you feel the same, Sensei? 🌙"
+      ],
+      maid: [
+        "Plana... will serve as your maid today... 👗",
+        "M-maid Plana... is this acceptable, Sensei...? 🙈",
+        "Plana chose this... just for you... 💕",
+        "Plana will stay by your side... and support your focus... 🧹",
+        "This outfit... feels unfamiliar... but warm... 🌸"
+      ]
     };
     
-    const hinaOutfitKeys = ["dress","maid"]; // HINA: DRESS + MAID
-    const hinaOutfitMessages = { //Swich
+    const hinaOutfitKeys = ["dress", "maid"];
+
+    const hinaOutfitMessages = {
       dress: [
-        "Hina... is wearing a beautiful dress today... do you like it, Sensei? 👗",
-        "Hina chose this dress... especially to study with you... 💜",
-        "This dress... makes Hina feel a little more confident... 🌸",
-        "Sensei... does Hina look nice in this dress?... Hina is happy... ✨",
-        "This blue dress... is Hina's favorite... it feels perfect for today... 💙"
+        "Hina... is wearing a dress today... just for you... 👗",
+        "This dress... Hina chose it carefully... 💜",
+        "It makes Hina feel... a little more confident... 🌸",
+        "Sensei... does it look nice?... Hina is a bit nervous... ✨",
+        "This color... Hina likes it... it feels calm... 💙"
       ],
       maid: [
         "Hina... will serve you today... as your maid... 👗",
-        "Welcome, Sensei... Hina is ready to help you focus... 🧹",
-        "Hina... wants to be your special maid today... 💜",
-        "Ara... Hina will stay by your side while you study... ✨",
-        "Maid Hina... will do her best for you, Sensei... 💕"
-      ],
+        "M-maid Hina... will do her best... 🙈",
+        "Hina chose this... for you... 💕",
+        "Hina will stay by your side... while you study... 🧹",
+        "This outfit... is a little embarrassing... but... Hina will try... 🌸"
+      ]
     };
 
   function changeOutfit(direction) {
