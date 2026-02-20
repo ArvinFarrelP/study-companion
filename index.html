@@ -4691,32 +4691,41 @@ function updateStreakDisplayEnhanced() {
     let dragMoved = false;
 
     const outfits = {
-      arona: ["assets/images/arona.png","assets/images/arona_yukata.jpg"],
-      plana: ["assets/images/plana.png","assets/images/plana_bunnyGirl.jpg","assets/images/plana_kimono.jpg"], // SWIMSUIT DIHAPUS
-      hina: ["assets/images/hina_dress.jpg","assets/images/hina_maid.jpg"], // HINA: DRESS + MAID
+        arona: ["assets/images/arona.png", "assets/images/arona_maid.jpg"], // HAPUS yukata, TAMBAH maid
+        plana: ["assets/images/plana.png", "assets/images/plana_maid.jpg"], // HAPUS bunny & kimono, TAMBAH maid
+        hina: ["assets/images/hina_dress.jpg", "assets/images/hina_maid.jpg"], // TETAP
     };
 
-    const aronaOutfitKeys = ["default", "yukata"]; // ARONA: DEFAULT + YUKATA
+    const aronaOutfitKeys = ["default", "maid"]; // Ganti "yukata" → "maid"
     const aronaOutfitMessages = {
-      default: [
-        "Arona pakai seragam biasa hari ini... tetap semangat ya Sensei! 📚",
-        "Seragam Arona yang biasa... tapi semangatnya luar biasa! ✨",
-        "Arona siap belajar dengan Sensei hari ini! 💫"
-      ],
-      yukata: [
-        "Sensei lihat! Arona pakai yukata baru! Cantik tidak? 👘",
-        "Arona mau ikut festival dengan Sensei pakai yukata ini... 🎆",
-        "Yukata ini spesial... Arona pakai khusus untuk Sensei loh! 💕",
-        "Ehehe~ Arona jadi makin cantik pakai yukata ya Sensei? 🌸",
-        "Arona suka warna yukata ini... biru seperti langit! 💙"
-      ]
+        default: [
+            "Arona pakai seragam biasa hari ini... tetap semangat ya Sensei! 📚",
+            "Seragam Arona yang biasa... tapi semangatnya luar biasa! ✨",
+            "Arona siap belajar dengan Sensei hari ini! 💫"
+        ],
+        maid: [
+            "Arona... akan melayani Sensei sebagai maid hari ini! 👗",
+            "Gokigenyou, Sensei~ Arona siap membantu! ✨",
+            "Arona jadi maid spesial Sensei hari ini... 💕",
+            "Maid Arona akan jaga Sensei selama belajar! 🧹",
+            "Arona suka pakai outfit maid ini... cocok tidak Sensei? 👗"
+        ]
     };
 
-    const planaOutfitKeys = ["default","bunny","kimono"]; // SWIMSUIT DIHAPUS
+    const planaOutfitKeys = ["default", "maid"]; // HAPUS "bunny" & "kimono", TAMBAH "maid"
     const planaOutfitMessages = {
-      default: ["Plana... hanya punya ini... maaf Sensei... 📖","Seragam biasa ini... cukup untuk belajar... 📚","Plana merasa nyaman dengan ini... Sensei juga? 🌙"],
-      kimono: ["Kimono... apakah cocok? Plana agak malu... 🌸","Sensei suka? Plana... senang... sedikit... ✨","Untuk acara spesial... Plana pakai ini... 🎋","Kimono ini... warisan dari Sensei... eh, bukan! 💕"],
-      bunny: ["S-sensei... jangan lihat... Plana salah ambil baju... 🐰💦","A-Arona yang suruh... Plana gak mau... tapi... 🙈","Telinganya... jangan dipegang... Kyaa! 🐰💕","Plana... jadi kelinci... mau Sensei elus? ... Eh?! 😳"],
+        default: [
+            "Plana... hanya punya ini... maaf Sensei... 📖",
+            "Seragam biasa ini... cukup untuk belajar... 📚",
+            "Plana merasa nyaman dengan ini... Sensei juga? 🌙"
+        ],
+        maid: [
+            "Plana... akan melayani sebagai maid... hari ini... 👗",
+            "M-maid Plana... apakah cocok Sensei? 🙈",
+            "Plana... jadi maid... untuk Sensei... spesial... 💕",
+            "Plana akan jaga Sensei... selama belajar... 🧹",
+            "Outfit maid ini... Plana pilih sendiri... malu... 🌸"
+        ]
     };
     
     const hinaOutfitKeys = ["dress","maid"]; // HINA: DRESS + MAID
