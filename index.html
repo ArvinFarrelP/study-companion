@@ -2973,7 +2973,7 @@
                 aria-live="polite"
               ></div>
               <img
-                src="assets/images/arona.png"
+                src="assets/images/arona.webp"
                 alt="Arona study companion character"
                 class="w-80 h-96 object-contain rounded-2xl"
                 id="character-image"
@@ -4321,11 +4321,11 @@ hina: {
       // Tentukan foto yang akan ditampilkan di bubble
       let photoPath;
       if (currentMode === "arona") {
-        photoPath = outfits.arona[currentOutfit] || "assets/images/arona.png";
+        photoPath = outfits.arona[currentOutfit] || "assets/images/arona.webp";
       } else if (currentMode === "plana") {
-        photoPath = outfits.plana[currentOutfit] || "assets/images/plana.png";
+        photoPath = outfits.plana[currentOutfit] || "assets/images/plana.webp";
       } else if (currentMode === "hina") {
-        photoPath = outfits.hina[currentOutfit] || "assets/images/hina_dress.jpg";
+        photoPath = outfits.hina[currentOutfit] || "assets/images/hina_dress.webp";
       }
       
       // Tentukan warna border berdasarkan mode
@@ -4724,9 +4724,9 @@ hina: {
     let dragMoved = false;
 
     const outfits = {
-        arona: ["assets/images/arona.png", "assets/images/arona_maid.png"], // HAPUS yukata, TAMBAH maid
-        plana: ["assets/images/plana.png", "assets/images/plana_maid.png"], // HAPUS bunny & kimono, TAMBAH maid
-        hina: ["assets/images/hina_dress.png", "assets/images/hina_maid.jpg"], // TETAP
+        arona: ["assets/images/arona.webp", "assets/images/arona_maid.webp"], // HAPUS yukata, TAMBAH maid
+        plana: ["assets/images/plana.webp", "assets/images/plana_maid.webp"], // HAPUS bunny & kimono, TAMBAH maid
+        hina: ["assets/images/hina_dress.webp", "assets/images/hina_maid.webp"], // TETAP
     };
 
 const aronaOutfitKeys = ["default", "maid"];
@@ -4792,7 +4792,7 @@ const hinaOutfitMessages = {
         const outfitKey = aronaOutfitKeys[currentOutfit] || "default";
         const messages = aronaOutfitMessages[outfitKey];
         const selected = messages[Math.floor(Math.random() * messages.length)];
-        const photoPath = outfits.arona[currentOutfit] || "assets/images/arona.png";
+        const photoPath = outfits.arona[currentOutfit] || "assets/images/arona.webp";
         
         // 🟢 GANTI DENGAN INI (style baru)
         bubble.innerHTML = `
@@ -4818,7 +4818,7 @@ const hinaOutfitMessages = {
         const outfitKey = aronaOutfitKeys[currentOutfit] || "default";
         const messages = aronaOutfitMessages[outfitKey];
         const selected = messages[Math.floor(Math.random() * messages.length)];
-        const photoPath = outfits.arona[currentOutfit] || "assets/images/arona.png";
+        const photoPath = outfits.arona[currentOutfit] || "assets/images/arona.webp";
         
         // ✅ GANTI DENGAN INI (style baru)
         bubble.innerHTML = `
@@ -4832,7 +4832,7 @@ const hinaOutfitMessages = {
       const key = planaOutfitKeys[currentOutfit] || "default";
       const msgs = planaOutfitMessages[key];
       const selected = msgs[Math.floor(Math.random() * msgs.length)];
-      const photoPath = outfits.plana[currentOutfit] || "assets/images/plana.png";
+      const photoPath = outfits.plana[currentOutfit] || "assets/images/plana.webp";
       
       bubble.innerHTML = `
           <div style="display: flex; align-items: center; gap: 8px; background: white; border-radius: 16px; padding: 6px 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
@@ -4845,7 +4845,7 @@ const hinaOutfitMessages = {
       const key = hinaOutfitKeys[currentOutfit] || "dress";
       const msgs = hinaOutfitMessages[key];
       const selected = msgs[Math.floor(Math.random() * msgs.length)];
-      const photoPath = outfits.hina[currentOutfit] || "assets/images/hina_dress.jpg";
+      const photoPath = outfits.hina[currentOutfit] || "assets/images/hina_dress.webp";
       
       bubble.innerHTML = `
           <div style="display: flex; align-items: center; gap: 8px; background: white; border-radius: 16px; padding: 6px 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
@@ -4943,7 +4943,7 @@ const hinaOutfitMessages = {
       if (sunIcon) sunIcon.classList.remove("hidden"); 
       if (moonIcon) moonIcon.classList.add("hidden");
       if (hinaIcon) hinaIcon.classList.add("hidden");
-      if (img) img.src = "assets/images/arona.png";
+      if (img) img.src = "assets/images/arona.webp";
       if (appTitle) appTitle.textContent = "Arona Study Companion";
       currentMode = "arona";
     }
@@ -4956,7 +4956,7 @@ const hinaOutfitMessages = {
       if (sunIcon) sunIcon.classList.add("hidden"); 
       if (moonIcon) moonIcon.classList.remove("hidden");
       if (hinaIcon) hinaIcon.classList.add("hidden");
-      if (img) img.src = "assets/images/plana.png";
+      if (img) img.src = "assets/images/plana.webp";
       if (appTitle) appTitle.textContent = "Plana Study Companion";
       currentMode = "plana";
     }
@@ -4969,7 +4969,7 @@ const hinaOutfitMessages = {
       if (sunIcon) sunIcon.classList.add("hidden");
       if (moonIcon) moonIcon.classList.add("hidden");
       if (hinaIcon) hinaIcon.classList.remove("hidden");
-      if (img) img.src = "assets/images/hina_dress.jpg"; // UBAH KE DRESS
+      if (img) img.src = "assets/images/hina_dress.webp"; // UBAH KE DRESS
       if (appTitle) appTitle.textContent = "Hina Study Companion";
       currentMode = "hina";
     }
@@ -4996,7 +4996,7 @@ const hinaOutfitMessages = {
           if (sunIcon) sunIcon.classList.remove("hidden"); 
           if (moonIcon) moonIcon.classList.add("hidden");
           if (hinaIcon) hinaIcon.classList.add("hidden");
-          document.getElementById("character-image").src = "assets/images/arona.png";
+          document.getElementById("character-image").src = "assets/images/arona.webp";
           appTitle.textContent = "Arona Study Companion";
           currentMode = "arona";
         } else if (toMode === "plana") {
@@ -5004,7 +5004,7 @@ const hinaOutfitMessages = {
           if (sunIcon) sunIcon.classList.add("hidden"); 
           if (moonIcon) moonIcon.classList.remove("hidden");
           if (hinaIcon) hinaIcon.classList.add("hidden");
-          document.getElementById("character-image").src = "assets/images/plana.png";
+          document.getElementById("character-image").src = "assets/images/plana.webp";
           appTitle.textContent = "Plana Study Companion";
           currentMode = "plana";
         } else {
@@ -5012,7 +5012,7 @@ const hinaOutfitMessages = {
           if (sunIcon) sunIcon.classList.add("hidden");
           if (moonIcon) moonIcon.classList.add("hidden");
           if (hinaIcon) hinaIcon.classList.remove("hidden");
-          document.getElementById("character-image").src = "assets/images/hina_dress.jpg";
+          document.getElementById("character-image").src = "assets/images/hina_dress.webp";
           appTitle.textContent = "Hina Study Companion";
           currentMode = "hina";
         }
