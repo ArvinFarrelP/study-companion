@@ -3324,65 +3324,18 @@
             </div>
           </div>
 
-          <div class="max-h-48 overflow-y-auto playlist-container">
-            <h3 class="text-lg font-semibold text-primary mb-3">
-              Study Playlist
-            </h3>
-            <div class="space-y-2" role="listbox" aria-label="Music playlist">
-              <div
-                class="flex items-center gap-3 p-2 rounded-lg bg-primary-opacity cursor-pointer"
-                data-track="0"
-                role="option"
-                aria-selected="true"
-              >
-                <div class="playlist-number playlist-active">
-                  <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </div>
-                <div class="flex-1">
-                  <p class="text-sm font-medium">Lo-fi Study Beats</p>
-                  <p class="text-xs text-gray-400">Chill Anime Mix</p>
-                </div>
-                <span class="text-xs text-gray-400">01:00:29</span>
-              </div>
-
-              <div
-                class="flex items-center gap-3 p-2 rounded-lg hover:bg-primary-opacity cursor-pointer"
-                data-track="1"
-                role="option"
-                aria-selected="false"
-              >
-                <div class="playlist-number playlist-inactive">2</div>
-                <div class="flex-1">
-                  <p class="text-sm font-medium">Rainy Night Coding</p>
-                  <p class="text-xs text-gray-400">Jazz Hop</p>
-                </div>
-                <span class="text-xs text-gray-400">01:02:14</span>
-              </div>
-
-              <div
-                class="flex items-center gap-3 p-2 rounded-lg hover:bg-primary-opacity cursor-pointer"
-                data-track="2"
-                role="option"
-                aria-selected="false"
-              >
-                <div class="playlist-number playlist-inactive">3</div>
-                <div class="flex-1">
-                  <p class="text-sm font-medium">Coffee Shop Vibes</p>
-                  <p class="text-xs text-gray-400">Acoustic Lo-fi</p>
-                </div>
-                <span class="text-xs text-gray-400">00:32:22</span>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-    </main>
+<div class="max-h-48 overflow-y-auto playlist-container" id="dynamic-playlist">
+  <h3 class="text-lg font-semibold text-primary mb-3">
+    Study Playlist
+  </h3>
+  <div class="space-y-2" id="playlist-items">
+    <!-- Akan diisi oleh JavaScript -->
+              </div>  <!-- Nutup playlist container -->
+            </div>    <!-- Nutup music player section -->
+          </div>      <!-- Nutup glass rounded-3xl -->
+        </section>    <!-- Nutup music player section -->
+      </div>          <!-- Nutup flex container -->
+    </main>           <!-- Nutup main -->
 
     <footer class="site-footer theme-transition">
       <div class="footer-content">
@@ -4455,21 +4408,124 @@ hina: {
     const currentTrackDisplay = document.getElementById("current-track-display");
     const currentArtistEl = document.getElementById("current-artist");
 
-    const playlist = [
-      { title:"Lo-fi Study Beats", artist:"Chill Anime Mix", src:"./assets/music/lofi-study.mp3", duration:"01:00:29" },
-      { title:"Rainy Night Coding", artist:"Jazz Hop", src:"./assets/music/rainy-coding.mp3", duration:"01:02:14" },
-      { title:"Coffee Shop Vibes", artist:"Acoustic Lo-fi", src:"./assets/music/coffee-vibes.mp3", duration:"00:32:22" },
-    ];
+// ============================================================
+// AUDIO - PLAYLIST PER KARAKTER
+// ============================================================
+// Deklarasi variables untuk audio
+let currentTrackIndex = 0;
+let isMusicPlaying = false;
+let currentFallbackIndex = 0;
 
-    const audioFallbacks = {
-      "lofi-study.mp3": ["https://cdn.pixabay.com/download/audio/2022/03/15/audio_d17187f128.mp3","https://assets.mixkit.co/music/preview/mixkit-chill-abstract-loop-229.mp3"],
-      "rainy-coding.mp3": ["https://cdn.pixabay.com/download/audio/2022/11/16/audio_8c97a94dbf.mp3","https://assets.mixkit.co/music/preview/mixkit-rainy-jazz-229.mp3"],
-      "coffee-vibes.mp3": ["https://cdn.pixabay.com/download/audio/2022/10/25/audio_1e779eb41f.mp3","https://assets.mixkit.co/music/preview/mixkit-coffee-shop-ambience-230.mp3"],
-    };
+// Playlist default untuk Arona & Plana
+const defaultPlaylist = [
+  { title:"Lo-fi Study Beats", artist:"Chill Anime Mix", src:"./assets/music/lofi-study.mp3", duration:"01:00:29" },
+  { title:"Rainy Night Coding", artist:"Jazz Hop", src:"./assets/music/rainy-coding.mp3", duration:"01:02:14" },
+  { title:"Coffee Shop Vibes", artist:"Acoustic Lo-fi", src:"./assets/music/coffee-vibes.mp3", duration:"00:32:22" },
+];
 
-    let currentTrackIndex = 0;
-    let isMusicPlaying = false;
-    let currentFallbackIndex = 0;
+// Playlist khusus Hina
+const hinaPlaylist = [
+  { 
+    title: "Hina Theme — Yumeji no Hana", 
+    artist: "Blue Archive OST", 
+    src: "./assets/music/hina-theme.mp3",
+    duration: "03:24"
+  }
+];
+
+// Playlist aktif yang akan digunakan
+let playlist = [...defaultPlaylist];
+
+// FUNGSI HARUS DIDEKLARASIKAN DULU SEBELUM DIPANGGIL!
+
+// Fungsi untuk update tampilan playlist
+function updatePlaylistUI() {
+  const playlistContainer = document.getElementById('playlist-items');
+  if (!playlistContainer) return;
+  
+  playlistContainer.innerHTML = '';
+  
+  playlist.forEach((track, index) => {
+    const trackElement = document.createElement('div');
+    trackElement.className = `flex items-center gap-3 p-2 rounded-lg ${index === currentTrackIndex ? 'bg-primary-opacity' : 'hover:bg-primary-opacity'} cursor-pointer`;
+    trackElement.setAttribute('data-track', index);
+    trackElement.setAttribute('role', 'option');
+    trackElement.setAttribute('aria-selected', index === currentTrackIndex);
+    
+    trackElement.innerHTML = `
+      <div class="playlist-number ${index === currentTrackIndex ? 'playlist-active' : 'playlist-inactive'}">
+        ${index === currentTrackIndex ? 
+          '<svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/></svg>' : 
+          (index + 1)}
+      </div>
+      <div class="flex-1">
+        <p class="text-sm font-medium">${track.title}</p>
+        <p class="text-xs text-gray-400">${track.artist}</p>
+      </div>
+      <span class="text-xs text-gray-400">${track.duration}</span>
+    `;
+    
+    trackElement.addEventListener('click', () => playTrack(index));
+    playlistContainer.appendChild(trackElement);
+  });
+}
+
+// Fungsi untuk update tampilan music
+function updateMusicDisplay() {
+  if (playlist.length > 0 && currentTrackIndex < playlist.length) {
+    currentTrackDisplay.textContent = playlist[currentTrackIndex].title;
+    currentArtistEl.textContent = playlist[currentTrackIndex].artist;
+    totalTimeEl.textContent = playlist[currentTrackIndex].duration;
+  } else {
+    currentTrackDisplay.textContent = "No Music";
+    currentArtistEl.textContent = currentMode === "hina" ? "Hina Special" : "Select a theme";
+    totalTimeEl.textContent = "0:00";
+  }
+}
+
+// Fungsi untuk update playlist berdasarkan mode karakter
+function updatePlaylistByMode() {
+  if (currentMode === "hina") {
+    playlist = [...hinaPlaylist];
+  } else {
+    playlist = [...defaultPlaylist];
+  }
+  
+  currentTrackIndex = 0;
+  updateMusicDisplay();
+  updatePlaylistUI();  // ← SEKARANG SUDAH BISA DIPANGGIL
+  
+  if (audioPlayer) {
+    audioPlayer.pause();
+    isMusicPlaying = false;
+    playIcon.classList.remove("hidden");
+    pauseIcon.classList.add("hidden");
+    
+    if (playlist.length > 0) {
+      currentTrackDisplay.textContent = playlist[0].title;
+      currentArtistEl.textContent = playlist[0].artist;
+      totalTimeEl.textContent = playlist[0].duration;
+    } else {
+      currentTrackDisplay.textContent = "No Music";
+      currentArtistEl.textContent = "";
+      totalTimeEl.textContent = "0:00";
+    }
+    
+    audioPlayer.src = "";
+    progressFill.style.width = "0%";
+    currentTimeEl.textContent = "0:00";
+  }
+}
+
+// Panggil fungsi saat inisialisasi
+updatePlaylistByMode();
+
+const audioFallbacks = {
+  "lofi-study.mp3": ["./assets/music/lofi-study.mp3"],
+  "rainy-coding.mp3": ["./assets/music/rainy-coding.mp3"],
+  "coffee-vibes.mp3": ["./assets/music/coffee-vibes.mp3"],
+  "hina-theme.mp3": ["./assets/music/hina-theme.mp3"]
+};
 
     const savedVolume = safeLoad("musicVolume");
     audioPlayer.volume = savedVolume !== null ? parseFloat(savedVolume) : 0.7;
@@ -4547,21 +4603,50 @@ hina: {
     nextBtn.addEventListener("click", () => playTrack((currentTrackIndex+1) % playlist.length));
     audioPlayer.addEventListener("ended", () => playTrack((currentTrackIndex+1) % playlist.length));
 
-    function playTrack(index) {
-      currentTrackIndex = index;
-      const track = playlist[index];
-      if (currentTrackDisplay) currentTrackDisplay.textContent = track.title;
-      if (currentArtistEl) currentArtistEl.textContent = track.artist;
-      if (totalTimeEl) totalTimeEl.textContent = track.duration;
-      currentFallbackIndex = 0;
-      audioPlayer.src = track.src;
-      updatePlaylistNumbers();
-      document.querySelectorAll("[data-track]").forEach(item => {
-        const isActive = parseInt(item.getAttribute("data-track")) === index;
-        item.classList.toggle("bg-primary-opacity", isActive);
-      });
-      if (isMusicPlaying) audioPlayer.play().catch(() => { isMusicPlaying = false; });
-    }
+function playTrack(index) {
+  // Validasi: pastikan index valid
+  if (!playlist || playlist.length === 0) {
+    console.log("No tracks available");
+    return;
+  }
+  
+  if (index < 0) index = 0;
+  if (index >= playlist.length) index = 0;
+  
+  currentTrackIndex = index;
+  const track = playlist[currentTrackIndex];
+  
+  if (currentTrackDisplay) currentTrackDisplay.textContent = track.title;
+  if (currentArtistEl) currentArtistEl.textContent = track.artist;
+  if (totalTimeEl) totalTimeEl.textContent = track.duration;
+  
+  currentFallbackIndex = 0;
+  audioPlayer.src = track.src;
+  
+  // 🔥 LOOP KHUSUS UNTUK HINA
+  if (currentMode === "hina") {
+    audioPlayer.loop = true;  // Hina loop terus
+    console.log("Hina mode: loop enabled");
+  } else {
+    audioPlayer.loop = false; // Arona & Plana tidak loop
+    console.log("Arona/Plana mode: loop disabled");
+  }
+  
+  updatePlaylistNumbers();
+  updatePlaylistUI();
+  
+  document.querySelectorAll("[data-track]").forEach(item => {
+    const isActive = parseInt(item.getAttribute("data-track")) === index;
+    item.classList.toggle("bg-primary-opacity", isActive);
+  });
+  
+  if (isMusicPlaying) {
+    audioPlayer.play().catch(() => { 
+      isMusicPlaying = false;
+      showNotification("Music Error", "Cannot play audio. Please check music files.");
+    });
+  }
+}
 
     function formatTime(s) {
       if (isNaN(s)) return "0:00";
@@ -4787,7 +4872,6 @@ const hinaOutfitMessages = {
     if (!bubble) return;
     
     if (outfits[currentMode].length <= 1) {
-      let selected;
     if (currentMode === "arona") {
         const outfitKey = aronaOutfitKeys[currentOutfit] || "default";
         const messages = aronaOutfitMessages[outfitKey];
@@ -4974,77 +5058,83 @@ const hinaOutfitMessages = {
       currentMode = "hina";
     }
 
-    function switchTheme(toMode) {
-      // Jika beralih ke Hina, tampilkan sparkle
-      if (toMode === "hina") {
-        setTimeout(() => {
-          showHinaSparkle();
-        }, 200);
-      }
+function switchTheme(toMode) {
+  // Jika beralih ke Hina, tampilkan sparkle
+  if (toMode === "hina") {
+    setTimeout(() => {
+      showHinaSparkle();
+    }, 200);
+  }
       
-      document.querySelectorAll(".fade-text").forEach(el => el.style.opacity = "0");
+  document.querySelectorAll(".fade-text").forEach(el => el.style.opacity = "0");
+  
+  // Fade out karakter lama
+  const charContainer = document.getElementById("character-container");
+  if (charContainer) {
+    charContainer.classList.add("fade-out");
+  }
+  
+  setTimeout(() => {
+    if (toMode === "arona") {
+      body.classList.remove("theme-plana", "theme-hina"); body.classList.add("theme-arona");
+      if (sunIcon) sunIcon.classList.remove("hidden"); 
+      if (moonIcon) moonIcon.classList.add("hidden");
+      if (hinaIcon) hinaIcon.classList.add("hidden");
+      document.getElementById("character-image").src = "assets/images/arona.webp";
+      appTitle.textContent = "Arona Study Companion";
+      currentMode = "arona";
       
-      // Fade out karakter lama
-      const charContainer = document.getElementById("character-container");
+    } else if (toMode === "plana") {
+      body.classList.remove("theme-arona", "theme-hina"); body.classList.add("theme-plana");
+      if (sunIcon) sunIcon.classList.add("hidden"); 
+      if (moonIcon) moonIcon.classList.remove("hidden");
+      if (hinaIcon) hinaIcon.classList.add("hidden");
+      document.getElementById("character-image").src = "assets/images/plana.webp";
+      appTitle.textContent = "Plana Study Companion";
+      currentMode = "plana";
+      
+    } else {
+      body.classList.remove("theme-arona", "theme-plana"); body.classList.add("theme-hina");
+      if (sunIcon) sunIcon.classList.add("hidden");
+      if (moonIcon) moonIcon.classList.add("hidden");
+      if (hinaIcon) hinaIcon.classList.remove("hidden");
+      document.getElementById("character-image").src = "assets/images/hina_dress.webp";
+      appTitle.textContent = "Hina Study Companion";
+      currentMode = "hina";
+    }
+    
+    // UPDATE PLAYLIST DAN PUTAR LAGU (CUKUP SEKALI)
+    updatePlaylistByMode();
+    playTrack(0);
+    
+    safeSave("studyCompanionMode", toMode);
+    currentOutfit = 0;
+    const savedOutfit = safeLoad(`${currentMode}Outfit`);
+    if (savedOutfit !== null) {
+      currentOutfit = parseInt(savedOutfit);
+      const img = document.getElementById("character-image");
+      if (img && outfits[currentMode][currentOutfit]) img.src = outfits[currentMode][currentOutfit];
+    }
+    loadAchievements();
+    
+    // Fade in karakter baru
+    setTimeout(() => {
       if (charContainer) {
-        charContainer.classList.add("fade-out");
+        charContainer.classList.remove("fade-out");
+        charContainer.classList.add("fade-in");
       }
+      triggerCharacterReaction("greeting");
       
       setTimeout(() => {
-        if (toMode === "arona") {
-          body.classList.remove("theme-plana", "theme-hina"); body.classList.add("theme-arona");
-          if (sunIcon) sunIcon.classList.remove("hidden"); 
-          if (moonIcon) moonIcon.classList.add("hidden");
-          if (hinaIcon) hinaIcon.classList.add("hidden");
-          document.getElementById("character-image").src = "assets/images/arona.webp";
-          appTitle.textContent = "Arona Study Companion";
-          currentMode = "arona";
-        } else if (toMode === "plana") {
-          body.classList.remove("theme-arona", "theme-hina"); body.classList.add("theme-plana");
-          if (sunIcon) sunIcon.classList.add("hidden"); 
-          if (moonIcon) moonIcon.classList.remove("hidden");
-          if (hinaIcon) hinaIcon.classList.add("hidden");
-          document.getElementById("character-image").src = "assets/images/plana.webp";
-          appTitle.textContent = "Plana Study Companion";
-          currentMode = "plana";
-        } else {
-          body.classList.remove("theme-arona", "theme-plana"); body.classList.add("theme-hina");
-          if (sunIcon) sunIcon.classList.add("hidden");
-          if (moonIcon) moonIcon.classList.add("hidden");
-          if (hinaIcon) hinaIcon.classList.remove("hidden");
-          document.getElementById("character-image").src = "assets/images/hina_dress.webp";
-          appTitle.textContent = "Hina Study Companion";
-          currentMode = "hina";
+        document.querySelectorAll(".fade-text").forEach(el => el.style.opacity = "1");
+        if (charContainer) {
+          charContainer.classList.remove("fade-in");
         }
-        
-        safeSave("studyCompanionMode", toMode);
-        currentOutfit = 0;
-        const savedOutfit = safeLoad(`${currentMode}Outfit`);
-        if (savedOutfit !== null) {
-          currentOutfit = parseInt(savedOutfit);
-          const img = document.getElementById("character-image");
-          if (img && outfits[currentMode][currentOutfit]) img.src = outfits[currentMode][currentOutfit];
-        }
-        loadAchievements();
-        
-        // Fade in karakter baru
-        setTimeout(() => {
-          if (charContainer) {
-            charContainer.classList.remove("fade-out");
-            charContainer.classList.add("fade-in");
-          }
-          triggerCharacterReaction("greeting");
-          
-          setTimeout(() => {
-            document.querySelectorAll(".fade-text").forEach(el => el.style.opacity = "1");
-            if (charContainer) {
-              charContainer.classList.remove("fade-in");
-            }
-          }, 400);
-        }, 100);
-        
       }, 400);
-    }
+    }, 100);
+    
+  }, 400);
+}
 
     themeToggleBtn.addEventListener("click", () => {
       createParticleEffect(themeToggleBtn);
@@ -5133,59 +5223,63 @@ const hinaOutfitMessages = {
       }
     }
 
-    // ============================================================
-    // INIT
-    // ============================================================
-    function initializeApp() {
-      const savedMode = safeLoad("studyCompanionMode") || "arona";
-      if (savedMode === "arona") applyAronaThemeImmediately();
-      else if (savedMode === "plana") applyPlanaThemeImmediately();
-      else applyHinaThemeImmediately();
+// ============================================================
+// INIT
+// ============================================================
+function initializeApp() {
+  const savedMode = safeLoad("studyCompanionMode") || "arona";
+  if (savedMode === "arona") applyAronaThemeImmediately();
+  else if (savedMode === "plana") applyPlanaThemeImmediately();
+  else applyHinaThemeImmediately();
 
-      progress = loadProgress();
-      loadAchievements();
-      loadStudyMetrics();
-      loadTodos();
-      renderTodoMini();
-      updateAchievementsUI();
-      updateDailyProgressBar();
-      updateStreakDisplayEnhanced();
+  progress = loadProgress();
+  loadAchievements();
+  loadStudyMetrics();
+  loadTodos();
+  renderTodoMini();
+  updateAchievementsUI();
+  updateDailyProgressBar();
+  updateStreakDisplayEnhanced();
 
-      playTrack(0);
+  // TAMBAHKAN BARIS INI - Update playlist berdasarkan mode yang tersimpan
+  updatePlaylistByMode();
+  
+  // BARU setelah itu putar lagu
+  playTrack(0);
 
-      if (timerButtons[0]) {
-        timerButtons[0].classList.add("bg-primary","text-white"); timerButtons[0].classList.remove("bg-primary-opacity"); timerButtons[0].setAttribute("aria-pressed","true");
-      }
+  if (timerButtons[0]) {
+    timerButtons[0].classList.add("bg-primary","text-white"); timerButtons[0].classList.remove("bg-primary-opacity"); timerButtons[0].setAttribute("aria-pressed","true");
+  }
 
-      updatePlaylistNumbers();
-      updateStartButtonText();
+  updatePlaylistNumbers();
+  updateStartButtonText();
 
-      const savedOutfit = safeLoad(`${currentMode}Outfit`);
-      if (savedOutfit !== null) {
-        currentOutfit = parseInt(savedOutfit);
-        const img = document.getElementById("character-image");
-        if (img && outfits[currentMode][currentOutfit]) img.src = outfits[currentMode][currentOutfit];
-      }
+  const savedOutfit = safeLoad(`${currentMode}Outfit`);
+  if (savedOutfit !== null) {
+    currentOutfit = parseInt(savedOutfit);
+    const img = document.getElementById("character-image");
+    if (img && outfits[currentMode][currentOutfit]) img.src = outfits[currentMode][currentOutfit];
+  }
 
-      autoSaveProgress();
+  autoSaveProgress();
 
+  setTimeout(() => {
+    if (splashScreen) {
+      splashScreen.style.opacity = "0"; splashScreen.style.transform = "scale(1.1)";
       setTimeout(() => {
-        if (splashScreen) {
-          splashScreen.style.opacity = "0"; splashScreen.style.transform = "scale(1.1)";
-          setTimeout(() => {
-            splashScreen.style.display = "none";
-            document.querySelectorAll(".page-transition").forEach(el => el.classList.add("page-loaded"));
-            if ("Notification" in window && Notification.permission === "default") Notification.requestPermission();
-            triggerCharacterReaction("greeting");
-            
-            // TAMBAHKAN INI - Sparkle saat pertama load jika mode Hina
-            if (currentMode === "hina") {
-              setTimeout(() => { showHinaSparkle(); }, 300);
-            }
-          }, 1000);
+        splashScreen.style.display = "none";
+        document.querySelectorAll(".page-transition").forEach(el => el.classList.add("page-loaded"));
+        if ("Notification" in window && Notification.permission === "default") Notification.requestPermission();
+        triggerCharacterReaction("greeting");
+        
+        // TAMBAHKAN INI - Sparkle saat pertama load jika mode Hina
+        if (currentMode === "hina") {
+          setTimeout(() => { showHinaSparkle(); }, 300);
         }
-      }, 2000);
+      }, 1000);
     }
+  }, 2000);
+}
 
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initializeApp);
     else initializeApp();

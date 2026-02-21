@@ -182,12 +182,21 @@ self.addEventListener('fetch', (event) => {
   }
 });
 
-// Strategy: Audio files
+// Strategy: Audio files - FIXED VERSION
 async function handleAudioRequest(request) {
   const cache = await caches.open(CACHE_NAME);
   
   try {
-    // Coba dari cache dulu
+    // Cek apakah ini range request (partial content)
+    const isRangeRequest = request.headers.has('range');
+    
+    // Jika range request, langsung fetch tanpa cache
+    if (isRangeRequest) {
+      console.log('[SW] Range request detected, bypassing cache:', request.url);
+      return fetch(request);
+    }
+    
+    // Untuk request normal, coba dari cache dulu
     const cachedResponse = await cache.match(request);
     if (cachedResponse) {
       console.log('[SW] Audio served from cache:', request.url);
@@ -197,20 +206,26 @@ async function handleAudioRequest(request) {
     // Coba dari network
     const networkResponse = await fetch(request);
     
-    // Cache jika sukses
-    if (networkResponse.ok) {
-      await cache.put(request, networkResponse.clone());
-      console.log('[SW] Audio cached:', request.url);
+    // Cache hanya jika response OK dan BUKAN partial content (206)
+    if (networkResponse.ok && networkResponse.status !== 206) {
+      try {
+        await cache.put(request, networkResponse.clone());
+        console.log('[SW] Audio cached:', request.url);
+      } catch (cacheError) {
+        console.debug('[SW] Failed to cache audio (likely range request):', request.url);
+      }
     }
     
     return networkResponse;
   } catch (error) {
-    console.warn('[SW] Audio fetch failed, returning silent audio:', error);
+    console.warn('[SW] Audio fetch failed:', error);
     
     // Fallback: return silent audio
     return new Response('', {
+      status: 200,
       headers: {
         'Content-Type': 'audio/mpeg',
+        'Content-Length': '0',
         'X-SW-Fallback': 'silent-audio'
       }
     });
