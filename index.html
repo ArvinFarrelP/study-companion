@@ -3094,7 +3094,6 @@
                       Best: 0
                     </span>
                   </div>
-                  <span class="text-xs text-primary" id="streak-message"></span>
                 </div>
                 
                 <!-- Streak Calendar 7 hari -->
@@ -3102,10 +3101,6 @@
                   <!-- Akan diisi JavaScript -->
                 </div>
                 
-                <!-- Progress ke achievement berikutnya -->
-                <div class="mt-2 text-xs text-gray-500 text-center" id="next-streak-goal">
-                  🔜 Next: 7 days streak
-                </div>
               </div>
             </section>
 
@@ -3626,29 +3621,6 @@
         }
     }
 
-    // Update next goal
-    function updateNextGoal() {
-        const streak = progress.streak || 0;
-        let nextGoal = 7; // default
-        
-        if (streak < 3) nextGoal = 3;
-        else if (streak < 7) nextGoal = 7;
-        else if (streak < 14) nextGoal = 14;
-        else if (streak < 21) nextGoal = 21;
-        else if (streak < 30) nextGoal = 30;
-        else nextGoal = streak + 7;
-        
-        const remaining = nextGoal - streak;
-        const goalEl = document.getElementById('next-streak-goal');
-        if (goalEl) {
-            if (remaining > 0) {
-                goalEl.innerHTML = `🎯 ${remaining} days left to reach a ${nextGoal}-day streak!`;
-            } else {
-                goalEl.innerHTML = `✨ Congratulations! ${streak}-day streak achieved! ✨`;
-            }
-        }
-    }
-
     // Enhanced streak display function
 function updateStreakDisplayEnhanced() {
     const el = document.getElementById("streak-display");
@@ -3684,10 +3656,8 @@ function updateStreakDisplayEnhanced() {
     el.title = getStreakMessage(s);
     
     // Update komponen lain
-    document.getElementById('streak-message').textContent = getStreakMessage(s);
     renderStreakCalendar();
     updateBestStreak();
-    updateNextGoal();
 }
 
     // ============================================================
