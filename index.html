@@ -34,6 +34,58 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <style>
       /* All your existing CSS styles remain exactly the same */
+
+      /* Hina Sparkle Effect */
+      #hina-effect {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 999;
+      }
+
+      .sparkle {
+        position: absolute;
+        width: 7px;
+        height: 7px;
+        background: radial-gradient(circle, #ffffff 0%, #e9d5ff 70%, rgba(233,213,255,0) 100%);
+        border-radius: 50%;
+        opacity: 0;
+        box-shadow: 0 0 6px rgba(255,255,255,0.6);
+        animation: sparkleFall 2s ease-out forwards;
+      }
+
+      @keyframes sparkleFall {
+        0% {
+          transform: translateY(-20px) scale(0.8);
+          opacity: 0;
+        }
+        20% {
+          opacity: 0.6;
+        }
+        100% {
+          transform: translateY(120px) scale(1);
+          opacity: 0;
+        }
+      }
+
+      /* Character fade transition */
+      .character {
+        transition: all 0.4s ease;
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .character.fade-out {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+
+      .character.fade-in {
+        opacity: 1;
+        transform: scale(1);
+      }
+
       * {
         margin: 0;
         padding: 0;
@@ -2623,6 +2675,9 @@
 
     <div class="background-overlay" aria-hidden="true"></div>
 
+        <!-- Hina Sparkle Effect Container -->
+    <div id="hina-effect"></div>
+
     <div class="theme-toggle page-transition">
       <button
         id="theme-toggle-btn"
@@ -4950,7 +5005,21 @@ const hinaOutfitMessages = {
     }
 
     function switchTheme(toMode) {
+      // Jika beralih ke Hina, tampilkan sparkle
+      if (toMode === "hina") {
+        setTimeout(() => {
+          showHinaSparkle();
+        }, 200);
+      }
+      
       document.querySelectorAll(".fade-text").forEach(el => el.style.opacity = "0");
+      
+      // Fade out karakter lama
+      const charContainer = document.getElementById("character-container");
+      if (charContainer) {
+        charContainer.classList.add("fade-out");
+      }
+      
       setTimeout(() => {
         if (toMode === "arona") {
           body.classList.remove("theme-plana", "theme-hina"); body.classList.add("theme-arona");
@@ -4973,10 +5042,11 @@ const hinaOutfitMessages = {
           if (sunIcon) sunIcon.classList.add("hidden");
           if (moonIcon) moonIcon.classList.add("hidden");
           if (hinaIcon) hinaIcon.classList.remove("hidden");
-          document.getElementById("character-image").src = "assets/images/hina_dress.jpg"; // UBAH KE DRESS
+          document.getElementById("character-image").src = "assets/images/hina_dress.jpg";
           appTitle.textContent = "Hina Study Companion";
           currentMode = "hina";
         }
+        
         safeSave("studyCompanionMode", toMode);
         currentOutfit = 0;
         const savedOutfit = safeLoad(`${currentMode}Outfit`);
@@ -4986,10 +5056,23 @@ const hinaOutfitMessages = {
           if (img && outfits[currentMode][currentOutfit]) img.src = outfits[currentMode][currentOutfit];
         }
         loadAchievements();
-        triggerCharacterReaction("greeting");
+        
+        // Fade in karakter baru
         setTimeout(() => {
-          document.querySelectorAll(".fade-text").forEach(el => el.style.opacity = "1");
-        }, 400);
+          if (charContainer) {
+            charContainer.classList.remove("fade-out");
+            charContainer.classList.add("fade-in");
+          }
+          triggerCharacterReaction("greeting");
+          
+          setTimeout(() => {
+            document.querySelectorAll(".fade-text").forEach(el => el.style.opacity = "1");
+            if (charContainer) {
+              charContainer.classList.remove("fade-in");
+            }
+          }, 400);
+        }, 100);
+        
       }, 400);
     }
 
@@ -5043,6 +5126,43 @@ const hinaOutfitMessages = {
       });
     }
 
+        // ============================================================
+    // HINA SPARKLE EFFECT
+    // ============================================================
+    function showHinaSparkle() {
+      const container = document.getElementById("hina-effect");
+      if (!container) return;
+      
+      // Bersihkan container
+      container.innerHTML = '';
+      
+      // Buat 4-5 sparkle
+      const sparkleCount = 4 + Math.floor(Math.random() * 2);
+      
+      for (let i = 0; i < sparkleCount; i++) {
+        const sparkle = document.createElement("div");
+        sparkle.classList.add("sparkle");
+        
+        // Posisi random di area atas karakter
+        sparkle.style.left = (30 + Math.random() * 40) + "%";
+        sparkle.style.top = (10 + Math.random() * 20) + "%";
+        
+        // Variasi ukuran
+        const size = 4 + Math.random() * 4;
+        sparkle.style.width = size + "px";
+        sparkle.style.height = size + "px";
+        
+        // Variasi delay
+        sparkle.style.animationDelay = (Math.random() * 0.3) + "s";
+        
+        container.appendChild(sparkle);
+        
+        setTimeout(() => {
+          if (sparkle.parentNode) sparkle.remove();
+        }, 2500);
+      }
+    }
+
     // ============================================================
     // INIT
     // ============================================================
@@ -5087,6 +5207,11 @@ const hinaOutfitMessages = {
             document.querySelectorAll(".page-transition").forEach(el => el.classList.add("page-loaded"));
             if ("Notification" in window && Notification.permission === "default") Notification.requestPermission();
             triggerCharacterReaction("greeting");
+            
+            // TAMBAHKAN INI - Sparkle saat pertama load jika mode Hina
+            if (currentMode === "hina") {
+              setTimeout(() => { showHinaSparkle(); }, 300);
+            }
           }, 1000);
         }
       }, 2000);
