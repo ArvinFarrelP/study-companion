@@ -15,7 +15,7 @@
 ## 🎬 Demo
 
 <p align="center">
-  <img src="screenshots/demo.gif" width="80%" alt="App Demo" />
+  <img src="Screenshots/demo.gif" width="80%" alt="App Demo" />
 </p>
 
 ---
@@ -28,14 +28,14 @@
 
 ## ✨ Features
 
-* ⏱️ Pomodoro Timer (25 / 45 / 60 min)
-* 🎨 Anime Companions (Arona, Plana)
-* 🎵 Lo-fi Music Player
-* 🏆 Achievements & Streaks
-* 📊 Focus Tracking
-* 🌙 Light / Dark Theme
-* 📱 Fully Responsive
-* 📲 PWA Ready (installable & offline)
+- ⏱️ Pomodoro Timer (25 / 45 / 60 min)
+- 🎨 Anime Companions (Arona, Plana)
+- 🎵 Lo-fi Music Player
+- 🏆 Achievements & Streaks
+- 📊 Focus Tracking
+- 🌙 Light / Dark Theme
+- 📱 Fully Responsive
+- 📲 PWA Ready (installable & offline)
 
 ---
 
