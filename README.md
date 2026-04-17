@@ -15,7 +15,7 @@
 ## 🎬 Demo
 
 <p align="center">
-  <img src="Screenshots/demo.gif" width="80%" alt="App Demo" />
+  <img src="screenshots/demo.gif" width="80%" alt="App Demo" />
 </p>
 
 ---
