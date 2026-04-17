@@ -3,7 +3,7 @@
 > Turn your study sessions into a calm, anime-powered focus experience.
 
 <p align="center">
-  <img src="assets/images/arona.png" width="160" alt="Arona Character" />
+  <img src="assets/images/banner.png" width="160" alt="Arona Character" />
 </p>
 
 <p align="center">
