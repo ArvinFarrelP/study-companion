@@ -1,6 +1,6 @@
 # ✨ Arona Study Companion
 
-> *Turn your focus sessions into calm, anime-powered productivity.*
+> _Turn your focus sessions into calm, anime-powered productivity._
 
 <p align="center">
   <img src="assets/images/arona.png" width="180" alt="Arona Character" />
@@ -21,14 +21,14 @@ https://arvinlabs.me/study-companion/
 
 ## ✨ Features
 
-* ⏱️ **Pomodoro Timer** — 25 / 45 / 60 minute focus sessions
-* 🎨 **Anime Companions** — Arona, Plana, and more
-* 🎵 **Lo-fi Music Player** — Built-in chill study playlists
-* 🏆 **Achievement System** — Stay consistent, unlock progress
-* 📊 **Focus Tracking** — Daily progress & streak system
-* 🌙 **Theme Switching** — Light / dark anime vibes
-* 📱 **Fully Responsive** — Works on desktop & mobile
-* 📲 **PWA Ready** — Install as an app (offline support)
+- ⏱️ **Pomodoro Timer** — 25 / 45 / 60 minute focus sessions
+- 🎨 **Anime Companions** — Arona, Plana, and more
+- 🎵 **Lo-fi Music Player** — Built-in chill study playlists
+- 🏆 **Achievement System** — Stay consistent, unlock progress
+- 📊 **Focus Tracking** — Daily progress & streak system
+- 🌙 **Theme Switching** — Light / dark anime vibes
+- 📱 **Fully Responsive** — Works on desktop & mobile
+- 📲 **PWA Ready** — Install as an app (offline support)
 
 ---
 
@@ -38,16 +38,16 @@ Most productivity tools feel **cold and mechanical**.
 
 This project explores:
 
-* ✨ Emotional UI (anime + calm design)
-* 🧠 Focus psychology (Pomodoro + reward system)
-* 🎯 Habit building through visual feedback
+- ✨ Emotional UI (anime + calm design)
+- 🧠 Focus psychology (Pomodoro + reward system)
+- 🎯 Habit building through visual feedback
 
 ---
 
 ## 📸 Preview
 
 <p align="center">
-  <img src="screenshots/preview-1.png" width="80%" />
+  <img src="screenshots/Screenshot2.png" width="80%" />
 </p>
 
 ---
@@ -83,9 +83,9 @@ Upload files to your server.
 
 ### 3. Install as App (PWA)
 
-* Open in browser (HTTPS required)
-* Click **"Add to Home Screen"**
-* Enjoy offline usage
+- Open in browser (HTTPS required)
+- Click **"Add to Home Screen"**
+- Enjoy offline usage
 
 ---
 
@@ -131,18 +131,18 @@ assets/music/
 
 ## 🧩 Tech Stack
 
-* HTML, CSS, JavaScript (Vanilla)
-* PWA (Service Worker + Manifest)
-* Local Storage (progress tracking)
+- HTML, CSS, JavaScript (Vanilla)
+- PWA (Service Worker + Manifest)
+- Local Storage (progress tracking)
 
 ---
 
 ## 🌱 Roadmap
 
-* [ ] User accounts (sync progress)
-* [ ] More characters & themes
-* [ ] Advanced analytics
-* [ ] Mobile app version
+- [ ] User accounts (sync progress)
+- [ ] More characters & themes
+- [ ] Advanced analytics
+- [ ] Mobile app version
 
 ---
 
@@ -150,9 +150,9 @@ assets/music/
 
 Contributions are welcome!
 
-* Fork this repo
-* Create your feature branch
-* Submit a pull request
+- Fork this repo
+- Create your feature branch
+- Submit a pull request
 
 ---
 
